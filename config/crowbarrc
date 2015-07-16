@@ -1,0 +1,5 @@
+[default]
+hostname = http://localhost
+port = 3000
+username = crowbar
+password = crowbar
