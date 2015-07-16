@@ -30,7 +30,22 @@ module Crowbar
                 barclamp = args.shift
                 helper.validate_availability_of! barclamp
 
-                fail "Not implemented yet!"
+                $request.proposal_list(barclamp) do |request|
+                  case request.code
+                  when 200
+                    body = begin
+                      JSON.parse(request.body)
+                    rescue
+                      []
+                    end
+
+                    say body.join("\n")
+                  when 404
+                    err "Failed to find any available proposal"
+                  else
+                    err "Got unknown response with code #{request.code}"
+                  end
+                end
               end
             end
 

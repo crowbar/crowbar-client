@@ -90,7 +90,6 @@ module Crowbar
       end
 
       def machine_list
-        # TODO(must): Set the correct route
         result = self.class.get(
           "/crowbar/machines/1.0"
         )
@@ -106,6 +105,18 @@ module Crowbar
         # TODO(must): Set the correct route
         result = self.class.get(
           "/crowbar/machines/1.0"
+        )
+
+        if block_given?
+          yield result
+        else
+          result
+        end
+      end
+
+      def proposal_list(barclamp)
+        result = self.class.get(
+          "/crowbar/#{barclamp}/1.0/proposals.json"
         )
 
         if block_given?
