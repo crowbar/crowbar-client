@@ -27,7 +27,7 @@ module Crowbar
             parent.arg :barclamp
             parent.arg :proposal, :optional
             parent.command :proposal do |c|
-              c.action do |_global, _opts, _args|
+              c.action do |global, opts, args|
                 # TODO(must): Needs to be implemented in controller
                 fail "Not implemented yet!"
               end
@@ -35,7 +35,7 @@ module Crowbar
 
             parent.desc "Reset all nodes state"
             parent.command :nodes do |c|
-              c.action do |_global, _opts, _args|
+              c.action do |global, opts, args|
                 # TODO(must): Needs to be implemented in controller
                 fail "Not implemented yet!"
               end

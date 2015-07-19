@@ -26,7 +26,7 @@ module Crowbar
             parent.desc "Show a list of available proposals"
             parent.arg :barclamp
             parent.command :list do |c|
-              c.action do |_global, _opts, args|
+              c.action do |global, opts, args|
                 barclamp = args.shift
                 helper.validate_availability_of! barclamp
 
@@ -58,7 +58,7 @@ module Crowbar
             parent.arg :proposal
             parent.arg :path, :optional
             parent.command :show do |c|
-              c.action do |_global, _opts, args|
+              c.action do |global, opts, args|
                 barclamp = args.shift
                 proposal = args.shift
                 path = args.shift
@@ -104,7 +104,7 @@ module Crowbar
             parent.arg :barclamp
             parent.arg :proposal
             parent.command :create do |c|
-              c.action do |_global, _opts, args|
+              c.action do |global, opts, args|
                 barclamp = args.shift
                 proposal = args.shift
                 helper.validate_availability_of! barclamp
@@ -117,7 +117,7 @@ module Crowbar
             parent.arg :barclamp
             parent.arg :proposal
             parent.command :edit do |c|
-              c.action do |_global, _opts, args|
+              c.action do |global, opts, args|
                 barclamp = args.shift
                 proposal = args.shift
                 helper.validate_availability_of! barclamp
@@ -132,7 +132,7 @@ module Crowbar
             parent.arg :barclamp
             parent.arg :proposal
             parent.command :delete do |c|
-              c.action do |_global, _opts, args|
+              c.action do |global, opts, args|
                 barclamp = args.shift
                 proposal = args.shift
                 helper.validate_availability_of! barclamp
@@ -154,7 +154,7 @@ module Crowbar
             parent.arg :barclamp
             parent.arg :proposal
             parent.command :dequeue do |c|
-              c.action do |_global, _opts, args|
+              c.action do |global, opts, args|
                 barclamp = args.shift
                 proposal = args.shift
                 helper.validate_availability_of! barclamp
@@ -176,7 +176,7 @@ module Crowbar
             parent.arg :barclamp
             parent.arg :proposal
             parent.command :commit do |c|
-              c.action do |_global, _opts, args|
+              c.action do |global, opts, args|
                 barclamp = args.shift
                 proposal = args.shift
                 helper.validate_availability_of! barclamp

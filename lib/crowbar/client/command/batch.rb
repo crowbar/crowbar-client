@@ -31,7 +31,7 @@ module Crowbar
 
             parent.desc "Build proposals from file"
             parent.command :build do |c|
-              c.action do |_global, _opts, _args|
+              c.action do |global, opts, args|
                 # TODO(must): Implement the batch build functionality
                 fail "Not implemented yet!"
               end
@@ -39,7 +39,7 @@ module Crowbar
 
             parent.desc "Export proposals to file"
             parent.command :export do |c|
-              c.action do |_global, _opts, _args|
+              c.action do |global, opts, args|
                 # TODO(must): Implement the batch export functionality
                 fail "Not implemented yet!"
               end

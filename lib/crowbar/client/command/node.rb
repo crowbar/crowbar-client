@@ -150,7 +150,7 @@ module Crowbar
             end
 
             parent.desc "Delete the specified node"
-            parent.arg :node
+            parent.arg :name_or_alias
             parent.command :delete do |c|
               c.action do |global, opts, args|
                 name = args.shift
@@ -169,7 +169,7 @@ module Crowbar
             end
 
             parent.desc "Hardware update a node"
-            parent.arg :node
+            parent.arg :name_or_alias
             parent.command :hardware do |c|
               c.action do |global, opts, args|
                 name = args.shift
@@ -188,7 +188,7 @@ module Crowbar
             end
 
             parent.desc "Identify the specified node"
-            parent.arg :node
+            parent.arg :name_or_alias
             parent.command :identify do |c|
               c.action do |global, opts, args|
                 name = args.shift
@@ -207,7 +207,7 @@ module Crowbar
             end
 
             parent.desc "Reinstall the specified node"
-            parent.arg :node
+            parent.arg :name_or_alias
             parent.command :reinstall do |c|
               c.action do |global, opts, args|
                 name = args.shift
@@ -226,7 +226,7 @@ module Crowbar
             end
 
             parent.desc "Reset the specified node"
-            parent.arg :node
+            parent.arg :name_or_alias
             parent.command :reset do |c|
               c.action do |global, opts, args|
                 name = args.shift
@@ -245,7 +245,7 @@ module Crowbar
             end
 
             parent.desc "Shutdown the specified node"
-            parent.arg :node
+            parent.arg :name_or_alias
             parent.command :shutdown do |c|
               c.action do |global, opts, args|
                 name = args.shift
@@ -264,7 +264,7 @@ module Crowbar
             end
 
             parent.desc "Reboot the specified node"
-            parent.arg :node
+            parent.arg :name_or_alias
             parent.command :reboot do |c|
               c.action do |global, opts, args|
                 name = args.shift
@@ -283,7 +283,7 @@ module Crowbar
             end
 
             parent.desc "Shutdown the specified node"
-            parent.arg :node
+            parent.arg :name_or_alias
             parent.command :shutdown do |c|
               c.action do |global, opts, args|
                 name = args.shift
@@ -302,7 +302,7 @@ module Crowbar
             end
 
             parent.desc "Poweron the specified node"
-            parent.arg :node
+            parent.arg :name_or_alias
             parent.command :poweron do |c|
               c.action do |global, opts, args|
                 name = args.shift
@@ -321,7 +321,7 @@ module Crowbar
             end
 
             parent.desc "Powercycle the specified node"
-            parent.arg :node
+            parent.arg :name_or_alias
             parent.command :powercycle do |c|
               c.action do |global, opts, args|
                 name = args.shift
@@ -340,7 +340,7 @@ module Crowbar
             end
 
             parent.desc "Poweroff the specified node"
-            parent.arg :node
+            parent.arg :name_or_alias
             parent.command :poweroff do |c|
               c.action do |global, opts, args|
                 name = args.shift
@@ -359,7 +359,7 @@ module Crowbar
             end
 
             parent.desc "Allocate the specified node"
-            parent.arg :node
+            parent.arg :name_or_alias
             parent.command :allocate do |c|
               c.action do |global, opts, args|
                 name = args.shift
@@ -378,7 +378,7 @@ module Crowbar
             end
 
             parent.desc "Assign an intended role to a node"
-            parent.arg :node
+            parent.arg :name_or_alias
             parent.arg :role
             parent.command :role do |c|
               c.action do |global, opts, args|
@@ -408,7 +408,7 @@ module Crowbar
             end
 
             parent.desc "Set an alias for a node"
-            parent.arg :node
+            parent.arg :name_or_alias
             parent.arg :alias
             parent.command :rename do |c|
               c.action do |global, opts, args|
@@ -438,7 +438,7 @@ module Crowbar
             end
 
             parent.desc "Show a specific node config"
-            parent.arg :node
+            parent.arg :name_or_alias
             parent.arg :path, :optional
             parent.command :show do |c|
               c.action do |global, opts, args|
@@ -480,7 +480,7 @@ module Crowbar
             end
 
             parent.desc "Transition a node to a specific state"
-            parent.arg :node
+            parent.arg :name_or_alias
             parent.arg :state
             parent.command :transition do |c|
               c.action do |global, opts, args|
