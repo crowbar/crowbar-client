@@ -39,9 +39,13 @@ module Crowbar
                       []
                     end
 
-                    say body.join("\n")
+                    if body.empty?
+                      err "No proposals"
+                    else
+                      say body.sort.join("\n")
+                    end
                   when 404
-                    err "Failed to find any available proposal"
+                    err "Failed to find any available proposals"
                   else
                     err "Got unknown response with code #{request.code}"
                   end
@@ -49,26 +53,60 @@ module Crowbar
               end
             end
 
+            parent.desc "Show a proposal for specific barclamp"
+            parent.arg :barclamp
+            parent.arg :proposal
+            parent.arg :path, :optional
+            parent.command :show do |c|
+              c.action do |_global, _opts, args|
+                barclamp = args.shift
+                proposal = args.shift
+                path = args.shift
+                helper.validate_availability_of! barclamp
+
+                $request.proposal_show(barclamp, proposal) do |request|
+                  body = begin
+                    JSON.parse(request.body).with_indifferent_access
+                  rescue
+                    {}
+                  end
+
+                  case request.code
+                  when 200
+                    begin
+                      path.to_s.split(".").each do |segment|
+                        body = body[segment]
+                      end
+
+                      if body.is_a?(Hash) || body.is_a?(Array)
+                        say JSON.pretty_generate(body)
+                      else
+                        say body
+                      end
+                    rescue
+                      err "Path does not fully exist"
+                    end
+                  when 404
+                    err "Proposal does not exist"
+                  when 409
+                    # TODO(must): Implement this return code in controller
+                    err body[:errors].to_sentence
+                  else
+                    err "Got unknown response with code #{request.code}"
+                  end
+                end
+              end
+            end
+
+
+
             parent.desc "Create a proposal for specific barclamp"
             parent.arg :barclamp
             parent.arg :proposal
             parent.command :create do |c|
               c.action do |_global, _opts, args|
                 barclamp = args.shift
-                # proposal = args.shift
-                helper.validate_availability_of! barclamp
-
-                fail "Not implemented yet!"
-              end
-            end
-
-            parent.desc "Show a proposal for specific barclamp"
-            parent.arg :barclamp
-            parent.arg :proposal
-            parent.command :show do |c|
-              c.action do |_global, _opts, args|
-                barclamp = args.shift
-                # proposal = args.shift
+                proposal = args.shift
                 helper.validate_availability_of! barclamp
 
                 fail "Not implemented yet!"
@@ -81,12 +119,14 @@ module Crowbar
             parent.command :edit do |c|
               c.action do |_global, _opts, args|
                 barclamp = args.shift
-                # proposal = args.shift
+                proposal = args.shift
                 helper.validate_availability_of! barclamp
 
                 fail "Not implemented yet!"
               end
             end
+
+
 
             parent.desc "Delete a proposal for specific barclamp"
             parent.arg :barclamp
@@ -94,23 +134,19 @@ module Crowbar
             parent.command :delete do |c|
               c.action do |_global, _opts, args|
                 barclamp = args.shift
-                # proposal = args.shift
+                proposal = args.shift
                 helper.validate_availability_of! barclamp
 
-                fail "Not implemented yet!"
-              end
-            end
-
-            parent.desc "Commit a proposal for specific barclamp"
-            parent.arg :barclamp
-            parent.arg :proposal
-            parent.command :commit do |c|
-              c.action do |_global, _opts, args|
-                barclamp = args.shift
-                # proposal = args.shift
-                helper.validate_availability_of! barclamp
-
-                fail "Not implemented yet!"
+                $request.proposal_delete(barclamp, proposal) do |request|
+                  case request.code
+                  when 200
+                    say "Deleted successfully #{proposal} on #{barclamp}"
+                  when 404
+                    err "Proposal does not exist"
+                  else
+                    err "Got unknown response with code #{request.code}"
+                  end
+                end
               end
             end
 
@@ -120,10 +156,43 @@ module Crowbar
             parent.command :dequeue do |c|
               c.action do |_global, _opts, args|
                 barclamp = args.shift
-                # proposal = args.shift
+                proposal = args.shift
                 helper.validate_availability_of! barclamp
 
-                fail "Not implemented yet!"
+                $request.proposal_action(:dequeue, barclamp, proposal) do |request|
+                  case request.code
+                  when 200
+                    say "Dequeued #{proposal} on #{barclamp}"
+                  when 404
+                    err "Proposal does not exist"
+                  else
+                    err "Got unknown response with code #{request.code}"
+                  end
+                end
+              end
+            end
+
+            parent.desc "Commit a proposal for specific barclamp"
+            parent.arg :barclamp
+            parent.arg :proposal
+            parent.command :commit do |c|
+              c.action do |_global, _opts, args|
+                barclamp = args.shift
+                proposal = args.shift
+                helper.validate_availability_of! barclamp
+
+                $request.proposal_action(:commit, barclamp, proposal) do |request|
+                  case request.code
+                  when 200
+                    say "Commited #{proposal} on #{barclamp}"
+                  when 202
+                    say "Queued #{proposal} on #{barclamp}"
+                  when 404
+                    err "Proposal does not exist"
+                  else
+                    err "Got unknown response with code #{request.code}"
+                  end
+                end
               end
             end
           end

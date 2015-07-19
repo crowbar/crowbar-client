@@ -30,19 +30,26 @@ module Crowbar
                 barclamp = args.shift
                 helper.validate_availability_of! barclamp
 
-                fail "Not implemented yet!"
+                $request.role_list(barclamp) do |request|
+                  case request.code
+                  when 200
+                    body = begin
+                      JSON.parse(request.body)
+                    rescue
+                      []
+                    end
 
-                # $request.role_list(barclamp) do |request|
-                #   case request.code
-                #   when 200
-                #     # TODO(must): Show roles list
-                #     fail "Not implemented yet!"
-                #   when 404
-                #     err "Barclamp does not exist"
-                #   else
-                #     err "Got unknown response with code #{request.code}"
-                #   end
-                # end
+                    if body.empty?
+                      err "No roles"
+                    else
+                      say body.sort.join("\n")
+                    end
+                  when 404
+                    err "Barclamp does not exist"
+                  else
+                    err "Got unknown response with code #{request.code}"
+                  end
+                end
               end
             end
 
@@ -52,22 +59,29 @@ module Crowbar
             parent.command :show do |c|
               c.action do |_global, _opts, args|
                 barclamp = args.shift
-                # role = args.shift
+                role = args.shift
                 helper.validate_availability_of! barclamp
 
-                fail "Not implemented yet!"
+                $request.role_show(barclamp, role) do |request|
+                  case request.code
+                  when 200
+                    body = begin
+                      JSON.parse(request.body)
+                    rescue
+                      []
+                    end
 
-                # $request.role_show(barclamp, role) do |request|
-                #   case request.code
-                #   when 200
-                #     # TODO(must): Show role details
-                #     fail "Not implemented yet!"
-                #   when 404
-                #     err "Barclamp does not exist"
-                #   else
-                #     err "Got unknown response with code #{request.code}"
-                #   end
-                # end
+                    if body.empty?
+                      err "No nodes"
+                    else
+                      say body.sort.join("\n")
+                    end
+                  when 404
+                    err "Role does not exist"
+                  else
+                    err "Got unknown response with code #{request.code}"
+                  end
+                end
               end
             end
           end

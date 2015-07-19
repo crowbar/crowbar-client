@@ -54,7 +54,7 @@ module Crowbar
                       end
 
                       output = Terminal::Table.new(
-                        rows: rows,
+                        rows: rows.sort,
                         headings: [
                           "Name",
                           "Status"
@@ -70,7 +70,7 @@ module Crowbar
                         end
                       end
 
-                      output = JSON.pretty_generate(rows)
+                      output = JSON.pretty_generate(rows.sort)
                     else
                       err "Invalid format, valid formats: table, json"
                       return
@@ -117,7 +117,7 @@ module Crowbar
                       end
 
                       output = Terminal::Table.new(
-                        rows: rows,
+                        rows: rows.sort,
                         headings: [
                           "Name",
                           "Alias"
@@ -133,7 +133,7 @@ module Crowbar
                         end
                       end
 
-                      output = JSON.pretty_generate(rows)
+                      output = JSON.pretty_generate(rows.sort)
                     else
                       err "Invalid format, valid formats: table, json"
                       return

@@ -26,9 +26,8 @@ TBD
   * Network commands
     * any
   * Proposal commands
-    * any
-  * Role commands
-    * any
+    * create
+    * edit
   * Reset commands
     * proposal
     * nodes

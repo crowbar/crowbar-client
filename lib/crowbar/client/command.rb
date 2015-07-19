@@ -21,6 +21,7 @@ module Crowbar
   end
 end
 
+require_relative "command/barclamps"
 require_relative "command/batch"
 require_relative "command/node"
 require_relative "command/proposal"

@@ -69,6 +69,7 @@ module Crowbar
         true
       end
 
+      include Command::Barclamps
       include Command::Batch
       include Command::Node
       include Command::Proposal

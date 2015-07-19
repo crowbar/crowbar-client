@@ -29,7 +29,7 @@ module Crowbar
 
       def node_action(action, name)
         result = self.class.get(
-          "/crowbar/machines/1.0/#{action}/#{name}"
+          "/crowbar/machines/1.0/#{action}/#{name}.json"
         )
 
         if block_given?
@@ -41,7 +41,7 @@ module Crowbar
 
       def node_transition(name, state)
         result = self.class.post(
-          "/crowbar/crowbar/1.0/transition/default",
+          "/crowbar/crowbar/1.0/transition/default.json",
           body: { name: name, state: state }
         )
 
@@ -54,7 +54,7 @@ module Crowbar
 
       def node_rename(name, update)
         result = self.class.post(
-          "/crowbar/machines/1.0/rename/#{name}",
+          "/crowbar/machines/1.0/rename/#{name}.json",
           body: { alias: update }
         )
 
@@ -67,7 +67,7 @@ module Crowbar
 
       def node_role(name, update)
         result = self.class.post(
-          "/crowbar/machines/1.0/role/#{name}",
+          "/crowbar/machines/1.0/role/#{name}.json",
           body: { role: update }
         )
 
@@ -80,7 +80,7 @@ module Crowbar
 
       def node_show(name)
         result = self.class.get(
-          "/crowbar/machines/1.0/#{name}"
+          "/crowbar/machines/1.0/#{name}.json"
         )
 
         if block_given?
@@ -92,7 +92,7 @@ module Crowbar
 
       def node_delete(name)
         result = self.class.delete(
-          "/crowbar/machines/1.0/#{name}"
+          "/crowbar/machines/1.0/#{name}.json"
         )
 
         if block_given?
@@ -104,7 +104,7 @@ module Crowbar
 
       def node_list
         result = self.class.get(
-          "/crowbar/machines/1.0"
+          "/crowbar/machines/1.0.json"
         )
 
         if block_given?
@@ -116,7 +116,19 @@ module Crowbar
 
       def node_status
         result = self.class.get(
-          "/nodes/status"
+          "/nodes/status.json"
+        )
+
+        if block_given?
+          yield result
+        else
+          result
+        end
+      end
+
+      def proposal_action(action, barclamp, proposal)
+        result = self.class.get(
+          "/crowbar/#{barclamp}/1.0/proposals/#{action}/#{proposal}.json"
         )
 
         if block_given?
@@ -129,6 +141,54 @@ module Crowbar
       def proposal_list(barclamp)
         result = self.class.get(
           "/crowbar/#{barclamp}/1.0/proposals.json"
+        )
+
+        if block_given?
+          yield result
+        else
+          result
+        end
+      end
+
+      def proposal_show(barclamp, proposal)
+        result = self.class.get(
+          "/crowbar/#{barclamp}/1.0/proposals/#{proposal}.json"
+        )
+
+        if block_given?
+          yield result
+        else
+          result
+        end
+      end
+
+      def proposal_delete(barclamp, proposal)
+        result = self.class.delete(
+          "/crowbar/#{barclamp}/1.0/proposals/#{proposal}.json"
+        )
+
+        if block_given?
+          yield result
+        else
+          result
+        end
+      end
+
+      def role_list(barclamp)
+        result = self.class.get(
+          "/crowbar/#{barclamp}/1.0/elements.json"
+        )
+
+        if block_given?
+          yield result
+        else
+          result
+        end
+      end
+
+      def role_show(barclamp, role)
+        result = self.class.get(
+          "/crowbar/#{barclamp}/1.0/elements/#{role}.json"
         )
 
         if block_given?
