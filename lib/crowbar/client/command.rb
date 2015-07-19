@@ -22,7 +22,7 @@ module Crowbar
 end
 
 require_relative "command/batch"
-require_relative "command/machines"
+require_relative "command/node"
 require_relative "command/proposal"
 require_relative "command/reset"
 require_relative "command/role"

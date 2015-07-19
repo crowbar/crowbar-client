@@ -17,33 +17,22 @@
 module Crowbar
   module Client
     module Command
-      module Machines
+      module Node
         extend ActiveSupport::Concern
 
         included do
-          desc "Machines specific commands for reboot and others"
-          command :machines do |parent|
-            # parent.desc "Show current nodes status"
-            # parent.command :status do |c|
-            #   c.action do |global, opts, args|
-            #     $request.machine_status do |request|
-            #       case request.code
-            #       when 200
-            #         # TODO(must): Migrate "node_state status"
-            #         fail "Not implemented yet!"
-            #       when 404
-            #         err "Failed to find any available node"
-            #       else
-            #         err "Got unknown response with code #{request.code}"
-            #       end
-            #     end
-            #   end
-            # end
+          desc "Node specific commands for reboot and others"
+          command :node do |parent|
+            parent.desc "Show current nodes status"
+            parent.command :status do |c|
+              c.desc "Format of the resulting output"
+              c.flag [:format], type: String, default_value: :table
 
-            parent.desc "Show a list of available nodes"
-            parent.command :list do |c|
+              c.desc "Filter output by criteria"
+              c.flag [:filter], type: String, default_value: nil
+
               c.action do |global, opts, args|
-                $request.machine_list do |request|
+                $request.node_status do |request|
                   case request.code
                   when 200
                     body = begin
@@ -52,8 +41,105 @@ module Crowbar
                       {}
                     end
 
-                    # TODO(must): Merge aliases and list
-                    say JSON.pretty_generate(body)
+                    # TODO(must): Implement filter method
+                    case opts[:format].to_sym
+                    when :table
+                      rows = [].tap do |result|
+                        body[:nodes].each do |name, data|
+                          result.push([
+                            name,
+                            data[:status]
+                          ])
+                        end
+                      end
+
+                      output = Terminal::Table.new(
+                        rows: rows,
+                        headings: [
+                          "Name",
+                          "Status"
+                        ]
+                      )
+                    when :json
+                      rows = [].tap do |result|
+                        body[:nodes].each do |name, data|
+                          result.push({
+                            name: name,
+                            status: data[:status]
+                          })
+                        end
+                      end
+
+                      output = JSON.pretty_generate(rows)
+                    else
+                      err "Invalid format, valid formats: table, json"
+                      return
+                    end
+
+                    say output
+                  when 404
+                    err "Failed to find any available node"
+                  else
+                    err "Got unknown response with code #{request.code}"
+                  end
+                end
+              end
+            end
+
+            parent.desc "Show a list of available nodes"
+            parent.command :list do |c|
+              c.desc "Format of the resulting output"
+              c.flag [:format], type: String, default_value: :table
+
+              c.desc "Filter output by criteria"
+              c.flag [:filter], type: String, default_value: nil
+
+              c.action do |global, opts, args|
+                $request.node_list do |request|
+                  case request.code
+                  when 200
+                    body = begin
+                      JSON.parse(request.body).with_indifferent_access
+                    rescue
+                      {}
+                    end
+
+                    # TODO(must): Implement filter method
+                    case opts[:format].to_sym
+                    when :table
+                      rows = [].tap do |result|
+                        body[:nodes].each do |data|
+                          result.push([
+                            data[:name],
+                            data[:alias]
+                          ])
+                        end
+                      end
+
+                      output = Terminal::Table.new(
+                        rows: rows,
+                        headings: [
+                          "Name",
+                          "Alias"
+                        ]
+                      )
+                    when :json
+                      rows = [].tap do |result|
+                        body[:nodes].each do |data|
+                          result.push({
+                            name: data[:name],
+                            alias: data[:alias]
+                          })
+                        end
+                      end
+
+                      output = JSON.pretty_generate(rows)
+                    else
+                      err "Invalid format, valid formats: table, json"
+                      return
+                    end
+
+                    say output
                   when 404
                     err "Failed to find any available node"
                   else
@@ -69,7 +155,7 @@ module Crowbar
               c.action do |global, opts, args|
                 name = args.shift
 
-                $request.machine_delete(name) do |request|
+                $request.node_delete(name) do |request|
                   case request.code
                   when 200
                     say "Deleted successfully #{name}"
@@ -88,7 +174,7 @@ module Crowbar
               c.action do |global, opts, args|
                 name = args.shift
 
-                $request.machine_action(:update, name) do |request|
+                $request.node_action(:update, name) do |request|
                   case request.code
                   when 200
                     say "Executed hardware for #{name}"
@@ -107,7 +193,7 @@ module Crowbar
               c.action do |global, opts, args|
                 name = args.shift
 
-                $request.machine_action(:identify, name) do |request|
+                $request.node_action(:identify, name) do |request|
                   case request.code
                   when 200
                     say "Executed identify for #{name}"
@@ -126,7 +212,7 @@ module Crowbar
               c.action do |global, opts, args|
                 name = args.shift
 
-                $request.machine_action(:reinstall, name) do |request|
+                $request.node_action(:reinstall, name) do |request|
                   case request.code
                   when 200
                     say "Executed reinstall for #{name}"
@@ -145,7 +231,7 @@ module Crowbar
               c.action do |global, opts, args|
                 name = args.shift
 
-                $request.machine_action(:reset, name) do |request|
+                $request.node_action(:reset, name) do |request|
                   case request.code
                   when 200
                     say "Executed reset for #{name}"
@@ -164,7 +250,7 @@ module Crowbar
               c.action do |global, opts, args|
                 name = args.shift
 
-                $request.machine_action(:reset, name) do |request|
+                $request.node_action(:reset, name) do |request|
                   case request.code
                   when 200
                     say "Executed shutdown for #{name}"
@@ -183,7 +269,7 @@ module Crowbar
               c.action do |global, opts, args|
                 name = args.shift
 
-                $request.machine_action(:reboot, name) do |request|
+                $request.node_action(:reboot, name) do |request|
                   case request.code
                   when 200
                     say "Executed reboot for #{name}"
@@ -202,7 +288,7 @@ module Crowbar
               c.action do |global, opts, args|
                 name = args.shift
 
-                $request.machine_action(:shutdown, name) do |request|
+                $request.node_action(:shutdown, name) do |request|
                   case request.code
                   when 200
                     say "Executed shutdown for #{name}"
@@ -221,7 +307,7 @@ module Crowbar
               c.action do |global, opts, args|
                 name = args.shift
 
-                $request.machine_action(:poweron, name) do |request|
+                $request.node_action(:poweron, name) do |request|
                   case request.code
                   when 200
                     say "Executed poweron for #{name}"
@@ -240,7 +326,7 @@ module Crowbar
               c.action do |global, opts, args|
                 name = args.shift
 
-                $request.machine_action(:powercycle, name) do |request|
+                $request.node_action(:powercycle, name) do |request|
                   case request.code
                   when 200
                     say "Executed powercycle for #{name}"
@@ -259,7 +345,7 @@ module Crowbar
               c.action do |global, opts, args|
                 name = args.shift
 
-                $request.machine_action(:poweroff, name) do |request|
+                $request.node_action(:poweroff, name) do |request|
                   case request.code
                   when 200
                     say "Executed poweroff for #{name}"
@@ -278,7 +364,7 @@ module Crowbar
               c.action do |global, opts, args|
                 name = args.shift
 
-                $request.machine_action(:allocate, name) do |request|
+                $request.node_action(:allocate, name) do |request|
                   case request.code
                   when 200
                     say "Executed allocate for #{name}"
@@ -299,7 +385,7 @@ module Crowbar
                 name = args.shift
                 update = args.shift
 
-                $request.machine_role(name, update) do |request|
+                $request.node_role(name, update) do |request|
                   body = begin
                     JSON.parse(request.body).with_indifferent_access
                   rescue
@@ -329,7 +415,7 @@ module Crowbar
                 name = args.shift
                 update = args.shift
 
-                $request.machine_rename(name, update) do |request|
+                $request.node_rename(name, update) do |request|
                   body = begin
                     JSON.parse(request.body).with_indifferent_access
                   rescue
@@ -359,7 +445,7 @@ module Crowbar
                 name = args.shift
                 path = args.shift
 
-                $request.machine_show(name) do |request|
+                $request.node_show(name) do |request|
                   body = begin
                     JSON.parse(request.body).with_indifferent_access
                   rescue
@@ -393,27 +479,29 @@ module Crowbar
               end
             end
 
-            # parent.desc "Transition a node to a specific state"
-            # parent.arg :node
-            # parent.arg :state
-            # parent.command :transition do |c|
-            #   c.action do |global, opts, args|
-            #     # name = args.shift
-            #     # state = args.shift
-            #     fail "Not implemented yet!"
-            #     # $request.machine_transition(name, state) do |request|
-            #     #   case request.code
-            #     #   when 200
-            #     #     # TODO(must): Show transition response
-            #     #     fail "Not implemented yet!"
-            #     #   when 404
-            #     #     err "Barclamp does not exist"
-            #     #   else
-            #     #     err "Got unknown response with code #{request.code}"
-            #     #   end
-            #     # end
-            #   end
-            # end
+            parent.desc "Transition a node to a specific state"
+            parent.arg :node
+            parent.arg :state
+            parent.command :transition do |c|
+              c.action do |global, opts, args|
+                name = args.shift
+                state = args.shift
+
+                $request.node_transition(name, state) do |request|
+                  case request.code
+                  when 200
+                    say "Transitioned #{name} into #{state}"
+                  when 404
+                    err "Name does not exist"
+                  when 409
+                    # TODO(must): Implement this return code in controller
+                    err body[:errors].to_sentence
+                  else
+                    err "Got unknown response with code #{request.code}"
+                  end
+                end
+              end
+            end
           end
         end
       end

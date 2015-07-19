@@ -23,17 +23,18 @@ TBD
 
 * Write rspec test coverage
 * Implement most commands
-  * Most important the dynamic barclamp commands
+  * Network commands
+    * any
+  * Proposal commands
+    * any
+  * Role commands
+    * any
   * Reset commands
     * proposal
     * nodes
   * Batch commands
     * build
     * export
-  * Machines commands
-    * status
-    * list
-    * transition
 
 
 ## Contributing

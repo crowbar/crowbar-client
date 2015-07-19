@@ -24,12 +24,14 @@ else
   gem "inifile", version: ">= 3.0.0"
   gem "gli", version: ">= 2.13.0"
   gem "httparty", version: ">= 0.13.3"
+  gem "terminal-table", version: ">= 1.5.2"
 end
 
 require "active_support/all"
 require "inifile"
 require "gli"
 require "httparty"
+require "terminal-table"
 
 GLI::Commands::Help.tap do |config|
   config.skips_around = false

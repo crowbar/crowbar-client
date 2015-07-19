@@ -70,7 +70,7 @@ module Crowbar
       end
 
       include Command::Batch
-      include Command::Machines
+      include Command::Node
       include Command::Proposal
       include Command::Reset
       include Command::Role

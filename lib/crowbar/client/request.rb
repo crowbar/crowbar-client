@@ -27,7 +27,7 @@ module Crowbar
         self.class.debug_output $stderr if options[:debug]
       end
 
-      def machine_action(action, name)
+      def node_action(action, name)
         result = self.class.get(
           "/crowbar/machines/1.0/#{action}/#{name}"
         )
@@ -39,7 +39,20 @@ module Crowbar
         end
       end
 
-      def machine_rename(name, update)
+      def node_transition(name, state)
+        result = self.class.post(
+          "/crowbar/crowbar/1.0/transition/default",
+          body: { name: name, state: state }
+        )
+
+        if block_given?
+          yield result
+        else
+          result
+        end
+      end
+
+      def node_rename(name, update)
         result = self.class.post(
           "/crowbar/machines/1.0/rename/#{name}",
           body: { alias: update }
@@ -52,7 +65,7 @@ module Crowbar
         end
       end
 
-      def machine_role(name, update)
+      def node_role(name, update)
         result = self.class.post(
           "/crowbar/machines/1.0/role/#{name}",
           body: { role: update }
@@ -65,7 +78,7 @@ module Crowbar
         end
       end
 
-      def machine_show(name)
+      def node_show(name)
         result = self.class.get(
           "/crowbar/machines/1.0/#{name}"
         )
@@ -77,7 +90,7 @@ module Crowbar
         end
       end
 
-      def machine_delete(name)
+      def node_delete(name)
         result = self.class.delete(
           "/crowbar/machines/1.0/#{name}"
         )
@@ -89,7 +102,7 @@ module Crowbar
         end
       end
 
-      def machine_list
+      def node_list
         result = self.class.get(
           "/crowbar/machines/1.0"
         )
@@ -101,10 +114,9 @@ module Crowbar
         end
       end
 
-      def machine_status
-        # TODO(must): Set the correct route
+      def node_status
         result = self.class.get(
-          "/crowbar/machines/1.0"
+          "/nodes/status"
         )
 
         if block_given?
