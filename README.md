@@ -5,6 +5,7 @@
 [![Code Climate](https://codeclimate.com/github/crowbar/crowbar-client.svg)](https://codeclimate.com/github/crowbar/crowbar-client)
 [![Test Coverage](https://codeclimate.com/github/crowbar/crowbar-client/badges/coverage.svg)](https://codeclimate.com/github/crowbar/crowbar-client)
 [![Dependency Status](https://gemnasium.com/crowbar/crowbar-client.svg)](https://gemnasium.com/crowbar/crowbar-client)
+[![Join the chat at https://gitter.im/crowbar/crowbar](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/crowbar/crowbar)
 
 TBD
 
