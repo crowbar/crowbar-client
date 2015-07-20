@@ -54,7 +54,7 @@ module Crowbar
                       end
 
                       say Terminal::Table.new(
-                        rows: rows.sort,
+                        rows:     rows.sort,
                         headings: [
                           "Name",
                           "Status"
@@ -64,7 +64,7 @@ module Crowbar
                       rows = [].tap do |result|
                         body[:nodes].each do |name, data|
                           result.push(
-                            name: name,
+                            name:   name,
                             status: data[:status]
                           )
                         end
@@ -116,7 +116,7 @@ module Crowbar
                       end
 
                       say Terminal::Table.new(
-                        rows: rows.sort,
+                        rows:     rows.sort,
                         headings: [
                           "Name",
                           "Alias"
@@ -126,7 +126,7 @@ module Crowbar
                       rows = [].tap do |result|
                         body[:nodes].each do |data|
                           result.push(
-                            name: data[:name],
+                            name:  data[:name],
                             alias: data[:alias]
                           )
                         end

@@ -11,50 +11,58 @@
 # This file contains the rules with derive from this.
 
 Lint/EndAlignment:
-  StyleGuide: https://github.com/SUSE/style-guides/blob/master/Ruby.md#lintendalignment
+  # Stop complains about unsupported attribute
+  # StyleGuide: https://github.com/SUSE/style-guides/blob/master/Ruby.md#lintendalignment
   AlignWith: variable
 
 Metrics/AbcSize:
-  StyleGuide: https://github.com/SUSE/style-guides/blob/master/Ruby.md#metricsabcsize
+  # Stop complains about unsupported attribute
+  # StyleGuide: https://github.com/SUSE/style-guides/blob/master/Ruby.md#metricsabcsize
   Max: 30
 
 Metrics/LineLength:
-  StyleGuide: https://github.com/SUSE/style-guides/blob/master/Ruby.md#metricslinelength
+  # Stop complains about unsupported attribute
+  # StyleGuide: https://github.com/SUSE/style-guides/blob/master/Ruby.md#metricslinelength
   Max: 100
-  # To make it possible to copy or click on URIs in the code, we allow lines
-  # contaning a URI to be longer than Max.
   AllowURI: true
   URISchemes:
     - http
     - https
 
 Style/AlignHash:
-  StyleGuide: https://github.com/SUSE/style-guides/blob/master/Ruby.md#stylealignhash
+  # Stop complains about unsupported attribute
+  # StyleGuide: https://github.com/SUSE/style-guides/blob/master/Ruby.md#stylealignhash
   EnforcedHashRocketStyle: table
   EnforcedColonStyle: table
 
 Style/AlignParameters:
-  StyleGuide: https://github.com/SUSE/style-guides/blob/master/Ruby.md#stylealignparameters
+  # Stop complains about unsupported attribute
+  # StyleGuide: https://github.com/SUSE/style-guides/blob/master/Ruby.md#stylealignparameters
   Enabled: false
 
 Style/CollectionMethods:
-  StyleGuide: https://github.com/SUSE/style-guides/blob/master/Ruby.md#stylecollectionmethods
+  # Stop complains about unsupported attribute
+  # StyleGuide: https://github.com/SUSE/style-guides/blob/master/Ruby.md#stylecollectionmethods
   Enabled: false
 
 Style/EmptyLinesAroundBlockBody:
-  StyleGuide: https://github.com/SUSE/style-guides/blob/master/Ruby.md#styleemptylinesaroundblockbody
+  # Stop complains about unsupported attribute
+  # StyleGuide: https://github.com/SUSE/style-guides/blob/master/Ruby.md#styleemptylinesaroundblockbody
   Enabled: false
 
 Style/MultilineOperationIndentation:
-  StyleGuide: https://github.com/SUSE/style-guides/blob/master/Ruby.md#stylemultilineoperationindentation
+  # Stop complains about unsupported attribute
+  # StyleGuide: https://github.com/SUSE/style-guides/blob/master/Ruby.md#stylemultilineoperationindentation
   EnforcedStyle: indented
 
 Style/StringLiterals:
-  StyleGuide: https://github.com/SUSE/style-guides/blob/master/Ruby.md#stylestringliterals
+  # Stop complains about unsupported attribute
+  # StyleGuide: https://github.com/SUSE/style-guides/blob/master/Ruby.md#stylestringliterals
   EnforcedStyle: double_quotes
 
 Style/StringLiteralsInInterpolation:
-  StyleGuide: https://github.com/SUSE/style-guides/blob/master/Ruby.md#stylestringliteralsininterpolation
+  # Stop complains about unsupported attribute
+  # StyleGuide: https://github.com/SUSE/style-guides/blob/master/Ruby.md#stylestringliteralsininterpolation
   EnforcedStyle: double_quotes
 
 inherit_from: .rubocop.crowbar.yml

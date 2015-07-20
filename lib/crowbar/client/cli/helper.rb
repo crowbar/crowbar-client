@@ -37,7 +37,21 @@ module Crowbar
           end
 
           def configure(path, section)
-            file = if path.nil?
+            ini = IniFile.load(detect_config(path))
+
+            if ini[section]
+              ini[section].with_indifferent_access
+            else
+              {}
+            end
+          rescue
+            {}
+          end
+
+          protected
+
+          def detect_config(path)
+            if path.nil?
               [
                 "#{ENV["HOME"]}/.crowbarrc",
                 "/etc/crowbarrc"
@@ -46,18 +60,6 @@ module Crowbar
               end
             else
               path
-            end
-
-            begin
-              ini = IniFile.load(file)
-
-              if ini[section]
-                ini[section].with_indifferent_access
-              else
-                {}
-              end
-            rescue
-              {}
             end
           end
         end

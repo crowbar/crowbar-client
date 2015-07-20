@@ -50,7 +50,7 @@ module Crowbar
                       err "No barclamps"
                     else
                       say Terminal::Table.new(
-                        rows: rows.sort,
+                        rows:     rows.sort,
                         headings: [
                           "Name"
                         ]

@@ -25,13 +25,13 @@ module Crowbar
             config = configure(global[:config], global[:alias])
 
             Request.instance.configure(
-              host: config[:hostname] || global[:hostname],
-              port: config[:port] || global[:port],
+              host:     config[:hostname] || global[:hostname],
+              port:     config[:port] || global[:port],
               username: config[:username] || global[:username],
               password: config[:password] || global[:password],
-              legacy: config[:legacy] || global[:legacy],
-              debug: config[:debug] || global[:debug],
-              timeout: config[:timeout] || global[:timeout]
+              legacy:   config[:legacy] || global[:legacy],
+              debug:    config[:debug] || global[:debug],
+              timeout:  config[:timeout] || global[:timeout]
             )
 
             true
