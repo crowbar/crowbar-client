@@ -98,8 +98,6 @@ module Crowbar
               end
             end
 
-
-
             parent.desc "Create a proposal for specific barclamp"
             parent.arg :barclamp
             parent.arg :proposal
@@ -109,7 +107,7 @@ module Crowbar
                 proposal = args.shift
                 helper.validate_availability_of! barclamp
 
-                fail "Not implemented yet!"
+                fail "Not implemented yet! (#{barclamp}, #{proposal})"
               end
             end
 
@@ -122,11 +120,9 @@ module Crowbar
                 proposal = args.shift
                 helper.validate_availability_of! barclamp
 
-                fail "Not implemented yet!"
+                fail "Not implemented yet! (#{barclamp}, #{proposal})"
               end
             end
-
-
 
             parent.desc "Delete a proposal for specific barclamp"
             parent.arg :barclamp

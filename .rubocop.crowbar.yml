@@ -10,6 +10,16 @@ Style/RedundantReturn:
 Style/Documentation:
   Enabled: false
 
+Style/WordArray:
+  Enabled: false
+
+Style/RegexpLiteral:
+  Enabled: false
+
+Style/AlignHash:
+  EnforcedHashRocketStyle: key
+  EnforcedColonStyle: key
+
 Lint/UnusedMethodArgument:
   Enabled: false
 

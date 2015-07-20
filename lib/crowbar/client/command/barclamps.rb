@@ -48,9 +48,8 @@ module Crowbar
 
                     if rows.empty?
                       err "No barclamps"
-                      return
                     else
-                      output = Terminal::Table.new(
+                      say Terminal::Table.new(
                         rows: rows.sort,
                         headings: [
                           "Name"
@@ -60,26 +59,22 @@ module Crowbar
                   when :json
                     rows = [].tap do |result|
                       body.keys.each do |name|
-                        result.push({
+                        result.push(
                           name: name
-                        })
+                        )
                       end
                     end
 
                     if rows.empty?
                       err "No barclamps"
-                      return
                     else
-                      output = JSON.pretty_generate(
+                      say JSON.pretty_generate(
                         rows.sort_by { |r| r[:name] }
                       )
                     end
                   else
                     err "Invalid format, valid formats: table, json"
-                    return
                   end
-
-                  say output
                 else
                   err "Got unknown response with code #{request.code}"
                 end

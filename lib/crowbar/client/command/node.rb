@@ -53,7 +53,7 @@ module Crowbar
                         end
                       end
 
-                      output = Terminal::Table.new(
+                      say Terminal::Table.new(
                         rows: rows.sort,
                         headings: [
                           "Name",
@@ -63,22 +63,19 @@ module Crowbar
                     when :json
                       rows = [].tap do |result|
                         body[:nodes].each do |name, data|
-                          result.push({
+                          result.push(
                             name: name,
                             status: data[:status]
-                          })
+                          )
                         end
                       end
 
-                      output = JSON.pretty_generate(
+                      say JSON.pretty_generate(
                         rows.sort_by { |r| r[:name] }
                       )
                     else
                       err "Invalid format, valid formats: table, json"
-                      return
                     end
-
-                    say output
                   when 404
                     err "Failed to find any available node"
                   else
@@ -118,7 +115,7 @@ module Crowbar
                         end
                       end
 
-                      output = Terminal::Table.new(
+                      say Terminal::Table.new(
                         rows: rows.sort,
                         headings: [
                           "Name",
@@ -128,22 +125,19 @@ module Crowbar
                     when :json
                       rows = [].tap do |result|
                         body[:nodes].each do |data|
-                          result.push({
+                          result.push(
                             name: data[:name],
                             alias: data[:alias]
-                          })
+                          )
                         end
                       end
 
-                      output = JSON.pretty_generate(
+                      say JSON.pretty_generate(
                         rows.sort_by { |r| r[:name] }
                       )
                     else
                       err "Invalid format, valid formats: table, json"
-                      return
                     end
-
-                    say output
                   when 404
                     err "Failed to find any available node"
                   else
