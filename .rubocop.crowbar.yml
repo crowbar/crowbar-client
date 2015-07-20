@@ -20,10 +20,6 @@ Style/WordArray:
 Style/RegexpLiteral:
   Enabled: false
 
-Style/AlignHash:
-  EnforcedHashRocketStyle: key
-  EnforcedColonStyle: key
-
 Lint/UnusedMethodArgument:
   Enabled: false
 
