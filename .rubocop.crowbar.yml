@@ -14,20 +14,18 @@ Style/FileName:
 Style/Documentation:
   Enabled: false
 
-Style/WordArray:
-  Enabled: false
-
-Style/RegexpLiteral:
-  Enabled: false
-
 Lint/UnusedMethodArgument:
   Enabled: false
 
 Lint/UnusedBlockArgument:
   Enabled: false
 
+# Below that it should be improved
 Metrics/AbcSize:
   Max: 50
 
 Metrics/LineLength:
   Max: 150
+
+Metrics/ModuleLength:
+  Max: 450
