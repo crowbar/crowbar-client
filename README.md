@@ -12,12 +12,21 @@ was originally developed by the [Dell CloudEdge Solutions Team](http://dell.com/
 
 ## Badges
 
-[![Gem Version](http://img.shields.io/gem/v/crowbar-client.svg)](https://rubygems.org/gems/crowbar-client)
 [![Build Status](https://secure.travis-ci.org/crowbar/crowbar-client.svg)](https://travis-ci.org/crowbar/crowbar-client)
 [![Code Climate](https://codeclimate.com/github/crowbar/crowbar-client.svg)](https://codeclimate.com/github/crowbar/crowbar-client)
 [![Test Coverage](https://codeclimate.com/github/crowbar/crowbar-client/badges/coverage.svg)](https://codeclimate.com/github/crowbar/crowbar-client)
 [![Dependency Status](https://gemnasium.com/crowbar/crowbar-client.svg)](https://gemnasium.com/crowbar/crowbar-client)
 [![Join the chat at https://gitter.im/crowbar/crowbar](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/crowbar/crowbar)
+
+## Install
+
+To install this simple rubygem you can check your package manager if it is
+available for you, alternativly you can just install the ruby gem if you have a
+running ruby stack on your machine with this command:
+
+```
+gem install crowbar-client
+```
 
 ## Contributing
 
