@@ -30,7 +30,7 @@ module Crowbar
                 barclamp = args.shift
                 helper.validate_availability_of! barclamp
 
-                $request.proposal_list(barclamp) do |request|
+                Request.instance.proposal_list(barclamp) do |request|
                   case request.code
                   when 200
                     body = begin
@@ -64,7 +64,7 @@ module Crowbar
                 path = args.shift
                 helper.validate_availability_of! barclamp
 
-                $request.proposal_show(barclamp, proposal) do |request|
+                Request.instance.proposal_show(barclamp, proposal) do |request|
                   body = begin
                     JSON.parse(request.body).with_indifferent_access
                   rescue
@@ -137,7 +137,7 @@ module Crowbar
                 proposal = args.shift
                 helper.validate_availability_of! barclamp
 
-                $request.proposal_delete(barclamp, proposal) do |request|
+                Request.instance.proposal_delete(barclamp, proposal) do |request|
                   case request.code
                   when 200
                     say "Deleted successfully #{proposal} on #{barclamp}"
@@ -159,7 +159,7 @@ module Crowbar
                 proposal = args.shift
                 helper.validate_availability_of! barclamp
 
-                $request.proposal_action(:dequeue, barclamp, proposal) do |request|
+                Request.instance.proposal_action(:dequeue, barclamp, proposal) do |request|
                   case request.code
                   when 200
                     say "Dequeued #{proposal} on #{barclamp}"
@@ -181,7 +181,7 @@ module Crowbar
                 proposal = args.shift
                 helper.validate_availability_of! barclamp
 
-                $request.proposal_action(:commit, barclamp, proposal) do |request|
+                Request.instance.proposal_action(:commit, barclamp, proposal) do |request|
                   case request.code
                   when 200
                     say "Commited #{proposal} on #{barclamp}"

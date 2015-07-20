@@ -26,21 +26,60 @@ module Crowbar
             c.desc "Format of the resulting output"
             c.flag [:format], type: String, default_value: :table
 
+            c.desc "Filter output by criteria"
+            c.flag [:filter], type: String, default_value: nil
+
             c.action do |global, opts, args|
-              $request.barclamp_list do |request|
+              Request.instance.barclamp_list do |request|
                 case request.code
                 when 200
                   body = begin
-                    JSON.parse(request.body).keys
+                    JSON.parse(request.body)
                   rescue
                     []
                   end
 
-                  if body.empty?
-                    err "No barclamps"
+                  # TODO(must): Implement filter method
+                  case opts[:format].to_sym
+                  when :table
+                    rows = body.keys.map do |name|
+                      [name]
+                    end
+
+                    if rows.empty?
+                      err "No barclamps"
+                      return
+                    else
+                      output = Terminal::Table.new(
+                        rows: rows.sort,
+                        headings: [
+                          "Name"
+                        ]
+                      )
+                    end
+                  when :json
+                    rows = [].tap do |result|
+                      body.keys.each do |name|
+                        result.push({
+                          name: name
+                        })
+                      end
+                    end
+
+                    if rows.empty?
+                      err "No barclamps"
+                      return
+                    else
+                      output = JSON.pretty_generate(
+                        rows.sort_by { |r| r[:name] }
+                      )
+                    end
                   else
-                    say body.sort.join("\n")
+                    err "Invalid format, valid formats: table, json"
+                    return
                   end
+
+                  say output
                 else
                   err "Got unknown response with code #{request.code}"
                 end

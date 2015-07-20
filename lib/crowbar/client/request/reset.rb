@@ -14,16 +14,15 @@
 # limitations under the License.
 #
 
-require_relative "command/barclamps"
-require_relative "command/batch"
-require_relative "command/node"
-require_relative "command/proposal"
-require_relative "command/reset"
-require_relative "command/role"
-
 module Crowbar
   module Client
-    module Command
+    class Request
+      module Reset
+        extend ActiveSupport::Concern
+
+        included do
+        end
+      end
     end
   end
 end

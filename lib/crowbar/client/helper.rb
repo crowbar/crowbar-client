@@ -25,7 +25,7 @@ module Crowbar
       protected
 
       def available_barclamps
-        @available_barclamps ||= $request.barclamp_list.keys
+        @available_barclamps ||= Request.instance.barclamp_list.keys
       end
     end
   end

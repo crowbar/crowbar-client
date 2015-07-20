@@ -32,7 +32,7 @@ module Crowbar
               c.flag [:filter], type: String, default_value: nil
 
               c.action do |global, opts, args|
-                $request.node_status do |request|
+                Request.instance.node_status do |request|
                   case request.code
                   when 200
                     body = begin
@@ -70,7 +70,9 @@ module Crowbar
                         end
                       end
 
-                      output = JSON.pretty_generate(rows.sort)
+                      output = JSON.pretty_generate(
+                        rows.sort_by { |r| r[:name] }
+                      )
                     else
                       err "Invalid format, valid formats: table, json"
                       return
@@ -95,7 +97,7 @@ module Crowbar
               c.flag [:filter], type: String, default_value: nil
 
               c.action do |global, opts, args|
-                $request.node_list do |request|
+                Request.instance.node_list do |request|
                   case request.code
                   when 200
                     body = begin
@@ -133,7 +135,9 @@ module Crowbar
                         end
                       end
 
-                      output = JSON.pretty_generate(rows.sort)
+                      output = JSON.pretty_generate(
+                        rows.sort_by { |r| r[:name] }
+                      )
                     else
                       err "Invalid format, valid formats: table, json"
                       return
@@ -155,7 +159,7 @@ module Crowbar
               c.action do |global, opts, args|
                 name = args.shift
 
-                $request.node_delete(name) do |request|
+                Request.instance.node_delete(name) do |request|
                   case request.code
                   when 200
                     say "Deleted successfully #{name}"
@@ -174,7 +178,7 @@ module Crowbar
               c.action do |global, opts, args|
                 name = args.shift
 
-                $request.node_action(:update, name) do |request|
+                Request.instance.node_action(:update, name) do |request|
                   case request.code
                   when 200
                     say "Executed hardware for #{name}"
@@ -193,7 +197,7 @@ module Crowbar
               c.action do |global, opts, args|
                 name = args.shift
 
-                $request.node_action(:identify, name) do |request|
+                Request.instance.node_action(:identify, name) do |request|
                   case request.code
                   when 200
                     say "Executed identify for #{name}"
@@ -212,7 +216,7 @@ module Crowbar
               c.action do |global, opts, args|
                 name = args.shift
 
-                $request.node_action(:reinstall, name) do |request|
+                Request.instance.node_action(:reinstall, name) do |request|
                   case request.code
                   when 200
                     say "Executed reinstall for #{name}"
@@ -231,7 +235,7 @@ module Crowbar
               c.action do |global, opts, args|
                 name = args.shift
 
-                $request.node_action(:reset, name) do |request|
+                Request.instance.node_action(:reset, name) do |request|
                   case request.code
                   when 200
                     say "Executed reset for #{name}"
@@ -250,7 +254,7 @@ module Crowbar
               c.action do |global, opts, args|
                 name = args.shift
 
-                $request.node_action(:reset, name) do |request|
+                Request.instance.node_action(:reset, name) do |request|
                   case request.code
                   when 200
                     say "Executed shutdown for #{name}"
@@ -269,7 +273,7 @@ module Crowbar
               c.action do |global, opts, args|
                 name = args.shift
 
-                $request.node_action(:reboot, name) do |request|
+                Request.instance.node_action(:reboot, name) do |request|
                   case request.code
                   when 200
                     say "Executed reboot for #{name}"
@@ -288,7 +292,7 @@ module Crowbar
               c.action do |global, opts, args|
                 name = args.shift
 
-                $request.node_action(:shutdown, name) do |request|
+                Request.instance.node_action(:shutdown, name) do |request|
                   case request.code
                   when 200
                     say "Executed shutdown for #{name}"
@@ -307,7 +311,7 @@ module Crowbar
               c.action do |global, opts, args|
                 name = args.shift
 
-                $request.node_action(:poweron, name) do |request|
+                Request.instance.node_action(:poweron, name) do |request|
                   case request.code
                   when 200
                     say "Executed poweron for #{name}"
@@ -326,7 +330,7 @@ module Crowbar
               c.action do |global, opts, args|
                 name = args.shift
 
-                $request.node_action(:powercycle, name) do |request|
+                Request.instance.node_action(:powercycle, name) do |request|
                   case request.code
                   when 200
                     say "Executed powercycle for #{name}"
@@ -345,7 +349,7 @@ module Crowbar
               c.action do |global, opts, args|
                 name = args.shift
 
-                $request.node_action(:poweroff, name) do |request|
+                Request.instance.node_action(:poweroff, name) do |request|
                   case request.code
                   when 200
                     say "Executed poweroff for #{name}"
@@ -364,7 +368,7 @@ module Crowbar
               c.action do |global, opts, args|
                 name = args.shift
 
-                $request.node_action(:allocate, name) do |request|
+                Request.instance.node_action(:allocate, name) do |request|
                   case request.code
                   when 200
                     say "Executed allocate for #{name}"
@@ -385,7 +389,7 @@ module Crowbar
                 name = args.shift
                 update = args.shift
 
-                $request.node_role(name, update) do |request|
+                Request.instance.node_role(name, update) do |request|
                   body = begin
                     JSON.parse(request.body).with_indifferent_access
                   rescue
@@ -415,7 +419,7 @@ module Crowbar
                 name = args.shift
                 update = args.shift
 
-                $request.node_rename(name, update) do |request|
+                Request.instance.node_rename(name, update) do |request|
                   body = begin
                     JSON.parse(request.body).with_indifferent_access
                   rescue
@@ -445,7 +449,7 @@ module Crowbar
                 name = args.shift
                 path = args.shift
 
-                $request.node_show(name) do |request|
+                Request.instance.node_show(name) do |request|
                   body = begin
                     JSON.parse(request.body).with_indifferent_access
                   rescue
@@ -487,7 +491,7 @@ module Crowbar
                 name = args.shift
                 state = args.shift
 
-                $request.node_transition(name, state) do |request|
+                Request.instance.node_transition(name, state) do |request|
                   case request.code
                   when 200
                     say "Transitioned #{name} into #{state}"

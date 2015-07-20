@@ -14,16 +14,26 @@
 # limitations under the License.
 #
 
-require_relative "command/barclamps"
-require_relative "command/batch"
-require_relative "command/node"
-require_relative "command/proposal"
-require_relative "command/reset"
-require_relative "command/role"
-
 module Crowbar
   module Client
-    module Command
+    class Request
+      module Barclamps
+        extend ActiveSupport::Concern
+
+        included do
+          def barclamp_list
+            result = self.class.get(
+              "/crowbar.json"
+            )
+
+            if block_given?
+              yield result
+            else
+              result
+            end
+          end
+        end
+      end
     end
   end
 end

@@ -30,7 +30,7 @@ module Crowbar
                 barclamp = args.shift
                 helper.validate_availability_of! barclamp
 
-                $request.role_list(barclamp) do |request|
+                Request.instance.role_list(barclamp) do |request|
                   case request.code
                   when 200
                     body = begin
@@ -62,7 +62,7 @@ module Crowbar
                 role = args.shift
                 helper.validate_availability_of! barclamp
 
-                $request.role_show(barclamp, role) do |request|
+                Request.instance.role_show(barclamp, role) do |request|
                   case request.code
                   when 200
                     body = begin

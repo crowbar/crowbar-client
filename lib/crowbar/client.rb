@@ -33,15 +33,12 @@ require "gli"
 require "httparty"
 require "terminal-table"
 
+require "singleton"
+
 GLI::Commands::Help.tap do |config|
   config.skips_around = false
   config.skips_pre = false
   config.skips_post = false
-end
-
-module Crowbar
-  module Client
-  end
 end
 
 require_relative "client/errors"
