@@ -147,25 +147,6 @@ module Crowbar
               end
             end
 
-            parent.desc "Delete the specified node"
-            parent.arg :name_or_alias
-            parent.command :delete do |c|
-              c.action do |global, opts, args|
-                name = args.shift
-
-                Request.instance.node_delete(name) do |request|
-                  case request.code
-                  when 200
-                    say "Deleted successfully #{name}"
-                  when 404
-                    err "Name does not exist"
-                  else
-                    err "Got unknown response with code #{request.code}"
-                  end
-                end
-              end
-            end
-
             parent.desc "Hardware update a node"
             parent.arg :name_or_alias
             parent.command :hardware do |c|
@@ -178,6 +159,8 @@ module Crowbar
                     say "Executed hardware for #{name}"
                   when 404
                     err "Name does not exist"
+                  when 422
+                    err body[:error]
                   else
                     err "Got unknown response with code #{request.code}"
                   end
@@ -197,6 +180,29 @@ module Crowbar
                     say "Executed identify for #{name}"
                   when 404
                     err "Name does not exist"
+                  when 422
+                    err body[:error]
+                  else
+                    err "Got unknown response with code #{request.code}"
+                  end
+                end
+              end
+            end
+
+            parent.desc "Delete the specified node"
+            parent.arg :name_or_alias
+            parent.command :delete do |c|
+              c.action do |global, opts, args|
+                name = args.shift
+
+                Request.instance.node_delete(name) do |request|
+                  case request.code
+                  when 200
+                    say "Deleted successfully #{name}"
+                  when 403
+                    err "Not allowed for an admin server"
+                  when 404
+                    err "Name does not exist"
                   else
                     err "Got unknown response with code #{request.code}"
                   end
@@ -214,6 +220,8 @@ module Crowbar
                   case request.code
                   when 200
                     say "Executed reinstall for #{name}"
+                  when 403
+                    err "Not allowed for an admin server"
                   when 404
                     err "Name does not exist"
                   else
@@ -233,6 +241,8 @@ module Crowbar
                   case request.code
                   when 200
                     say "Executed reset for #{name}"
+                  when 403
+                    err "Not allowed for an admin server"
                   when 404
                     err "Name does not exist"
                   else
@@ -252,6 +262,8 @@ module Crowbar
                   case request.code
                   when 200
                     say "Executed shutdown for #{name}"
+                  when 403
+                    err "Not allowed for an admin server"
                   when 404
                     err "Name does not exist"
                   else
@@ -271,44 +283,8 @@ module Crowbar
                   case request.code
                   when 200
                     say "Executed reboot for #{name}"
-                  when 404
-                    err "Name does not exist"
-                  else
-                    err "Got unknown response with code #{request.code}"
-                  end
-                end
-              end
-            end
-
-            parent.desc "Shutdown the specified node"
-            parent.arg :name_or_alias
-            parent.command :shutdown do |c|
-              c.action do |global, opts, args|
-                name = args.shift
-
-                Request.instance.node_action(:shutdown, name) do |request|
-                  case request.code
-                  when 200
-                    say "Executed shutdown for #{name}"
-                  when 404
-                    err "Name does not exist"
-                  else
-                    err "Got unknown response with code #{request.code}"
-                  end
-                end
-              end
-            end
-
-            parent.desc "Poweron the specified node"
-            parent.arg :name_or_alias
-            parent.command :poweron do |c|
-              c.action do |global, opts, args|
-                name = args.shift
-
-                Request.instance.node_action(:poweron, name) do |request|
-                  case request.code
-                  when 200
-                    say "Executed poweron for #{name}"
+                  when 403
+                    err "Not allowed for an admin server"
                   when 404
                     err "Name does not exist"
                   else
@@ -328,6 +304,8 @@ module Crowbar
                   case request.code
                   when 200
                     say "Executed powercycle for #{name}"
+                  when 403
+                    err "Not allowed for an admin server"
                   when 404
                     err "Name does not exist"
                   else
@@ -347,6 +325,29 @@ module Crowbar
                   case request.code
                   when 200
                     say "Executed poweroff for #{name}"
+                  when 403
+                    err "Not allowed for an admin server"
+                  when 404
+                    err "Name does not exist"
+                  else
+                    err "Got unknown response with code #{request.code}"
+                  end
+                end
+              end
+            end
+
+            parent.desc "Poweron the specified node"
+            parent.arg :name_or_alias
+            parent.command :poweron do |c|
+              c.action do |global, opts, args|
+                name = args.shift
+
+                Request.instance.node_action(:poweron, name) do |request|
+                  case request.code
+                  when 200
+                    say "Executed poweron for #{name}"
+                  when 403
+                    err "Not allowed for an admin server"
                   when 404
                     err "Name does not exist"
                   else
@@ -368,6 +369,8 @@ module Crowbar
                     say "Executed allocate for #{name}"
                   when 404
                     err "Name does not exist"
+                  when 422
+                    err body[:error]
                   else
                     err "Got unknown response with code #{request.code}"
                   end
@@ -395,9 +398,8 @@ module Crowbar
                     say "Executed allocate for #{name}"
                   when 404
                     err "Name does not exist"
-                  when 409
-                    # TODO(must): Implement this return code in controller
-                    err body[:errors].to_sentence
+                  when 422
+                    err body[:error]
                   else
                     err "Got unknown response with code #{request.code}"
                   end
@@ -425,9 +427,8 @@ module Crowbar
                     say "Executed allocate for #{name}"
                   when 404
                     err "Name does not exist"
-                  when 409
-                    # TODO(must): Implement this return code in controller
-                    err body[:errors].to_sentence
+                  when 422
+                    err body[:error]
                   else
                     err "Got unknown response with code #{request.code}"
                   end
@@ -467,9 +468,8 @@ module Crowbar
                     end
                   when 404
                     err "Name does not exist"
-                  when 409
-                    # TODO(must): Implement this return code in controller
-                    err body[:errors].to_sentence
+                  when 422
+                    err body[:error]
                   else
                     err "Got unknown response with code #{request.code}"
                   end
@@ -491,9 +491,8 @@ module Crowbar
                     say "Transitioned #{name} into #{state}"
                   when 404
                     err "Name does not exist"
-                  when 409
-                    # TODO(must): Implement this return code in controller
-                    err body[:errors].to_sentence
+                  when 422
+                    err body[:error]
                   else
                     err "Got unknown response with code #{request.code}"
                   end
