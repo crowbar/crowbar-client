@@ -37,7 +37,7 @@ module Crowbar
           flag [:n, :hostname], default_value: "http://127.0.0.1"
 
           desc "Specify port for connection"
-          flag [:p, :port], default_value: "3000"
+          flag [:p, :port], default_value: "80"
 
           desc "Specify timeout for connection"
           flag [:t, :timeout], default_value: "60"
