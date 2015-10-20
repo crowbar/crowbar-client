@@ -1,5 +1,7 @@
+inherit_from: .hound.suse.yml
+
 AllCops:
-  RunRailsCops: false
+  RunRailsCops: true
   DisplayStyleGuide: true
   DisplayCopNames: true
 
@@ -11,6 +13,10 @@ Style/FileName:
   Exclude:
     - "lib/crowbar-*"
 
+Style/AlignHash:
+  EnforcedHashRocketStyle: key
+  EnforcedColonStyle: key
+
 Style/Documentation:
   Enabled: false
 
@@ -20,12 +26,8 @@ Lint/UnusedMethodArgument:
 Lint/UnusedBlockArgument:
   Enabled: false
 
-# Below that it should be improved
 Metrics/AbcSize:
   Max: 50
 
 Metrics/LineLength:
   Max: 150
-
-Metrics/ModuleLength:
-  Max: 450

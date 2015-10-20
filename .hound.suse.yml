@@ -75,4 +75,7 @@ Style/RegexpLiteral:
   # StyleGuide: https://github.com/SUSE/style-guides/blob/master/Ruby.md#deviations-from-the-upstream-style-guide
   Enabled: false
 
-inherit_from: .rubocop.crowbar.yml
+Style/SignalException:
+  # Stop complains about unsupported attribute
+  # StyleGuide: https://github.com/bbatsov/ruby-style-guide#fail-method
+  EnforcedStyle: only_raise
