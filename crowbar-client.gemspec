@@ -52,6 +52,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "yard"
   s.add_development_dependency "rspec"
   s.add_development_dependency "aruba"
+  s.add_development_dependency "webmock"
 
   s.add_runtime_dependency "httparty", ">= 0.13.3"
   s.add_runtime_dependency "gli", ">= 2.13.0"
