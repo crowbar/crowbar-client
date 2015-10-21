@@ -42,6 +42,8 @@ GLI::Commands::Help.tap do |config|
 end
 
 require_relative "client/errors"
+require_relative "client/filter"
+require_relative "client/formatter"
 require_relative "client/command"
 require_relative "client/helper"
 require_relative "client/request"

@@ -14,15 +14,12 @@
 # limitations under the License.
 #
 
+require_relative "filter/base"
+require_relative "filter/array"
+
 module Crowbar
   module Client
-    class UnavailableBarclampError < StandardError
-      def initialize(barclamp)
-        super("Barclamp #{barclamp} is not available")
-      end
-    end
-
-    class InvalidFormat < StandardError
+    module Filter
     end
   end
 end

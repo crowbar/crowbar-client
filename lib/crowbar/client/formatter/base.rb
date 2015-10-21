@@ -16,13 +16,18 @@
 
 module Crowbar
   module Client
-    class UnavailableBarclampError < StandardError
-      def initialize(barclamp)
-        super("Barclamp #{barclamp} is not available")
-      end
-    end
+    module Formatter
+      class Base
+        attr_accessor :options
 
-    class InvalidFormat < StandardError
+        def initialize(options = {})
+          self.options = options
+        end
+
+        def empty?
+          false
+        end
+      end
     end
   end
 end

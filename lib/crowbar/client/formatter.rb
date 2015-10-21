@@ -14,15 +14,12 @@
 # limitations under the License.
 #
 
+require_relative "formatter/base"
+require_relative "formatter/array"
+
 module Crowbar
   module Client
-    class UnavailableBarclampError < StandardError
-      def initialize(barclamp)
-        super("Barclamp #{barclamp} is not available")
-      end
-    end
-
-    class InvalidFormat < StandardError
+    module Formatter
     end
   end
 end

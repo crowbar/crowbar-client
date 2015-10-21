@@ -16,13 +16,18 @@
 
 module Crowbar
   module Client
-    class UnavailableBarclampError < StandardError
-      def initialize(barclamp)
-        super("Barclamp #{barclamp} is not available")
+    module Filter
+      class Array < Base
+        def result
+          if options[:filter].present?
+            options[:values].select do |row|
+              row.include? options[:filter]
+            end
+          else
+            options[:values]
+          end
+        end
       end
-    end
-
-    class InvalidFormat < StandardError
     end
   end
 end

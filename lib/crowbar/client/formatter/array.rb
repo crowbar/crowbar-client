@@ -16,13 +16,29 @@
 
 module Crowbar
   module Client
-    class UnavailableBarclampError < StandardError
-      def initialize(barclamp)
-        super("Barclamp #{barclamp} is not available")
-      end
-    end
+    module Formatter
+      class Array < Base
+        def result
+          case options[:format].to_sym
+          when :table
+            Terminal::Table.new(
+              rows: options[:values].zip,
+              headings: options[:headings]
+            )
+          when :json
+            JSON.pretty_generate(
+              options[:values]
+            )
+          else
+            raise InvalidFormat,
+              "Invalid format, valid formats: table, json"
+          end
+        end
 
-    class InvalidFormat < StandardError
+        def empty?
+          options[:values].empty?
+        end
+      end
     end
   end
 end
