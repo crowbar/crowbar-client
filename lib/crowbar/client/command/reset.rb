@@ -21,7 +21,7 @@ module Crowbar
         extend ActiveSupport::Concern
 
         included do
-          desc "Reset specific commands for nodes/proposals"
+          desc "Reset specific commands"
           command :reset do |parent|
             parent.desc "Reset specific proposal"
             parent.arg :barclamp

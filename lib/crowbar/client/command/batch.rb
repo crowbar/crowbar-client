@@ -21,7 +21,7 @@ module Crowbar
         extend ActiveSupport::Concern
 
         included do
-          desc "Batch specific commands for import and export"
+          desc "Batch specific commands"
           command :batch do |parent|
             parent.desc "Include given proposals"
             parent.flag [:i, :include], type: Array

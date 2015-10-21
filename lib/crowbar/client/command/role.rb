@@ -21,7 +21,7 @@ module Crowbar
         extend ActiveSupport::Concern
 
         included do
-          desc "Role specific commands for barclamps"
+          desc "Role specific commands"
           command :role do |parent|
             parent.desc "Show a list of available roles"
             parent.arg :barclamp
