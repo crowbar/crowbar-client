@@ -16,6 +16,7 @@
 
 require_relative "command/barclamps"
 require_relative "command/batch"
+require_relative "command/network"
 require_relative "command/node"
 require_relative "command/proposal"
 require_relative "command/reset"
