@@ -26,6 +26,12 @@ module Crowbar
             parent.desc "Show a list of available roles"
             parent.arg :barclamp
             parent.command :list do |c|
+              c.desc "Format of the resulting output"
+              c.flag [:format], type: String, default_value: :table
+
+              c.desc "Filter output by criteria"
+              c.flag [:filter], type: String, default_value: nil
+
               c.action do |global, opts, args|
                 barclamp = args.shift
                 helper.validate_availability_of! barclamp
@@ -33,16 +39,19 @@ module Crowbar
                 Request.instance.role_list(barclamp) do |request|
                   case request.code
                   when 200
-                    body = begin
-                      JSON.parse(request.body)
-                    rescue
-                      []
-                    end
+                    formatter = Formatter::Array.new(
+                      format: opts[:format],
+                      headings: ["Roles"],
+                      values: Filter::Array.new(
+                        filter: opts[:filter],
+                        values: request.parsed_response.sort
+                      ).result
+                    )
 
-                    if body.empty?
+                    if formatter.empty?
                       err "No roles"
                     else
-                      say body.sort.join("\n")
+                      say formatter.result
                     end
                   when 404
                     err "Barclamp does not exist"
@@ -57,6 +66,12 @@ module Crowbar
             parent.arg :barclamp
             parent.arg :role
             parent.command :show do |c|
+              c.desc "Format of the resulting output"
+              c.flag [:format], type: String, default_value: :table
+
+              c.desc "Filter output by criteria"
+              c.flag [:filter], type: String, default_value: nil
+
               c.action do |global, opts, args|
                 barclamp = args.shift
                 role = args.shift
@@ -65,16 +80,19 @@ module Crowbar
                 Request.instance.role_show(barclamp, role) do |request|
                   case request.code
                   when 200
-                    body = begin
-                      JSON.parse(request.body)
-                    rescue
-                      []
-                    end
+                    formatter = Formatter::Array.new(
+                      format: opts[:format],
+                      headings: ["Nodes"],
+                      values: Filter::Array.new(
+                        filter: opts[:filter],
+                        values: request.parsed_response.sort
+                      ).result
+                    )
 
-                    if body.empty?
+                    if formatter.empty?
                       err "No nodes"
                     else
-                      say body.sort.join("\n")
+                      say formatter.result
                     end
                   when 404
                     err "Role does not exist"
