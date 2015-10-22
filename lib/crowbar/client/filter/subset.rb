@@ -14,14 +14,24 @@
 # limitations under the License.
 #
 
-require_relative "filter/base"
-require_relative "filter/array"
-require_relative "filter/hash"
-require_relative "filter/subset"
-
 module Crowbar
   module Client
     module Filter
+      class Subset < Base
+        def result
+          if options[:filter].present?
+            options[:filter].to_s.split(".").each do |segment|
+              if segment.to_i.to_s == segment
+                segment = segment.to_i
+              end
+
+              options[:values] = options[:values][segment]
+            end
+          end
+
+          options[:values]
+        end
+      end
     end
   end
 end
