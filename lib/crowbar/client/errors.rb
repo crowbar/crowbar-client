@@ -22,7 +22,16 @@ module Crowbar
       end
     end
 
-    class InvalidFormat < StandardError
+    class InvalidFormatError < StandardError
+    end
+
+    class EditorAbortError < StandardError
+    end
+
+    class EditorStartupError < StandardError
+    end
+
+    class InvalidJsonError < StandardError
     end
   end
 end
