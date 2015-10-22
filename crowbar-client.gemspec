@@ -59,4 +59,5 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "activesupport", ">= 3.0.0"
   s.add_runtime_dependency "inifile", ">= 3.0.0"
   s.add_runtime_dependency "terminal-table", ">= 1.5.2"
+  s.add_runtime_dependency "easy_diff"
 end

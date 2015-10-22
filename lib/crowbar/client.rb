@@ -25,6 +25,7 @@ else
   gem "gli", version: ">= 2.13.0"
   gem "httparty", version: ">= 0.13.3"
   gem "terminal-table", version: ">= 1.5.2"
+  gem "easy_diff"
 end
 
 require "active_support/all"
@@ -32,8 +33,7 @@ require "inifile"
 require "gli"
 require "httparty"
 require "terminal-table"
-
-require "singleton"
+require "easy_diff"
 
 GLI::Commands::Help.tap do |config|
   config.skips_around = false
@@ -42,6 +42,7 @@ GLI::Commands::Help.tap do |config|
 end
 
 require_relative "client/errors"
+require_relative "client/util"
 require_relative "client/filter"
 require_relative "client/formatter"
 require_relative "client/command"
