@@ -21,9 +21,21 @@ module Crowbar
         extend ActiveSupport::Concern
 
         included do
-          def proposal_action(action, barclamp, proposal)
+          def proposal_commit(barclamp, proposal)
+            result = self.class.post(
+              "/crowbar/#{barclamp}/1.0/proposals/commit/#{proposal}.json"
+            )
+
+            if block_given?
+              yield result
+            else
+              result
+            end
+          end
+
+          def proposal_dequeue(barclamp, proposal)
             result = self.class.get(
-              "/crowbar/#{barclamp}/1.0/proposals/#{action}/#{proposal}.json"
+              "/crowbar/#{barclamp}/1.0/proposals/dequeue/#{proposal}.json"
             )
 
             if block_given?
