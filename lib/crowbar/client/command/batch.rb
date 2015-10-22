@@ -33,7 +33,7 @@ module Crowbar
             parent.command :build do |c|
               c.action do |global, opts, args|
                 # TODO(must): Implement the batch build functionality
-                fail "Not implemented yet!"
+                raise "Not implemented yet!"
               end
             end
 
@@ -41,7 +41,7 @@ module Crowbar
             parent.command :export do |c|
               c.action do |global, opts, args|
                 # TODO(must): Implement the batch export functionality
-                fail "Not implemented yet!"
+                raise "Not implemented yet!"
               end
             end
           end

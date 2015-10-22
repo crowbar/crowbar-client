@@ -29,7 +29,7 @@ module Crowbar
             parent.command :proposal do |c|
               c.action do |global, opts, args|
                 # TODO(must): Needs to be implemented in controller
-                fail "Not implemented yet!"
+                raise "Not implemented yet!"
               end
             end
 
@@ -37,7 +37,7 @@ module Crowbar
             parent.command :nodes do |c|
               c.action do |global, opts, args|
                 # TODO(must): Needs to be implemented in controller
-                fail "Not implemented yet!"
+                raise "Not implemented yet!"
               end
             end
           end

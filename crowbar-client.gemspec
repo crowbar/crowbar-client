@@ -20,7 +20,7 @@ require "crowbar/client/version"
 Gem::Specification.new do |s|
   s.name = "crowbar-client"
   s.version = Crowbar::Client::Version
-  s.date = Time.now.strftime("%F")
+  s.date = Time.now.utc.strftime("%F")
 
   s.authors = ["Thomas Boerger"]
   s.email = ["tboerger@suse.de"]

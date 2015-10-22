@@ -32,7 +32,7 @@ module Crowbar
               c.arg :range
               c.arg :suggestion, :optional
               c.command :allocate do |a|
-                a.action do |_global, _opts, args|
+                a.action do |global, opts, args|
                   name = args.shift
                   service = args.shift
                   network = args.shift
@@ -61,7 +61,7 @@ module Crowbar
               c.arg :service
               c.arg :network
               c.command :deallocate do |a|
-                a.action do |_global, _opts, args|
+                a.action do |global, opts, args|
                   name = args.shift
                   service = args.shift
                   network = args.shift
@@ -91,7 +91,7 @@ module Crowbar
               c.arg :range
               c.arg :suggestion, :optional
               c.command :allocate do |a|
-                a.action do |_global, _opts, args|
+                a.action do |global, opts, args|
                   name = args.shift
                   node = args.shift
                   network = args.shift
@@ -120,7 +120,7 @@ module Crowbar
               c.arg :node
               c.arg :network
               c.command :deallocate do |a|
-                a.action do |_global, _opts, args|
+                a.action do |global, opts, args|
                   name = args.shift
                   node = args.shift
                   network = args.shift
@@ -148,7 +148,7 @@ module Crowbar
               c.arg :node
               c.arg :network
               c.command :enable do |a|
-                a.action do |_global, _opts, args|
+                a.action do |global, opts, args|
                   name = args.shift
                   node = args.shift
                   network = args.shift
@@ -173,7 +173,7 @@ module Crowbar
               c.arg :node
               c.arg :network
               c.command :disable do |a|
-                a.action do |_global, _opts, args|
+                a.action do |global, opts, args|
                   name = args.shift
                   node = args.shift
                   network = args.shift

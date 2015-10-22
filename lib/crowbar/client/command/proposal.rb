@@ -107,7 +107,7 @@ module Crowbar
                 proposal = args.shift
                 helper.validate_availability_of! barclamp
 
-                fail "Not implemented yet! (#{barclamp}, #{proposal})"
+                raise "Not implemented yet! (#{barclamp}, #{proposal})"
               end
             end
 
@@ -120,7 +120,7 @@ module Crowbar
                 proposal = args.shift
                 helper.validate_availability_of! barclamp
 
-                fail "Not implemented yet! (#{barclamp}, #{proposal})"
+                raise "Not implemented yet! (#{barclamp}, #{proposal})"
               end
             end
 
