@@ -21,7 +21,7 @@ module Crowbar
         extend ActiveSupport::Concern
 
         included do
-          desc "Proposal specific commands for barclamps"
+          desc "Proposal specific commands"
           command :proposal do |parent|
             parent.desc "Show a list of available proposals"
             parent.arg :barclamp
@@ -107,7 +107,7 @@ module Crowbar
                 proposal = args.shift
                 helper.validate_availability_of! barclamp
 
-                fail "Not implemented yet! (#{barclamp}, #{proposal})"
+                raise "Not implemented yet! (#{barclamp}, #{proposal})"
               end
             end
 
@@ -120,7 +120,7 @@ module Crowbar
                 proposal = args.shift
                 helper.validate_availability_of! barclamp
 
-                fail "Not implemented yet! (#{barclamp}, #{proposal})"
+                raise "Not implemented yet! (#{barclamp}, #{proposal})"
               end
             end
 

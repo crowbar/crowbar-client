@@ -39,6 +39,7 @@ module Crowbar
 
       include Command::Barclamps
       include Command::Batch
+      include Command::Network
       include Command::Node
       include Command::Proposal
       include Command::Reset

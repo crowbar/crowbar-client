@@ -19,7 +19,7 @@ module Crowbar
     class Helper
       def validate_availability_of!(barclamp)
         return if available_barclamps.include? barclamp
-        fail UnavailableBarclampError, barclamp
+        raise UnavailableBarclampError, barclamp
       end
 
       protected

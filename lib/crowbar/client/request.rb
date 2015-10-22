@@ -16,6 +16,7 @@
 
 require_relative "request/barclamps"
 require_relative "request/batch"
+require_relative "request/network"
 require_relative "request/node"
 require_relative "request/proposal"
 require_relative "request/reset"
@@ -41,6 +42,7 @@ module Crowbar
 
       include Barclamps
       include Batch
+      include Network
       include Node
       include Proposal
       include Reset

@@ -21,7 +21,7 @@ module Crowbar
         extend ActiveSupport::Concern
 
         included do
-          desc "Node specific commands for reboot and others"
+          desc "Node specific commands"
           command :node do |parent|
             parent.desc "Show current nodes status"
             parent.command :status do |c|

@@ -21,7 +21,7 @@ module Crowbar
         extend ActiveSupport::Concern
 
         included do
-          desc "List all available barclamps"
+          desc "List available barclamps"
           command :barclamps do |c|
             c.desc "Format of the resulting output"
             c.flag [:format], type: String, default_value: :table
