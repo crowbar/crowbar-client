@@ -22,15 +22,15 @@ module Crowbar
           case options[:format].to_sym
           when :table
             Terminal::Table.new(
-              rows: options[:values].zip,
-              headings: options[:headings]
+              headings: options[:headings],
+              rows: options[:values].zip
             )
           when :json
             JSON.pretty_generate(
               options[:values]
             )
           else
-            raise InvalidFormat,
+            raise InvalidFormatError,
               "Invalid format, valid formats: table, json"
           end
         end
