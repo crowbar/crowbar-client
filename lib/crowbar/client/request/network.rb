@@ -21,15 +21,15 @@ module Crowbar
         extend ActiveSupport::Concern
 
         included do
-          def network_allocate_virtual(
-            name,
+          def network_allocate_virtual_ip(
+            proposal,
             service,
             network,
             range,
             suggestion
           )
             result = self.class.post(
-              "/crowbar/network/1.0/allocate_virtual_ip/#{name}.json",
+              "/crowbar/network/1.0/allocate_virtual_ip/#{proposal}.json",
               body: {
                 name: service,
                 network: network,
@@ -45,13 +45,13 @@ module Crowbar
             end
           end
 
-          def network_deallocate_virtual(
-            name,
+          def network_deallocate_virtual_ip(
+            proposal,
             service,
             network
           )
             result = self.class.post(
-              "/crowbar/network/1.0/deallocate_virtual_ip/#{name}.json",
+              "/crowbar/network/1.0/deallocate_virtual_ip/#{proposal}.json",
               body: {
                 name: service,
                 network: network
@@ -66,14 +66,14 @@ module Crowbar
           end
 
           def network_allocate_ip(
-            name,
+            proposal,
             node,
             network,
             range,
             suggestion
           )
             result = self.class.post(
-              "/crowbar/network/1.0/allocate_ip/#{name}.json",
+              "/crowbar/network/1.0/allocate_ip/#{proposal}.json",
               body: {
                 name: node,
                 network: network,
@@ -90,12 +90,12 @@ module Crowbar
           end
 
           def network_deallocate_ip(
-            name,
+            proposal,
             node,
             network
           )
             result = self.class.post(
-              "/crowbar/network/1.0/deallocate_ip/#{name}.json",
+              "/crowbar/network/1.0/deallocate_ip/#{proposal}.json",
               body: {
                 name: node,
                 network: network
@@ -110,12 +110,12 @@ module Crowbar
           end
 
           def network_enable_interface(
-            name,
+            proposal,
             node,
             network
           )
             result = self.class.post(
-              "/crowbar/network/1.0/enable_interface/#{name}.json",
+              "/crowbar/network/1.0/enable_interface/#{proposal}.json",
               body: {
                 name: node,
                 network: network
@@ -130,12 +130,12 @@ module Crowbar
           end
 
           def network_disable_interface(
-            name,
+            proposal,
             node,
             network
           )
             result = self.class.post(
-              "/crowbar/network/1.0/disable_interface/#{name}.json",
+              "/crowbar/network/1.0/disable_interface/#{proposal}.json",
               body: {
                 name: node,
                 network: network

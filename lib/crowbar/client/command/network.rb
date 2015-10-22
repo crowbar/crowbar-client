@@ -22,25 +22,25 @@ module Crowbar
 
         included do
           desc "Network specific commands"
-          command :network do |parent|
+          command "network" do |parent|
             parent.desc "Actions for virtual IP addresses"
-            parent.command :virtual do |c|
+            parent.command "virtual-ip" do |c|
               c.desc "Allocate virtual IP address"
-              c.arg :name
+              c.arg :proposal
               c.arg :service
               c.arg :network
               c.arg :range
               c.arg :suggestion, :optional
-              c.command :allocate do |a|
+              c.command "allocate" do |a|
                 a.action do |global, opts, args|
-                  name = args.shift
+                  proposal = args.shift
                   service = args.shift
                   network = args.shift
                   range = args.shift
                   suggestion = args.shift || ""
 
-                  Request.instance.network_allocate_virtual(
-                    name,
+                  Request.instance.network_allocate_virtual_ip(
+                    proposal,
                     service,
                     network,
                     range,
@@ -57,17 +57,17 @@ module Crowbar
               end
 
               c.desc "Deallocate virtual IP address"
-              c.arg :name
+              c.arg :proposal
               c.arg :service
               c.arg :network
-              c.command :deallocate do |a|
+              c.command "deallocate" do |a|
                 a.action do |global, opts, args|
-                  name = args.shift
+                  proposal = args.shift
                   service = args.shift
                   network = args.shift
 
-                  Request.instance.network_deallocate_virtual(
-                    name,
+                  Request.instance.network_deallocate_virtual_ip(
+                    proposal,
                     service,
                     network
                   ) do |request|
@@ -82,24 +82,24 @@ module Crowbar
               end
             end
 
-            parent.desc "Actions for real IP addresses"
-            parent.command :ip do |c|
-              c.desc "Allocate real IP address"
-              c.arg :name
+            parent.desc "Actions for node IP addresses"
+            parent.command "ip" do |c|
+              c.desc "Allocate node IP address"
+              c.arg :proposal
               c.arg :node
               c.arg :network
               c.arg :range
               c.arg :suggestion, :optional
-              c.command :allocate do |a|
+              c.command "allocate" do |a|
                 a.action do |global, opts, args|
-                  name = args.shift
+                  proposal = args.shift
                   node = args.shift
                   network = args.shift
                   range = args.shift
                   suggestion = args.shift || ""
 
                   Request.instance.network_allocate_ip(
-                    name,
+                    proposal,
                     node,
                     network,
                     range,
@@ -115,18 +115,18 @@ module Crowbar
                 end
               end
 
-              c.desc "Deallocate real IP address"
-              c.arg :name
+              c.desc "Deallocate node IP address"
+              c.arg :proposal
               c.arg :node
               c.arg :network
-              c.command :deallocate do |a|
+              c.command "deallocate" do |a|
                 a.action do |global, opts, args|
-                  name = args.shift
+                  proposal = args.shift
                   node = args.shift
                   network = args.shift
 
                   Request.instance.network_deallocate_ip(
-                    name,
+                    proposal,
                     node,
                     network
                   ) do |request|
@@ -142,19 +142,19 @@ module Crowbar
             end
 
             parent.desc "Actions for network interfaces"
-            parent.command :interface do |c|
+            parent.command "interface" do |c|
               c.desc "Enable a network interface"
-              c.arg :name
+              c.arg :proposal
               c.arg :node
               c.arg :network
-              c.command :enable do |a|
+              c.command "enable" do |a|
                 a.action do |global, opts, args|
-                  name = args.shift
+                  proposal = args.shift
                   node = args.shift
                   network = args.shift
 
                   Request.instance.network_enable_interface(
-                    name,
+                    proposal,
                     node,
                     network
                   ) do |request|
@@ -169,17 +169,17 @@ module Crowbar
               end
 
               c.desc "Disable a network interface"
-              c.arg :name
+              c.arg :proposal
               c.arg :node
               c.arg :network
-              c.command :disable do |a|
+              c.command "disable" do |a|
                 a.action do |global, opts, args|
-                  name = args.shift
+                  proposal = args.shift
                   node = args.shift
                   network = args.shift
 
                   Request.instance.network_disable_interface(
-                    name,
+                    proposal,
                     node,
                     network
                   ) do |request|
