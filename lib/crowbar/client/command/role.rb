@@ -49,14 +49,14 @@ module Crowbar
                     )
 
                     if formatter.empty?
-                      err "No roles"
+                      exit_now! "No roles"
                     else
                       say formatter.result
                     end
                   when 404
-                    err "Barclamp does not exist"
+                    exit_now! "Barclamp does not exist"
                   else
-                    err "Got unknown response with code #{request.code}"
+                    exit_now! "Got unknown response with code #{request.code}"
                   end
                 end
               end
@@ -90,14 +90,14 @@ module Crowbar
                     )
 
                     if formatter.empty?
-                      err "No nodes"
+                      exit_now! "No nodes"
                     else
                       say formatter.result
                     end
                   when 404
-                    err "Role does not exist"
+                    exit_now! "Role does not exist"
                   else
-                    err "Got unknown response with code #{request.code}"
+                    exit_now! "Got unknown response with code #{request.code}"
                   end
                 end
               end
