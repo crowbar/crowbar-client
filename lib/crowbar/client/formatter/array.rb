@@ -27,13 +27,15 @@ module Crowbar
               headings: options[:headings],
               rows: options[:values].zip
             )
+          when :plain
+            options[:values].join("\n")
           when :json
             JSON.pretty_generate(
               options[:values]
             )
           else
             raise InvalidFormatError,
-              "Invalid format, valid formats: table, json"
+              "Invalid format, valid formats: table, json, plain"
           end
         end
 

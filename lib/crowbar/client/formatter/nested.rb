@@ -25,11 +25,13 @@ module Crowbar
           case options[:format].to_sym
           when :table
             process_table
+          when :plain
+            process_plain
           when :json
             process_json
           else
             raise InvalidFormatError,
-              "Invalid format, valid formats: table, json"
+              "Invalid format, valid formats: table, json, plain"
           end
         end
 
@@ -39,7 +41,7 @@ module Crowbar
 
         protected
 
-        def process_hash(values, path = "")
+        def process_hash(values, path = "", type = :table)
           [].tap do |result|
             values.map do |key, value|
               new_path = [path.to_s.dup, key].reject(&:empty?).join(".")
@@ -48,13 +50,24 @@ module Crowbar
               when value.is_a?(::Hash)
                 result.concat process_hash(
                   value,
-                  new_path
+                  new_path,
+                  type
                 )
               when value.is_a?(::Array)
-                result.push [
-                  new_path,
-                  value.join("\n")
-                ]
+                case type
+                when :table
+                  result.push [
+                    new_path,
+                    value.join("\n")
+                  ]
+                when :plain
+                  value.each_with_index do |row, index|
+                    result.push [
+                      [new_path, index].join("."),
+                      row
+                    ]
+                  end
+                end
               else
                 result.push [
                   new_path,
@@ -70,7 +83,8 @@ module Crowbar
           when options[:values].is_a?(::Hash)
             values = process_hash(
               options[:values],
-              options[:path]
+              options[:path],
+              :table
             )
           when options[:values].is_a?(::Array)
             values = [[
@@ -88,6 +102,35 @@ module Crowbar
             headings: options[:headings],
             rows: values
           )
+        end
+
+        def process_plain
+          case
+          when options[:values].is_a?(::Hash)
+            values = process_hash(
+              options[:values],
+              options[:path],
+              :plain
+            )
+          when options[:values].is_a?(::Array)
+            values = [].tap do |result|
+              options[:values].each_with_index do |row, index|
+                result.push [
+                  [options[:path], index].join("."),
+                  row
+                ]
+              end
+            end
+          else
+            values = [[
+              options[:path],
+              options[:values]
+            ]]
+          end
+
+          values.map do |value|
+            value.join(" ")
+          end.join("\n")
         end
 
         def process_json
