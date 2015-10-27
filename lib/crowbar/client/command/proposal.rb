@@ -125,7 +125,7 @@ module Crowbar
                   "id" => proposal
                 )
 
-                payload = case
+                case
                 when opts[:data]
                   json = begin
                     JSON.load opts[:data]
@@ -133,7 +133,7 @@ module Crowbar
                     exit_now! "Invalid json data"
                   end
 
-                  if opts[:merge]
+                  payload = if opts[:merge]
                     template.easy_merge json
                   else
                     json
@@ -145,7 +145,7 @@ module Crowbar
                     exit_now! "Invalid json file"
                   end
 
-                  if opts[:merge]
+                  payload = if opts[:merge]
                     template.easy_merge json
                   else
                     json
@@ -155,7 +155,7 @@ module Crowbar
                     editor = Util::Editor.new content: template
                     editor.edit!
 
-                    editor.result
+                    payload = editor.result
                   rescue EditorAbortError => e
                     exit_now! e.message
                   rescue EditorStartupError => e
@@ -201,7 +201,7 @@ module Crowbar
                   proposal
                 ).parsed_response
 
-                payload = case
+                case
                 when opts[:data]
                   json = begin
                     JSON.load opts[:data]
@@ -209,7 +209,7 @@ module Crowbar
                     exit_now! "Invalid json data"
                   end
 
-                  if opts[:merge]
+                  payload = if opts[:merge]
                     original.easy_merge json
                   else
                     json
@@ -221,7 +221,7 @@ module Crowbar
                     exit_now! "Invalid json file"
                   end
 
-                  if opts[:merge]
+                  payload = if opts[:merge]
                     original.easy_merge json
                   else
                     json
@@ -231,7 +231,7 @@ module Crowbar
                     editor = Util::Editor.new content: original
                     editor.edit!
 
-                    editor.result
+                    payload = editor.result
                   rescue EditorAbortError => e
                     exit_now! e.message
                   rescue EditorStartupError => e

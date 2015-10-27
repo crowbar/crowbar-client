@@ -21,10 +21,7 @@ module Crowbar
         def result
           if options[:filter].present?
             options[:filter].to_s.split(".").each do |segment|
-              if segment.to_i.to_s == segment
-                segment = segment.to_i
-              end
-
+              segment = segment.to_i if segment.to_i.to_s == segment
               options[:values] = options[:values][segment]
             end
           end

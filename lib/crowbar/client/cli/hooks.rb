@@ -22,9 +22,7 @@ module Crowbar
 
         included do
           pre do |global|
-            if global[:debug]
-              ENV["GLI_DEBUG"] = "true"
-            end
+            ENV["GLI_DEBUG"] = "true" if global[:debug]
 
             config = configure(global[:config], global[:alias])
 

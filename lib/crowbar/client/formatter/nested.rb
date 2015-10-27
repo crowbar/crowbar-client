@@ -63,19 +63,19 @@ module Crowbar
         end
 
         def process_table
-          values = case
+          case
           when options[:values].is_a?(::Hash)
-            process_hash(
+            values = process_hash(
               options[:values],
               options[:path]
             )
           when options[:values].is_a?(::Array)
-            [[
+            values = [[
               options[:path],
               options[:values].join("\n")
             ]]
           else
-            [[
+            values = [[
               options[:path],
               options[:values]
             ]]
