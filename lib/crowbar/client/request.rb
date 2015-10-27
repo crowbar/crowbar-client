@@ -21,6 +21,7 @@ require_relative "request/node"
 require_relative "request/proposal"
 require_relative "request/reset"
 require_relative "request/role"
+require_relative "request/repository"
 
 module Crowbar
   module Client
@@ -47,6 +48,7 @@ module Crowbar
       include Proposal
       include Reset
       include Role
+      include Repository
     end
   end
 end

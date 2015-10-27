@@ -21,6 +21,7 @@ require_relative "command/node"
 require_relative "command/proposal"
 require_relative "command/reset"
 require_relative "command/role"
+require_relative "command/repository"
 
 module Crowbar
   module Client
