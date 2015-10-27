@@ -14,6 +14,8 @@
 # limitations under the License.
 #
 
+require "inifile"
+
 module Crowbar
   module Client
     class Cli

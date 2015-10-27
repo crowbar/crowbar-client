@@ -14,6 +14,9 @@
 # limitations under the License.
 #
 
+require "terminal-table"
+require "json"
+
 module Crowbar
   module Client
     module Formatter
