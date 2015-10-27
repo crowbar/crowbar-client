@@ -25,7 +25,7 @@ else
   gem "gli", version: ">= 2.13.0"
   gem "httparty", version: ">= 0.13.3"
   gem "terminal-table", version: ">= 1.5.2"
-  gem "easy_diff"
+  gem "easy_diff", version: ">= 0.0.5"
 end
 
 require "active_support/all"
