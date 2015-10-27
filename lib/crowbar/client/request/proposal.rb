@@ -33,9 +33,9 @@ module Crowbar
             end
           end
 
-          def proposal_dequeue(barclamp, proposal)
+          def proposal_show(barclamp, proposal)
             result = self.class.get(
-              "/crowbar/#{barclamp}/1.0/proposals/dequeue/#{proposal}.json"
+              "/crowbar/#{barclamp}/1.0/proposals/#{proposal}.json"
             )
 
             if block_given?
@@ -45,9 +45,9 @@ module Crowbar
             end
           end
 
-          def proposal_show(barclamp, proposal)
-            result = self.class.get(
-              "/crowbar/#{barclamp}/1.0/proposals/#{proposal}.json"
+          def proposal_dequeue(barclamp, proposal)
+            result = self.class.delete(
+              "/crowbar/#{barclamp}/1.0/proposals/dequeue/#{proposal}.json"
             )
 
             if block_given?
