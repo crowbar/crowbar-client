@@ -111,29 +111,48 @@ module Crowbar
               c.desc "Proposal data as a json file"
               c.flag [:file], type: String, default_value: nil
 
+              c.desc "Merge input with proposal data"
+              c.switch [:merge], negatable: false
+
               c.action do |global, opts, args|
                 barclamp = args.shift
                 proposal = args.shift
                 helper.validate_availability_of! barclamp
 
-                # TODO(should): Preload the template from API
+                template = Request.instance.proposal_template(
+                  barclamp
+                ).parsed_response.easy_merge(
+                  "id" => proposal
+                )
 
-                content = case
+                payload = case
                 when opts[:data]
-                  begin
+                  json = begin
                     JSON.load opts[:data]
                   rescue
                     exit_now! "Invalid json data"
                   end
+
+                  if opts[:merge]
+                    template.easy_merge json
+                  else
+                    json
+                  end
                 when opts[:file]
-                  begin
+                  json = begin
                     JSON.load opts[:file]
                   rescue
                     exit_now! "Invalid json file"
                   end
+
+                  if opts[:merge]
+                    template.easy_merge json
+                  else
+                    json
+                  end
                 else
                   begin
-                    editor = Util::Editor.new content: {}
+                    editor = Util::Editor.new content: template
                     editor.edit!
 
                     editor.result
@@ -148,8 +167,14 @@ module Crowbar
                   end
                 end
 
-                raise content.inspect
-
+                Request.instance.proposal_create(barclamp, proposal, payload) do |request|
+                  case request.code
+                  when 200
+                    say "Created successfully #{proposal} on #{barclamp}"
+                  else
+                    exit_now! request.parsed_response["error"]
+                  end
+                end
               end
             end
 
@@ -163,6 +188,9 @@ module Crowbar
               c.desc "Proposal data as a json file"
               c.flag [:file], type: String, default_value: nil
 
+              c.desc "Merge input with proposal data"
+              c.switch [:merge], negatable: false
+
               c.action do |global, opts, args|
                 barclamp = args.shift
                 proposal = args.shift
@@ -173,18 +201,30 @@ module Crowbar
                   proposal
                 ).parsed_response
 
-                content = case
+                payload = case
                 when opts[:data]
-                  begin
+                  json = begin
                     JSON.load opts[:data]
                   rescue
                     exit_now! "Invalid json data"
                   end
+
+                  if opts[:merge]
+                    original.easy_merge json
+                  else
+                    json
+                  end
                 when opts[:file]
-                  begin
+                  json = begin
                     JSON.load opts[:file]
                   rescue
                     exit_now! "Invalid json file"
+                  end
+
+                  if opts[:merge]
+                    original.easy_merge json
+                  else
+                    json
                   end
                 else
                   begin
@@ -203,8 +243,14 @@ module Crowbar
                   end
                 end
 
-                # TODO(must): Submit content to API
-
+                Request.instance.proposal_update(barclamp, proposal, payload) do |request|
+                  case request.code
+                  when 200
+                    say "Updated successfully #{proposal} on #{barclamp}"
+                  else
+                    exit_now! request.parsed_response["error"]
+                  end
+                end
               end
             end
 

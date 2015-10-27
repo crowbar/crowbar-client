@@ -104,7 +104,7 @@ module Crowbar
             file.path
           ].join(" ")
 
-          system(command)
+          system(command) && file.open
         end
       end
     end

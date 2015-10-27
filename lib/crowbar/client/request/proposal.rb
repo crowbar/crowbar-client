@@ -45,18 +45,6 @@ module Crowbar
             end
           end
 
-          def proposal_list(barclamp)
-            result = self.class.get(
-              "/crowbar/#{barclamp}/1.0/proposals.json"
-            )
-
-            if block_given?
-              yield result
-            else
-              result
-            end
-          end
-
           def proposal_show(barclamp, proposal)
             result = self.class.get(
               "/crowbar/#{barclamp}/1.0/proposals/#{proposal}.json"
@@ -72,6 +60,62 @@ module Crowbar
           def proposal_delete(barclamp, proposal)
             result = self.class.delete(
               "/crowbar/#{barclamp}/1.0/proposals/#{proposal}.json"
+            )
+
+            if block_given?
+              yield result
+            else
+              result
+            end
+          end
+
+          def proposal_list(barclamp)
+            result = self.class.get(
+              "/crowbar/#{barclamp}/1.0/proposals.json"
+            )
+
+            if block_given?
+              yield result
+            else
+              result
+            end
+          end
+
+          def proposal_template(barclamp)
+            result = self.class.get(
+              "/crowbar/#{barclamp}/1.0/proposals/template.json"
+            )
+
+            if block_given?
+              yield result
+            else
+              result
+            end
+          end
+
+          def proposal_create(barclamp, proposal, payload)
+            result = self.class.put(
+              "/crowbar/#{barclamp}/1.0/proposals.json",
+              body: payload.to_json,
+              headers: {
+                "Content-Type" => "application/json"
+              }
+            )
+
+            if block_given?
+              yield result
+            else
+              result
+            end
+          end
+
+          def proposal_update(barclamp, proposal, payload)
+            result = self.class.post(
+              "/crowbar/#{barclamp}/1.0/proposals/#{proposal}.json",
+              body: payload.to_json,
+              headers: {
+                "Content-Type" => "application/json"
+              }
             )
 
             if block_given?
