@@ -14,13 +14,24 @@
 # limitations under the License.
 #
 
-require_relative "filter/base"
-require_relative "filter/array"
-require_relative "filter/hash"
-
 module Crowbar
   module Client
     module Filter
+      class Hash < Base
+        def result
+          if options[:filter].present?
+            options[:values].select do |row|
+              result = row.values.map do |value|
+                value.include? options[:filter]
+              end
+
+              result.include? true
+            end
+          else
+            options[:values]
+          end
+        end
+      end
     end
   end
 end
