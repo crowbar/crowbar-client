@@ -44,6 +44,7 @@ module Crowbar
       include Command::Proposal
       include Command::Reset
       include Command::Role
+      include Command::Repository
     end
   end
 end

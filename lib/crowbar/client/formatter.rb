@@ -16,6 +16,7 @@
 
 require_relative "formatter/base"
 require_relative "formatter/array"
+require_relative "formatter/hash"
 
 module Crowbar
   module Client
