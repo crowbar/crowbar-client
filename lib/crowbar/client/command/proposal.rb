@@ -177,7 +177,7 @@ module Crowbar
                 Request.instance.proposal_create(barclamp, proposal, payload) do |request|
                   case request.code
                   when 200
-                    say "Created successfully #{proposal} on #{barclamp}"
+                    say "Successfully created #{proposal} on #{barclamp}"
                   else
                     exit_now! request.parsed_response["error"]
                   end
@@ -259,7 +259,7 @@ module Crowbar
                 Request.instance.proposal_update(barclamp, proposal, payload) do |request|
                   case request.code
                   when 200
-                    say "Updated successfully #{proposal} on #{barclamp}"
+                    say "Successfully updated #{proposal} on #{barclamp}"
                   else
                     exit_now! request.parsed_response["error"]
                   end
@@ -279,7 +279,7 @@ module Crowbar
                 Request.instance.proposal_delete(barclamp, proposal) do |request|
                   case request.code
                   when 200
-                    say "Deleted successfully #{proposal} on #{barclamp}"
+                    say "Successfully deleted #{proposal} on #{barclamp}"
                   else
                     exit_now! request.parsed_response["error"]
                   end
@@ -299,7 +299,7 @@ module Crowbar
                 Request.instance.proposal_dequeue(barclamp, proposal) do |request|
                   case request.code
                   when 200
-                    say "Dequeued successfully #{proposal} on #{barclamp}"
+                    say "Successfully dequeued #{proposal} on #{barclamp}"
                   else
                     exit_now! request.parsed_response["error"]
                   end
@@ -319,9 +319,9 @@ module Crowbar
                 Request.instance.proposal_commit(barclamp, proposal) do |request|
                   case request.code
                   when 200
-                    say "Commited successfully #{proposal} on #{barclamp}"
+                    say "Successfully commited #{proposal} on #{barclamp}"
                   when 202
-                    say "Queued #{proposal} on #{barclamp}"
+                    say "Successfully queued #{proposal} on #{barclamp}"
                   else
                     exit_now! request.parsed_response["error"]
                   end
