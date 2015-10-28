@@ -99,12 +99,7 @@ module Crowbar
         end
 
         def start
-          command = [
-            program,
-            file.path
-          ].join(" ")
-
-          system(command) && file.open
+          system(program, file.path) && file.open
         end
       end
     end
