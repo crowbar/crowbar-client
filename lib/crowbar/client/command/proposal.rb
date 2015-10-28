@@ -103,7 +103,7 @@ module Crowbar
                 Request.instance.proposal_show(barclamp, proposal) do |request|
                   case request.code
                   when 200
-                    formatter = Formatter::Hash.new(
+                    formatter = Formatter::Nested.new(
                       format: opts[:format],
                       path: opts[:filter],
                       headings: ["Key", "Value"],
