@@ -35,6 +35,9 @@ module Crowbar
                 network: network,
                 range: range,
                 suggestion: suggestion
+              }.to_json,
+              headers: {
+                "Content-Type" => "application/json"
               }
             )
 
@@ -55,6 +58,9 @@ module Crowbar
               body: {
                 name: service,
                 network: network
+              }.to_json,
+              headers: {
+                "Content-Type" => "application/json"
               }
             )
 
@@ -79,6 +85,9 @@ module Crowbar
                 network: network,
                 range: range,
                 suggestion: suggestion
+              }.to_json,
+              headers: {
+                "Content-Type" => "application/json"
               }
             )
 
@@ -99,6 +108,9 @@ module Crowbar
               body: {
                 name: node,
                 network: network
+              }.to_json,
+              headers: {
+                "Content-Type" => "application/json"
               }
             )
 
@@ -119,6 +131,9 @@ module Crowbar
               body: {
                 name: node,
                 network: network
+              }.to_json,
+              headers: {
+                "Content-Type" => "application/json"
               }
             )
 
@@ -139,6 +154,9 @@ module Crowbar
               body: {
                 name: node,
                 network: network
+              }.to_json,
+              headers: {
+                "Content-Type" => "application/json"
               }
             )
 

@@ -14,24 +14,11 @@
 # limitations under the License.
 #
 
+require_relative "util/editor"
+
 module Crowbar
   module Client
-    class UnavailableBarclampError < StandardError
-      def initialize(barclamp)
-        super("Barclamp #{barclamp} is not available")
-      end
-    end
-
-    class InvalidFormatError < StandardError
-    end
-
-    class EditorAbortError < StandardError
-    end
-
-    class EditorStartupError < StandardError
-    end
-
-    class InvalidJsonError < StandardError
+    module Util
     end
   end
 end

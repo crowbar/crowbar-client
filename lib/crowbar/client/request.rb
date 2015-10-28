@@ -23,6 +23,9 @@ require_relative "request/reset"
 require_relative "request/role"
 require_relative "request/repository"
 
+require "httparty"
+require "singleton"
+
 module Crowbar
   module Client
     class Request

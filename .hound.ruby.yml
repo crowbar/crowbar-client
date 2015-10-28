@@ -27,7 +27,10 @@ Lint/UnusedBlockArgument:
   Enabled: false
 
 Metrics/MethodLength:
-  Max: 20
+  Max: 50
+
+Metrics/ClassLength:
+  Max: 500
 
 Metrics/ModuleLength:
   Max: 500

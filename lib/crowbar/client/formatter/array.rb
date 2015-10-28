@@ -14,6 +14,8 @@
 # limitations under the License.
 #
 
+require "terminal-table"
+
 module Crowbar
   module Client
     module Formatter
@@ -22,16 +24,18 @@ module Crowbar
           case options[:format].to_sym
           when :table
             Terminal::Table.new(
-              rows: options[:values].zip,
-              headings: options[:headings]
+              headings: options[:headings],
+              rows: options[:values].zip
             )
+          when :plain
+            options[:values].join("\n")
           when :json
             JSON.pretty_generate(
               options[:values]
             )
           else
-            raise InvalidFormat,
-              "Invalid format, valid formats: table, json"
+            raise InvalidFormatError,
+              "Invalid format, valid formats: table, json, plain"
           end
         end
 

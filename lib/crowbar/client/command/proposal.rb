@@ -14,6 +14,8 @@
 # limitations under the License.
 #
 
+require "easy_diff"
+
 module Crowbar
   module Client
     module Command
@@ -22,10 +24,27 @@ module Crowbar
 
         included do
           desc "Proposal specific commands"
-          command :proposal do |parent|
+          command "proposal" do |parent|
             parent.desc "Show a list of available proposals"
             parent.arg :barclamp
-            parent.command :list do |c|
+            parent.command "list" do |c|
+              c.desc <<-EOF
+                Format of the output, valid formats are table, json or plain
+              EOF
+
+              c.flag [:format],
+                type: String,
+                default_value: :table,
+                must_match: [:table, :json, :plain]
+
+              c.desc <<-EOF
+                Filter by criteria, display only data that contains filter
+              EOF
+
+              c.flag [:filter],
+                type: String,
+                default_value: nil
+
               c.action do |global, opts, args|
                 barclamp = args.shift
                 helper.validate_availability_of! barclamp
@@ -33,21 +52,22 @@ module Crowbar
                 Request.instance.proposal_list(barclamp) do |request|
                   case request.code
                   when 200
-                    body = begin
-                      JSON.parse(request.body)
-                    rescue
-                      []
-                    end
+                    formatter = Formatter::Array.new(
+                      format: opts[:format],
+                      headings: ["Proposals"],
+                      values: Filter::Array.new(
+                        filter: opts[:filter],
+                        values: request.parsed_response.sort
+                      ).result
+                    )
 
-                    if body.empty?
-                      err "No proposals"
+                    if formatter.empty?
+                      exit_now! "No proposals"
                     else
-                      say body.sort.join("\n")
+                      say formatter.result
                     end
-                  when 404
-                    err "Failed to find any available proposals"
                   else
-                    err "Got unknown response with code #{request.code}"
+                    exit_now! request.parsed_response["error"]
                   end
                 end
               end
@@ -57,42 +77,49 @@ module Crowbar
             parent.arg :barclamp
             parent.arg :proposal
             parent.arg :path, :optional
-            parent.command :show do |c|
+            parent.command "show" do |c|
+              c.desc <<-EOF
+                Format of the output, valid formats are table, json or plain
+              EOF
+
+              c.flag [:format],
+                type: String,
+                default_value: :table,
+                must_match: [:table, :json, :plain]
+
+              c.desc <<-EOF
+                Filter by criteria, display only data that contains filter
+              EOF
+
+              c.flag [:filter],
+                type: String,
+                default_value: nil
+
               c.action do |global, opts, args|
                 barclamp = args.shift
                 proposal = args.shift
-                path = args.shift
                 helper.validate_availability_of! barclamp
 
                 Request.instance.proposal_show(barclamp, proposal) do |request|
-                  body = begin
-                    JSON.parse(request.body).with_indifferent_access
-                  rescue
-                    {}
-                  end
-
                   case request.code
                   when 200
-                    begin
-                      path.to_s.split(".").each do |segment|
-                        body = body[segment]
-                      end
+                    formatter = Formatter::Nested.new(
+                      format: opts[:format],
+                      path: opts[:filter],
+                      headings: ["Key", "Value"],
+                      values: Filter::Subset.new(
+                        filter: opts[:filter],
+                        values: request.parsed_response
+                      ).result
+                    )
 
-                      if body.is_a?(Hash) || body.is_a?(Array)
-                        say JSON.pretty_generate(body)
-                      else
-                        say body
-                      end
-                    rescue
-                      err "Path does not fully exist"
+                    if formatter.empty?
+                      exit_now! "No result"
+                    else
+                      say formatter.result
                     end
-                  when 404
-                    err "Proposal does not exist"
-                  when 409
-                    # TODO(must): Implement this return code in controller
-                    err body[:errors].to_sentence
                   else
-                    err "Got unknown response with code #{request.code}"
+                    exit_now! request.parsed_response["error"]
                   end
                 end
               end
@@ -101,33 +128,199 @@ module Crowbar
             parent.desc "Create a proposal for specific barclamp"
             parent.arg :barclamp
             parent.arg :proposal
-            parent.command :create do |c|
+            parent.command "create" do |c|
+              c.desc <<-EOF
+                Reading proposal data from this json string
+              EOF
+
+              c.flag [:data],
+                type: String,
+                default_value: nil
+
+              c.desc <<-EOF
+                Reading proposal data from this json file
+              EOF
+
+              c.flag [:file],
+                type: String,
+                default_value: nil
+
+              c.desc <<-EOF
+                Merge input loaded from server with proposal data
+              EOF
+
+              c.switch [:merge],
+                negatable: false
+
               c.action do |global, opts, args|
                 barclamp = args.shift
                 proposal = args.shift
                 helper.validate_availability_of! barclamp
 
-                raise "Not implemented yet! (#{barclamp}, #{proposal})"
+                case
+                when opts[:data]
+                  json = begin
+                    JSON.load opts[:data]
+                  rescue
+                    exit_now! "Invalid json data"
+                  end
+
+                  payload = if opts[:merge]
+                    proposal_create_preload(
+                      barclamp,
+                      proposal
+                    ).easy_merge(json)
+                  else
+                    json
+                  end
+                when opts[:file]
+                  json = begin
+                    JSON.load opts[:file]
+                  rescue
+                    exit_now! "Invalid json file"
+                  end
+
+                  payload = if opts[:merge]
+                    proposal_create_preload(
+                      barclamp,
+                      proposal
+                    ).easy_merge(json)
+                  else
+                    json
+                  end
+                else
+                  begin
+                    template = proposal_create_preload(
+                      barclamp,
+                      proposal
+                    )
+
+                    editor = Util::Editor.new content: template
+                    editor.edit!
+
+                    payload = editor.result
+                  rescue EditorAbortError => e
+                    exit_now! e.message
+                  rescue EditorStartupError => e
+                    exit_now! e.message
+                  rescue InvalidJsonError => e
+                    exit_now! e.message
+                  rescue
+                    exit_now! "Editing content failed"
+                  end
+                end
+
+                Request.instance.proposal_create(barclamp, proposal, payload) do |request|
+                  case request.code
+                  when 200
+                    say "Successfully created #{proposal} on #{barclamp}"
+                  else
+                    exit_now! request.parsed_response["error"]
+                  end
+                end
               end
             end
 
             parent.desc "Edit a proposal for specific barclamp"
             parent.arg :barclamp
             parent.arg :proposal
-            parent.command :edit do |c|
+            parent.command "edit" do |c|
+              c.desc <<-EOF
+                Reading proposal data from this json string
+              EOF
+
+              c.flag [:data],
+                type: String,
+                default_value: nil
+
+              c.desc <<-EOF
+                Reading proposal data from this json file
+              EOF
+
+              c.flag [:file],
+                type: String,
+                default_value: nil
+
+              c.desc <<-EOF
+                Merge input loaded from server with proposal data
+              EOF
+
+              c.switch [:merge],
+                negatable: false
+
               c.action do |global, opts, args|
                 barclamp = args.shift
                 proposal = args.shift
                 helper.validate_availability_of! barclamp
 
-                raise "Not implemented yet! (#{barclamp}, #{proposal})"
+                case
+                when opts[:data]
+                  json = begin
+                    JSON.load opts[:data]
+                  rescue
+                    exit_now! "Invalid json data"
+                  end
+
+                  payload = if opts[:merge]
+                    proposal_update_preload(
+                      barclamp,
+                      proposal
+                    ).easy_merge(json)
+                  else
+                    json
+                  end
+                when opts[:file]
+                  json = begin
+                    JSON.load opts[:file]
+                  rescue
+                    exit_now! "Invalid json file"
+                  end
+
+                  payload = if opts[:merge]
+                    proposal_update_preload(
+                      barclamp,
+                      proposal
+                    ).easy_merge(json)
+                  else
+                    json
+                  end
+                else
+                  begin
+                    original = proposal_update_preload(
+                      barclamp,
+                      proposal
+                    )
+
+                    editor = Util::Editor.new content: original
+                    editor.edit!
+
+                    payload = editor.result
+                  rescue EditorAbortError => e
+                    exit_now! e.message
+                  rescue EditorStartupError => e
+                    exit_now! e.message
+                  rescue InvalidJsonError => e
+                    exit_now! e.message
+                  rescue
+                    exit_now! "Editing content failed"
+                  end
+                end
+
+                Request.instance.proposal_update(barclamp, proposal, payload) do |request|
+                  case request.code
+                  when 200
+                    say "Successfully updated #{proposal} on #{barclamp}"
+                  else
+                    exit_now! request.parsed_response["error"]
+                  end
+                end
               end
             end
 
             parent.desc "Delete a proposal for specific barclamp"
             parent.arg :barclamp
             parent.arg :proposal
-            parent.command :delete do |c|
+            parent.command "delete" do |c|
               c.action do |global, opts, args|
                 barclamp = args.shift
                 proposal = args.shift
@@ -136,11 +329,9 @@ module Crowbar
                 Request.instance.proposal_delete(barclamp, proposal) do |request|
                   case request.code
                   when 200
-                    say "Deleted successfully #{proposal} on #{barclamp}"
-                  when 404
-                    err "Proposal does not exist"
+                    say "Successfully deleted #{proposal} on #{barclamp}"
                   else
-                    err "Got unknown response with code #{request.code}"
+                    exit_now! request.parsed_response["error"]
                   end
                 end
               end
@@ -149,20 +340,18 @@ module Crowbar
             parent.desc "Dequeue a proposal for specific barclamp"
             parent.arg :barclamp
             parent.arg :proposal
-            parent.command :dequeue do |c|
+            parent.command "dequeue" do |c|
               c.action do |global, opts, args|
                 barclamp = args.shift
                 proposal = args.shift
                 helper.validate_availability_of! barclamp
 
-                Request.instance.proposal_action(:dequeue, barclamp, proposal) do |request|
+                Request.instance.proposal_dequeue(barclamp, proposal) do |request|
                   case request.code
                   when 200
-                    say "Dequeued #{proposal} on #{barclamp}"
-                  when 404
-                    err "Proposal does not exist"
+                    say "Successfully dequeued #{proposal} on #{barclamp}"
                   else
-                    err "Got unknown response with code #{request.code}"
+                    exit_now! request.parsed_response["error"]
                   end
                 end
               end
@@ -171,22 +360,20 @@ module Crowbar
             parent.desc "Commit a proposal for specific barclamp"
             parent.arg :barclamp
             parent.arg :proposal
-            parent.command :commit do |c|
+            parent.command "commit" do |c|
               c.action do |global, opts, args|
                 barclamp = args.shift
                 proposal = args.shift
                 helper.validate_availability_of! barclamp
 
-                Request.instance.proposal_action(:commit, barclamp, proposal) do |request|
+                Request.instance.proposal_commit(barclamp, proposal) do |request|
                   case request.code
                   when 200
-                    say "Commited #{proposal} on #{barclamp}"
+                    say "Successfully commited #{proposal} on #{barclamp}"
                   when 202
-                    say "Queued #{proposal} on #{barclamp}"
-                  when 404
-                    err "Proposal does not exist"
+                    say "Successfully queued #{proposal} on #{barclamp}"
                   else
-                    err "Got unknown response with code #{request.code}"
+                    exit_now! request.parsed_response["error"]
                   end
                 end
               end

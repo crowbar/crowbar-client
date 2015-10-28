@@ -17,6 +17,7 @@
 require_relative "filter/base"
 require_relative "filter/array"
 require_relative "filter/hash"
+require_relative "filter/subset"
 
 module Crowbar
   module Client

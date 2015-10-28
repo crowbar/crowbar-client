@@ -16,22 +16,19 @@
 
 module Crowbar
   module Client
-    class UnavailableBarclampError < StandardError
-      def initialize(barclamp)
-        super("Barclamp #{barclamp} is not available")
+    module Filter
+      class Subset < Base
+        def result
+          if options[:filter].present?
+            options[:filter].to_s.split(".").each do |segment|
+              segment = segment.to_i if segment.to_i.to_s == segment
+              options[:values] = options[:values][segment]
+            end
+          end
+
+          options[:values]
+        end
       end
-    end
-
-    class InvalidFormatError < StandardError
-    end
-
-    class EditorAbortError < StandardError
-    end
-
-    class EditorStartupError < StandardError
-    end
-
-    class InvalidJsonError < StandardError
     end
   end
 end

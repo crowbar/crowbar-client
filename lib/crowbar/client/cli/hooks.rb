@@ -22,6 +22,8 @@ module Crowbar
 
         included do
           pre do |global|
+            ENV["GLI_DEBUG"] = "true" if global[:debug]
+
             config = configure(global[:config], global[:alias])
 
             Request.instance.configure(

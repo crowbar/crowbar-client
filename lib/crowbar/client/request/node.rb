@@ -36,7 +36,13 @@ module Crowbar
           def node_transition(name, state)
             result = self.class.post(
               "/crowbar/crowbar/1.0/transition/default",
-              body: { name: name, state: state }
+              body: {
+                name: name,
+                state: state
+              }.to_json,
+              headers: {
+                "Content-Type" => "application/json"
+              }
             )
 
             if block_given?
@@ -49,7 +55,12 @@ module Crowbar
           def node_rename(name, update)
             result = self.class.post(
               "/crowbar/machines/1.0/rename/#{name}",
-              body: { alias: update }
+              body: {
+                alias: update
+              }.to_json,
+              headers: {
+                "Content-Type" => "application/json"
+              }
             )
 
             if block_given?
@@ -62,7 +73,12 @@ module Crowbar
           def node_role(name, update)
             result = self.class.post(
               "/crowbar/machines/1.0/role/#{name}",
-              body: { role: update }
+              body: {
+                role: update
+              }.to_json,
+              headers: {
+                "Content-Type" => "application/json"
+              }
             )
 
             if block_given?
