@@ -28,11 +28,22 @@ module Crowbar
             parent.desc "Show a list of available proposals"
             parent.arg :barclamp
             parent.command "list" do |c|
-              c.desc "Format of the resulting output"
-              c.flag [:format], type: String, default_value: :table
+              c.desc <<-EOF
+                Format of the output, valid formats are table, json or plain
+              EOF
 
-              c.desc "Filter output by criteria"
-              c.flag [:filter], type: String, default_value: nil
+              c.flag [:format],
+                type: String,
+                default_value: :table,
+                must_match: [:table, :json, :plain]
+
+              c.desc <<-EOF
+                Filter by criteria, display only data that contains filter
+              EOF
+
+              c.flag [:filter],
+                type: String,
+                default_value: nil
 
               c.action do |global, opts, args|
                 barclamp = args.shift
@@ -67,11 +78,22 @@ module Crowbar
             parent.arg :proposal
             parent.arg :path, :optional
             parent.command "show" do |c|
-              c.desc "Format of the resulting output"
-              c.flag [:format], type: String, default_value: :table
+              c.desc <<-EOF
+                Format of the output, valid formats are table, json or plain
+              EOF
 
-              c.desc "Filter output by criteria"
-              c.flag [:filter], type: String, default_value: nil
+              c.flag [:format],
+                type: String,
+                default_value: :table,
+                must_match: [:table, :json, :plain]
+
+              c.desc <<-EOF
+                Filter by criteria, display only data that contains filter
+              EOF
+
+              c.flag [:filter],
+                type: String,
+                default_value: nil
 
               c.action do |global, opts, args|
                 barclamp = args.shift
@@ -107,14 +129,28 @@ module Crowbar
             parent.arg :barclamp
             parent.arg :proposal
             parent.command "create" do |c|
-              c.desc "Proposal data in json format"
-              c.flag [:data], type: String, default_value: nil
+              c.desc <<-EOF
+                Reading proposal data from this json string
+              EOF
 
-              c.desc "Proposal data as a json file"
-              c.flag [:file], type: String, default_value: nil
+              c.flag [:data],
+                type: String,
+                default_value: nil
 
-              c.desc "Merge input with proposal data"
-              c.switch [:merge], negatable: false
+              c.desc <<-EOF
+                Reading proposal data from this json file
+              EOF
+
+              c.flag [:file],
+                type: String,
+                default_value: nil
+
+              c.desc <<-EOF
+                Merge input loaded from server with proposal data
+              EOF
+
+              c.switch [:merge],
+                negatable: false
 
               c.action do |global, opts, args|
                 barclamp = args.shift
@@ -189,14 +225,28 @@ module Crowbar
             parent.arg :barclamp
             parent.arg :proposal
             parent.command "edit" do |c|
-              c.desc "Proposal data in json format"
-              c.flag [:data], type: String, default_value: nil
+              c.desc <<-EOF
+                Reading proposal data from this json string
+              EOF
 
-              c.desc "Proposal data as a json file"
-              c.flag [:file], type: String, default_value: nil
+              c.flag [:data],
+                type: String,
+                default_value: nil
 
-              c.desc "Merge input with proposal data"
-              c.switch [:merge], negatable: false
+              c.desc <<-EOF
+                Reading proposal data from this json file
+              EOF
+
+              c.flag [:file],
+                type: String,
+                default_value: nil
+
+              c.desc <<-EOF
+                Merge input loaded from server with proposal data
+              EOF
+
+              c.switch [:merge],
+                negatable: false
 
               c.action do |global, opts, args|
                 barclamp = args.shift
