@@ -22,6 +22,21 @@ module Crowbar
         raise UnavailableBarclampError, barclamp
       end
 
+      def proposal_create_preload(barclamp, proposal)
+        Request.instance.proposal_template(
+          barclamp
+        ).parsed_response.easy_merge(
+          "id" => proposal
+        )
+      end
+
+      def proposal_update_preload(barclamp, proposal)
+        Request.instance.proposal_show(
+          barclamp,
+          proposal
+        ).parsed_response
+      end
+
       protected
 
       def available_barclamps

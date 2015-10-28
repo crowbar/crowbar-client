@@ -121,12 +121,6 @@ module Crowbar
                 proposal = args.shift
                 helper.validate_availability_of! barclamp
 
-                template = Request.instance.proposal_template(
-                  barclamp
-                ).parsed_response.easy_merge(
-                  "id" => proposal
-                )
-
                 case
                 when opts[:data]
                   json = begin
@@ -136,7 +130,10 @@ module Crowbar
                   end
 
                   payload = if opts[:merge]
-                    template.easy_merge json
+                    proposal_create_preload(
+                      barclamp,
+                      proposal
+                    ).easy_merge(json)
                   else
                     json
                   end
@@ -148,12 +145,20 @@ module Crowbar
                   end
 
                   payload = if opts[:merge]
-                    template.easy_merge json
+                    proposal_create_preload(
+                      barclamp,
+                      proposal
+                    ).easy_merge(json)
                   else
                     json
                   end
                 else
                   begin
+                    template = proposal_create_preload(
+                      barclamp,
+                      proposal
+                    )
+
                     editor = Util::Editor.new content: template
                     editor.edit!
 
@@ -198,11 +203,6 @@ module Crowbar
                 proposal = args.shift
                 helper.validate_availability_of! barclamp
 
-                original = Request.instance.proposal_show(
-                  barclamp,
-                  proposal
-                ).parsed_response
-
                 case
                 when opts[:data]
                   json = begin
@@ -212,7 +212,10 @@ module Crowbar
                   end
 
                   payload = if opts[:merge]
-                    original.easy_merge json
+                    proposal_update_preload(
+                      barclamp,
+                      proposal
+                    ).easy_merge(json)
                   else
                     json
                   end
@@ -224,12 +227,20 @@ module Crowbar
                   end
 
                   payload = if opts[:merge]
-                    original.easy_merge json
+                    proposal_update_preload(
+                      barclamp,
+                      proposal
+                    ).easy_merge(json)
                   else
                     json
                   end
                 else
                   begin
+                    original = proposal_update_preload(
+                      barclamp,
+                      proposal
+                    )
+
                     editor = Util::Editor.new content: original
                     editor.edit!
 
