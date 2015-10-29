@@ -18,29 +18,29 @@ module Crowbar
   module Client
     module Formatter
       class Hash < Base
-        def result
-          case options[:format].to_sym
-          when :table
-            Terminal::Table.new(
-              rows: options[:values].map(&:values),
-              headings: options[:headings]
-            )
-          when :json
-            JSON.pretty_generate(
-              options[:values]
-            )
-          when :plain
-            options[:values].map do |value|
-              value.values.join(" ")
-            end.join("\n")
-          else
-            raise InvalidFormat,
-              "Invalid format, valid formats: table, json, plain"
-          end
-        end
-
         def empty?
           options[:values].empty?
+        end
+
+        protected
+
+        def process_table
+          Terminal::Table.new(
+            rows: options[:values].map(&:values),
+            headings: options[:headings]
+          )
+        end
+
+        def process_plain
+          options[:values].map do |value|
+            value.values.join(" ")
+          end.join("\n")
+        end
+
+        def process_json
+          JSON.pretty_generate(
+            options[:values]
+          )
         end
       end
     end

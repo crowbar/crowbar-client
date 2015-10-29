@@ -24,6 +24,20 @@ module Crowbar
           self.options = options
         end
 
+        def result
+          case options[:format].to_sym
+          when :table
+            process_table
+          when :plain
+            process_plain
+          when :json
+            process_json
+          else
+            raise InvalidFormatError,
+              "Invalid format, valid formats: table, json, plain"
+          end
+        end
+
         def empty?
           false
         end

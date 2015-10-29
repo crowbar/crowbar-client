@@ -21,62 +21,11 @@ module Crowbar
   module Client
     module Formatter
       class Nested < Base
-        def result
-          case options[:format].to_sym
-          when :table
-            process_table
-          when :plain
-            process_plain
-          when :json
-            process_json
-          else
-            raise InvalidFormatError,
-              "Invalid format, valid formats: table, json, plain"
-          end
-        end
-
         def empty?
           options[:values].blank?
         end
 
         protected
-
-        def process_hash(values, path = "", type = :table)
-          [].tap do |result|
-            values.map do |key, value|
-              new_path = [path.to_s.dup, key].reject(&:empty?).join(".")
-
-              case
-              when value.is_a?(::Hash)
-                result.concat process_hash(
-                  value,
-                  new_path,
-                  type
-                )
-              when value.is_a?(::Array)
-                case type
-                when :table
-                  result.push [
-                    new_path,
-                    value.join("\n")
-                  ]
-                when :plain
-                  value.each_with_index do |row, index|
-                    result.push [
-                      [new_path, index].join("."),
-                      row
-                    ]
-                  end
-                end
-              else
-                result.push [
-                  new_path,
-                  value
-                ]
-              end
-            end
-          end
-        end
 
         def process_table
           case
@@ -140,6 +89,43 @@ module Crowbar
             )
           else
             options[:values]
+          end
+        end
+
+        def process_hash(values, path = "", type = :table)
+          [].tap do |result|
+            values.map do |key, value|
+              new_path = [path.to_s.dup, key].reject(&:empty?).join(".")
+
+              case
+              when value.is_a?(::Hash)
+                result.concat process_hash(
+                  value,
+                  new_path,
+                  type
+                )
+              when value.is_a?(::Array)
+                case type
+                when :table
+                  result.push [
+                    new_path,
+                    value.join("\n")
+                  ]
+                when :plain
+                  value.each_with_index do |row, index|
+                    result.push [
+                      [new_path, index].join("."),
+                      row
+                    ]
+                  end
+                end
+              else
+                result.push [
+                  new_path,
+                  value
+                ]
+              end
+            end
           end
         end
       end

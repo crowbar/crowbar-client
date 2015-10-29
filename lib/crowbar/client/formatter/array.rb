@@ -20,27 +20,27 @@ module Crowbar
   module Client
     module Formatter
       class Array < Base
-        def result
-          case options[:format].to_sym
-          when :table
-            Terminal::Table.new(
-              headings: options[:headings],
-              rows: options[:values].zip
-            )
-          when :plain
-            options[:values].join("\n")
-          when :json
-            JSON.pretty_generate(
-              options[:values]
-            )
-          else
-            raise InvalidFormatError,
-              "Invalid format, valid formats: table, json, plain"
-          end
-        end
-
         def empty?
           options[:values].empty?
+        end
+
+        protected
+
+        def process_table
+          Terminal::Table.new(
+            headings: options[:headings],
+            rows: options[:values].zip
+          )
+        end
+
+        def process_plain
+          options[:values].join("\n")
+        end
+
+        def process_json
+          JSON.pretty_generate(
+            options[:values]
+          )
         end
       end
     end
