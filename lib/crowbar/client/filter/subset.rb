@@ -22,7 +22,19 @@ module Crowbar
           if options[:filter].present?
             options[:filter].to_s.split(".").each do |segment|
               segment = segment.to_i if segment.to_i.to_s == segment
-              options[:values] = options[:values][segment]
+
+              unless options[:values][segment.to_sym].nil?
+                options[:values] = options[:values][segment.to_sym]
+                next
+              end
+
+              unless options[:values][segment.to_s].nil?
+                options[:values] = options[:values][segment.to_s]
+                next
+              end
+
+              options[:values] = nil
+              break
             end
           end
 
