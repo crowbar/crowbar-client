@@ -17,6 +17,9 @@ Style/AlignHash:
   EnforcedHashRocketStyle: key
   EnforcedColonStyle: key
 
+Style/DotPosition:
+  EnforcedStyle: leading
+
 Style/Documentation:
   Enabled: false
 
