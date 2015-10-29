@@ -18,13 +18,9 @@ module Crowbar
   module Client
     module Filter
       class Array < Base
-        def result
-          if options[:filter].present?
-            options[:values].select do |row|
-              row.include? options[:filter]
-            end
-          else
-            options[:values]
+        def process
+          options[:values].select do |row|
+            row.include? options[:filter]
           end
         end
       end

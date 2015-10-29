@@ -23,6 +23,18 @@ module Crowbar
         def initialize(options = {})
           self.options = options
         end
+
+        def result
+          if options[:filter].present?
+            process
+          else
+            options[:values]
+          end
+        end
+
+        def process
+          raise BadFilterError
+        end
       end
     end
   end

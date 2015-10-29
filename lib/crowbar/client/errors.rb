@@ -22,6 +22,12 @@ module Crowbar
       end
     end
 
+    class BadFormatterError < StandardError
+    end
+
+    class BadFilterError < StandardError
+    end
+
     class InvalidFormatError < StandardError
     end
 

@@ -18,17 +18,13 @@ module Crowbar
   module Client
     module Filter
       class Hash < Base
-        def result
-          if options[:filter].present?
-            options[:values].select do |row|
-              result = row.values.map do |value|
-                value.include? options[:filter]
-              end
-
-              result.include? true
+        def process
+          options[:values].select do |row|
+            result = row.values.map do |value|
+              value.include? options[:filter]
             end
-          else
-            options[:values]
+
+            result.include? true
           end
         end
       end

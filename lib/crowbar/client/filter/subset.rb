@@ -18,27 +18,24 @@ module Crowbar
   module Client
     module Filter
       class Subset < Base
-        def result
-          if options[:filter].present?
-            options[:filter].to_s.split(".").each do |segment|
-              segment = segment.to_i if segment.to_i.to_s == segment
-
-              unless options[:values][segment.to_sym].nil?
-                options[:values] = options[:values][segment.to_sym]
-                next
-              end
-
-              unless options[:values][segment.to_s].nil?
-                options[:values] = options[:values][segment.to_s]
-                next
-              end
-
-              options[:values] = nil
-              break
-            end
+        def process
+          options[:filter].to_s.split(".").each do |segment|
+            segment = segment.to_i if segment.to_i.to_s == segment
+            options[:values] = subset(segment)
           end
 
           options[:values]
+        end
+
+        protected
+
+        def subset(segment)
+          case
+          when options[:values][segment.to_sym].present?
+            options[:values][segment.to_sym]
+          when options[:values][segment.to_s].present?
+            options[:values][segment.to_s]
+          end
         end
       end
     end
