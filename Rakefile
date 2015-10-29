@@ -22,12 +22,17 @@ rescue LoadError
 end
 
 require "rubocop/rake_task"
-RuboCop::RakeTask.new
-
-require "yard"
-YARD::Rake::YardocTask.new
+RuboCop::RakeTask.new(:rubocop) do |task|
+  task.options = [
+    "-c",
+    ".hound.ruby.yml"
+  ]
+end
 
 require "rspec/core/rake_task"
 RSpec::Core::RakeTask.new(:spec)
 
-task default: [:spec]
+require "yard"
+YARD::Rake::YardocTask.new
+
+task default: [:spec, :rubocop]
