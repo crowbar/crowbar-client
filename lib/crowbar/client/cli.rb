@@ -82,7 +82,46 @@ module Crowbar
         true
       end
 
-      include Cli::Helper
+      class << self
+        def say(message)
+          $stdout.puts message
+        end
+
+        def err(message)
+          $stderr.puts message
+        end
+
+        def helper
+          @helper ||= ::Crowbar::Client::Helper.new
+        end
+
+        def configure(path, section)
+          ini = IniFile.load(detect_config(path))
+
+          if ini[section]
+            ini[section].with_indifferent_access
+          else
+            {}
+          end
+        rescue
+          {}
+        end
+
+        protected
+
+        def detect_config(path)
+          if path.nil?
+            [
+              "#{ENV["HOME"]}/.crowbarrc",
+              "/etc/crowbarrc"
+            ].detect do |temp|
+              File.exist? temp
+            end
+          else
+            path
+          end
+        end
+      end
 
       include Command::Barclamps
       include Command::Batch
