@@ -27,6 +27,7 @@ else
   gem "httparty", version: ">= 0.13.3"
   gem "terminal-table", version: ">= 1.5.2"
   gem "easy_diff", version: ">= 0.0.5"
+  gem "hashie", version: ">= 3.4.1"
 end
 
 require "active_support/all"
