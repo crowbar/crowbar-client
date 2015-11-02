@@ -14,20 +14,26 @@
 # limitations under the License.
 #
 
+require_relative "../base"
+
 module Crowbar
   module Client
     module Request
-      module Proposal
+      module Repository
+        class DeactivateAll < Base
+          def method
+            :post
+          end
+
+          def url
+            [
+              "utils",
+              "repositories",
+              "deactivate_all"
+            ].join("/")
+          end
+        end
       end
     end
   end
 end
-
-require_relative "proposal/commit"
-require_relative "proposal/create"
-require_relative "proposal/delete"
-require_relative "proposal/dequeue"
-require_relative "proposal/list"
-require_relative "proposal/show"
-require_relative "proposal/template"
-require_relative "proposal/update"

@@ -14,20 +14,25 @@
 # limitations under the License.
 #
 
+require "httparty"
+require "singleton"
+
 module Crowbar
   module Client
     module Request
-      module Proposal
+      class Party
+        include Singleton
+        include HTTParty
+
+        format :json
+
+        def configure(options)
+          self.class.base_uri [options[:host], options[:port]].join(":")
+          self.class.digest_auth options[:username], options[:password]
+          self.class.default_timeout options[:timeout].to_i
+          self.class.debug_output $stderr if options[:debug]
+        end
       end
     end
   end
 end
-
-require_relative "proposal/commit"
-require_relative "proposal/create"
-require_relative "proposal/delete"
-require_relative "proposal/dequeue"
-require_relative "proposal/list"
-require_relative "proposal/show"
-require_relative "proposal/template"
-require_relative "proposal/update"

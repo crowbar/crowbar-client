@@ -16,80 +16,15 @@
 
 module Crowbar
   module Client
-    class Request
+    module Request
       module Repository
-        extend ActiveSupport::Concern
-
-        included do
-          def repository_list
-            result = self.class.get(
-              "/utils/repositories.json"
-            )
-
-            if block_given?
-              yield result
-            else
-              result
-            end
-          end
-
-          def repository_activate(platform, repo)
-            result = self.class.post(
-              "/utils/repositories/activate.json",
-              body: {
-                platform: platform,
-                repo: repo
-              }
-            )
-
-            if block_given?
-              yield result
-            else
-              result
-            end
-          end
-
-          def repository_activate_all(platform, repo)
-            result = self.class.post(
-              "/utils/repositories/activate_all.json"
-            )
-
-            if block_given?
-              yield result
-            else
-              result
-            end
-          end
-
-          def repository_deactivate(platform, repo)
-            result = self.class.post(
-              "/utils/repositories/deactivate.json",
-              body: {
-                platform: platform,
-                repo: repo
-              }
-            )
-
-            if block_given?
-              yield result
-            else
-              result
-            end
-          end
-
-          def repository_deactivate_all(platform, repo)
-            result = self.class.post(
-              "/utils/repositories/deactivate_all.json"
-            )
-
-            if block_given?
-              yield result
-            else
-              result
-            end
-          end
-        end
       end
     end
   end
 end
+
+require_relative "repository/activate"
+require_relative "repository/activate_all"
+require_relative "repository/deactivate"
+require_relative "repository/deactivate_all"
+require_relative "repository/list"

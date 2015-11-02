@@ -16,13 +16,12 @@
 
 module Crowbar
   module Client
-    class Request
+    module Request
       module Batch
-        extend ActiveSupport::Concern
-
-        included do
-        end
       end
     end
   end
 end
+
+require_relative "batch/build"
+require_relative "batch/export"

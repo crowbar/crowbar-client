@@ -14,20 +14,35 @@
 # limitations under the License.
 #
 
+require_relative "../base"
+
 module Crowbar
   module Client
     module Request
-      module Proposal
+      module VirtualIp
+        class Deallocate < Base
+          def content
+            {
+              name: attrs.service,
+              network: attrs.network
+            }
+          end
+
+          def method
+            :post
+          end
+
+          def url
+            [
+              "crowbar",
+              "network",
+              "1.0",
+              "deallocate_virtual_ip",
+              attrs.prop
+            ].join("/")
+          end
+        end
       end
     end
   end
 end
-
-require_relative "proposal/commit"
-require_relative "proposal/create"
-require_relative "proposal/delete"
-require_relative "proposal/dequeue"
-require_relative "proposal/list"
-require_relative "proposal/show"
-require_relative "proposal/template"
-require_relative "proposal/update"

@@ -14,44 +14,22 @@
 # limitations under the License.
 #
 
-require_relative "request/barclamps"
-require_relative "request/batch"
-require_relative "request/network"
-require_relative "request/node"
-require_relative "request/proposal"
-require_relative "request/reset"
-require_relative "request/role"
-require_relative "request/repository"
-
-require "httparty"
-require "singleton"
-
 module Crowbar
   module Client
-    class Request
-      include Singleton
-      include HTTParty
-
-      format :json
-      attr_accessor :legacy
-
-      def configure(options)
-        self.class.base_uri [options[:host], options[:port]].join(":")
-        self.class.digest_auth options[:username], options[:password]
-        self.class.default_timeout options[:timeout].to_i
-        self.class.debug_output $stderr if options[:debug]
-
-        self.legacy = options[:legacy]
-      end
-
-      include Barclamps
-      include Batch
-      include Network
-      include Node
-      include Proposal
-      include Reset
-      include Role
-      include Repository
+    module Request
     end
   end
 end
+
+require_relative "request/barclamp"
+require_relative "request/base"
+require_relative "request/batch"
+require_relative "request/host_ip"
+require_relative "request/interface"
+require_relative "request/node"
+require_relative "request/party"
+require_relative "request/proposal"
+require_relative "request/repository"
+require_relative "request/reset"
+require_relative "request/role"
+require_relative "request/virtual_ip"

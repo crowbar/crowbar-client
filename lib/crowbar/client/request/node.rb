@@ -16,127 +16,18 @@
 
 module Crowbar
   module Client
-    class Request
+    module Request
       module Node
-        extend ActiveSupport::Concern
-
-        included do
-          def node_action(action, name)
-            result = self.class.get(
-              "/crowbar/machines/1.0/#{action}/#{name}"
-            )
-
-            if block_given?
-              yield result
-            else
-              result
-            end
-          end
-
-          def node_transition(name, state)
-            result = self.class.post(
-              "/crowbar/crowbar/1.0/transition/default",
-              body: {
-                name: name,
-                state: state
-              }.to_json,
-              headers: {
-                "Content-Type" => "application/json"
-              }
-            )
-
-            if block_given?
-              yield result
-            else
-              result
-            end
-          end
-
-          def node_rename(name, update)
-            result = self.class.post(
-              "/crowbar/machines/1.0/rename/#{name}",
-              body: {
-                alias: update
-              }.to_json,
-              headers: {
-                "Content-Type" => "application/json"
-              }
-            )
-
-            if block_given?
-              yield result
-            else
-              result
-            end
-          end
-
-          def node_role(name, update)
-            result = self.class.post(
-              "/crowbar/machines/1.0/role/#{name}",
-              body: {
-                role: update
-              }.to_json,
-              headers: {
-                "Content-Type" => "application/json"
-              }
-            )
-
-            if block_given?
-              yield result
-            else
-              result
-            end
-          end
-
-          def node_show(name)
-            result = self.class.get(
-              "/crowbar/machines/1.0/#{name}"
-            )
-
-            if block_given?
-              yield result
-            else
-              result
-            end
-          end
-
-          def node_delete(name)
-            result = self.class.delete(
-              "/crowbar/machines/1.0/#{name}"
-            )
-
-            if block_given?
-              yield result
-            else
-              result
-            end
-          end
-
-          def node_list
-            result = self.class.get(
-              "/crowbar/machines/1.0"
-            )
-
-            if block_given?
-              yield result
-            else
-              result
-            end
-          end
-
-          def node_status
-            result = self.class.get(
-              "/nodes/status"
-            )
-
-            if block_given?
-              yield result
-            else
-              result
-            end
-          end
-        end
       end
     end
   end
 end
+
+require_relative "node/action"
+require_relative "node/delete"
+require_relative "node/list"
+require_relative "node/rename"
+require_relative "node/role"
+require_relative "node/show"
+require_relative "node/status"
+require_relative "node/transition"

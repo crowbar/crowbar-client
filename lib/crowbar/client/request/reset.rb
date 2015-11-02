@@ -16,13 +16,12 @@
 
 module Crowbar
   module Client
-    class Request
+    module Request
       module Reset
-        extend ActiveSupport::Concern
-
-        included do
-        end
       end
     end
   end
 end
+
+require_relative "reset/node"
+require_relative "reset/proposal"

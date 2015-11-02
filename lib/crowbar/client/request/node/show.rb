@@ -14,23 +14,24 @@
 # limitations under the License.
 #
 
+require_relative "../base"
+
 module Crowbar
   module Client
-    class Request
-      module Barclamps
-        extend ActiveSupport::Concern
+    module Request
+      module Node
+        class Show < Base
+          def method
+            :get
+          end
 
-        included do
-          def barclamp_list
-            result = self.class.get(
-              "/crowbar.json"
-            )
-
-            if block_given?
-              yield result
-            else
-              result
-            end
+          def url
+            [
+              "crowbar",
+              "machines",
+              "1.0",
+              attrs.name
+            ].join("/")
           end
         end
       end
