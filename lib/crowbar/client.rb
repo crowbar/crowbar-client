@@ -30,15 +30,35 @@ else
 end
 
 require "active_support/all"
-require "gli"
 
-GLI::Commands::Help.tap do |config|
-  config.skips_around = false
-  config.skips_pre = false
-  config.skips_post = false
+module Crowbar
+  module Client
+    class UnavailableBarclampError < StandardError
+      def initialize(barclamp)
+        super("Barclamp #{barclamp} is not available")
+      end
+    end
+
+    class BadFormatterError < StandardError
+    end
+
+    class BadFilterError < StandardError
+    end
+
+    class InvalidFormatError < StandardError
+    end
+
+    class EditorAbortError < StandardError
+    end
+
+    class EditorStartupError < StandardError
+    end
+
+    class InvalidJsonError < StandardError
+    end
+  end
 end
 
-require_relative "client/errors"
 require_relative "client/util"
 require_relative "client/filter"
 require_relative "client/formatter"

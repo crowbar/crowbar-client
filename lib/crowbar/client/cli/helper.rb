@@ -22,9 +22,6 @@ module Crowbar
       module Helper
         extend ActiveSupport::Concern
 
-        included do
-        end
-
         module ClassMethods
           def say(message)
             $stdout.puts message
@@ -35,7 +32,7 @@ module Crowbar
           end
 
           def helper
-            @helper ||= Crowbar::Client::Helper.new
+            @helper ||= ::Crowbar::Client::Helper.new
           end
 
           def configure(path, section)
