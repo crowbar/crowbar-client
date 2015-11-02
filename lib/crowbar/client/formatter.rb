@@ -14,14 +14,14 @@
 # limitations under the License.
 #
 
-require_relative "formatter/base"
-require_relative "formatter/array"
-require_relative "formatter/hash"
-require_relative "formatter/nested"
-
 module Crowbar
   module Client
     module Formatter
     end
   end
 end
+
+require_relative "formatter/base"
+require_relative "formatter/array"
+require_relative "formatter/hash"
+require_relative "formatter/nested"

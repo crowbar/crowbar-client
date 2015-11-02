@@ -14,6 +14,13 @@
 # limitations under the License.
 #
 
+module Crowbar
+  module Client
+    module Command
+    end
+  end
+end
+
 require_relative "command/barclamps"
 require_relative "command/batch"
 require_relative "command/network"
@@ -22,10 +29,3 @@ require_relative "command/proposal"
 require_relative "command/reset"
 require_relative "command/role"
 require_relative "command/repository"
-
-module Crowbar
-  module Client
-    module Command
-    end
-  end
-end

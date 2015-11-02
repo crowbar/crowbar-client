@@ -14,11 +14,11 @@
 # limitations under the License.
 #
 
-require_relative "util/editor"
-
 module Crowbar
   module Client
     module Util
     end
   end
 end
+
+require_relative "util/editor"
