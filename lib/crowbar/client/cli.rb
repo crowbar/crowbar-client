@@ -15,6 +15,7 @@
 #
 
 require "gli"
+require "hashie/mash"
 
 GLI::Commands::Help.tap do |config|
   config.skips_around = false
@@ -70,13 +71,13 @@ module Crowbar
         config = configure(global[:config], global[:alias])
 
         Request::Party.instance.configure(
-          host:     config[:hostname] || global[:hostname],
-          port:     config[:port] || global[:port],
-          username: config[:username] || global[:username],
-          password: config[:password] || global[:password],
-          legacy:   config[:legacy] || global[:legacy],
-          debug:    config[:debug] || global[:debug],
-          timeout:  config[:timeout] || global[:timeout]
+          host:     config.hostname || global[:hostname],
+          port:     config.port || global[:port],
+          username: config.username || global[:username],
+          password: config.password || global[:password],
+          legacy:   config.legacy || global[:legacy],
+          debug:    config.debug || global[:debug],
+          timeout:  config.timeout || global[:timeout]
         )
 
         true
@@ -96,30 +97,38 @@ module Crowbar
         end
 
         def configure(path, section)
-          ini = IniFile.load(detect_config(path))
+          ini = Hashie::Mash.new(
+            IniFile.load(
+              config_detect(path)
+            )
+          )
 
           if ini[section]
-            ini[section].with_indifferent_access
+            ini[section]
           else
-            {}
+            Hashie::Mash.new
           end
         rescue
-          {}
+          Hashie::Mash.new
         end
 
         protected
 
-        def detect_config(path)
+        def config_detect(path)
           if path.nil?
-            [
-              "#{ENV["HOME"]}/.crowbarrc",
-              "/etc/crowbarrc"
-            ].detect do |temp|
+            config_paths.detect do |temp|
               File.exist? temp
             end
           else
             path
           end
+        end
+
+        def config_paths
+          [
+            "#{ENV["HOME"]}/.crowbarrc",
+            "/etc/crowbarrc"
+          ]
         end
       end
 
