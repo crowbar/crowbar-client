@@ -51,10 +51,7 @@ module Crowbar
       flag [:P, :password], default_value: "crowbar"
 
       desc "Specify host for connection"
-      flag [:n, :hostname], default_value: "http://127.0.0.1"
-
-      desc "Specify port for connection"
-      flag [:p, :port], default_value: "80"
+      flag [:s, :server], default_value: "http://127.0.0.1:80"
 
       desc "Specify timeout for connection"
       flag [:t, :timeout], default_value: "60"
@@ -62,20 +59,15 @@ module Crowbar
       desc "Output debug informations"
       switch [:d, :debug], negatable: false
 
-      desc "Call legacy routes for 1.x compatibility"
-      switch [:l, :legacy], negatable: false
-
       pre do |global|
         ENV["GLI_DEBUG"] = "true" if global[:debug]
 
         config = configure(global[:config], global[:alias])
 
         Request::Party.instance.configure(
-          host:     config.hostname || global[:hostname],
-          port:     config.port || global[:port],
+          server:   config.server || global[:server],
           username: config.username || global[:username],
           password: config.password || global[:password],
-          legacy:   config.legacy || global[:legacy],
           debug:    config.debug || global[:debug],
           timeout:  config.timeout || global[:timeout]
         )

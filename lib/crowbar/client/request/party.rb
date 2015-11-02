@@ -24,10 +24,11 @@ module Crowbar
         include Singleton
         include HTTParty
 
+        follow_redirects true
         format :json
 
         def configure(options)
-          self.class.base_uri [options[:host], options[:port]].join(":")
+          self.class.base_uri options[:server]
           self.class.digest_auth options[:username], options[:password]
           self.class.default_timeout options[:timeout].to_i
           self.class.debug_output $stderr if options[:debug]
