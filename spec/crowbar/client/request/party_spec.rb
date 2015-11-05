@@ -16,8 +16,8 @@
 
 require_relative "../../../spec_helper"
 
-describe "Crowbar::Client::Util::Runner" do
-  subject { ::Crowbar::Client::Util::Runner }
+describe "Crowbar::Client::Request::Party" do
+  subject { ::Crowbar::Client::Request::Party }
 
   pending
 
