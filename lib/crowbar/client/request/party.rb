@@ -46,17 +46,17 @@ module Crowbar
           ) if should_debug_with(options)
         end
 
-        def method_missing(method_name, *arguments, &block)
-          if self.class.respond_to?(method_name, true)
-            self.class.send(method_name, *arguments, &block)
+        def method_missing(method, *arguments, &block)
+          if self.class.respond_to?(method, true)
+            self.class.send(method, *arguments, &block)
           else
             super
           end
         end
 
         def respond_to?(method_sym, include_private = false)
-          if self.class.respond_to?(method_name, true)
-            self.class.send(method_name, *arguments, &block)
+          if self.class.respond_to?(method, true)
+            self.class.send(method, *arguments, &block)
           else
             super
           end
