@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-require_relative "../base"
+require "easy_diff"
 
 module Crowbar
   module Client
@@ -22,10 +22,10 @@ module Crowbar
       module Repository
         class Activate < Base
           def content
-            {
+            super.easy_merge!(
               platform: attrs.platform,
               repo: attrs.repo
-            }
+            )
           end
 
           def method
@@ -37,55 +37,6 @@ module Crowbar
               "utils",
               "repositories",
               "activate"
-            ].join("/")
-          end
-        end
-
-        class ActivateAll < Base
-          def method
-            :post
-          end
-
-          def url
-            [
-              "utils",
-              "repositories",
-              "activate_all"
-            ].join("/")
-          end
-        end
-
-        class Deactivate < Base
-          def content
-            {
-              platform: attrs.platform,
-              repo: attrs.repo
-            }
-          end
-
-          def method
-            :post
-          end
-
-          def url
-            [
-              "utils",
-              "repositories",
-              "deactivate"
-            ].join("/")
-          end
-        end
-
-        class DeactivateAll < Base
-          def method
-            :post
-          end
-
-          def url
-            [
-              "utils",
-              "repositories",
-              "deactivate_all"
             ].join("/")
           end
         end

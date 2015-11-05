@@ -14,8 +14,29 @@
 # limitations under the License.
 #
 
-require_relative "../../spec_helper"
+module Crowbar
+  module Client
+    module Command
+      module HostIp
+        class Deallocate < Base
+          def request
+            @request ||= Request::HostIp::Deallocate.new(
+              args
+            )
+          end
 
-describe "Crowbar::Client::Cli" do
-  subject { ::Crowbar::Client::Cli }
+          def execute
+            request.process do |request|
+              case request.code
+              when 200
+                say "Successfully deallocated the host IP"
+              else
+                err request.parsed_response["error"]
+              end
+            end
+          end
+        end
+      end
+    end
+  end
 end

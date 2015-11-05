@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-require_relative "../base"
+require "easy_diff"
 
 module Crowbar
   module Client
@@ -22,7 +22,9 @@ module Crowbar
       module Proposal
         class Create < Base
           def content
-            attrs.payload
+            super.easy_merge!(
+              attrs.payload
+            )
           end
 
           def method

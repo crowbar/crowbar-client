@@ -17,11 +17,17 @@
 module Crowbar
   module Client
     module Filter
+      autoload :Array,
+        File.expand_path("../filter/array", __FILE__)
+
+      autoload :Base,
+        File.expand_path("../filter/base", __FILE__)
+
+      autoload :Hash,
+        File.expand_path("../filter/hash", __FILE__)
+
+      autoload :Subset,
+        File.expand_path("../filter/subset", __FILE__)
     end
   end
 end
-
-require_relative "filter/base"
-require_relative "filter/array"
-require_relative "filter/hash"
-require_relative "filter/subset"

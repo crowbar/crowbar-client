@@ -18,16 +18,30 @@ module Crowbar
   module Client
     module Request
       module Proposal
+        autoload :Commit,
+          File.expand_path("../proposal/commit", __FILE__)
+
+        autoload :Create,
+          File.expand_path("../proposal/create", __FILE__)
+
+        autoload :Delete,
+          File.expand_path("../proposal/delete", __FILE__)
+
+        autoload :Dequeue,
+          File.expand_path("../proposal/dequeue", __FILE__)
+
+        autoload :Edit,
+          File.expand_path("../proposal/edit", __FILE__)
+
+        autoload :List,
+          File.expand_path("../proposal/list", __FILE__)
+
+        autoload :Show,
+          File.expand_path("../proposal/show", __FILE__)
+
+        autoload :Template,
+          File.expand_path("../proposal/template", __FILE__)
       end
     end
   end
 end
-
-require_relative "proposal/commit"
-require_relative "proposal/create"
-require_relative "proposal/delete"
-require_relative "proposal/dequeue"
-require_relative "proposal/list"
-require_relative "proposal/show"
-require_relative "proposal/template"
-require_relative "proposal/update"

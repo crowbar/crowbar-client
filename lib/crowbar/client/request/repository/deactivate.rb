@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-require_relative "../base"
+require "easy_diff"
 
 module Crowbar
   module Client
@@ -22,10 +22,10 @@ module Crowbar
       module Repository
         class Deactivate < Base
           def content
-            {
+            super.easy_merge!(
               platform: attrs.platform,
               repo: attrs.repo
-            }
+            )
           end
 
           def method

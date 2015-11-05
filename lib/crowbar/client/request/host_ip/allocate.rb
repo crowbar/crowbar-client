@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-require_relative "../base"
+require "easy_diff"
 
 module Crowbar
   module Client
@@ -22,12 +22,12 @@ module Crowbar
       module HostIp
         class Allocate < Base
           def content
-            {
+            super.easy_merge!(
               name: attrs.node,
               network: attrs.network,
               range: attrs.range,
               suggestion: attrs.suggest
-            }
+            )
           end
 
           def method

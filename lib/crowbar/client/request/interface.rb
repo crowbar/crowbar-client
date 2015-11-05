@@ -18,10 +18,12 @@ module Crowbar
   module Client
     module Request
       module Interface
+        autoload :Disable,
+          File.expand_path("../interface/disable", __FILE__)
+
+        autoload :Enable,
+          File.expand_path("../interface/enable", __FILE__)
       end
     end
   end
 end
-
-require_relative "interface/disable"
-require_relative "interface/enable"

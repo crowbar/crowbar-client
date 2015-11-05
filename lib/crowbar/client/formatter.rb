@@ -17,11 +17,17 @@
 module Crowbar
   module Client
     module Formatter
+      autoload :Array,
+        File.expand_path("../formatter/array", __FILE__)
+
+      autoload :Base,
+        File.expand_path("../formatter/base", __FILE__)
+
+      autoload :Hash,
+        File.expand_path("../formatter/hash", __FILE__)
+
+      autoload :Nested,
+        File.expand_path("../formatter/nested", __FILE__)
     end
   end
 end
-
-require_relative "formatter/base"
-require_relative "formatter/array"
-require_relative "formatter/hash"
-require_relative "formatter/nested"

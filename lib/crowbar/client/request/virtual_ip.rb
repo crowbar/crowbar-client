@@ -18,10 +18,12 @@ module Crowbar
   module Client
     module Request
       module VirtualIp
+        autoload :Allocate,
+          File.expand_path("../virtual_ip/allocate", __FILE__)
+
+        autoload :Deallocate,
+          File.expand_path("../virtual_ip/deallocate", __FILE__)
       end
     end
   end
 end
-
-require_relative "virtual_ip/allocate"
-require_relative "virtual_ip/deallocate"

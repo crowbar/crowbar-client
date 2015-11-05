@@ -14,8 +14,7 @@
 # limitations under the License.
 #
 
-require "hashie/mash"
-require_relative "party"
+require "hashie"
 
 module Crowbar
   module Client
@@ -33,17 +32,16 @@ module Crowbar
         end
 
         def content
-          {}
+          @content ||= {}
         end
 
         def headers
-          {}
+          @headers ||= {}
         end
 
         def params
-          if headers["Content-Type"].nil?
-            headers["Content-Type"] = "application/json"
-          end
+          headers["Content-Type"] ||= "application/json"
+          headers["Accept"] ||= "application/json"
 
           {
             body: content.to_json,
@@ -54,7 +52,10 @@ module Crowbar
         def process
           result = request.send(
             method,
-            url,
+            [
+              "/",
+              url
+            ].join(""),
             params
           )
 

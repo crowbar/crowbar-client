@@ -18,92 +18,11 @@ module Crowbar
   module Client
     module Command
       module Role
-        extend ActiveSupport::Concern
+        autoload :List,
+          File.expand_path("../role/list", __FILE__)
 
-        included do
-          desc "Role specific commands"
-          command :role do |parent|
-            parent.desc "Show a list of available roles"
-            parent.arg :barclamp
-            parent.command :list do |c|
-              c.desc "Format of the resulting output"
-              c.flag [:format], type: String, default_value: :table
-
-              c.desc "Filter output by criteria"
-              c.flag [:filter], type: String, default_value: nil
-
-              c.action do |global, opts, args|
-                barclamp = args.shift
-                helper.validate_availability_of! barclamp
-
-                Request.instance.role_list(barclamp) do |request|
-                  case request.code
-                  when 200
-                    formatter = Formatter::Array.new(
-                      format: opts[:format],
-                      headings: ["Roles"],
-                      values: Filter::Array.new(
-                        filter: opts[:filter],
-                        values: request.parsed_response.sort
-                      ).result
-                    )
-
-                    if formatter.empty?
-                      exit_now! "No roles"
-                    else
-                      say formatter.result
-                    end
-                  when 404
-                    exit_now! "Barclamp does not exist"
-                  else
-                    exit_now! "Got unknown response with code #{request.code}"
-                  end
-                end
-              end
-            end
-
-            parent.desc "Show details of a specific role"
-            parent.arg :barclamp
-            parent.arg :role
-            parent.command :show do |c|
-              c.desc "Format of the resulting output"
-              c.flag [:format], type: String, default_value: :table
-
-              c.desc "Filter output by criteria"
-              c.flag [:filter], type: String, default_value: nil
-
-              c.action do |global, opts, args|
-                barclamp = args.shift
-                role = args.shift
-                helper.validate_availability_of! barclamp
-
-                Request.instance.role_show(barclamp, role) do |request|
-                  case request.code
-                  when 200
-                    formatter = Formatter::Array.new(
-                      format: opts[:format],
-                      headings: ["Nodes"],
-                      values: Filter::Array.new(
-                        filter: opts[:filter],
-                        values: request.parsed_response.sort
-                      ).result
-                    )
-
-                    if formatter.empty?
-                      exit_now! "No nodes"
-                    else
-                      say formatter.result
-                    end
-                  when 404
-                    exit_now! "Role does not exist"
-                  else
-                    exit_now! "Got unknown response with code #{request.code}"
-                  end
-                end
-              end
-            end
-          end
-        end
+        autoload :Show,
+          File.expand_path("../role/show", __FILE__)
       end
     end
   end

@@ -15,6 +15,7 @@
 #
 
 require "terminal-table"
+require "json"
 
 module Crowbar
   module Client

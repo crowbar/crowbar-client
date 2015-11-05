@@ -18,10 +18,12 @@ module Crowbar
   module Client
     module Request
       module Batch
+        autoload :Build,
+          File.expand_path("../batch/build", __FILE__)
+
+        autoload :Export,
+          File.expand_path("../batch/export", __FILE__)
       end
     end
   end
 end
-
-require_relative "batch/build"
-require_relative "batch/export"

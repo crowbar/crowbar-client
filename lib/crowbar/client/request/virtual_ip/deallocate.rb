@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-require_relative "../base"
+require "easy_diff"
 
 module Crowbar
   module Client
@@ -22,10 +22,10 @@ module Crowbar
       module VirtualIp
         class Deallocate < Base
           def content
-            {
+            super.easy_merge!(
               name: attrs.service,
               network: attrs.network
-            }
+            )
           end
 
           def method

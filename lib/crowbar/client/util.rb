@@ -17,8 +17,11 @@
 module Crowbar
   module Client
     module Util
+      autoload :Editor,
+        File.expand_path("../util/editor", __FILE__)
+
+      autoload :Runner,
+        File.expand_path("../util/runner", __FILE__)
     end
   end
 end
-
-require_relative "util/editor"

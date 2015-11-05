@@ -14,8 +14,6 @@
 # limitations under the License.
 #
 
-require_relative "../base"
-
 module Crowbar
   module Client
     module Request
@@ -31,7 +29,7 @@ module Crowbar
               attrs.barclamp,
               "1.0",
               "elements",
-              role
+              attrs.role
             ].join("/")
           end
         end

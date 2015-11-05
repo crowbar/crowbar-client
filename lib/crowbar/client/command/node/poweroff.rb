@@ -14,19 +14,32 @@
 # limitations under the License.
 #
 
-require_relative "../base"
+require "easy_diff"
 
 module Crowbar
   module Client
-    module Request
-      module Reset
-        class Node < Base
-          def method
-            :get
+    module Command
+      module Node
+        class Poweroff < Base
+          def request
+            @request ||= Request::Node::Action.new(
+              args.easy_merge(
+                action: :poweroff
+              )
+            )
           end
 
-          def url
-            [].join("/")
+          def execute
+            request.process do |request|
+              case request.code
+              when 200
+                say "Successfully triggered poweroff for #{args.name}"
+              when 404
+                err "Node does not exist"
+              else
+                err request.parsed_response["error"]
+              end
+            end
           end
         end
       end

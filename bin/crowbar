@@ -29,7 +29,9 @@ rescue LoadError
 end
 
 begin
-  exit Crowbar::Client::Cli.run(ARGV)
+  Crowbar::Client::Util::Runner.new(
+    ARGV.dup
+  ).execute!
 rescue Interrupt
   abort "Quitting..."
 end

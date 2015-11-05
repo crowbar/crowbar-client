@@ -18,9 +18,9 @@ module Crowbar
   module Client
     module Request
       module Barclamp
+        autoload :List,
+          File.expand_path("../barclamp/list", __FILE__)
       end
     end
   end
 end
-
-require_relative "barclamp/list"

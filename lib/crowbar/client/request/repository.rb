@@ -18,13 +18,21 @@ module Crowbar
   module Client
     module Request
       module Repository
+        autoload :Activate,
+          File.expand_path("../repository/activate", __FILE__)
+
+        autoload :ActivateAll,
+          File.expand_path("../repository/activate_all", __FILE__)
+
+        autoload :Deactivate,
+          File.expand_path("../repository/deactivate", __FILE__)
+
+        autoload :DeactivateAll,
+          File.expand_path("../repository/deactivate_all", __FILE__)
+
+        autoload :List,
+          File.expand_path("../repository/list", __FILE__)
       end
     end
   end
 end
-
-require_relative "repository/activate"
-require_relative "repository/activate_all"
-require_relative "repository/deactivate"
-require_relative "repository/deactivate_all"
-require_relative "repository/list"

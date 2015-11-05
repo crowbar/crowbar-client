@@ -31,6 +31,8 @@ module Crowbar
 
         def subset(segment)
           case
+          when options[:values][segment.to_i].present?
+            options[:values][segment.to_i]
           when options[:values][segment.to_sym].present?
             options[:values][segment.to_sym]
           when options[:values][segment.to_s].present?

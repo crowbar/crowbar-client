@@ -14,8 +14,6 @@
 # limitations under the License.
 #
 
-require_relative "../base"
-
 module Crowbar
   module Client
     module Request

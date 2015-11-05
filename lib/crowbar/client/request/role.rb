@@ -18,10 +18,12 @@ module Crowbar
   module Client
     module Request
       module Role
+        autoload :List,
+          File.expand_path("../role/list", __FILE__)
+
+        autoload :Show,
+          File.expand_path("../role/show", __FILE__)
       end
     end
   end
 end
-
-require_relative "role/list"
-require_relative "role/show"

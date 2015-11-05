@@ -21,7 +21,7 @@ if File.exist? ENV["BUNDLE_GEMFILE"]
   Bundler.setup(:default)
 else
   gem "activesupport", version: ">= 3.0.0"
-  gem "gli", version: ">= 2.13.0"
+  gem "thor", version: ">= 0.19.1"
 
   gem "inifile", version: ">= 3.0.0"
   gem "httparty", version: ">= 0.13.3"
@@ -34,37 +34,52 @@ require "active_support/all"
 
 module Crowbar
   module Client
-    class UnavailableBarclampError < StandardError
+    class SimpleCatchableError < StandardError
+    end
+
+    class BadFormatterError < SimpleCatchableError
+    end
+
+    class BadFilterError < SimpleCatchableError
+    end
+
+    class InvalidFormatError < SimpleCatchableError
+    end
+
+    class EditorAbortError < SimpleCatchableError
+    end
+
+    class EditorStartupError < SimpleCatchableError
+    end
+
+    class InvalidJsonError < SimpleCatchableError
+    end
+
+    class UnavailableBarclampError < SimpleCatchableError
       def initialize(barclamp)
         super("Barclamp #{barclamp} is not available")
       end
     end
 
-    class BadFormatterError < StandardError
-    end
+    autoload :App,
+      File.expand_path("../client/app", __FILE__)
 
-    class BadFilterError < StandardError
-    end
+    autoload :Command,
+      File.expand_path("../client/command", __FILE__)
 
-    class InvalidFormatError < StandardError
-    end
+    autoload :Filter,
+      File.expand_path("../client/filter", __FILE__)
 
-    class EditorAbortError < StandardError
-    end
+    autoload :Formatter,
+      File.expand_path("../client/formatter", __FILE__)
 
-    class EditorStartupError < StandardError
-    end
+    autoload :Request,
+      File.expand_path("../client/request", __FILE__)
 
-    class InvalidJsonError < StandardError
-    end
+    autoload :Util,
+      File.expand_path("../client/util", __FILE__)
+
+    autoload :Version,
+      File.expand_path("../client/version", __FILE__)
   end
 end
-
-require_relative "client/util"
-require_relative "client/filter"
-require_relative "client/formatter"
-require_relative "client/command"
-require_relative "client/helper"
-require_relative "client/request"
-require_relative "client/version"
-require_relative "client/cli"

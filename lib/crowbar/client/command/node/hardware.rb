@@ -14,29 +14,32 @@
 # limitations under the License.
 #
 
-require_relative "../base"
+require "easy_diff"
 
 module Crowbar
   module Client
-    module Request
-      module Proposal
-        class Update < Base
-          def content
-            payload
+    module Command
+      module Node
+        class Hardware < Base
+          def request
+            @request ||= Request::Node::Action.new(
+              args.easy_merge(
+                action: :update
+              )
+            )
           end
 
-          def method
-            :post
-          end
-
-          def url
-            [
-              "crowbar",
-              attrs.barclamp,
-              "1.0",
-              "proposals",
-              attrs.proposal
-            ].join("/")
+          def execute
+            request.process do |request|
+              case request.code
+              when 200
+                say "Successfully triggered hardware for #{args.name}"
+              when 404
+                err "Node does not exist"
+              else
+                err request.parsed_response["error"]
+              end
+            end
           end
         end
       end

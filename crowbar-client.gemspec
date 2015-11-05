@@ -54,7 +54,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "aruba"
   s.add_development_dependency "webmock"
 
-  s.add_runtime_dependency "gli", ">= 2.13.0"
+  s.add_runtime_dependency "thor", ">= 0.19.1"
   s.add_runtime_dependency "activesupport", ">= 3.0.0"
 
   s.add_runtime_dependency "httparty", ">= 0.13.3"

@@ -18,16 +18,30 @@ module Crowbar
   module Client
     module Request
       module Node
+        autoload :Action,
+          File.expand_path("../node/action", __FILE__)
+
+        autoload :Delete,
+          File.expand_path("../node/delete", __FILE__)
+
+        autoload :List,
+          File.expand_path("../node/list", __FILE__)
+
+        autoload :Rename,
+          File.expand_path("../node/rename", __FILE__)
+
+        autoload :Role,
+          File.expand_path("../node/role", __FILE__)
+
+        autoload :Show,
+          File.expand_path("../node/show", __FILE__)
+
+        autoload :Status,
+          File.expand_path("../node/status", __FILE__)
+
+        autoload :Transition,
+          File.expand_path("../node/transition", __FILE__)
       end
     end
   end
 end
-
-require_relative "node/action"
-require_relative "node/delete"
-require_relative "node/list"
-require_relative "node/rename"
-require_relative "node/role"
-require_relative "node/show"
-require_relative "node/status"
-require_relative "node/transition"

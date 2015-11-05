@@ -14,15 +14,13 @@
 # limitations under the License.
 #
 
-require_relative "../base"
-
 module Crowbar
   module Client
     module Request
       module Node
         class Action < Base
           def method
-            :get
+            :post
           end
 
           def url

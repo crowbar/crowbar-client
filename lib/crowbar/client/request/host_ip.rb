@@ -18,10 +18,12 @@ module Crowbar
   module Client
     module Request
       module HostIp
+        autoload :Allocate,
+          File.expand_path("../host_ip/allocate", __FILE__)
+
+        autoload :Deallocate,
+          File.expand_path("../host_ip/deallocate", __FILE__)
       end
     end
   end
 end
-
-require_relative "host_ip/allocate"
-require_relative "host_ip/deallocate"

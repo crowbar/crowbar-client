@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-require_relative "../base"
+require "easy_diff"
 
 module Crowbar
   module Client
@@ -22,10 +22,10 @@ module Crowbar
       module Node
         class Transition < Base
           def content
-            {
+            super.easy_merge!(
               name: attrs.name,
               state: attrs.state
-            }
+            )
           end
 
           def method
@@ -35,7 +35,7 @@ module Crowbar
           def url
             [
               "crowbar",
-              "machines",
+              "crowbar",
               "1.0",
               "transition",
               "default"

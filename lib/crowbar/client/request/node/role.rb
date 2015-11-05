@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-require_relative "../base"
+require "easy_diff"
 
 module Crowbar
   module Client
@@ -22,9 +22,9 @@ module Crowbar
       module Node
         class Role < Base
           def content
-            {
-              role: attrs.update
-            }
+            super.easy_merge!(
+              role: attrs.value
+            )
           end
 
           def method

@@ -18,10 +18,12 @@ module Crowbar
   module Client
     module Request
       module Reset
+        autoload :Nodes,
+          File.expand_path("../reset/nodes", __FILE__)
+
+        autoload :Proposal,
+          File.expand_path("../reset/proposal", __FILE__)
       end
     end
   end
 end
-
-require_relative "reset/node"
-require_relative "reset/proposal"

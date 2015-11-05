@@ -28,10 +28,48 @@ module Crowbar
         format :json
 
         def configure(options)
-          self.class.base_uri options[:server]
-          self.class.digest_auth options[:username], options[:password]
-          self.class.default_timeout options[:timeout].to_i
-          self.class.debug_output $stderr if options[:debug]
+          self.class.base_uri(
+            options[:server]
+          )
+
+          self.class.default_timeout(
+            options[:timeout].to_i
+          )
+
+          self.class.digest_auth(
+            options[:username],
+            options[:password]
+          ) if should_auth_with(options)
+
+          self.class.debug_output(
+            $stderr
+          ) if should_debug_with(options)
+        end
+
+        def method_missing(method_name, *arguments, &block)
+          if self.class.respond_to?(method_name, true)
+            self.class.send(method_name, *arguments, &block)
+          else
+            super
+          end
+        end
+
+        def respond_to?(method_sym, include_private = false)
+          if self.class.respond_to?(method_name, true)
+            self.class.send(method_name, *arguments, &block)
+          else
+            super
+          end
+        end
+
+        protected
+
+        def should_auth_with(options)
+          !options[:anonymous]
+        end
+
+        def should_debug_with(options)
+          options[:debug]
         end
       end
     end

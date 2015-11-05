@@ -17,19 +17,41 @@
 module Crowbar
   module Client
     module Request
+      autoload :Barclamp,
+        File.expand_path("../request/barclamp", __FILE__)
+
+      autoload :Base,
+        File.expand_path("../request/base", __FILE__)
+
+      autoload :Batch,
+        File.expand_path("../request/batch", __FILE__)
+
+      autoload :HostIp,
+        File.expand_path("../request/host_ip", __FILE__)
+
+      autoload :Interface,
+        File.expand_path("../request/interface", __FILE__)
+
+      autoload :Node,
+        File.expand_path("../request/node", __FILE__)
+
+      autoload :Party,
+        File.expand_path("../request/party", __FILE__)
+
+      autoload :Proposal,
+        File.expand_path("../request/proposal", __FILE__)
+
+      autoload :Repository,
+        File.expand_path("../request/repository", __FILE__)
+
+      autoload :Reset,
+        File.expand_path("../request/reset", __FILE__)
+
+      autoload :Role,
+        File.expand_path("../request/role", __FILE__)
+
+      autoload :VirtualIp,
+        File.expand_path("../request/virtual_ip", __FILE__)
     end
   end
 end
-
-require_relative "request/barclamp"
-require_relative "request/base"
-require_relative "request/batch"
-require_relative "request/host_ip"
-require_relative "request/interface"
-require_relative "request/node"
-require_relative "request/party"
-require_relative "request/proposal"
-require_relative "request/repository"
-require_relative "request/reset"
-require_relative "request/role"
-require_relative "request/virtual_ip"

@@ -34,7 +34,7 @@ module Crowbar
             process_json
           else
             raise InvalidFormatError,
-              "Invalid format, valid formats: table, json, plain"
+              "You requested an invalid format for this resource"
           end
         end
 
