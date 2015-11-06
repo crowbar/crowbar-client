@@ -41,6 +41,10 @@ require "crowbar/client"
 require "rspec"
 require "webmock/rspec"
 
+WebMock.disable_net_connect!(
+  allow: "codeclimate.com"
+)
+
 Dir[File.expand_path("../support/**/*.rb", __FILE__)].each do |f|
   require f
 end
