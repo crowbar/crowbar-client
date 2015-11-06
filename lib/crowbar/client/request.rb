@@ -14,44 +14,44 @@
 # limitations under the License.
 #
 
-require_relative "request/barclamps"
-require_relative "request/batch"
-require_relative "request/network"
-require_relative "request/node"
-require_relative "request/proposal"
-require_relative "request/reset"
-require_relative "request/role"
-require_relative "request/repository"
-
-require "httparty"
-require "singleton"
-
 module Crowbar
   module Client
-    class Request
-      include Singleton
-      include HTTParty
+    module Request
+      autoload :Barclamp,
+        File.expand_path("../request/barclamp", __FILE__)
 
-      format :json
-      attr_accessor :legacy
+      autoload :Base,
+        File.expand_path("../request/base", __FILE__)
 
-      def configure(options)
-        self.class.base_uri [options[:host], options[:port]].join(":")
-        self.class.digest_auth options[:username], options[:password]
-        self.class.default_timeout options[:timeout].to_i
-        self.class.debug_output $stderr if options[:debug]
+      autoload :Batch,
+        File.expand_path("../request/batch", __FILE__)
 
-        self.legacy = options[:legacy]
-      end
+      autoload :HostIp,
+        File.expand_path("../request/host_ip", __FILE__)
 
-      include Barclamps
-      include Batch
-      include Network
-      include Node
-      include Proposal
-      include Reset
-      include Role
-      include Repository
+      autoload :Interface,
+        File.expand_path("../request/interface", __FILE__)
+
+      autoload :Node,
+        File.expand_path("../request/node", __FILE__)
+
+      autoload :Party,
+        File.expand_path("../request/party", __FILE__)
+
+      autoload :Proposal,
+        File.expand_path("../request/proposal", __FILE__)
+
+      autoload :Repository,
+        File.expand_path("../request/repository", __FILE__)
+
+      autoload :Reset,
+        File.expand_path("../request/reset", __FILE__)
+
+      autoload :Role,
+        File.expand_path("../request/role", __FILE__)
+
+      autoload :VirtualIp,
+        File.expand_path("../request/virtual_ip", __FILE__)
     end
   end
 end

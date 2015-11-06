@@ -39,7 +39,13 @@ end
 
 require "crowbar/client"
 require "rspec"
+require "webmock/rspec"
+
+Dir[File.expand_path("../support/**/*.rb", __FILE__)].each do |f|
+  require f
+end
 
 RSpec.configure do |config|
   config.mock_with :rspec
+  config.order = "random"
 end

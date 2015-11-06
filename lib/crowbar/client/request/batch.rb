@@ -16,12 +16,13 @@
 
 module Crowbar
   module Client
-    class Request
+    module Request
       module Batch
-        extend ActiveSupport::Concern
+        autoload :Build,
+          File.expand_path("../batch/build", __FILE__)
 
-        included do
-        end
+        autoload :Export,
+          File.expand_path("../batch/export", __FILE__)
       end
     end
   end

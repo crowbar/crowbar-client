@@ -21,29 +21,65 @@ if File.exist? ENV["BUNDLE_GEMFILE"]
   Bundler.setup(:default)
 else
   gem "activesupport", version: ">= 3.0.0"
-  gem "gli", version: ">= 2.13.0"
+  gem "thor", version: ">= 0.19.1"
 
   gem "inifile", version: ">= 3.0.0"
   gem "httparty", version: ">= 0.13.3"
   gem "terminal-table", version: ">= 1.5.2"
   gem "easy_diff", version: ">= 0.0.5"
+  gem "hashie", version: ">= 3.4.1"
 end
 
 require "active_support/all"
-require "gli"
 
-GLI::Commands::Help.tap do |config|
-  config.skips_around = false
-  config.skips_pre = false
-  config.skips_post = false
+module Crowbar
+  module Client
+    class SimpleCatchableError < StandardError
+    end
+
+    class BadFormatterError < SimpleCatchableError
+    end
+
+    class BadFilterError < SimpleCatchableError
+    end
+
+    class InvalidFormatError < SimpleCatchableError
+    end
+
+    class EditorAbortError < SimpleCatchableError
+    end
+
+    class EditorStartupError < SimpleCatchableError
+    end
+
+    class InvalidJsonError < SimpleCatchableError
+    end
+
+    class UnavailableBarclampError < SimpleCatchableError
+      def initialize(barclamp)
+        super("Barclamp #{barclamp} is not available")
+      end
+    end
+
+    autoload :App,
+      File.expand_path("../client/app", __FILE__)
+
+    autoload :Command,
+      File.expand_path("../client/command", __FILE__)
+
+    autoload :Filter,
+      File.expand_path("../client/filter", __FILE__)
+
+    autoload :Formatter,
+      File.expand_path("../client/formatter", __FILE__)
+
+    autoload :Request,
+      File.expand_path("../client/request", __FILE__)
+
+    autoload :Util,
+      File.expand_path("../client/util", __FILE__)
+
+    autoload :Version,
+      File.expand_path("../client/version", __FILE__)
+  end
 end
-
-require_relative "client/errors"
-require_relative "client/util"
-require_relative "client/filter"
-require_relative "client/formatter"
-require_relative "client/command"
-require_relative "client/helper"
-require_relative "client/request"
-require_relative "client/version"
-require_relative "client/cli"

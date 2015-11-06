@@ -16,126 +16,31 @@
 
 module Crowbar
   module Client
-    class Request
+    module Request
       module Node
-        extend ActiveSupport::Concern
+        autoload :Action,
+          File.expand_path("../node/action", __FILE__)
 
-        included do
-          def node_action(action, name)
-            result = self.class.get(
-              "/crowbar/machines/1.0/#{action}/#{name}"
-            )
+        autoload :Delete,
+          File.expand_path("../node/delete", __FILE__)
 
-            if block_given?
-              yield result
-            else
-              result
-            end
-          end
+        autoload :List,
+          File.expand_path("../node/list", __FILE__)
 
-          def node_transition(name, state)
-            result = self.class.post(
-              "/crowbar/crowbar/1.0/transition/default",
-              body: {
-                name: name,
-                state: state
-              }.to_json,
-              headers: {
-                "Content-Type" => "application/json"
-              }
-            )
+        autoload :Rename,
+          File.expand_path("../node/rename", __FILE__)
 
-            if block_given?
-              yield result
-            else
-              result
-            end
-          end
+        autoload :Role,
+          File.expand_path("../node/role", __FILE__)
 
-          def node_rename(name, update)
-            result = self.class.post(
-              "/crowbar/machines/1.0/rename/#{name}",
-              body: {
-                alias: update
-              }.to_json,
-              headers: {
-                "Content-Type" => "application/json"
-              }
-            )
+        autoload :Show,
+          File.expand_path("../node/show", __FILE__)
 
-            if block_given?
-              yield result
-            else
-              result
-            end
-          end
+        autoload :Status,
+          File.expand_path("../node/status", __FILE__)
 
-          def node_role(name, update)
-            result = self.class.post(
-              "/crowbar/machines/1.0/role/#{name}",
-              body: {
-                role: update
-              }.to_json,
-              headers: {
-                "Content-Type" => "application/json"
-              }
-            )
-
-            if block_given?
-              yield result
-            else
-              result
-            end
-          end
-
-          def node_show(name)
-            result = self.class.get(
-              "/crowbar/machines/1.0/#{name}"
-            )
-
-            if block_given?
-              yield result
-            else
-              result
-            end
-          end
-
-          def node_delete(name)
-            result = self.class.delete(
-              "/crowbar/machines/1.0/#{name}"
-            )
-
-            if block_given?
-              yield result
-            else
-              result
-            end
-          end
-
-          def node_list
-            result = self.class.get(
-              "/crowbar/machines/1.0"
-            )
-
-            if block_given?
-              yield result
-            else
-              result
-            end
-          end
-
-          def node_status
-            result = self.class.get(
-              "/nodes/status"
-            )
-
-            if block_given?
-              yield result
-            else
-              result
-            end
-          end
-        end
+        autoload :Transition,
+          File.expand_path("../node/transition", __FILE__)
       end
     end
   end

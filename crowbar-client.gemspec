@@ -54,11 +54,12 @@ Gem::Specification.new do |s|
   s.add_development_dependency "aruba"
   s.add_development_dependency "webmock"
 
-  s.add_runtime_dependency "gli", ">= 2.13.0"
+  s.add_runtime_dependency "thor", ">= 0.19.1"
   s.add_runtime_dependency "activesupport", ">= 3.0.0"
 
   s.add_runtime_dependency "httparty", ">= 0.13.3"
   s.add_runtime_dependency "inifile", ">= 3.0.0"
   s.add_runtime_dependency "terminal-table", ">= 1.5.2"
   s.add_runtime_dependency "easy_diff", ">= 0.0.5"
+  s.add_runtime_dependency "hashie", ">= 3.4.1"
 end

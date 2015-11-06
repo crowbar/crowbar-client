@@ -16,79 +16,22 @@
 
 module Crowbar
   module Client
-    class Request
+    module Request
       module Repository
-        extend ActiveSupport::Concern
+        autoload :Activate,
+          File.expand_path("../repository/activate", __FILE__)
 
-        included do
-          def repository_list
-            result = self.class.get(
-              "/utils/repositories.json"
-            )
+        autoload :ActivateAll,
+          File.expand_path("../repository/activate_all", __FILE__)
 
-            if block_given?
-              yield result
-            else
-              result
-            end
-          end
+        autoload :Deactivate,
+          File.expand_path("../repository/deactivate", __FILE__)
 
-          def repository_activate(platform, repo)
-            result = self.class.post(
-              "/utils/repositories/activate.json",
-              body: {
-                platform: platform,
-                repo: repo
-              }
-            )
+        autoload :DeactivateAll,
+          File.expand_path("../repository/deactivate_all", __FILE__)
 
-            if block_given?
-              yield result
-            else
-              result
-            end
-          end
-
-          def repository_activate_all(platform, repo)
-            result = self.class.post(
-              "/utils/repositories/activate_all.json"
-            )
-
-            if block_given?
-              yield result
-            else
-              result
-            end
-          end
-
-          def repository_deactivate(platform, repo)
-            result = self.class.post(
-              "/utils/repositories/deactivate.json",
-              body: {
-                platform: platform,
-                repo: repo
-              }
-            )
-
-            if block_given?
-              yield result
-            else
-              result
-            end
-          end
-
-          def repository_deactivate_all(platform, repo)
-            result = self.class.post(
-              "/utils/repositories/deactivate_all.json"
-            )
-
-            if block_given?
-              yield result
-            else
-              result
-            end
-          end
-        end
+        autoload :List,
+          File.expand_path("../repository/list", __FILE__)
       end
     end
   end

@@ -16,35 +16,13 @@
 
 module Crowbar
   module Client
-    class Request
+    module Request
       module Role
-        extend ActiveSupport::Concern
+        autoload :List,
+          File.expand_path("../role/list", __FILE__)
 
-        included do
-          def role_list(barclamp)
-            result = self.class.get(
-              "/crowbar/#{barclamp}/1.0/elements.json"
-            )
-
-            if block_given?
-              yield result
-            else
-              result
-            end
-          end
-
-          def role_show(barclamp, role)
-            result = self.class.get(
-              "/crowbar/#{barclamp}/1.0/elements/#{role}.json"
-            )
-
-            if block_given?
-              yield result
-            else
-              result
-            end
-          end
-        end
+        autoload :Show,
+          File.expand_path("../role/show", __FILE__)
       end
     end
   end

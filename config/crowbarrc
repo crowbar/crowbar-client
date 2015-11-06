@@ -1,5 +1,5 @@
 [default]
-hostname = http://localhost
-port = 80
+server = http://localhost:80
 username = crowbar
 password = crowbar
+anonymous = false

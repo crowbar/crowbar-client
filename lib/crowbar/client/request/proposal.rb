@@ -16,115 +16,31 @@
 
 module Crowbar
   module Client
-    class Request
+    module Request
       module Proposal
-        extend ActiveSupport::Concern
+        autoload :Commit,
+          File.expand_path("../proposal/commit", __FILE__)
 
-        included do
-          def proposal_commit(barclamp, proposal)
-            result = self.class.post(
-              "/crowbar/#{barclamp}/1.0/proposals/commit/#{proposal}.json"
-            )
+        autoload :Create,
+          File.expand_path("../proposal/create", __FILE__)
 
-            if block_given?
-              yield result
-            else
-              result
-            end
-          end
+        autoload :Delete,
+          File.expand_path("../proposal/delete", __FILE__)
 
-          def proposal_show(barclamp, proposal)
-            result = self.class.get(
-              "/crowbar/#{barclamp}/1.0/proposals/#{proposal}.json"
-            )
+        autoload :Dequeue,
+          File.expand_path("../proposal/dequeue", __FILE__)
 
-            if block_given?
-              yield result
-            else
-              result
-            end
-          end
+        autoload :Edit,
+          File.expand_path("../proposal/edit", __FILE__)
 
-          def proposal_dequeue(barclamp, proposal)
-            result = self.class.delete(
-              "/crowbar/#{barclamp}/1.0/proposals/dequeue/#{proposal}.json"
-            )
+        autoload :List,
+          File.expand_path("../proposal/list", __FILE__)
 
-            if block_given?
-              yield result
-            else
-              result
-            end
-          end
+        autoload :Show,
+          File.expand_path("../proposal/show", __FILE__)
 
-          def proposal_delete(barclamp, proposal)
-            result = self.class.delete(
-              "/crowbar/#{barclamp}/1.0/proposals/#{proposal}.json"
-            )
-
-            if block_given?
-              yield result
-            else
-              result
-            end
-          end
-
-          def proposal_list(barclamp)
-            result = self.class.get(
-              "/crowbar/#{barclamp}/1.0/proposals.json"
-            )
-
-            if block_given?
-              yield result
-            else
-              result
-            end
-          end
-
-          def proposal_template(barclamp)
-            result = self.class.get(
-              "/crowbar/#{barclamp}/1.0/proposals/template.json"
-            )
-
-            if block_given?
-              yield result
-            else
-              result
-            end
-          end
-
-          def proposal_create(barclamp, proposal, payload)
-            result = self.class.put(
-              "/crowbar/#{barclamp}/1.0/proposals.json",
-              body: payload.to_json,
-              headers: {
-                "Content-Type" => "application/json"
-              }
-            )
-
-            if block_given?
-              yield result
-            else
-              result
-            end
-          end
-
-          def proposal_update(barclamp, proposal, payload)
-            result = self.class.post(
-              "/crowbar/#{barclamp}/1.0/proposals/#{proposal}.json",
-              body: payload.to_json,
-              headers: {
-                "Content-Type" => "application/json"
-              }
-            )
-
-            if block_given?
-              yield result
-            else
-              result
-            end
-          end
-        end
+        autoload :Template,
+          File.expand_path("../proposal/template", __FILE__)
       end
     end
   end

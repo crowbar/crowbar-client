@@ -16,12 +16,13 @@
 
 module Crowbar
   module Client
-    class Request
+    module Request
       module Reset
-        extend ActiveSupport::Concern
+        autoload :Nodes,
+          File.expand_path("../reset/nodes", __FILE__)
 
-        included do
-        end
+        autoload :Proposal,
+          File.expand_path("../reset/proposal", __FILE__)
       end
     end
   end

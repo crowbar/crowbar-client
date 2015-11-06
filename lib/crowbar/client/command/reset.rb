@@ -18,30 +18,11 @@ module Crowbar
   module Client
     module Command
       module Reset
-        extend ActiveSupport::Concern
+        autoload :Nodes,
+          File.expand_path("../reset/nodes", __FILE__)
 
-        included do
-          desc "Reset specific commands"
-          command :reset do |parent|
-            parent.desc "Reset specific proposal"
-            parent.arg :barclamp
-            parent.arg :proposal, :optional
-            parent.command :proposal do |c|
-              c.action do |global, opts, args|
-                # TODO(must): Needs to be implemented in controller
-                raise "Not implemented yet!"
-              end
-            end
-
-            parent.desc "Reset all nodes state"
-            parent.command :nodes do |c|
-              c.action do |global, opts, args|
-                # TODO(must): Needs to be implemented in controller
-                raise "Not implemented yet!"
-              end
-            end
-          end
-        end
+        autoload :Proposal,
+          File.expand_path("../reset/proposal", __FILE__)
       end
     end
   end

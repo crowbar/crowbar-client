@@ -14,18 +14,41 @@
 # limitations under the License.
 #
 
-require_relative "command/barclamps"
-require_relative "command/batch"
-require_relative "command/network"
-require_relative "command/node"
-require_relative "command/proposal"
-require_relative "command/reset"
-require_relative "command/role"
-require_relative "command/repository"
-
 module Crowbar
   module Client
     module Command
+      autoload :Barclamp,
+        File.expand_path("../command/barclamp", __FILE__)
+
+      autoload :Base,
+        File.expand_path("../command/base", __FILE__)
+
+      autoload :Batch,
+        File.expand_path("../command/batch", __FILE__)
+
+      autoload :HostIp,
+        File.expand_path("../command/host_ip", __FILE__)
+
+      autoload :Interface,
+        File.expand_path("../command/interface", __FILE__)
+
+      autoload :Node,
+        File.expand_path("../command/node", __FILE__)
+
+      autoload :Proposal,
+        File.expand_path("../command/proposal", __FILE__)
+
+      autoload :Repository,
+        File.expand_path("../command/repository", __FILE__)
+
+      autoload :Reset,
+        File.expand_path("../command/reset", __FILE__)
+
+      autoload :Role,
+        File.expand_path("../command/role", __FILE__)
+
+      autoload :VirtualIp,
+        File.expand_path("../command/virtual_ip", __FILE__)
     end
   end
 end

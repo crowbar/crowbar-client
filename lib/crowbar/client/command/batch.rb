@@ -18,34 +18,11 @@ module Crowbar
   module Client
     module Command
       module Batch
-        extend ActiveSupport::Concern
+        autoload :Build,
+          File.expand_path("../batch/build", __FILE__)
 
-        included do
-          desc "Batch specific commands"
-          command :batch do |parent|
-            parent.desc "Include given proposals"
-            parent.flag [:i, :include], type: Array
-
-            parent.desc "Exclude given proposals"
-            parent.flag [:e, :exclude], type: Array
-
-            parent.desc "Build proposals from file"
-            parent.command :build do |c|
-              c.action do |global, opts, args|
-                # TODO(must): Implement the batch build functionality
-                raise "Not implemented yet!"
-              end
-            end
-
-            parent.desc "Export proposals to file"
-            parent.command :export do |c|
-              c.action do |global, opts, args|
-                # TODO(must): Implement the batch export functionality
-                raise "Not implemented yet!"
-              end
-            end
-          end
-        end
+        autoload :Export,
+          File.expand_path("../batch/export", __FILE__)
       end
     end
   end

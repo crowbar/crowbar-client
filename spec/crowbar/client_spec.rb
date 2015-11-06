@@ -14,7 +14,8 @@
 # limitations under the License.
 #
 
-require "spec_helper"
+require_relative "../spec_helper"
 
 describe Crowbar::Client do
+  subject { ::Crowbar::Client }
 end
