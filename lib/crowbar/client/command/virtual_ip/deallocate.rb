@@ -17,10 +17,10 @@
 module Crowbar
   module Client
     module Command
-      module VirtualIp
+      module VirtualIP
         class Deallocate < Base
           def request
-            @request ||= Request::VirtualIp::Deallocate.new(
+            @request ||= Request::VirtualIP::Deallocate.new(
               args
             )
           end

@@ -16,11 +16,11 @@
 
 require_relative "../../../../spec_helper"
 
-describe "Crowbar::Client::Command::HostIp::Deallocate" do
+describe "Crowbar::Client::Command::HostIP::Deallocate" do
   include_context "command_context"
 
   subject do
-    ::Crowbar::Client::Command::HostIp::Deallocate
+    ::Crowbar::Client::Command::HostIP::Deallocate
   end
 
   pending

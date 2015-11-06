@@ -17,7 +17,7 @@
 module Crowbar
   module Client
     module App
-      class HostIp < Base
+      class HostIP < Base
         desc "allocate PROPOSAL NODE NETWORK RANGE [SUGGESTION]",
           "Allocate a host IP address"
 

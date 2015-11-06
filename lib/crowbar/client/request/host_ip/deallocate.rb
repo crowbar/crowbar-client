@@ -19,7 +19,7 @@ require "easy_diff"
 module Crowbar
   module Client
     module Request
-      module HostIp
+      module HostIP
         class Deallocate < Base
           def content
             super.easy_merge!(

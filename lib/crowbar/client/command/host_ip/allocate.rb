@@ -17,10 +17,10 @@
 module Crowbar
   module Client
     module Command
-      module HostIp
+      module HostIP
         class Allocate < Base
           def request
-            @request ||= Request::HostIp::Allocate.new(
+            @request ||= Request::HostIP::Allocate.new(
               args
             )
           end

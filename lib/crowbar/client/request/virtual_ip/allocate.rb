@@ -19,7 +19,7 @@ require "easy_diff"
 module Crowbar
   module Client
     module Request
-      module VirtualIp
+      module VirtualIP
         class Allocate < Base
           def content
             super.easy_merge!(

@@ -17,7 +17,7 @@
 module Crowbar
   module Client
     module Request
-      module VirtualIp
+      module VirtualIP
         autoload :Allocate,
           File.expand_path("../virtual_ip/allocate", __FILE__)
 
