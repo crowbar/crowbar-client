@@ -18,7 +18,8 @@ module Crowbar
   module Client
     module App
       class Repository < Base
-        desc "list", "List all available repositories"
+        desc "list",
+          "List all available repositories"
 
         long_desc <<-LONGDESC
           `list` will print out a list of the available repositories

@@ -18,7 +18,8 @@ module Crowbar
   module Client
     module App
       class Role < Base
-        desc "list BARCLAMP", "List available roles for barclamp"
+        desc "list BARCLAMP",
+          "List available roles for barclamp"
 
         long_desc <<-LONGDESC
           `list BARCLAMP` will print out a list of the available roles
@@ -75,7 +76,8 @@ module Crowbar
           err e.message, 1
         end
 
-        desc "show BARCLAMP ROLE", "Show details of a specific role"
+        desc "show BARCLAMP ROLE",
+          "Show details of a specific role"
 
         long_desc <<-LONGDESC
           `show BARCLAMP ROLE` will print out the details for a specified
