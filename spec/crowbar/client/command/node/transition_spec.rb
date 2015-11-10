@@ -20,9 +20,20 @@ describe "Crowbar::Client::Command::Node::Transition" do
   include_context "command_context"
 
   subject do
-    ::Crowbar::Client::Command::Node::Transition
+    ::Crowbar::Client::Command::Node::Transition.new(
+      stdin,
+      stdout,
+      stderr
+    )
+  end
+
+  it "should always return a request class" do
+    expect(subject.request).to(
+      be_a(
+        ::Crowbar::Client::Request::Node::Transition
+      )
+    )
   end
 
   pending
-
 end

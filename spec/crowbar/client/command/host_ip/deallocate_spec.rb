@@ -20,9 +20,20 @@ describe "Crowbar::Client::Command::HostIP::Deallocate" do
   include_context "command_context"
 
   subject do
-    ::Crowbar::Client::Command::HostIP::Deallocate
+    ::Crowbar::Client::Command::HostIP::Deallocate.new(
+      stdin,
+      stdout,
+      stderr
+    )
+  end
+
+  it "should always return a request class" do
+    expect(subject.request).to(
+      be_a(
+        ::Crowbar::Client::Request::HostIP::Deallocate
+      )
+    )
   end
 
   pending
-
 end

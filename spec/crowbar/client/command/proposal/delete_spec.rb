@@ -20,9 +20,20 @@ describe "Crowbar::Client::Command::Proposal::Delete" do
   include_context "command_context"
 
   subject do
-    ::Crowbar::Client::Command::Proposal::Delete
+    ::Crowbar::Client::Command::Proposal::Delete.new(
+      stdin,
+      stdout,
+      stderr
+    )
+  end
+
+  it "should always return a request class" do
+    expect(subject.request).to(
+      be_a(
+        ::Crowbar::Client::Request::Proposal::Delete
+      )
+    )
   end
 
   pending
-
 end

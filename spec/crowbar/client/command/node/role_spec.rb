@@ -20,9 +20,20 @@ describe "Crowbar::Client::Command::Node::Role" do
   include_context "command_context"
 
   subject do
-    ::Crowbar::Client::Command::Node::Role
+    ::Crowbar::Client::Command::Node::Role.new(
+      stdin,
+      stdout,
+      stderr
+    )
+  end
+
+  it "should always return a request class" do
+    expect(subject.request).to(
+      be_a(
+        ::Crowbar::Client::Request::Node::Role
+      )
+    )
   end
 
   pending
-
 end

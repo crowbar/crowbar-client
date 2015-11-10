@@ -20,9 +20,20 @@ describe "Crowbar::Client::Command::VirtualIP::Deallocate" do
   include_context "command_context"
 
   subject do
-    ::Crowbar::Client::Command::VirtualIP::Deallocate
+    ::Crowbar::Client::Command::VirtualIP::Deallocate.new(
+      stdin,
+      stdout,
+      stderr
+    )
+  end
+
+  it "should always return a request class" do
+    expect(subject.request).to(
+      be_a(
+        ::Crowbar::Client::Request::VirtualIP::Deallocate
+      )
+    )
   end
 
   pending
-
 end

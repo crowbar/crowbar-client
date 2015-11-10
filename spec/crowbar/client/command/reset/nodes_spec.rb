@@ -20,9 +20,20 @@ describe "Crowbar::Client::Command::Reset::Nodes" do
   include_context "command_context"
 
   subject do
-    ::Crowbar::Client::Command::Reset::Nodes
+    ::Crowbar::Client::Command::Reset::Nodes.new(
+      stdin,
+      stdout,
+      stderr
+    )
+  end
+
+  it "should always return a request class" do
+    expect(subject.request).to(
+      be_a(
+        ::Crowbar::Client::Request::Reset::Nodes
+      )
+    )
   end
 
   pending
-
 end

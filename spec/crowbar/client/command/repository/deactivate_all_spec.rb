@@ -20,9 +20,20 @@ describe "Crowbar::Client::Command::Repository::DeactivateAll" do
   include_context "command_context"
 
   subject do
-    ::Crowbar::Client::Command::Repository::DeactivateAll
+    ::Crowbar::Client::Command::Repository::DeactivateAll.new(
+      stdin,
+      stdout,
+      stderr
+    )
+  end
+
+  it "should always return a request class" do
+    expect(subject.request).to(
+      be_a(
+        ::Crowbar::Client::Request::Repository::DeactivateAll
+      )
+    )
   end
 
   pending
-
 end

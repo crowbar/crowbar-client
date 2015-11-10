@@ -20,9 +20,20 @@ describe "Crowbar::Client::Command::VirtualIP::Allocate" do
   include_context "command_context"
 
   subject do
-    ::Crowbar::Client::Command::VirtualIP::Allocate
+    ::Crowbar::Client::Command::VirtualIP::Allocate.new(
+      stdin,
+      stdout,
+      stderr
+    )
+  end
+
+  it "should always return a request class" do
+    expect(subject.request).to(
+      be_a(
+        ::Crowbar::Client::Request::VirtualIP::Allocate
+      )
+    )
   end
 
   pending
-
 end

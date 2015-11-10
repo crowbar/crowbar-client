@@ -20,9 +20,20 @@ describe "Crowbar::Client::Command::Batch::Build" do
   include_context "command_context"
 
   subject do
-    ::Crowbar::Client::Command::Batch::Build
+    ::Crowbar::Client::Command::Batch::Build.new(
+      stdin,
+      stdout,
+      stderr
+    )
+  end
+
+  it "should always return a request class" do
+    expect(subject.request).to(
+      be_a(
+        ::Crowbar::Client::Request::Batch::Build
+      )
+    )
   end
 
   pending
-
 end

@@ -20,9 +20,20 @@ describe "Crowbar::Client::Command::Proposal::Show" do
   include_context "command_context"
 
   subject do
-    ::Crowbar::Client::Command::Proposal::Show
+    ::Crowbar::Client::Command::Proposal::Show.new(
+      stdin,
+      stdout,
+      stderr
+    )
+  end
+
+  it "should always return a request class" do
+    expect(subject.request).to(
+      be_a(
+        ::Crowbar::Client::Request::Proposal::Show
+      )
+    )
   end
 
   pending
-
 end

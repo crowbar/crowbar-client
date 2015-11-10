@@ -20,9 +20,43 @@ describe "Crowbar::Client::Command::Proposal::Edit" do
   include_context "command_context"
 
   subject do
-    ::Crowbar::Client::Command::Proposal::Edit
+    ::Crowbar::Client::Command::Proposal::Edit.new(
+      stdin,
+      stdout,
+      stderr
+    )
+  end
+
+  it "should always return a request class" do
+    subject.args.merge!(
+      barclamp: "testing",
+      proposal: "default"
+    )
+
+    subject.options.merge!(
+      merge: true,
+      data: "{}"
+    )
+
+    stub_request(:get, "http://crowbar/crowbar/testing/1.0/proposals/default")
+      .with(
+        headers: {
+          "Accept" => "application/json",
+          "Content-Type" => "application/json"
+        }
+      )
+      .to_return(
+        status: 200,
+        body: "{}",
+        headers: {}
+      )
+
+    expect(subject.request).to(
+      be_a(
+        ::Crowbar::Client::Request::Proposal::Edit
+      )
+    )
   end
 
   pending
-
 end

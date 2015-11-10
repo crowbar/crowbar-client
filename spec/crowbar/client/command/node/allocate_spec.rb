@@ -20,9 +20,20 @@ describe "Crowbar::Client::Command::Node::Allocate" do
   include_context "command_context"
 
   subject do
-    ::Crowbar::Client::Command::Node::Allocate
+    ::Crowbar::Client::Command::Node::Allocate.new(
+      stdin,
+      stdout,
+      stderr
+    )
+  end
+
+  it "should always return a request class" do
+    expect(subject.request).to(
+      be_a(
+        ::Crowbar::Client::Request::Node::Action
+      )
+    )
   end
 
   pending
-
 end

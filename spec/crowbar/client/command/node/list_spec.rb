@@ -20,9 +20,20 @@ describe "Crowbar::Client::Command::Node::List" do
   include_context "command_context"
 
   subject do
-    ::Crowbar::Client::Command::Node::List
+    ::Crowbar::Client::Command::Node::List.new(
+      stdin,
+      stdout,
+      stderr
+    )
+  end
+
+  it "should always return a request class" do
+    expect(subject.request).to(
+      be_a(
+        ::Crowbar::Client::Request::Node::List
+      )
+    )
   end
 
   pending
-
 end

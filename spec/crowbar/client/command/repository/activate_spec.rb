@@ -20,9 +20,20 @@ describe "Crowbar::Client::Command::Repository::Activate" do
   include_context "command_context"
 
   subject do
-    ::Crowbar::Client::Command::Repository::Activate
+    ::Crowbar::Client::Command::Repository::Activate.new(
+      stdin,
+      stdout,
+      stderr
+    )
+  end
+
+  it "should always return a request class" do
+    expect(subject.request).to(
+      be_a(
+        ::Crowbar::Client::Request::Repository::Activate
+      )
+    )
   end
 
   pending
-
 end

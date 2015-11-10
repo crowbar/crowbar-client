@@ -15,6 +15,14 @@
 #
 
 shared_context "command_context" do
+  before(:each) do
+    Crowbar::Client::Config.configure(
+      Crowbar::Client::Config.defaults.merge(
+        server: "http://crowbar:80"
+      )
+    )
+  end
+
   let!(:stdin) do
     StringIO.new
   end
