@@ -22,6 +22,8 @@ module Crowbar
     module Command
       module Proposal
         class Edit < Base
+          include Mixin::Barclamp
+
           def request
             @request ||= Request::Proposal::Edit.new(
               args.easy_merge(

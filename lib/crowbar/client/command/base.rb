@@ -49,18 +49,6 @@ module Crowbar
         def err(message)
           raise SimpleCatchableError, message
         end
-
-        def validate_barclamp!(barclamp)
-          return if available_barclamps.include? barclamp
-          raise UnavailableBarclampError, barclamp
-        end
-
-        def available_barclamps
-          @available_barclamps ||= Request::Barclamp::List
-            .new
-            .process
-            .keys
-        end
       end
     end
   end

@@ -19,6 +19,9 @@ module Crowbar
     module Command
       module Repository
         class List < Base
+          include Mixin::Format
+          include Mixin::Filter
+
           def request
             @request ||= Request::Repository::List.new(
               args
@@ -30,10 +33,10 @@ module Crowbar
               case request.code
               when 200
                 formatter = Formatter::Hash.new(
-                  format: options[:format],
+                  format: provide_format,
                   headings: ["Platform", "Repo"],
                   values: Filter::Hash.new(
-                    filter: options[:filter],
+                    filter: provide_filter,
                     values: content_from(request)
                   ).result
                 )

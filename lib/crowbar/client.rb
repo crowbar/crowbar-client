@@ -73,6 +73,9 @@ module Crowbar
     autoload :Formatter,
       File.expand_path("../client/formatter", __FILE__)
 
+    autoload :Mixin,
+      File.expand_path("../client/mixin", __FILE__)
+
     autoload :Request,
       File.expand_path("../client/request", __FILE__)
 

@@ -19,6 +19,11 @@ module Crowbar
     module Command
       module Proposal
         class Show < Base
+          include Mixin::Barclamp
+
+          include Mixin::Format
+          include Mixin::Filter
+
           def request
             @request ||= Request::Proposal::Show.new(
               args
@@ -32,11 +37,11 @@ module Crowbar
               case request.code
               when 200
                 formatter = Formatter::Nested.new(
-                  format: options[:format],
-                  path: options[:filter],
+                  format: provide_format,
+                  path: provide_filter,
                   headings: ["Key", "Value"],
                   values: Filter::Subset.new(
-                    filter: options[:filter],
+                    filter: provide_filter,
                     values: content_from(request)
                   ).result
                 )

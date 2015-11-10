@@ -14,32 +14,17 @@
 # limitations under the License.
 #
 
+require "active_support/concern"
+
 module Crowbar
   module Client
-    module Command
-      module Proposal
-        class Delete < Base
-          include Mixin::Barclamp
+    module Mixin
+      module Filter
+        extend ActiveSupport::Concern
 
-          def request
-            @request ||= Request::Proposal::Delete.new(
-              args
-            )
-          end
-
-          def execute
-            validate_barclamp! args.barclamp
-
-            request.process do |request|
-              case request.code
-              when 200
-                say "Successfully deleted #{args.proposal} proposal"
-              when 404
-                say "Proposal does not exist"
-              else
-                err request.parsed_response["error"]
-              end
-            end
+        included do
+          def provide_filter
+            options[:filter]
           end
         end
       end
