@@ -27,7 +27,7 @@ module Crowbar
         LONGDESC
 
         def allocate(proposal, node, network, range, suggestion = nil)
-          Command::VirtualIp::Allocate.new(
+          Command::HostIP::Allocate.new(
             *command_params(
               proposal: proposal,
               node: node,
@@ -49,7 +49,7 @@ module Crowbar
         LONGDESC
 
         def deallocate(proposal, node, network)
-          Command::VirtualIp::Allocate.new(
+          Command::HostIP::Allocate.new(
             *command_params(
               proposal: proposal,
               node: node,
