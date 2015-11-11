@@ -18,7 +18,8 @@ module Crowbar
   module Client
     module App
       class Repository < Base
-        desc "list", "List all available repositories"
+        desc "list",
+          "List all available repositories"
 
         long_desc <<-LONGDESC
           `list` will print out a list of the available repositories
@@ -27,7 +28,8 @@ module Crowbar
           can filter the list by any search criteria.
 
           With --format <format> option you can choose an output format
-          with the available options table, json or plain.
+          with the available options table, json or plain. You can also
+          use the shortcut options --table, --json or --plain.
 
           With --filter <filter> option you can limit the result of
           printed out elements. You can use any substring that is part
@@ -39,6 +41,24 @@ module Crowbar
           default: "table",
           banner: "<format>",
           desc: "Format of the output, valid formats are table, json or plain"
+
+        class_option :table,
+          type: :boolean,
+          default: false,
+          aliases: [],
+          desc: "Format output as table, a shortcut for --format table option"
+
+        class_option :json,
+          type: :boolean,
+          default: false,
+          aliases: [],
+          desc: "Format output as table, a shortcut for --format json option"
+
+        class_option :plain,
+          type: :boolean,
+          default: false,
+          aliases: [],
+          desc: "Format output as table, a shortcut for --format plain option"
 
         method_option :filter,
           type: :string,

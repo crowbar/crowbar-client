@@ -19,6 +19,8 @@ module Crowbar
     module Command
       module Proposal
         class Commit < Base
+          include Mixin::Barclamp
+
           def request
             @request ||= Request::Proposal::Commit.new(
               args

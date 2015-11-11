@@ -15,6 +15,14 @@
 #
 
 shared_examples "a request class" do
+  before(:each) do
+    Crowbar::Client::Config.configure(
+      Crowbar::Client::Config.defaults.merge(
+        server: "http://crowbar:80"
+      )
+    )
+  end
+
   it "provides a method value" do
     expect(subject.method).to(
       eql(method)

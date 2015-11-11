@@ -19,6 +19,11 @@ module Crowbar
     module Command
       module Proposal
         class List < Base
+          include Mixin::Barclamp
+
+          include Mixin::Format
+          include Mixin::Filter
+
           def request
             @request ||= Request::Proposal::List.new(
               args
@@ -32,10 +37,10 @@ module Crowbar
               case request.code
               when 200
                 formatter = Formatter::Array.new(
-                  format: options[:format],
+                  format: provide_format,
                   headings: ["Proposal"],
                   values: Filter::Array.new(
-                    filter: options[:filter],
+                    filter: provide_filter,
                     values: content_from(request)
                   ).result
                 )

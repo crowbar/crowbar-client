@@ -15,8 +15,7 @@
 #
 
 require "thor"
-require "inifile"
-require "hashie"
+require "easy_diff"
 
 module Crowbar
   module Client
@@ -25,13 +24,17 @@ module Crowbar
         def initialize(args = [], local_options = {}, config = {})
           super
 
-          config = config_parse(
-            options[:config],
-            options[:alias]
-          )
-
-          Request::Party.instance.configure(
-            options.merge(config)
+          Config.configure(
+            options.slice(
+              :config,
+              :alias,
+              :username,
+              :password,
+              :server,
+              :timeout,
+              :anonymous,
+              :debug
+            )
           )
         end
 
