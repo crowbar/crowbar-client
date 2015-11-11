@@ -29,7 +29,7 @@ module Crowbar
       autoload :Entry,
         File.expand_path("../app/entry", __FILE__)
 
-      autoload :HostIp,
+      autoload :HostIP,
         File.expand_path("../app/host_ip", __FILE__)
 
       autoload :Interface,
@@ -53,7 +53,7 @@ module Crowbar
       autoload :Role,
         File.expand_path("../app/role", __FILE__)
 
-      autoload :VirtualIp,
+      autoload :VirtualIP,
         File.expand_path("../app/virtual_ip", __FILE__)
     end
   end
