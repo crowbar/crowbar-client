@@ -25,12 +25,12 @@ module Crowbar
         included do
           def provide_format
             case
-            when table?
-              :table
             when json?
               :json
             when plain?
               :plain
+            when table?
+              :table
             else
               :table
             end
@@ -38,16 +38,16 @@ module Crowbar
 
           protected
 
-          def table?
-            options[:format] == "table" || options[:table]
-          end
-
           def json?
             options[:format] == "json" || options[:json]
           end
 
           def plain?
             options[:format] == "plain" || options[:plain]
+          end
+
+          def table?
+            options[:format] == "table" || options[:table]
           end
         end
       end
