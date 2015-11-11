@@ -17,11 +17,11 @@
 module Crowbar
   module Client
     class Version
-      MAJOR = 0
+      MAJOR = 1
       MINOR = 0
-      PATCH = 1
+      PATCH = 0
 
-      PRE = "alpha1"
+      PRE = nil
 
       class << self
         def to_s
