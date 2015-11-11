@@ -67,6 +67,9 @@ module Crowbar
     autoload :Command,
       File.expand_path("../client/command", __FILE__)
 
+    autoload :Config,
+      File.expand_path("../client/config", __FILE__)
+
     autoload :Filter,
       File.expand_path("../client/filter", __FILE__)
 

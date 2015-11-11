@@ -15,35 +15,37 @@
 #
 
 require "httparty"
-require "singleton"
 
 module Crowbar
   module Client
     module Request
       class Party
-        include Singleton
         include HTTParty
 
         follow_redirects true
         format :json
 
-        def configure(options)
+        def initialize
           self.class.base_uri(
-            options[:server]
+            config.server
           )
 
           self.class.default_timeout(
-            options[:timeout].to_i
+            config.timeout
           )
 
           self.class.digest_auth(
-            options[:username],
-            options[:password]
-          ) if should_auth_with(options)
+            config.username,
+            config.password
+          ) if should_auth
 
           self.class.debug_output(
             $stderr
-          ) if should_debug_with(options)
+          ) if should_debug
+        end
+
+        def config
+          @config ||= Config
         end
 
         def method_missing(method, *arguments, &block)
@@ -56,7 +58,7 @@ module Crowbar
 
         def respond_to?(method_sym, include_private = false)
           if self.class.respond_to?(method, true)
-            self.class.send(method, *arguments, &block)
+            true
           else
             super
           end
@@ -64,12 +66,12 @@ module Crowbar
 
         protected
 
-        def should_auth_with(options)
-          !options[:anonymous]
+        def should_auth
+          !config.anonymous
         end
 
-        def should_debug_with(options)
-          options[:debug]
+        def should_debug
+          config.debug
         end
       end
     end

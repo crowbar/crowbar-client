@@ -28,7 +28,7 @@ module Crowbar
         end
 
         def request
-          @request ||= Party.instance
+          @request ||= Party.new
         end
 
         def content
