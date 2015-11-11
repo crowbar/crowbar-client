@@ -14,20 +14,11 @@
 # limitations under the License.
 #
 
-ENV["BUNDLE_GEMFILE"] ||= File.expand_path("../../../Gemfile", __FILE__)
+ENV["CURRENT_GEMFILE"] ||= File.expand_path("../../../Gemfile", __FILE__)
 
-if File.exist? ENV["BUNDLE_GEMFILE"]
+if File.exist? ENV["CURRENT_GEMFILE"]
   require "bundler"
   Bundler.setup(:default)
-else
-  gem "activesupport", version: ">= 3.0.0"
-  gem "thor", version: ">= 0.19.1"
-
-  gem "inifile", version: ">= 3.0.0"
-  gem "httparty", version: ">= 0.13.3"
-  gem "terminal-table", version: ">= 1.5.2"
-  gem "easy_diff", version: ">= 0.0.5"
-  gem "hashie", version: ">= 3.4.1"
 end
 
 require "active_support/all"
