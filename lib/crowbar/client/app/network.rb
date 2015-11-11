@@ -20,11 +20,11 @@ module Crowbar
       class Network < Base
         desc "virtualip [COMMANDS]",
           "Actions for virtual IP addresses, call without params for help"
-        subcommand "virtualip", Crowbar::Client::App::VirtualIp
+        subcommand "virtualip", Crowbar::Client::App::VirtualIP
 
         desc "hostip [COMMANDS]",
           "Actions for host IP addresses, call without params for help"
-        subcommand "hostip", Crowbar::Client::App::HostIp
+        subcommand "hostip", Crowbar::Client::App::HostIP
 
         desc "interface [COMMANDS]",
           "Actions for network interfaces, call without params for help"

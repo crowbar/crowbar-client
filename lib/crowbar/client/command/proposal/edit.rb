@@ -65,12 +65,12 @@ module Crowbar
 
           def from_data
             json = begin
-              JSON.load options.data
+              JSON.load options[:data]
             rescue
               err "Invalid json data"
             end
 
-            if options.merge
+            if options[:merge]
               proposal_preload.easy_merge(
                 json
               )
@@ -81,12 +81,12 @@ module Crowbar
 
           def from_file
             json = begin
-              JSON.load options.file
+              JSON.load options[:file]
             rescue
               err "Invalid json file"
             end
 
-            if options.merge
+            if options[:merge]
               proposal_preload.easy_merge(
                 json
               )
@@ -114,9 +114,9 @@ module Crowbar
 
           def payload_content
             case
-            when options.data
+            when options[:data]
               from_data
-            when options.file
+            when options[:file]
               from_file
             else
               from_editor

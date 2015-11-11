@@ -16,10 +16,10 @@
 
 require_relative "../../../../spec_helper"
 
-describe "Crowbar::Client::Request::HostIp::Deallocate" do
+describe "Crowbar::Client::Request::HostIP::Deallocate" do
   it_behaves_like "a request class" do
     subject do
-      ::Crowbar::Client::Request::HostIp::Deallocate.new(
+      ::Crowbar::Client::Request::HostIP::Deallocate.new(
         attrs
       )
     end

@@ -17,10 +17,10 @@
 module Crowbar
   module Client
     module Command
-      module HostIp
+      module HostIP
         class Deallocate < Base
           def request
-            @request ||= Request::HostIp::Deallocate.new(
+            @request ||= Request::HostIP::Deallocate.new(
               args
             )
           end

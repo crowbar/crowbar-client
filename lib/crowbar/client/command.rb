@@ -26,7 +26,7 @@ module Crowbar
       autoload :Batch,
         File.expand_path("../command/batch", __FILE__)
 
-      autoload :HostIp,
+      autoload :HostIP,
         File.expand_path("../command/host_ip", __FILE__)
 
       autoload :Interface,
@@ -47,7 +47,7 @@ module Crowbar
       autoload :Role,
         File.expand_path("../command/role", __FILE__)
 
-      autoload :VirtualIp,
+      autoload :VirtualIP,
         File.expand_path("../command/virtual_ip", __FILE__)
     end
   end

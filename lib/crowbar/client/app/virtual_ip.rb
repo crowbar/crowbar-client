@@ -17,7 +17,7 @@
 module Crowbar
   module Client
     module App
-      class VirtualIp < Base
+      class VirtualIP < Base
         desc "allocate PROPOSAL SERVICE NETWORK RANGE [SUGGESTION]",
           "Allocate a virtual IP address"
 
@@ -27,7 +27,7 @@ module Crowbar
         LONGDESC
 
         def allocate(proposal, service, network, range, suggestion = nil)
-          Command::VirtualIp::Allocate.new(
+          Command::VirtualIP::Allocate.new(
             *command_params(
               proposal: proposal,
               service: service,
@@ -49,7 +49,7 @@ module Crowbar
         LONGDESC
 
         def deallocate(proposal, service, network)
-          Command::VirtualIp::Allocate.new(
+          Command::VirtualIP::Allocate.new(
             *command_params(
               proposal: proposal,
               service: service,
