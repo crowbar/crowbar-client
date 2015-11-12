@@ -42,7 +42,7 @@ Gem::Specification.new do |s|
 
   s.test_files = Dir.glob("spec/**/*")
 
-  s.executables = ["crowbar"]
+  s.executables = ["crowbarctl"]
   s.require_paths = ["lib"]
 
   s.required_ruby_version = ">= 1.9.3"
