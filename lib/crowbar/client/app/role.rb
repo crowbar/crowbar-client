@@ -42,19 +42,19 @@ module Crowbar
           banner: "<format>",
           desc: "Format of the output, valid formats are table, json or plain"
 
-        class_option :table,
+        method_option :table,
           type: :boolean,
           default: false,
           aliases: [],
           desc: "Format output as table, a shortcut for --format table option"
 
-        class_option :json,
+        method_option :json,
           type: :boolean,
           default: false,
           aliases: [],
           desc: "Format output as table, a shortcut for --format json option"
 
-        class_option :plain,
+        method_option :plain,
           type: :boolean,
           default: false,
           aliases: [],
@@ -100,19 +100,19 @@ module Crowbar
           banner: "<format>",
           desc: "Format of the output, valid formats are table, json or plain"
 
-        class_option :table,
+        method_option :table,
           type: :boolean,
           default: false,
           aliases: [],
           desc: "Format output as table, a shortcut for --format table option"
 
-        class_option :json,
+        method_option :json,
           type: :boolean,
           default: false,
           aliases: [],
           desc: "Format output as table, a shortcut for --format json option"
 
-        class_option :plain,
+        method_option :plain,
           type: :boolean,
           default: false,
           aliases: [],
