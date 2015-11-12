@@ -26,28 +26,28 @@ module Crowbar
           def provide_format
             case
             when json?
-              :json
+              options[:format] = :json
             when plain?
-              :plain
+              options[:format] = :plain
             when table?
-              :table
-            else
-              :table
+              options[:format] = :table
             end
+
+            options[:format].to_sym
           end
 
           protected
 
           def json?
-            options[:format] == "json" || options[:json]
+            options[:json]
           end
 
           def plain?
-            options[:format] == "plain" || options[:plain]
+            options[:plain]
           end
 
           def table?
-            options[:format] == "table" || options[:table]
+            options[:table]
           end
         end
       end
