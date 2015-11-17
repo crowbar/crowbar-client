@@ -34,6 +34,10 @@ module Crowbar
           With --filter <filter> option you can limit the result of
           printed out elements. You can use any substring that is part
           of the found elements.
+
+          With --no-ready switch you can hide all nodes that already
+          transitioned to the ready state, per default the listing will
+          display all nodes.
         LONGDESC
 
         method_option :format,
@@ -65,6 +69,12 @@ module Crowbar
           default: nil,
           banner: "<filter>",
           desc: "Filter by criteria, display only data that contains filter"
+
+        method_option :ready,
+          type: :boolean,
+          default: true,
+          aliases: [],
+          desc: "Show or hide the nodes that already transitioned to ready"
 
         def status
           Command::Node::Status.new(

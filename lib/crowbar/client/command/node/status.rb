@@ -57,6 +57,8 @@ module Crowbar
           def content_from(request)
             [].tap do |row|
               request.parsed_response["nodes"].each do |name, value|
+                next if value["status"] == "Ready" && !options["ready"]
+
                 row.push(
                   name: name,
                   status: value["status"]
