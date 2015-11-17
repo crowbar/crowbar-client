@@ -28,6 +28,9 @@ module Crowbar
     class SimpleCatchableError < StandardError
     end
 
+    class BadOptionsError < SimpleCatchableError
+    end
+
     class BadFormatterError < SimpleCatchableError
     end
 
