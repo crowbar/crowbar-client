@@ -27,7 +27,8 @@ module Crowbar
           formats and you can filter the list by any search criteria.
 
           With --format <format> option you can choose an output format
-          with the available options table, json or plain.
+          with the available options table, json or plain. You can also
+          use the shortcut options --table, --json or --plain.
 
           With --filter <filter> option you can limit the result of
           printed out elements. You can use any substring that is part
