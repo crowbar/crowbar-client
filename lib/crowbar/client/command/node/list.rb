@@ -34,7 +34,7 @@ module Crowbar
               when 200
                 formatter = Formatter::Hash.new(
                   format: provide_format,
-                  headings: ["Name", "Alias"],
+                  headings: headings,
                   values: Filter::Hash.new(
                     filter: provide_filter,
                     values: content_from(request)
@@ -54,15 +54,31 @@ module Crowbar
 
           protected
 
+          def headings
+            [].tap do |values|
+              values.push("Name") if options["names"]
+              values.push("Alias") if options["aliases"]
+            end
+          end
+
           def content_from(request)
             [].tap do |row|
               request.parsed_response["nodes"].each do |child|
+                values = {}
+                values[:name] = child["name"] if options["names"]
+                values[:alias] = child["alias"] if options["aliases"]
+
                 row.push(
-                  name: child["name"],
-                  alias: child["alias"]
+                  values
                 )
               end
             end
+          end
+
+          def checks
+            msg = "Please provide only names or aliases switch"
+            raise BadOptionsError,
+              msg unless options["names"] || options["aliases"]
           end
         end
       end
