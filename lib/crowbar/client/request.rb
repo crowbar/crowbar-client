@@ -50,6 +50,9 @@ module Crowbar
       autoload :Role,
         File.expand_path("../request/role", __FILE__)
 
+      autoload :Server,
+        File.expand_path("../request/server", __FILE__)
+
       autoload :VirtualIP,
         File.expand_path("../request/virtual_ip", __FILE__)
     end

@@ -47,6 +47,9 @@ module Crowbar
       autoload :Role,
         File.expand_path("../command/role", __FILE__)
 
+      autoload :Server,
+        File.expand_path("../command/server", __FILE__)
+
       autoload :VirtualIP,
         File.expand_path("../command/virtual_ip", __FILE__)
     end

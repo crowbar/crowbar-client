@@ -115,6 +115,10 @@ module Crowbar
         desc "role [COMMANDS]",
           "Role specific commands, call without params for help"
         subcommand "role", Crowbar::Client::App::Role
+
+        desc "server [COMMANDS]",
+          "Server specific commands, call without params for help"
+        subcommand "server", Crowbar::Client::App::Server
       end
     end
   end
