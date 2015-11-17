@@ -34,7 +34,7 @@ module Crowbar
               when 200
                 formatter = Formatter::Hash.new(
                   format: provide_format,
-                  headings: ["Name", "Alias"],
+                  headings: ["Name", "Status"],
                   values: Filter::Hash.new(
                     filter: provide_filter,
                     values: content_from(request)

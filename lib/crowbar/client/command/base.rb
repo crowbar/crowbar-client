@@ -38,9 +38,14 @@ module Crowbar
           self.args = Hashie::Mash.new(
             args
           )
+
+          checks
         end
 
         protected
+
+        def checks
+        end
 
         def say(message)
           stdout.puts message

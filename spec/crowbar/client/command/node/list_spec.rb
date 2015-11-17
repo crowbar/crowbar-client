@@ -23,7 +23,9 @@ describe "Crowbar::Client::Command::Node::List" do
     ::Crowbar::Client::Command::Node::List.new(
       stdin,
       stdout,
-      stderr
+      stderr,
+      lists: true,
+      aliases: true
     )
   end
 
