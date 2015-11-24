@@ -38,7 +38,6 @@ module Crowbar
 
       def defaults
         @defaults ||= Hashie::Mash.new(
-          config: nil,
           alias: default_alias,
           username: default_username,
           password: default_password,
@@ -145,21 +144,22 @@ module Crowbar
       end
 
       def finder
-        if options.config.nil?
-          paths.detect do |temp|
-            File.exist? temp
-          end
-        else
-          options.config
+        paths.detect do |temp|
+          File.exist? temp
         end
       end
 
       def paths
         [
-          options.config,
-          "#{ENV["HOME"]}/.crowbarrc",
-          "/etc/crowbarrc"
-        ].compact
+          File.join(
+            ENV["HOME"],
+            ".crowbarrc"
+          ),
+          File.join(
+            "/etc",
+            "crowbarrc"
+          )
+        ]
       end
 
       class << self

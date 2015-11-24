@@ -26,7 +26,6 @@ module Crowbar
 
           Config.configure(
             options.slice(
-              :config,
               :alias,
               :username,
               :password,

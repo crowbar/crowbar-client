@@ -23,12 +23,6 @@ module Crowbar
           "-v"
         ] => :version
 
-        class_option :config,
-          type: :string,
-          default: Config.defaults[:config],
-          aliases: ["-c"],
-          desc: "Path to a configuration file"
-
         class_option :alias,
           type: :string,
           default: Config.defaults[:alias],
