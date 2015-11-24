@@ -39,13 +39,13 @@ module Crowbar
       def defaults
         @defaults ||= Hashie::Mash.new(
           config: nil,
-          alias: "default",
-          username: "crowbar",
-          password: "crowbar",
-          server: "http://127.0.0.1:80",
-          timeout: 60,
-          anonymous: false,
-          debug: false
+          alias: default_alias,
+          username: default_username,
+          password: default_password,
+          server: default_server,
+          timeout: default_timeout,
+          anonymous: default_anonymous,
+          debug: default_debug
         )
       end
 
@@ -62,6 +62,50 @@ module Crowbar
       end
 
       protected
+
+      def default_alias
+        ENV["CROWBAR_ALIAS"] || "default"
+      end
+
+      def default_username
+        ENV["CROWBAR_USERNAME"] || "crowbar"
+      end
+
+      def default_password
+        ENV["CROWBAR_PASSWORD"] || "crowbar"
+      end
+
+      def default_server
+        ENV["CROWBAR_SERVER"] || "http://127.0.0.1:80"
+      end
+
+      def default_timeout
+        if ENV["CROWBAR_TIMEOUT"].present?
+          ENV["CROWBAR_TIMEOUT"].to_i
+        else
+          60
+        end
+      end
+
+      def default_anonymous
+        if ENV["CROWBAR_ANONYMOUS"].present?
+          [
+            true, 1, "1", "t", "T", "true", "TRUE"
+          ].include? ENV["CROWBAR_ANONYMOUS"]
+        else
+          false
+        end
+      end
+
+      def default_debug
+        if ENV["CROWBAR_DEBUG"].present?
+          [
+            true, 1, "1", "t", "T", "true", "TRUE"
+          ].include? ENV["CROWBAR_ANONYMOUS"]
+        else
+          false
+        end
+      end
 
       def merge
         result = {}.tap do |overwrite|
