@@ -25,49 +25,49 @@ module Crowbar
 
         class_option :config,
           type: :string,
-          default: nil,
+          default: Config.defaults[:config],
           aliases: ["-c"],
           desc: "Path to a configuration file"
 
         class_option :alias,
           type: :string,
-          default: "default",
+          default: Config.defaults[:alias],
           aliases: ["-a"],
           desc: "Alias for a config section"
 
         class_option :username,
           type: :string,
-          default: "crowbar",
+          default: Config.defaults[:username],
           aliases: ["-U"],
           desc: "Specify username for connection"
 
         class_option :password,
           type: :string,
-          default: "crowbar",
+          default: Config.defaults[:password],
           aliases: ["-P"],
           desc: "Specify password for connection"
 
         class_option :server,
           type: :string,
-          default: "http://127.0.0.1:80",
+          default: Config.defaults[:server],
           aliases: ["-s"],
           desc: "Specify server for connection"
 
         class_option :timeout,
           type: :numeric,
-          default: 60,
+          default: Config.defaults[:timeout],
           aliases: ["-t"],
           desc: "Specify timeout for connection"
 
         class_option :anonymous,
           type: :boolean,
-          default: false,
+          default: Config.defaults[:anonymous],
           aliases: ["-a"],
           desc: "Skip API user authentication"
 
         class_option :debug,
           type: :boolean,
-          default: false,
+          default: Config.defaults[:debug],
           aliases: ["-d"],
           desc: "Output more debug information"
 
