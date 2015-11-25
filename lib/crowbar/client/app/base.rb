@@ -26,7 +26,6 @@ module Crowbar
 
           Config.configure(
             options.slice(
-              :config,
               :alias,
               :username,
               :password,
@@ -46,39 +45,6 @@ module Crowbar
           def err(message, exit_code = nil)
             $stderr.puts message
             exit(exit_code) unless exit_code.nil?
-          end
-
-          def config_parse(path, section)
-            ini = Hashie::Mash.new(
-              IniFile.load(
-                config_detect(path)
-              ).to_h
-            )
-
-            if ini[section]
-              ini[section]
-            else
-              Hashie::Mash.new
-            end
-          rescue
-            Hashie::Mash.new
-          end
-
-          def config_detect(path)
-            if path.nil?
-              config_paths.detect do |temp|
-                File.exist? temp
-              end
-            else
-              path
-            end
-          end
-
-          def config_paths
-            [
-              "#{ENV["HOME"]}/.crowbarrc",
-              "/etc/crowbarrc"
-            ]
           end
 
           def command_params(args = {})
