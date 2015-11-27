@@ -29,6 +29,9 @@ module Crowbar
       autoload :HostIP,
         File.expand_path("../request/host_ip", __FILE__)
 
+      autoload :Installer,
+        File.expand_path("../request/installer", __FILE__)
+
       autoload :Interface,
         File.expand_path("../request/interface", __FILE__)
 
