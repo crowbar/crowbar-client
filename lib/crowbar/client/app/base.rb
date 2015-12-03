@@ -38,12 +38,22 @@ module Crowbar
         end
 
         no_commands do
+          include Mixin::Format
+
           def say(message)
             $stdout.puts message
           end
 
           def err(message, exit_code = nil)
-            $stderr.puts message
+            case provide_format
+            when :json
+              $stderr.puts JSON.pretty_generate(
+                error: message
+              )
+            else
+              $stderr.puts message
+            end
+
             exit(exit_code) unless exit_code.nil?
           end
 
