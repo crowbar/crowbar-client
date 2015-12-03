@@ -113,6 +113,10 @@ module Crowbar
         desc "server [COMMANDS]",
           "Server specific commands, call without params for help"
         subcommand "server", Crowbar::Client::App::Server
+
+        desc "installer [COMMANDS]",
+          "Installer specific commands, call without params for help"
+        subcommand "installer", Crowbar::Client::App::Installer
       end
     end
   end
