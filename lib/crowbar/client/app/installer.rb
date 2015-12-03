@@ -78,7 +78,17 @@ module Crowbar
 
         long_desc <<-LONGDESC
           `start` will trigger the installation of the Administration Server.
+
+          With --force you can enforce a reinstallation if the installation
+          has already been finished. Be careful with that option as you will
+          destroy an already existing installation.
         LONGDESC
+
+        method_option :force,
+          type: :boolean,
+          default: false,
+          aliases: [],
+          desc: "Force Administration Server installation"
 
         def start
           Command::Installer::Start.new(

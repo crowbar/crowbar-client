@@ -26,11 +26,15 @@ describe "Crowbar::Client::Request::Installer::Start" do
     end
 
     let!(:attrs) do
-      {}
+      {
+        force: false
+      }
     end
 
     let!(:params) do
-      {}
+      {
+        force: false
+      }
     end
 
     let!(:method) do

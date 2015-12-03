@@ -21,7 +21,9 @@ module Crowbar
         class Start < Base
           def request
             @request ||= Request::Installer::Start.new(
-              args
+              args.easy_merge(
+                force: options.force
+              )
             )
           end
 
@@ -29,14 +31,13 @@ module Crowbar
             request.process do |request|
               case request.code
               when 200
-                say "Triggered Administration Server installation"
+                say "Triggered installation process"
               when 226
                 say "Crowbar already installing"
               when 410
-                say "Installation is already done. If you want to reinstall to get a fresh \
-setup, please remove the following file: /var/lib/crowbar/install/crowbar-installed-ok"
+                say "Installation is already done"
               when 501
-                err "Installation on this platform is not supported"
+                err "Platform is not supported"
               else
                 err request.parsed_response["error"]
               end

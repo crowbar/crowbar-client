@@ -14,11 +14,19 @@
 # limitations under the License.
 #
 
+require "easy_diff"
+
 module Crowbar
   module Client
     module Request
       module Installer
         class Start < Base
+          def content
+            super.easy_merge!(
+              force: attrs.force
+            )
+          end
+
           def method
             :post
           end

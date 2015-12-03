@@ -23,7 +23,8 @@ describe "Crowbar::Client::Command::Installer::Start" do
     ::Crowbar::Client::Command::Installer::Start.new(
       stdin,
       stdout,
-      stderr
+      stderr,
+      force: false
     )
   end
 
