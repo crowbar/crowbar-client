@@ -34,8 +34,8 @@ module Crowbar
               network: network
             )
           ).execute
-        rescue SimpleCatchableError => e
-          err e.message, 1
+        rescue => e
+          catch_errors(e)
         end
 
         desc "disable PROPOSAL NODE NETWORK",
@@ -54,8 +54,8 @@ module Crowbar
               network: network
             )
           ).execute
-        rescue SimpleCatchableError => e
-          err e.message, 1
+        rescue => e
+          catch_errors(e)
         end
       end
     end

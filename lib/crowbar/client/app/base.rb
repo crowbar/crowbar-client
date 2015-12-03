@@ -56,6 +56,19 @@ module Crowbar
               args
             ]
           end
+
+          def catch_errors(error)
+            case error
+            when SimpleCatchableError
+              err error.message, 1
+            when Errno::ECONNREFUSED
+              err "Connection to server refused", 1
+            when SocketError
+              err "Unknown server to connect to", 1
+            else
+              raise error
+            end
+          end
         end
       end
     end

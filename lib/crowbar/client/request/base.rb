@@ -59,6 +59,18 @@ module Crowbar
             params
           )
 
+          case result.code
+          when 500
+            raise InternalServerError,
+              "An internal error occured"
+          when 401
+            raise NotAuthorizedError,
+              "User is not authorized"
+          when 403
+            raise NotAuthorizedError,
+              "User access is forbidden"
+          end
+
           if block_given?
             yield result
           else

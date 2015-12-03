@@ -70,8 +70,8 @@ module Crowbar
           Command::Repository::List.new(
             *command_params
           ).execute
-        rescue SimpleCatchableError => e
-          err e.message, 1
+        rescue => e
+          catch_errors(e)
         end
 
         desc "activate PLATFORM REPO",
@@ -89,8 +89,8 @@ module Crowbar
               repo: repo
             )
           ).execute
-        rescue SimpleCatchableError => e
-          err e.message, 1
+        rescue => e
+          catch_errors(e)
         end
 
         desc "activate-all",
@@ -105,8 +105,8 @@ module Crowbar
           Command::Repository::ActivateAll.new(
             *command_params
           ).execute
-        rescue SimpleCatchableError => e
-          err e.message, 1
+        rescue => e
+          catch_errors(e)
         end
 
         desc "deactivate PLATFORM REPO",
@@ -124,8 +124,8 @@ module Crowbar
               repo: repo
             )
           ).execute
-        rescue SimpleCatchableError => e
-          err e.message, 1
+        rescue => e
+          catch_errors(e)
         end
 
         desc "deactivate-all",
@@ -140,8 +140,8 @@ module Crowbar
           Command::Repository::DeactivateAll.new(
             *command_params
           ).execute
-        rescue SimpleCatchableError => e
-          err e.message, 1
+        rescue => e
+          catch_errors(e)
         end
       end
     end

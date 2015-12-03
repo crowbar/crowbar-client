@@ -80,8 +80,8 @@ module Crowbar
           Command::Node::Status.new(
             *command_params
           ).execute
-        rescue SimpleCatchableError => e
-          err e.message, 1
+        rescue => e
+          catch_errors(e)
         end
 
         desc "list",
@@ -154,8 +154,8 @@ module Crowbar
           Command::Node::List.new(
             *command_params
           ).execute
-        rescue SimpleCatchableError => e
-          err e.message, 1
+        rescue => e
+          catch_errors(e)
         end
 
         desc "show NAME_OR_ALIAS",
@@ -215,8 +215,8 @@ module Crowbar
               name: name
             )
           ).execute
-        rescue SimpleCatchableError => e
-          err e.message, 1
+        rescue => e
+          catch_errors(e)
         end
 
         desc "hardware NAME_OR_ALIAS",
@@ -233,8 +233,8 @@ module Crowbar
               name: name
             )
           ).execute
-        rescue SimpleCatchableError => e
-          err e.message, 1
+        rescue => e
+          catch_errors(e)
         end
 
         desc "identify NAME_OR_ALIAS",
@@ -251,8 +251,8 @@ module Crowbar
               name: name
             )
           ).execute
-        rescue SimpleCatchableError => e
-          err e.message, 1
+        rescue => e
+          catch_errors(e)
         end
 
         desc "delete NAME_OR_ALIAS",
@@ -269,8 +269,8 @@ module Crowbar
               name: name
             )
           ).execute
-        rescue SimpleCatchableError => e
-          err e.message, 1
+        rescue => e
+          catch_errors(e)
         end
 
         desc "reinstall NAME_OR_ALIAS",
@@ -287,8 +287,8 @@ module Crowbar
               name: name
             )
           ).execute
-        rescue SimpleCatchableError => e
-          err e.message, 1
+        rescue => e
+          catch_errors(e)
         end
 
         desc "reset NAME_OR_ALIAS",
@@ -305,8 +305,8 @@ module Crowbar
               name: name
             )
           ).execute
-        rescue SimpleCatchableError => e
-          err e.message, 1
+        rescue => e
+          catch_errors(e)
         end
 
         desc "shutdown NAME_OR_ALIAS",
@@ -323,8 +323,8 @@ module Crowbar
               name: name
             )
           ).execute
-        rescue SimpleCatchableError => e
-          err e.message, 1
+        rescue => e
+          catch_errors(e)
         end
 
         desc "reboot NAME_OR_ALIAS",
@@ -341,8 +341,8 @@ module Crowbar
               name: name
             )
           ).execute
-        rescue SimpleCatchableError => e
-          err e.message, 1
+        rescue => e
+          catch_errors(e)
         end
 
         desc "powercycle NAME_OR_ALIAS",
@@ -359,8 +359,8 @@ module Crowbar
               name: name
             )
           ).execute
-        rescue SimpleCatchableError => e
-          err e.message, 1
+        rescue => e
+          catch_errors(e)
         end
 
         desc "poweroff NAME_OR_ALIAS",
@@ -377,8 +377,8 @@ module Crowbar
               name: name
             )
           ).execute
-        rescue SimpleCatchableError => e
-          err e.message, 1
+        rescue => e
+          catch_errors(e)
         end
 
         desc "poweron NAME_OR_ALIAS",
@@ -395,8 +395,8 @@ module Crowbar
               name: name
             )
           ).execute
-        rescue SimpleCatchableError => e
-          err e.message, 1
+        rescue => e
+          catch_errors(e)
         end
 
         desc "allocate NAME_OR_ALIAS",
@@ -413,8 +413,8 @@ module Crowbar
               name: name
             )
           ).execute
-        rescue SimpleCatchableError => e
-          err e.message, 1
+        rescue => e
+          catch_errors(e)
         end
 
         desc "role NAME_OR_ALIAS ROLE",
@@ -432,8 +432,8 @@ module Crowbar
               value: value
             )
           ).execute
-        rescue SimpleCatchableError => e
-          err e.message, 1
+        rescue => e
+          catch_errors(e)
         end
 
         desc "rename NAME_OR_ALIAS ALIAS",
@@ -451,8 +451,8 @@ module Crowbar
               value: value
             )
           ).execute
-        rescue SimpleCatchableError => e
-          err e.message, 1
+        rescue => e
+          catch_errors(e)
         end
 
         desc "transition NAME_OR_ALIAS STATE",
@@ -470,8 +470,8 @@ module Crowbar
               state: state
             )
           ).execute
-        rescue SimpleCatchableError => e
-          err e.message, 1
+        rescue => e
+          catch_errors(e)
         end
       end
     end
