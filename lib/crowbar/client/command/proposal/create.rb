@@ -91,10 +91,14 @@ module Crowbar
               JSON.load(
                 file
               )
+            rescue Errno::EACCES
+              err "Failed to access file"
             rescue Errno::ENOENT
               err "Failed to read file"
             rescue JSON::ParserError
               err "Failed to parse JSON"
+            rescue
+              err "Failed to process file"
             end
 
             if options[:merge]
