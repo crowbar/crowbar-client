@@ -66,9 +66,11 @@ module Crowbar
 
           def from_data
             json = begin
-              JSON.load options[:data]
-            rescue
-              err "Invalid json data"
+              JSON.load(
+                options[:data]
+              )
+            rescue JSON::ParserError
+              err "Failed to parse JSON"
             end
 
             if options[:merge]
@@ -82,9 +84,17 @@ module Crowbar
 
           def from_file
             json = begin
-              JSON.load options[:file]
-            rescue
-              err "Invalid json file"
+              file = File.read(
+                options[:file]
+              )
+
+              JSON.load(
+                file
+              )
+            rescue Errno::ENOENT
+              err "Failed to read file"
+            rescue JSON::ParserError
+              err "Failed to parse JSON"
             end
 
             if options[:merge]
