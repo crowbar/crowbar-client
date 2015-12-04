@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.2.0](https://github.com/crowbar/crowbar-client/releases/tag/v2.2.0) - 2015-12-03
+
+* BUGFIX
+  * Fixed reading of files for proposal create/edit (@tboerger)
+* ENHANCEMENT
+  * Added proper error handling to file read on proposal (@tboerger)
+  * Added subcommands for installation of admin server (@MaximilianMeister)
+  * Added proper error handling for general connection (@tboerger)
+
 ## [2.1.0](https://github.com/crowbar/crowbar-client/releases/tag/v2.1.0) - 2015-11-25
 
 * BREAKING
