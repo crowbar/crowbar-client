@@ -69,8 +69,8 @@ module Crowbar
           Command::Installer::Status.new(
             *command_params
           ).execute
-        rescue SimpleCatchableError => e
-          err e.message, 1
+        rescue => e
+          catch_errors(e)
         end
 
         desc "start",
@@ -94,8 +94,8 @@ module Crowbar
           Command::Installer::Start.new(
             *command_params
           ).execute
-        rescue SimpleCatchableError => e
-          err e.message, 1
+        rescue => e
+          catch_errors(e)
         end
       end
     end

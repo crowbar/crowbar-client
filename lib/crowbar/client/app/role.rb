@@ -72,8 +72,8 @@ module Crowbar
               barclamp: barclamp
             )
           ).execute
-        rescue SimpleCatchableError => e
-          err e.message, 1
+        rescue => e
+          catch_errors(e)
         end
 
         desc "show BARCLAMP ROLE",
@@ -131,8 +131,8 @@ module Crowbar
               role: role
             )
           ).execute
-        rescue SimpleCatchableError => e
-          err e.message, 1
+        rescue => e
+          catch_errors(e)
         end
       end
     end

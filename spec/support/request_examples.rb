@@ -47,6 +47,10 @@ shared_examples "a request class" do
         "/#{url}",
         body: params.to_json,
         headers: headers
+      ).and_return(
+        double(
+          code: 200
+        )
       )
     )
 

@@ -49,6 +49,12 @@ module Crowbar
     class InvalidJsonError < SimpleCatchableError
     end
 
+    class InternalServerError < SimpleCatchableError
+    end
+
+    class NotAuthorizedError < SimpleCatchableError
+    end
+
     class UnavailableBarclampError < SimpleCatchableError
       def initialize(barclamp)
         super("Barclamp #{barclamp} is not available")

@@ -33,8 +33,8 @@ module Crowbar
               proposal: proposal
             )
           ).execute
-        rescue SimpleCatchableError => e
-          err e.message, 1
+        rescue => e
+          catch_errors(e)
         end
 
         desc "nodes",
@@ -49,8 +49,8 @@ module Crowbar
           Command::Reset::Nodes.new(
             *command_params
           ).execute
-        rescue SimpleCatchableError => e
-          err e.message, 1
+        rescue => e
+          catch_errors(e)
         end
       end
     end

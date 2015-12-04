@@ -54,8 +54,8 @@ module Crowbar
               file: file
             )
           ).execute
-        rescue SimpleCatchableError => e
-          err e.message, 1
+        rescue => e
+          catch_errors(e)
         end
 
         desc "export PROPOSAL [PROPOSAL]",
@@ -91,8 +91,8 @@ module Crowbar
               proposals: proposals
             )
           ).execute
-        rescue SimpleCatchableError => e
-          err e.message, 1
+        rescue => e
+          catch_errors(e)
         end
       end
     end

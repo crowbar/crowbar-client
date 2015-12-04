@@ -72,8 +72,8 @@ module Crowbar
               barclamp: barclamp
             )
           ).execute
-        rescue SimpleCatchableError => e
-          err e.message, 1
+        rescue => e
+          catch_errors(e)
         end
 
         desc "show BARCLAMP PROPOSAL",
@@ -134,8 +134,8 @@ module Crowbar
               proposal: proposal
             )
           ).execute
-        rescue SimpleCatchableError => e
-          err e.message, 1
+        rescue => e
+          catch_errors(e)
         end
 
         desc "create BARCLAMP PROPOSAL",
@@ -184,8 +184,8 @@ module Crowbar
               proposal: proposal
             )
           ).execute
-        rescue SimpleCatchableError => e
-          err e.message, 1
+        rescue => e
+          catch_errors(e)
         end
 
         desc "edit BARCLAMP PROPOSAL",
@@ -234,8 +234,8 @@ module Crowbar
               proposal: proposal
             )
           ).execute
-        rescue SimpleCatchableError => e
-          err e.message, 1
+        rescue => e
+          catch_errors(e)
         end
 
         desc "delete BARCLAMP PROPOSAL",
@@ -253,8 +253,8 @@ module Crowbar
               proposal: proposal
             )
           ).execute
-        rescue SimpleCatchableError => e
-          err e.message, 1
+        rescue => e
+          catch_errors(e)
         end
 
         desc "dequeue BARCLAMP PROPOSAL",
@@ -272,8 +272,8 @@ module Crowbar
               proposal: proposal
             )
           ).execute
-        rescue SimpleCatchableError => e
-          err e.message, 1
+        rescue => e
+          catch_errors(e)
         end
 
         desc "commit BARCLAMP PROPOSAL",
@@ -291,8 +291,8 @@ module Crowbar
               proposal: proposal
             )
           ).execute
-        rescue SimpleCatchableError => e
-          err e.message, 1
+        rescue => e
+          catch_errors(e)
         end
       end
     end

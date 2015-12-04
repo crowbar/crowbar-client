@@ -38,12 +38,22 @@ module Crowbar
         end
 
         no_commands do
+          include Mixin::Format
+
           def say(message)
             $stdout.puts message
           end
 
           def err(message, exit_code = nil)
-            $stderr.puts message
+            case provide_format
+            when :json
+              $stderr.puts JSON.pretty_generate(
+                error: message
+              )
+            else
+              $stderr.puts message
+            end
+
             exit(exit_code) unless exit_code.nil?
           end
 
@@ -55,6 +65,19 @@ module Crowbar
               options,
               args
             ]
+          end
+
+          def catch_errors(error)
+            case error
+            when SimpleCatchableError
+              err error.message, 1
+            when Errno::ECONNREFUSED
+              err "Connection to server refused", 1
+            when SocketError
+              err "Unknown server to connect to", 1
+            else
+              raise error
+            end
           end
         end
       end
