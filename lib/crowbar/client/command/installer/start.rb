@@ -34,6 +34,8 @@ module Crowbar
                 say "Triggered installation process"
               when 226
                 say "Crowbar already installing"
+              when 412
+                say "Network validation failed"
               when 410
                 say "Installation is already done"
               when 501
