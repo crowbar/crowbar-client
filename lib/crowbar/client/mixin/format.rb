@@ -33,7 +33,11 @@ module Crowbar
               options[:format] = :table
             end
 
-            options[:format].to_sym
+            if options[:format].nil?
+              :table
+            else
+              options[:format].to_sym
+            end
           end
 
           protected
