@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.2.1](https://github.com/crowbar/crowbar-client/releases/tag/v2.2.1) - 2015-12-15
+
+* BUGFIX
+  * Fixed attribute naming within network request classes (@tboerger)
+  * Always provide a valid output format (@tboerger)
+  * Call correct classes for ip deallocation (@tboerger)
+* ENHANCEMENT
+  * Prevent install with invalid network config (@MaximilianMeister)
+
 ## [2.2.0](https://github.com/crowbar/crowbar-client/releases/tag/v2.2.0) - 2015-12-03
 
 * BUGFIX
