@@ -28,7 +28,7 @@ describe "Crowbar::Client::Request::VirtualIP::Deallocate" do
       {
         service: "",
         network: "",
-        prop: "default"
+        proposal: "default"
       }
     end
 
