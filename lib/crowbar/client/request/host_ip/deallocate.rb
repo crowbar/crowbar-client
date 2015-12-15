@@ -38,7 +38,7 @@ module Crowbar
               "network",
               "1.0",
               "deallocate_ip",
-              attrs.prop
+              attrs.proposal
             ].join("/")
           end
         end

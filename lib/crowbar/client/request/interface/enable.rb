@@ -38,7 +38,7 @@ module Crowbar
               "network",
               "1.0",
               "enable_interface",
-              attrs.prop
+              attrs.proposal
             ].join("/")
           end
         end

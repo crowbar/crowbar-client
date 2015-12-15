@@ -30,7 +30,7 @@ describe "Crowbar::Client::Request::VirtualIP::Allocate" do
         network: "",
         range: "",
         suggest: "",
-        prop: "default"
+        proposal: "default"
       }
     end
 

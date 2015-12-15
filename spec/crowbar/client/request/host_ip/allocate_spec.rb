@@ -30,7 +30,7 @@ describe "Crowbar::Client::Request::HostIP::Allocate" do
         network: "",
         range: "",
         suggest: "",
-        prop: "default"
+        proposal: "default"
       }
     end
 

@@ -28,7 +28,7 @@ describe "Crowbar::Client::Request::Interface::Enable" do
       {
         node: "node1",
         network: "admin",
-        prop: "default"
+        proposal: "default"
       }
     end
 
