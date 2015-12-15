@@ -49,7 +49,7 @@ module Crowbar
         LONGDESC
 
         def deallocate(proposal, node, network)
-          Command::HostIP::Allocate.new(
+          Command::HostIP::Deallocate.new(
             *command_params(
               proposal: proposal,
               node: node,
