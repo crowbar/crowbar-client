@@ -17,6 +17,9 @@
 module Crowbar
   module Client
     module App
+      autoload :Backup,
+        File.expand_path("../app/backup", __FILE__)
+
       autoload :Barclamp,
         File.expand_path("../app/barclamp", __FILE__)
 

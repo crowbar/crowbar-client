@@ -78,6 +78,10 @@ module Crowbar
           say "crowbar-client v#{Crowbar::Client::Version}"
         end
 
+        desc "backup [COMMANDS]",
+          "Backup specific commands, call without params for help"
+        subcommand "backup", Crowbar::Client::App::Backup
+
         desc "barclamp [COMMANDS]",
           "Barclamp specific commands, call without params for help"
         subcommand "barclamp", Crowbar::Client::App::Barclamp
