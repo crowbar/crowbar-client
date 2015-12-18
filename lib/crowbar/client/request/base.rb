@@ -36,13 +36,13 @@ module Crowbar
         end
 
         def headers
-          @headers ||= {}
+          @headers ||= {
+            "Content-Type" => "application/json",
+            "Accept" => "application/json"
+          }
         end
 
         def params
-          headers["Content-Type"] ||= "application/json"
-          headers["Accept"] ||= "application/json"
-
           {
             body: content.to_json,
             headers: headers
