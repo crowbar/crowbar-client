@@ -17,40 +17,38 @@
 require_relative "../../../../spec_helper"
 
 describe "Crowbar::Client::Request::Proposal::Create" do
-  # it_behaves_like "a request class", true do
-  #   subject do
-  #     ::Crowbar::Client::Request::Proposal::Create.new(
-  #       attrs
-  #     )
-  #   end
+  it_behaves_like "a request class", true do
+    subject do
+      ::Crowbar::Client::Request::Proposal::Create.new(
+        attrs
+      )
+    end
 
-  #   let!(:attrs) do
-  #     {
-  #       barclamp: "ntp",
-  #       proposal: "default"
-  #     }
-  #   end
+    let!(:attrs) do
+      {
+        barclamp: "ntp",
+        proposal: "default",
+        data: "{}"
+      }
+    end
 
-  #   let!(:params) do
-  #     {}
-  #   end
+    let!(:params) do
+      {}
+    end
 
-  #   let!(:method) do
-  #     :post
-  #   end
+    let!(:method) do
+      :put
+    end
 
-  #   let!(:url) do
-  #     "crowbar/ntp/1.0/proposals/commit/default"
-  #   end
+    let!(:url) do
+      "crowbar/ntp/1.0/proposals"
+    end
 
-  #   let!(:headers) do
-  #     {
-  #       "Content-Type" => "application/json",
-  #       "Accept" => "application/json"
-  #     }
-  #   end
-  # end
-
-  pending
-
+    let!(:headers) do
+      {
+        "Content-Type" => "application/json",
+        "Accept" => "application/json"
+      }
+    end
+  end
 end
