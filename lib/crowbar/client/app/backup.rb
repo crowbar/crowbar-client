@@ -108,6 +108,23 @@ module Crowbar
           catch_errors(e)
         end
 
+        desc "upload",
+          "Upload a backup"
+
+        long_desc <<-LONGDESC
+          `upload FILE` will upload a backup to the Administration Server.
+        LONGDESC
+
+        def upload(file)
+          Command::Backup::Upload.new(
+            *command_params(
+              fileupload: file
+            )
+          ).execute
+        rescue => e
+          catch_errors(e)
+        end
+
         desc "delete",
           "Delete a backup"
 

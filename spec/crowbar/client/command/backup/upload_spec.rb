@@ -14,25 +14,26 @@
 # limitations under the License.
 #
 
-module Crowbar
-  module Client
-    module Command
-      module Backup
-        autoload :Create,
-          File.expand_path("../backup/create", __FILE__)
+require_relative "../../../../spec_helper"
 
-        autoload :Delete,
-          File.expand_path("../backup/delete", __FILE__)
+describe "Crowbar::Client::Command::Backup::Upload" do
+  include_context "command_context"
 
-        autoload :Download,
-          File.expand_path("../backup/download", __FILE__)
-
-        autoload :List,
-          File.expand_path("../backup/list", __FILE__)
-
-        autoload :Upload,
-          File.expand_path("../backup/upload", __FILE__)
-      end
-    end
+  subject do
+    ::Crowbar::Client::Command::Backup::Upload.new(
+      stdin,
+      stdout,
+      stderr
+    )
   end
+
+  it "should always return a request class" do
+    expect(subject.request).to(
+      be_a(
+        ::Crowbar::Client::Request::Backup::Upload
+      )
+    )
+  end
+
+  pending
 end

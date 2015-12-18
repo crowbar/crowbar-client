@@ -29,6 +29,9 @@ module Crowbar
 
         autoload :List,
           File.expand_path("../backup/list", __FILE__)
+
+        autoload :Upload,
+          File.expand_path("../backup/upload", __FILE__)
       end
     end
   end

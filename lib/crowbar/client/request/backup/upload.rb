@@ -14,24 +14,34 @@
 # limitations under the License.
 #
 
+require "easy_diff"
+
 module Crowbar
   module Client
-    module Command
+    module Request
       module Backup
-        autoload :Create,
-          File.expand_path("../backup/create", __FILE__)
+        class Upload < Base
+          def params
+            {
+              headers: headers,
+              query: {
+                fileupload: File.new(attrs.fileupload)
+              }
+            }
+          end
 
-        autoload :Delete,
-          File.expand_path("../backup/delete", __FILE__)
+          def method
+            :post
+          end
 
-        autoload :Download,
-          File.expand_path("../backup/download", __FILE__)
-
-        autoload :List,
-          File.expand_path("../backup/list", __FILE__)
-
-        autoload :Upload,
-          File.expand_path("../backup/upload", __FILE__)
+          def url
+            [
+              "utils",
+              "backup",
+              "upload"
+            ].join("/")
+          end
+        end
       end
     end
   end
