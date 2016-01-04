@@ -26,8 +26,7 @@ describe "Crowbar::Client::Request::Backup::Delete" do
 
     let!(:attrs) do
       {
-        name: "test-backup",
-        created_at: "20150303-170203"
+        id: 1
       }
     end
 
@@ -41,7 +40,7 @@ describe "Crowbar::Client::Request::Backup::Delete" do
     end
 
     let!(:url) do
-      "utils/backup/delete/test-backup/20150303-170203"
+      "utils/backups/1"
     end
 
     let!(:headers) do

@@ -39,7 +39,7 @@ describe "Crowbar::Client::Request::Backup::List" do
     end
 
     let!(:url) do
-      "utils/backup"
+      "utils/backups"
     end
 
     let!(:headers) do

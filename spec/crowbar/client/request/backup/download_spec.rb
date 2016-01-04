@@ -26,8 +26,7 @@ describe "Crowbar::Client::Request::Backup::Download" do
 
     let!(:attrs) do
       {
-        name: "test-backup",
-        created_at: "20150303-170203"
+        id: 1
       }
     end
 
@@ -41,7 +40,7 @@ describe "Crowbar::Client::Request::Backup::Download" do
     end
 
     let!(:url) do
-      "utils/backup/download/test-backup/20150303-170203"
+      "utils/backups/1/download"
     end
 
     let!(:headers) do

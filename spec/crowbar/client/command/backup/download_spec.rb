@@ -24,8 +24,7 @@ describe "Crowbar::Client::Command::Backup::Download" do
       stdin,
       stdout,
       stderr,
-      name: "test-backup",
-      created_at: "20150303-170203"
+      id: 1
     )
   end
 
