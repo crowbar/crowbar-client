@@ -42,16 +42,15 @@ shared_examples "a request class" do
   end
 
   it "submits payload to an API" do
-    expect(::Crowbar::Client::Request::Party).to(
-      receive(method).with(
-        "/#{url}",
-        body: params.to_json,
-        headers: headers
-      ).and_return(
-        double(
-          code: 200
-        )
-      )
+    stub_request(
+      method,
+      [
+        "http://crowbar:80",
+        url
+      ].join("/")
+    ).with(
+      body: params.to_json,
+      headers: headers
     )
 
     subject.process

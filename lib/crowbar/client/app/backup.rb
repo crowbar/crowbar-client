@@ -94,7 +94,7 @@ module Crowbar
           "Download a backup"
 
         long_desc <<-LONGDESC
-          `download NAME CREATED_AT` will download a backup from the Administration Server.
+          `download ID` will download a backup from the Administration Server.
         LONGDESC
 
         def download(id)
@@ -128,7 +128,7 @@ module Crowbar
           "Delete a backup"
 
         long_desc <<-LONGDESC
-          `delete NAME CREATED_AT` will delete a backup from the Administration Server.
+          `delete ID` will delete a backup from the Administration Server.
         LONGDESC
 
         def delete(id)

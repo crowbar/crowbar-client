@@ -23,7 +23,8 @@ describe "Crowbar::Client::Command::Backup::Upload" do
     ::Crowbar::Client::Command::Backup::Upload.new(
       stdin,
       stdout,
-      stderr
+      stderr,
+      file: Tempfile.new("test")
     )
   end
 

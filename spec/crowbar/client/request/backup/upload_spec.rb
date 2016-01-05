@@ -24,13 +24,13 @@ describe "Crowbar::Client::Request::Backup::Upload" do
       )
     end
 
-    let!(:testfile) do
-      Tempfile.new("upload")
+    let!(:upload) do
+      Tempfile.new("test")
     end
 
     let!(:attrs) do
       {
-        fileupload: testfile
+        file: upload
       }
     end
 
@@ -44,13 +44,14 @@ describe "Crowbar::Client::Request::Backup::Upload" do
     end
 
     let!(:url) do
-      "utils/backup/upload"
+      "utils/backups/upload"
     end
 
     let!(:headers) do
       {
-        "Content-Type" => "application/json",
-        "Accept" => "application/json"
+        "Accept" => "application/json",
+        "Content-Length" => "248",
+        "Content-Type" => "multipart/form-data; boundary=-----------RubyMultipartPost"
       }
     end
   end

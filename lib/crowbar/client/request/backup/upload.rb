@@ -25,7 +25,7 @@ module Crowbar
             {
               headers: headers,
               query: {
-                fileupload: File.new(attrs.fileupload)
+                file: File.new(attrs.file)
               }
             }
           end
@@ -37,7 +37,7 @@ module Crowbar
           def url
             [
               "utils",
-              "backup",
+              "backups",
               "upload"
             ].join("/")
           end
