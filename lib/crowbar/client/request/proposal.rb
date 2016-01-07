@@ -36,6 +36,9 @@ module Crowbar
         autoload :List,
           File.expand_path("../proposal/list", __FILE__)
 
+        autoload :Reset,
+          File.expand_path("../proposal/reset", __FILE__)
+
         autoload :Show,
           File.expand_path("../proposal/show", __FILE__)
 

@@ -18,29 +18,30 @@ module Crowbar
   module Client
     module Command
       module Proposal
-        autoload :Commit,
-          File.expand_path("../proposal/commit", __FILE__)
+        class Reset < Base
+          include Mixin::Barclamp
 
-        autoload :Create,
-          File.expand_path("../proposal/create", __FILE__)
+          def request
+            @request ||= Request::Proposal::Reset.new(
+              args
+            )
+          end
 
-        autoload :Delete,
-          File.expand_path("../proposal/delete", __FILE__)
+          def execute
+            validate_barclamp! args.barclamp
 
-        autoload :Dequeue,
-          File.expand_path("../proposal/dequeue", __FILE__)
-
-        autoload :Edit,
-          File.expand_path("../proposal/edit", __FILE__)
-
-        autoload :List,
-          File.expand_path("../proposal/list", __FILE__)
-
-        autoload :Reset,
-          File.expand_path("../proposal/reset", __FILE__)
-
-        autoload :Show,
-          File.expand_path("../proposal/show", __FILE__)
+            request.process do |request|
+              case request.code
+              when 200
+                say "Successfully reset #{args.proposal} proposal"
+              when 404
+                say "Proposal does not exist"
+              else
+                err request.parsed_response["error"]
+              end
+            end
+          end
+        end
       end
     end
   end
