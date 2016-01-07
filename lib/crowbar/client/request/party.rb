@@ -14,13 +14,13 @@
 # limitations under the License.
 #
 
-require "httparty"
+require "httmultiparty"
 
 module Crowbar
   module Client
     module Request
       class Party
-        include HTTParty
+        include HTTMultiParty
 
         follow_redirects true
         format :json
