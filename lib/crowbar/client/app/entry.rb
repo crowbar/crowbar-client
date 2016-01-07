@@ -106,10 +106,6 @@ module Crowbar
           "Repository specific commands, call without params for help"
         subcommand "repository", Crowbar::Client::App::Repository
 
-        desc "reset [COMMANDS]",
-          "Reset specific commands, call without params for help"
-        subcommand "reset", Crowbar::Client::App::Reset
-
         desc "role [COMMANDS]",
           "Role specific commands, call without params for help"
         subcommand "role", Crowbar::Client::App::Role

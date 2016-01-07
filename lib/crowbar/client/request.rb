@@ -50,9 +50,6 @@ module Crowbar
       autoload :Repository,
         File.expand_path("../request/repository", __FILE__)
 
-      autoload :Reset,
-        File.expand_path("../request/reset", __FILE__)
-
       autoload :Role,
         File.expand_path("../request/role", __FILE__)
 
