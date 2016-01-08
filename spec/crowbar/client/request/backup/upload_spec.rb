@@ -17,26 +17,23 @@
 require_relative "../../../../spec_helper"
 
 describe "Crowbar::Client::Request::Backup::Upload" do
-  it_behaves_like "a request class" do
+  it_behaves_like "a request class", false do
     subject do
       ::Crowbar::Client::Request::Backup::Upload.new(
         attrs
       )
     end
 
-    let!(:upload) do
-      Tempfile.new("test")
-    end
-
     let!(:attrs) do
       {
-        file: upload
+        file: fixture_path(
+          "upload.tgz"
+        ).open
       }
     end
 
     let!(:params) do
-      {
-      }
+      {}
     end
 
     let!(:method) do
@@ -50,7 +47,7 @@ describe "Crowbar::Client::Request::Backup::Upload" do
     let!(:headers) do
       {
         "Accept" => "application/json",
-        "Content-Length" => "248",
+        "Content-Length" => "468",
         "Content-Type" => "multipart/form-data; boundary=-----------RubyMultipartPost"
       }
     end
