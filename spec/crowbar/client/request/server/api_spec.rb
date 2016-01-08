@@ -17,7 +17,7 @@
 require_relative "../../../../spec_helper"
 
 describe "Crowbar::Client::Request::Server::Api" do
-  it_behaves_like "a request class" do
+  it_behaves_like "a request class", true do
     subject do
       ::Crowbar::Client::Request::Server::Api.new(
         attrs
