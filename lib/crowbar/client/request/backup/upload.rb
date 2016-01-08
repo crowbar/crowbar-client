@@ -25,7 +25,7 @@ module Crowbar
             {
               headers: headers,
               query: {
-                file: File.new(attrs.file)
+                file: attrs.file
               }
             }
           end

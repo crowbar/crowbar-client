@@ -117,7 +117,9 @@ module Crowbar
         def upload(file)
           Command::Backup::Upload.new(
             *command_params(
-              file: file
+              file: File.new(
+                file
+              )
             )
           ).execute
         rescue => e
