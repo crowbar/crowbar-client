@@ -17,7 +17,7 @@
 require_relative "../../../../spec_helper"
 
 describe "Crowbar::Client::Request::Backup::List" do
-  it_behaves_like "a request class" do
+  it_behaves_like "a request class", true do
     subject do
       ::Crowbar::Client::Request::Backup::List.new(
         attrs
@@ -39,7 +39,7 @@ describe "Crowbar::Client::Request::Backup::List" do
     end
 
     let!(:url) do
-      "utils/backup"
+      "utils/backups"
     end
 
     let!(:headers) do

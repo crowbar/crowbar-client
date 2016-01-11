@@ -14,24 +14,15 @@
 # limitations under the License.
 #
 
-module Crowbar
-  module Client
-    module Request
-      module Backup
-        class Delete < Base
-          def method
-            :delete
-          end
-
-          def url
-            [
-              "utils",
-              "backups",
-              attrs.id
-            ].join("/")
-          end
-        end
-      end
-    end
+module HelperMethods
+  def fixture_path(file)
+    Pathname.new(
+      File.expand_path(
+        "../../fixtures",
+        __FILE__
+      )
+    ).join(
+      file
+    )
   end
 end

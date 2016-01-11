@@ -23,7 +23,9 @@ module Crowbar
         class Create < Base
           def content
             super.easy_merge!(
-              filename: attrs.filename
+              backup: {
+                name: attrs.backup
+              }
             )
           end
 
@@ -34,7 +36,7 @@ module Crowbar
           def url
             [
               "utils",
-              "backup"
+              "backups"
             ].join("/")
           end
         end

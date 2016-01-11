@@ -35,10 +35,9 @@ module Crowbar
           def url
             [
               "utils",
-              "backup",
-              "download",
-              attrs.name,
-              attrs.created_at
+              "backups",
+              attrs.id,
+              "download"
             ].join("/")
           end
         end

@@ -1,4 +1,3 @@
-#
 # Copyright 2015, SUSE Linux GmbH
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,19 +15,24 @@
 
 module Crowbar
   module Client
-    module Request
+    module Command
       module Backup
-        class Delete < Base
-          def method
-            :delete
+        class Upload < Base
+          def request
+            @request ||= Request::Backup::Upload.new(
+              args
+            )
           end
 
-          def url
-            [
-              "utils",
-              "backups",
-              attrs.id
-            ].join("/")
+          def execute
+            request.process do |request|
+              case request.code
+              when 200
+                say "Successfully uploaded backup"
+              else
+                err request.parsed_response["error"]
+              end
+            end
           end
         end
       end

@@ -26,7 +26,7 @@ module Crowbar
           def url
             [
               "utils",
-              "backup"
+              "backups"
             ].join("/")
           end
         end

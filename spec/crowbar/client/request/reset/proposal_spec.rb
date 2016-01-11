@@ -17,7 +17,7 @@
 require_relative "../../../../spec_helper"
 
 describe "Crowbar::Client::Request::Reset::Proposal" do
-  # it_behaves_like "a request class" do
+  # it_behaves_like "a request class", true do
   #   subject do
   #     ::Crowbar::Client::Request::Reset::Proposal.new(
   #       attrs

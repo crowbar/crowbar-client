@@ -17,7 +17,7 @@
 require_relative "../../../../spec_helper"
 
 describe "Crowbar::Client::Request::Backup::Create" do
-  it_behaves_like "a request class" do
+  it_behaves_like "a request class", true do
     subject do
       ::Crowbar::Client::Request::Backup::Create.new(
         attrs
@@ -26,13 +26,15 @@ describe "Crowbar::Client::Request::Backup::Create" do
 
     let!(:attrs) do
       {
-        filename: "test-backup"
+        backup: "test-backup"
       }
     end
 
     let!(:params) do
       {
-        filename: "test-backup"
+        backup: {
+          name: "test-backup"
+        }
       }
     end
 
@@ -41,7 +43,7 @@ describe "Crowbar::Client::Request::Backup::Create" do
     end
 
     let!(:url) do
-      "utils/backup"
+      "utils/backups"
     end
 
     let!(:headers) do

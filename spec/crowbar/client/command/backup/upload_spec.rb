@@ -14,24 +14,27 @@
 # limitations under the License.
 #
 
-module Crowbar
-  module Client
-    module Request
-      module Backup
-        class Delete < Base
-          def method
-            :delete
-          end
+require_relative "../../../../spec_helper"
 
-          def url
-            [
-              "utils",
-              "backups",
-              attrs.id
-            ].join("/")
-          end
-        end
-      end
-    end
+describe "Crowbar::Client::Command::Backup::Upload" do
+  include_context "command_context"
+
+  subject do
+    ::Crowbar::Client::Command::Backup::Upload.new(
+      stdin,
+      stdout,
+      stderr,
+      file: Tempfile.new("test")
+    )
   end
+
+  it "should always return a request class" do
+    expect(subject.request).to(
+      be_a(
+        ::Crowbar::Client::Request::Backup::Upload
+      )
+    )
+  end
+
+  pending
 end

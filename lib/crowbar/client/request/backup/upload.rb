@@ -14,20 +14,31 @@
 # limitations under the License.
 #
 
+require "easy_diff"
+
 module Crowbar
   module Client
     module Request
       module Backup
-        class Delete < Base
+        class Upload < Base
+          def params
+            {
+              headers: headers,
+              query: {
+                file: attrs.file
+              }
+            }
+          end
+
           def method
-            :delete
+            :post
           end
 
           def url
             [
               "utils",
               "backups",
-              attrs.id
+              "upload"
             ].join("/")
           end
         end

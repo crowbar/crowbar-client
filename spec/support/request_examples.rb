@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-shared_examples "a request class" do
+shared_examples "a request class" do |with_body|
   before(:each) do
     Crowbar::Client::Config.configure(
       Crowbar::Client::Config.defaults.merge(
@@ -25,35 +25,54 @@ shared_examples "a request class" do
 
   it "provides a method value" do
     expect(subject.method).to(
-      eql(method)
+      eq(method)
     )
   end
 
   it "provides a specific url" do
     expect(subject.url).to(
-      eql(url)
+      eq(url)
     )
   end
 
   it "provides a valid payload" do
     expect(subject.content).to(
-      eql(params)
+      eq(params)
     )
   end
 
   it "submits payload to an API" do
-    expect(::Crowbar::Client::Request::Party).to(
-      receive(method).with(
-        "/#{url}",
+    content = if with_body
+      {
         body: params.to_json,
         headers: headers
-      ).and_return(
-        double(
-          code: 200
-        )
-      )
+      }
+    else
+      {
+        headers: headers
+      }
+    end
+
+    stub_request(
+      method,
+      "http://crowbar:80/#{url}"
+    ).to_return(
+      status: 200,
+      body: "",
+      headers: {}
     )
 
     subject.process
+
+    expect(
+      a_request(
+        method,
+        "http://crowbar:80/#{url}"
+      ).with(
+        content
+      )
+    ).to(
+      have_been_made.once
+    )
   end
 end

@@ -83,7 +83,7 @@ module Crowbar
         def create(name)
           Command::Backup::Create.new(
             *command_params(
-              filename: name
+              backup: name
             )
           ).execute
         rescue => e
@@ -94,14 +94,32 @@ module Crowbar
           "Download a backup"
 
         long_desc <<-LONGDESC
-          `download NAME CREATED_AT` will download a backup from the Administration Server.
+          `download ID` will download a backup from the Administration Server.
         LONGDESC
 
-        def download(name, created_at)
+        def download(id)
           Command::Backup::Download.new(
             *command_params(
-              name: name,
-              created_at: created_at
+              id: id
+            )
+          ).execute
+        rescue => e
+          catch_errors(e)
+        end
+
+        desc "upload",
+          "Upload a backup"
+
+        long_desc <<-LONGDESC
+          `upload FILE` will upload a backup to the Administration Server.
+        LONGDESC
+
+        def upload(file)
+          Command::Backup::Upload.new(
+            *command_params(
+              file: File.new(
+                file
+              )
             )
           ).execute
         rescue => e
@@ -112,14 +130,13 @@ module Crowbar
           "Delete a backup"
 
         long_desc <<-LONGDESC
-          `delete NAME CREATED_AT` will delete a backup from the Administration Server.
+          `delete ID` will delete a backup from the Administration Server.
         LONGDESC
 
-        def delete(name, created_at)
+        def delete(id)
           Command::Backup::Delete.new(
             *command_params(
-              name: name,
-              created_at: created_at
+              id: id
             )
           ).execute
         rescue => e

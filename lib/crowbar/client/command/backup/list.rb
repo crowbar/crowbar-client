@@ -55,16 +55,17 @@ module Crowbar
           protected
 
           def headings
-            ["Name", "Created", "Filename", "Path"]
+            ["Id", "Name", "Created", "Size", "Version"]
           end
 
           def content_from(request)
             request.parsed_response.map do |row|
               row.slice(
+                "id",
                 "name",
                 "created_at",
-                "filename",
-                "path"
+                "size",
+                "version"
               )
             end
           end
