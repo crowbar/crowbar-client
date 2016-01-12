@@ -14,23 +14,26 @@
 # limitations under the License.
 #
 
-module Crowbar
-  module Client
-    module Command
-      module Reset
-        class Proposal < Base
-          def request
-            @request ||= Request::Reset::Proposal.new(
-              args
-            )
-          end
+require_relative "../../../../spec_helper"
 
-          def execute
-            request.process do |request|
-            end
-          end
-        end
-      end
-    end
+describe "Crowbar::Client::Command::Proposal::Reset" do
+  include_context "command_context"
+
+  subject do
+    ::Crowbar::Client::Command::Proposal::Reset.new(
+      stdin,
+      stdout,
+      stderr
+    )
   end
+
+  it "should always return a request class" do
+    expect(subject.request).to(
+      be_a(
+        ::Crowbar::Client::Request::Proposal::Reset
+      )
+    )
+  end
+
+  pending
 end

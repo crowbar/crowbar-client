@@ -294,6 +294,65 @@ module Crowbar
         rescue => e
           catch_errors(e)
         end
+
+        desc "reset BARCLAMP [PROPOSAL]",
+          "Reset a proposal for specific barclamp"
+
+        long_desc <<-LONGDESC
+          `reset BARCLAMP [PROPOSAL]` will try to reset the state
+          for the specified barclamp. If you don't provide a proposal
+          the client will select the default proposal. The usage of
+          this command is unsupported, unless you have been specifically
+          told to run it as part of a support request!
+
+          With --yes option you can force the reset without any further
+          question, this skips the otherwise required confirmation.
+        LONGDESC
+
+        method_option :yes,
+          type: :boolean,
+          default: false,
+          aliases: [],
+          desc: "Force the reset without any confirmation message"
+
+        def reset(barclamp, proposal = "default")
+          unless accepts_reset?
+            say "Canceled reset"
+            return
+          end
+
+          Command::Proposal::Reset.new(
+            *command_params(
+              barclamp: barclamp,
+              proposal: proposal
+            )
+          ).execute
+        rescue => e
+          catch_errors(e)
+        end
+
+        no_commands do
+          def accepts_reset?
+            return true if options[:yes]
+
+            question = <<-QUESTION.strip_heredoc
+              Usage of this command is unsupported, unless you have been
+              specifically told to run it as part of a support request!
+              Are you sure you want to proceed?
+            QUESTION
+
+            answer = ask(
+              question,
+              :red,
+              limited_to: [
+                "yes",
+                "no"
+              ]
+            )
+
+            answer == "yes"
+          end
+        end
       end
     end
   end

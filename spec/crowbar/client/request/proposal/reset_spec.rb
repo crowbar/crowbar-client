@@ -16,24 +16,38 @@
 
 require_relative "../../../../spec_helper"
 
-describe "Crowbar::Client::Command::Reset::Proposal" do
-  include_context "command_context"
-
-  subject do
-    ::Crowbar::Client::Command::Reset::Proposal.new(
-      stdin,
-      stdout,
-      stderr
-    )
-  end
-
-  it "should always return a request class" do
-    expect(subject.request).to(
-      be_a(
-        ::Crowbar::Client::Request::Reset::Proposal
+describe "Crowbar::Client::Request::Proposal::Reset" do
+  it_behaves_like "a request class", true do
+    subject do
+      ::Crowbar::Client::Request::Proposal::Reset.new(
+        attrs
       )
-    )
-  end
+    end
 
-  pending
+    let!(:attrs) do
+      {
+        barclamp: "ntp",
+        proposal: "default"
+      }
+    end
+
+    let!(:params) do
+      {}
+    end
+
+    let!(:method) do
+      :post
+    end
+
+    let!(:url) do
+      "crowbar/ntp/1.0/proposals/reset/default"
+    end
+
+    let!(:headers) do
+      {
+        "Content-Type" => "application/json",
+        "Accept" => "application/json"
+      }
+    end
+  end
 end

@@ -16,18 +16,22 @@
 
 module Crowbar
   module Client
-    module Command
-      module Reset
-        class Nodes < Base
-          def request
-            @request ||= Request::Reset::Nodes.new(
-              args
-            )
+    module Request
+      module Proposal
+        class Reset < Base
+          def method
+            :post
           end
 
-          def execute
-            request.process do |request|
-            end
+          def url
+            [
+              "crowbar",
+              attrs.barclamp,
+              "1.0",
+              "proposals",
+              "reset",
+              attrs.proposal
+            ].join("/")
           end
         end
       end

@@ -17,12 +17,31 @@
 module Crowbar
   module Client
     module Command
-      module Reset
-        autoload :Nodes,
-          File.expand_path("../reset/nodes", __FILE__)
+      module Proposal
+        class Reset < Base
+          include Mixin::Barclamp
 
-        autoload :Proposal,
-          File.expand_path("../reset/proposal", __FILE__)
+          def request
+            @request ||= Request::Proposal::Reset.new(
+              args
+            )
+          end
+
+          def execute
+            validate_barclamp! args.barclamp
+
+            request.process do |request|
+              case request.code
+              when 200
+                say "Successfully reset #{args.proposal} proposal"
+              when 404
+                say "Proposal does not exist"
+              else
+                err request.parsed_response["error"]
+              end
+            end
+          end
+        end
       end
     end
   end
