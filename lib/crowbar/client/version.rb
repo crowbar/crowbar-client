@@ -18,8 +18,8 @@ module Crowbar
   module Client
     class Version
       MAJOR = 2
-      MINOR = 2
-      PATCH = 1
+      MINOR = 3
+      PATCH = 0
 
       PRE = nil
 

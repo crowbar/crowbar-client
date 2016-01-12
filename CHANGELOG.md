@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.3.0](https://github.com/crowbar/crowbar-client/releases/tag/v2.3.0) - 2015-01-15
+
+* BREAKING
+  * Dropped --no-aliases option from node list subcommand (@tboerger)
+  * Dropped --no-names option from node list subcommand (@tboerger)
+* ENHANCEMENT
+  * Added more columns to node list subcommand (@tboerger)
+  * Order node list subcommand output alphabetically now (@tboerger)
+  * Added subcommand to reset a proposal state through the API (@tboerger)
+  * Added subcommand to interact with the backup API (@tboerger)
+  * Added subcommand to set the group of a node (@tboerger)
+
 ## [2.2.1](https://github.com/crowbar/crowbar-client/releases/tag/v2.2.1) - 2015-12-15
 
 * BUGFIX
