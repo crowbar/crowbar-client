@@ -447,6 +447,27 @@ module Crowbar
           catch_errors(e)
         end
 
+        desc "group NAME_OR_ALIAS GROUP",
+          "Assign another group to a node"
+
+        long_desc <<-LONGDESC
+          `group NAME_OR_ALIAS GROUP` will try to assign the specified
+          node to a different group. If you want to guess a group
+          automatically you can provide the group "automatic", then you
+          will get the new name as a response.
+        LONGDESC
+
+        def group(name, value)
+          Command::Node::Group.new(
+            *command_params(
+              name: name,
+              value: value
+            )
+          ).execute
+        rescue => e
+          catch_errors(e)
+        end
+
         desc "transition NAME_OR_ALIAS STATE",
           "Transition a node to a specific state"
 

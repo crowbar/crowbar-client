@@ -24,6 +24,9 @@ module Crowbar
         autoload :Delete,
           File.expand_path("../node/delete", __FILE__)
 
+        autoload :Group,
+          File.expand_path("../node/group", __FILE__)
+
         autoload :Hardware,
           File.expand_path("../node/hardware", __FILE__)
 
