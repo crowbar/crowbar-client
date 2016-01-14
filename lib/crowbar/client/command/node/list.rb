@@ -55,30 +55,23 @@ module Crowbar
           protected
 
           def headings
-            [].tap do |values|
-              values.push("Name") if options["names"]
-              values.push("Alias") if options["aliases"]
-            end
+            [
+              "Name",
+              "Alias"
+            ]
           end
 
           def content_from(request)
             [].tap do |row|
               request.parsed_response["nodes"].each do |child|
-                values = {}
-                values[:name] = child["name"] if options["names"]
-                values[:alias] = child["alias"] if options["aliases"]
-
                 row.push(
-                  values
+                  child.slice(
+                    "name",
+                    "alias"
+                  )
                 )
               end
             end
-          end
-
-          def checks
-            msg = "Please provide only names or aliases switch"
-            raise BadOptionsError,
-              msg unless options["names"] || options["aliases"]
           end
         end
       end

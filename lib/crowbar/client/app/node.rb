@@ -100,12 +100,6 @@ module Crowbar
           With --filter <filter> option you can limit the result of
           printed out elements. You can use any substring that is part
           of the found elements.
-
-          With --no-aliases switch you can disable the output of the node
-          aliases, per default the listing will display them.
-
-          With --no-names switch you can disable the output of the node
-          names, per default the listing will display them.
         LONGDESC
 
         method_option :format,
@@ -137,18 +131,6 @@ module Crowbar
           default: nil,
           banner: "<filter>",
           desc: "Filter by criteria, display only data that contains filter"
-
-        method_option :aliases,
-          type: :boolean,
-          default: true,
-          aliases: [],
-          desc: "Show or hide the aliases for the available nodes within listing"
-
-        method_option :names,
-          type: :boolean,
-          default: true,
-          aliases: [],
-          desc: "Show or hide the names for the available nodes within listing"
 
         def list
           Command::Node::List.new(
