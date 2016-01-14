@@ -70,7 +70,7 @@ module Crowbar
           end
 
           def content_from(request)
-            [].tap do |row|
+            result = [].tap do |row|
               request.parsed_response["nodes"].each do |child|
                 if options["meta"]
                   row.push(
@@ -89,6 +89,16 @@ module Crowbar
                   )
                 end
               end
+            end
+
+            result.sort do |x, y|
+              [
+                x["name"],
+                x["alias"]
+              ] <=> [
+                y["name"],
+                y["alias"]
+              ]
             end
           end
         end
