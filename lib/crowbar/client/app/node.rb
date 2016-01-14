@@ -100,6 +100,10 @@ module Crowbar
           With --filter <filter> option you can limit the result of
           printed out elements. You can use any substring that is part
           of the found elements.
+
+          With --no-meta switch you can disable the additional information
+          and just get a list of names and aliases for further scripting
+          where you don't care about the other columns.
         LONGDESC
 
         method_option :format,
@@ -131,6 +135,12 @@ module Crowbar
           default: nil,
           banner: "<filter>",
           desc: "Filter by criteria, display only data that contains filter"
+
+        method_option :meta,
+          type: :boolean,
+          default: true,
+          aliases: [],
+          desc: "Show or hide the additional meta info like group and status"
 
         def list
           Command::Node::List.new(

@@ -55,21 +55,39 @@ module Crowbar
           protected
 
           def headings
-            [
-              "Name",
-              "Alias"
-            ]
+            if options["meta"]
+              [
+                "Name",
+                "Alias",
+                "Group",
+                "Status"
+              ]
+            else
+              [
+                "Name"
+              ]
+            end
           end
 
           def content_from(request)
             [].tap do |row|
               request.parsed_response["nodes"].each do |child|
-                row.push(
-                  child.slice(
-                    "name",
-                    "alias"
+                if options["meta"]
+                  row.push(
+                    child.slice(
+                      "name",
+                      "alias",
+                      "group",
+                      "status"
+                    )
                   )
-                )
+                else
+                  row.push(
+                    child.slice(
+                      "name"
+                    )
+                  )
+                end
               end
             end
           end
