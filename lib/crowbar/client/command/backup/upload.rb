@@ -19,6 +19,17 @@ module Crowbar
       module Backup
         class Upload < Base
           def request
+            case args.file
+            when "-"
+              args.file = stdin.to_io
+            when File
+              args.file = args.file
+            else
+              args.file = File.new(
+                args.file
+              )
+            end
+
             @request ||= Request::Backup::Upload.new(
               args
             )

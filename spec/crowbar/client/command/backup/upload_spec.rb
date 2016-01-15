@@ -24,7 +24,9 @@ describe "Crowbar::Client::Command::Backup::Upload" do
       stdin,
       stdout,
       stderr,
-      file: Tempfile.new("test")
+      file: fixture_path(
+        "upload.tgz"
+      )
     )
   end
 
