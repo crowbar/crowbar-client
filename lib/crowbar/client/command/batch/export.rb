@@ -14,12 +14,19 @@
 # limitations under the License.
 #
 
+require "easy_diff"
+
 module Crowbar
   module Client
     module Command
       module Batch
         class Export < Base
           def request
+            args.easy_merge!(
+              includes: options.includes,
+              excludes: options.excludes
+            )
+
             @request ||= Request::Batch::Export.new(
               args
             )
@@ -27,6 +34,40 @@ module Crowbar
 
           def execute
             request.process do |request|
+              case request.code
+              when 200
+                if write(request.body)
+                  say "Successfully exported batch"
+                else
+                  err "Failed to export batch"
+                end
+              else
+                err request.parsed_response["error"]
+              end
+            end
+          end
+
+          protected
+
+          def write(body)
+            path.binmode
+            path.write body
+
+            true
+          rescue
+            false
+          end
+
+          def path
+            case args.file
+            when "-"
+              @path ||= stdout.to_io
+            when File
+              @path ||= args.file
+            else
+              @path ||= File.new(
+                args.file
+              )
             end
           end
         end

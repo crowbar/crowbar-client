@@ -14,17 +14,37 @@
 # limitations under the License.
 #
 
+require "easy_diff"
+
 module Crowbar
   module Client
     module Request
       module Batch
         class Export < Base
+          def content
+            super.easy_merge!(
+              includes: attrs.includes,
+              excludes: attrs.excludes
+            )
+          end
+
+          def headers
+            super.easy_merge!(
+              "Content-Type" => "application/octet-stream",
+              "Accept" => "application/octet-stream"
+            )
+          end
+
           def method
-            :get
+            :post
           end
 
           def url
-            [].join("/")
+            [
+              "utils",
+              "batch",
+              "export"
+            ].join("/")
           end
         end
       end

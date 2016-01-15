@@ -14,8 +14,6 @@
 # limitations under the License.
 #
 
-require "httparty"
-
 module Crowbar
   module Client
     module Command
@@ -32,9 +30,9 @@ module Crowbar
               case request.code
               when 200
                 if write(request.body)
-                  say "Successfully downloaded backup to #{path}"
+                  say "Successfully downloaded backup"
                 else
-                  say "Failed to download backup to #{path}"
+                  err "Failed to download backup"
                 end
               else
                 err request.parsed_response["error"]
@@ -45,12 +43,10 @@ module Crowbar
           protected
 
           def write(body)
-            path.open("wb") do |f|
-              f.binmode
-              f.write body
+            path.binmode
+            path.write body
 
-              true
-            end
+            true
           rescue
             false
           end

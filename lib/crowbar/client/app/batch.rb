@@ -28,24 +28,29 @@ module Crowbar
           stdin you should just write a `-` instead of a specific
           filename.
 
-          With --include <barclamp[.proposal]> option you can process
-          only a specific part from the provided YAML file structure.
+          With --includes BARCLAMP[.PROPOSAL] option you can process
+          only a specific part from the provided YAML file structure,
+          if you don't provide a proposal name we will take the `default`
+          proposal. This option allows multiple values, separated by a
+          `,` from each other.
 
-          With --exclude <barclamp[.proposal]> option you exclude
+          With --excludes BARCLAMP[.PROPOSAL] option you exclude
           specific parts from the provided YAML file structure to be
-          processed.
+          processed, if you don't provide a proposal name we will take
+          the `default` proposal. This option allows multiple values,
+          separated by a `,` from each other.
         LONGDESC
 
-        method_option :include,
-          type: :string,
-          default: nil,
-          banner: "<barclamp[.proposal]>",
+        method_option :includes,
+          type: :array,
+          default: [],
+          banner: "BARCLAMP[.PROPOSAL]",
           desc: "Include a specific barclamp or proposal for processing"
 
-        method_option :exclude,
-          type: :string,
-          default: nil,
-          banner: "<barclamp[.proposal]>",
+        method_option :excludes,
+          type: :array,
+          default: [],
+          banner: "BARCLAMP[.PROPOSAL]",
           desc: "Exclude a specific barclamp or proposal for processing"
 
         def build(file)
@@ -58,37 +63,45 @@ module Crowbar
           catch_errors(e)
         end
 
-        desc "export PROPOSAL [PROPOSAL]",
-          "Export proposals to stdout"
+        desc "export FILE",
+          "Export proposals to file or stdout"
 
         long_desc <<-LONGDESC
-          `export PROPOSAL [PROPOSAL]` will collect the informations
-          for the provided proposals and print it out to stdout in a
-          YAML format that can be used to build again.
+          `export FILE` will collect the informations of the proposals
+          in a YAML format. You can directly provide a path to a file or
+          just pipe the content into stdout. To pipe the content to
+          stdout you should just write a `-` instead of a specific
+          filename.
 
-          With --include <barclamp[.proposal]> option you can export
-          only a specific part from the existing proposals.
+          With --includes BARCLAMP[.PROPOSAL] option you can export
+          only a specific part from the existing proposals, if you don't
+          provide a proposal name we will take the `default` proposal.
+          This option allows multiple values, separated by a `,` from
+          each other.
 
-          With --exclude <barclamp[.proposal]> option you exclude
-          specific parts from the existing proposals to be exported.
+          With --excludes BARCLAMP[.PROPOSAL] option you exclude specific
+          parts from the existing proposals to be exported, if you don't
+          provide a proposal name we will take the `default` proposal.
+          This option allows multiple values, separated by a `,` from
+          each other.
         LONGDESC
 
-        method_option :include,
-          type: :string,
-          default: nil,
-          banner: "<barclamp[.proposal]>",
+        method_option :includes,
+          type: :array,
+          default: [],
+          banner: "BARCLAMP[.PROPOSAL]",
           desc: "Include a specific barclamp or proposal for export"
 
-        method_option :exclude,
-          type: :string,
-          default: nil,
-          banner: "<barclamp[.proposal]>",
+        method_option :excludes,
+          type: :array,
+          default: [],
+          banner: "BARCLAMP[.PROPOSAL]",
           desc: "Exclude a specific barclamp or proposal for export"
 
-        def export(*proposals)
+        def export(file)
           Command::Batch::Export.new(
             *command_params(
-              proposals: proposals
+              file: file
             )
           ).execute
         rescue => e

@@ -14,12 +14,30 @@
 # limitations under the License.
 #
 
+require "easy_diff"
+
 module Crowbar
   module Client
     module Command
       module Batch
         class Build < Base
           def request
+            args.easy_merge!(
+              includes: options.includes,
+              excludes: options.excludes
+            )
+
+            case args.file
+            when "-"
+              args.file = stdin.to_io
+            when File
+              args.file = args.file
+            else
+              args.file = File.new(
+                args.file
+              )
+            end
+
             @request ||= Request::Batch::Build.new(
               args
             )
@@ -27,6 +45,12 @@ module Crowbar
 
           def execute
             request.process do |request|
+              case request.code
+              when 200
+                say "Successfully built batch"
+              else
+                err request.parsed_response["error"]
+              end
             end
           end
         end
