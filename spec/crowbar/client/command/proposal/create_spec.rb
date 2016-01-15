@@ -28,14 +28,10 @@ describe "Crowbar::Client::Command::Proposal::Create" do
   end
 
   it "should always return a request class" do
-    subject.args.merge!(
-      barclamp: "testing"
-    )
+    subject.args[:barclamp] = "testing"
 
-    subject.options.merge!(
-      merge: true,
-      data: "{}"
-    )
+    subject.options[:merge] = true
+    subject.options[:data] = "{}"
 
     stub_request(:get, "http://crowbar/crowbar/testing/1.0/proposals/template")
       .with(
