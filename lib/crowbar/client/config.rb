@@ -109,15 +109,15 @@ module Crowbar
       def merge
         result = {}.tap do |overwrite|
           defaults.keys.each do |key|
-            case
+            overwrite[key] = case
             when options[key] != defaults[key]
-              overwrite[key] = options[key]
+              options[key]
             when config[key].present?
-              overwrite[key] = config[key]
+              config[key]
             when options[key].present?
-              overwrite[key] = options[key]
+              options[key]
             else
-              overwrite[key] = defaults[key]
+              defaults[key]
             end
           end
         end

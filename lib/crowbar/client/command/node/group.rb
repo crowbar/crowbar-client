@@ -14,22 +14,28 @@
 # limitations under the License.
 #
 
-require "active_support/concern"
-
 module Crowbar
   module Client
-    module Mixin
-      module Barclamp
-        extend ActiveSupport::Concern
-
-        included do
-          def validate_barclamp!(barclamp)
-            return if available_barclamps.include? barclamp
-            raise UnavailableBarclampError, barclamp
+    module Command
+      module Node
+        class Group < Base
+          def request
+            @request ||= Request::Node::Group.new(
+              args
+            )
           end
 
-          def available_barclamps
-            @available_barclamps ||= Request::Barclamp::List.new.process.keys
+          def execute
+            request.process do |request|
+              case request.code
+              when 200
+                say "Successfully updated group to #{request.parsed_response["group"]}"
+              when 404
+                err "Node does not exist"
+              else
+                err request.parsed_response["error"]
+              end
+            end
           end
         end
       end

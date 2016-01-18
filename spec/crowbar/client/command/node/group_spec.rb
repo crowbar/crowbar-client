@@ -14,25 +14,26 @@
 # limitations under the License.
 #
 
-require "active_support/concern"
+require_relative "../../../../spec_helper"
 
-module Crowbar
-  module Client
-    module Mixin
-      module Barclamp
-        extend ActiveSupport::Concern
+describe "Crowbar::Client::Command::Node::Group" do
+  include_context "command_context"
 
-        included do
-          def validate_barclamp!(barclamp)
-            return if available_barclamps.include? barclamp
-            raise UnavailableBarclampError, barclamp
-          end
-
-          def available_barclamps
-            @available_barclamps ||= Request::Barclamp::List.new.process.keys
-          end
-        end
-      end
-    end
+  subject do
+    ::Crowbar::Client::Command::Node::Group.new(
+      stdin,
+      stdout,
+      stderr
+    )
   end
+
+  it "should always return a request class" do
+    expect(subject.request).to(
+      be_a(
+        ::Crowbar::Client::Request::Node::Group
+      )
+    )
+  end
+
+  pending
 end

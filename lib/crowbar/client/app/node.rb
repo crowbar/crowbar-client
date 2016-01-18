@@ -101,11 +101,9 @@ module Crowbar
           printed out elements. You can use any substring that is part
           of the found elements.
 
-          With --no-aliases switch you can disable the output of the node
-          aliases, per default the listing will display them.
-
-          With --no-names switch you can disable the output of the node
-          names, per default the listing will display them.
+          With --no-meta switch you can disable the additional information
+          and just get a list of names and aliases for further scripting
+          where you don't care about the other columns.
         LONGDESC
 
         method_option :format,
@@ -138,17 +136,11 @@ module Crowbar
           banner: "<filter>",
           desc: "Filter by criteria, display only data that contains filter"
 
-        method_option :aliases,
+        method_option :meta,
           type: :boolean,
           default: true,
           aliases: [],
-          desc: "Show or hide the aliases for the available nodes within listing"
-
-        method_option :names,
-          type: :boolean,
-          default: true,
-          aliases: [],
-          desc: "Show or hide the names for the available nodes within listing"
+          desc: "Show or hide the additional meta info like group and status"
 
         def list
           Command::Node::List.new(
@@ -446,6 +438,27 @@ module Crowbar
 
         def rename(name, value)
           Command::Node::Rename.new(
+            *command_params(
+              name: name,
+              value: value
+            )
+          ).execute
+        rescue => e
+          catch_errors(e)
+        end
+
+        desc "group NAME_OR_ALIAS GROUP",
+          "Assign another group to a node"
+
+        long_desc <<-LONGDESC
+          `group NAME_OR_ALIAS GROUP` will try to assign the specified
+          node to a different group. If you want to guess a group
+          automatically you can provide the group "automatic", then you
+          will get the new name as a response.
+        LONGDESC
+
+        def group(name, value)
+          Command::Node::Group.new(
             *command_params(
               name: name,
               value: value

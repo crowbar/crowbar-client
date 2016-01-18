@@ -1,9 +1,11 @@
 inherit_from: .hound.suse.yml
 
 AllCops:
-  RunRailsCops: true
   DisplayStyleGuide: true
   DisplayCopNames: true
+
+Rails:
+  Enabled: true
 
 Style/RedundantReturn:
   Exclude:
@@ -19,6 +21,9 @@ Style/AlignHash:
 
 Style/DotPosition:
   EnforcedStyle: leading
+
+Style/CaseIndentation:
+  IndentWhenRelativeTo: end
 
 Style/Documentation:
   Enabled: false

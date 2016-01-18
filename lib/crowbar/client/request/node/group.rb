@@ -14,22 +14,23 @@
 # limitations under the License.
 #
 
-require "active_support/concern"
-
 module Crowbar
   module Client
-    module Mixin
-      module Barclamp
-        extend ActiveSupport::Concern
-
-        included do
-          def validate_barclamp!(barclamp)
-            return if available_barclamps.include? barclamp
-            raise UnavailableBarclampError, barclamp
+    module Request
+      module Node
+        class Group < Base
+          def method
+            :post
           end
 
-          def available_barclamps
-            @available_barclamps ||= Request::Barclamp::List.new.process.keys
+          def url
+            [
+              "nodes",
+              "groups",
+              "1.0",
+              attrs.name,
+              attrs.value
+            ].join("/")
           end
         end
       end
