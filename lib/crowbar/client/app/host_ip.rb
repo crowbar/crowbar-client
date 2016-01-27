@@ -18,6 +18,8 @@ module Crowbar
   module Client
     module App
       class HostIP < Base
+        namespace "network hostip"
+
         desc "allocate PROPOSAL NODE NETWORK RANGE [SUGGESTION]",
           "Allocate a host IP address"
 

@@ -80,6 +80,26 @@ module Crowbar
             end
           end
         end
+
+        class << self
+          def handle_argument_error(command, error, args, arity)
+            $stderr.puts("Usage: #{banner(command)}")
+            exit(2)
+          end
+
+          def banner(command, namespace = nil, subcommand = true)
+            addition = command.formatted_usage(
+              self,
+              false,
+              subcommand
+            )
+
+            [
+              basename,
+              addition
+            ].compact.join(" ")
+          end
+        end
       end
     end
   end

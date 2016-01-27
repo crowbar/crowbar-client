@@ -18,6 +18,8 @@ module Crowbar
   module Client
     module App
       class Interface < Base
+        namespace "network interface"
+
         desc "enable PROPOSAL NODE NETWORK",
           "Enable a network interface"
 
