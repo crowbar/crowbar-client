@@ -19,12 +19,27 @@ module Crowbar
     module Request
       module Batch
         class Build < Base
+          def params
+            {
+              headers: headers,
+              query: {
+                includes: attrs.includes,
+                excludes: attrs.excludes,
+                file: attrs.file
+              }
+            }
+          end
+
           def method
-            :get
+            :post
           end
 
           def url
-            [].join("/")
+            [
+              "utils",
+              "batch",
+              "build"
+            ].join("/")
           end
         end
       end

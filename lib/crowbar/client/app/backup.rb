@@ -22,9 +22,9 @@ module Crowbar
           "List existing backups"
 
         long_desc <<-LONGDESC
-          `list` will print out a list of existing backups on the admin
-          node. You can display the list in different output
-          formats and you can filter the list by any search criteria.
+          `list` will print out a list of existing backups on the server.
+          You can display the list in different output formats and you
+          can filter the list by any search criteria.
 
           With --format <format> option you can choose an output format
           with the available options table, json or plain. You can also
@@ -77,7 +77,9 @@ module Crowbar
           "Create a new backup"
 
         long_desc <<-LONGDESC
-          `create NAME` will create a new backup on the Administration Server.
+          `create NAME` will trigger the creation of a new backup on the
+          server, to download the backup after processing you can use the
+            download command.
         LONGDESC
 
         def create(name)
@@ -94,10 +96,16 @@ module Crowbar
           "Download a backup"
 
         long_desc <<-LONGDESC
-          `download ID` will download a backup from the Administration Server.
+          `download ID [FILE]` will download a backup from the server. If
+          you specify a `file` the download gets written to that file,
+          otherwise it gets saved to the current working directory with an
+          automatically generated filename. You can directly provide a path
+          to a file or just pipe the content to stdout. To pipe the content
+          to stdout you should just write a `-` instead of a specific
+          filename.
         LONGDESC
 
-        def download(id)
+        def download(id, file = nil)
           Command::Backup::Download.new(
             *command_params(
               id: id
@@ -111,15 +119,14 @@ module Crowbar
           "Upload a backup"
 
         long_desc <<-LONGDESC
-          `upload FILE` will upload a backup to the Administration Server.
+          `upload FILE` will upload a backup to the server. You can use
+          this backup later to trigger a restore.
         LONGDESC
 
         def upload(file)
           Command::Backup::Upload.new(
             *command_params(
-              file: File.new(
-                file
-              )
+              file: file
             )
           ).execute
         rescue => e
@@ -130,7 +137,9 @@ module Crowbar
           "Delete a backup"
 
         long_desc <<-LONGDESC
-          `delete ID` will delete a backup from the Administration Server.
+          `delete ID` will delete a backup from the server. Be careful
+          with that command, you are not able to restore this file after
+          deletion.
         LONGDESC
 
         def delete(id)

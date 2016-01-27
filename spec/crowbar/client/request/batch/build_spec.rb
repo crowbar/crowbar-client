@@ -17,48 +17,39 @@
 require_relative "../../../../spec_helper"
 
 describe "Crowbar::Client::Request::Batch::Build" do
-  # it_behaves_like "a request class", true do
-  #   subject do
-  #     ::Crowbar::Client::Request::Batch::Build.new(
-  #       attrs
-  #     )
-  #   end
+  it_behaves_like "a request class", false do
+    subject do
+      ::Crowbar::Client::Request::Batch::Build.new(
+        attrs
+      )
+    end
 
-  #   let!(:attrs) do
-  #     {
-  #       node: "",
-  #       network: "",
-  #       range: "",
-  #       suggest: "",
-  #       prop: "default"
-  #     }
-  #   end
+    let!(:attrs) do
+      {
+        file: fixture_path(
+          "batch.yml"
+        ).open
+      }
+    end
 
-  #   let!(:params) do
-  #     {
-  #       name: "",
-  #       network: "",
-  #       range: "",
-  #       suggestion: ""
-  #     }
-  #   end
+    let!(:params) do
+      {}
+    end
 
-  #   let!(:method) do
-  #     :post
-  #   end
+    let!(:method) do
+      :post
+    end
 
-  #   let!(:url) do
-  #     "crowbar/network/1.0/allocate_ip/default"
-  #   end
+    let!(:url) do
+      "utils/batch/build"
+    end
 
-  #   let!(:headers) do
-  #     {
-  #       "Content-Type" => "application/json",
-  #       "Accept" => "application/json"
-  #     }
-  #   end
-  # end
-
-  pending
-
+    let!(:headers) do
+      {
+        "Accept" => "application/json",
+        "Content-Length" => "403",
+        "Content-Type" => "multipart/form-data; boundary=-----------RubyMultipartPost"
+      }
+    end
+  end
 end

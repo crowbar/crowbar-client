@@ -17,48 +17,37 @@
 require_relative "../../../../spec_helper"
 
 describe "Crowbar::Client::Request::Batch::Export" do
-  # it_behaves_like "a request class", true do
-  #   subject do
-  #     ::Crowbar::Client::Request::Batch::Export.new(
-  #       attrs
-  #     )
-  #   end
+  it_behaves_like "a request class", true do
+    subject do
+      ::Crowbar::Client::Request::Batch::Export.new(
+        attrs
+      )
+    end
 
-  #   let!(:attrs) do
-  #     {
-  #       node: "",
-  #       network: "",
-  #       range: "",
-  #       suggest: "",
-  #       prop: "default"
-  #     }
-  #   end
+    let!(:attrs) do
+      {}
+    end
 
-  #   let!(:params) do
-  #     {
-  #       name: "",
-  #       network: "",
-  #       range: "",
-  #       suggestion: ""
-  #     }
-  #   end
+    let!(:params) do
+      {
+        includes: nil,
+        excludes: nil
+      }
+    end
 
-  #   let!(:method) do
-  #     :post
-  #   end
+    let!(:method) do
+      :post
+    end
 
-  #   let!(:url) do
-  #     "crowbar/network/1.0/allocate_ip/default"
-  #   end
+    let!(:url) do
+      "utils/batch/export"
+    end
 
-  #   let!(:headers) do
-  #     {
-  #       "Content-Type" => "application/json",
-  #       "Accept" => "application/json"
-  #     }
-  #   end
-  # end
-
-  pending
-
+    let!(:headers) do
+      {
+        "Content-Type" => "application/octet-stream",
+        "Accept" => "application/octet-stream"
+      }
+    end
+  end
 end
