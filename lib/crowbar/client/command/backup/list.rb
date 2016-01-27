@@ -66,7 +66,11 @@ module Crowbar
                 "created_at",
                 "size",
                 "version"
-              )
+              ).tap do |values|
+                values["size"] = number_to_human_size(
+                  values["size"]
+                )
+              end
             end
           end
         end

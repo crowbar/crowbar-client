@@ -15,11 +15,14 @@
 #
 
 require "hashie"
+require "active_support/number_helper"
 
 module Crowbar
   module Client
     module Command
       class Base
+        include ActiveSupport::NumberHelper
+
         attr_accessor :stdin
         attr_accessor :stdout
         attr_accessor :stderr
