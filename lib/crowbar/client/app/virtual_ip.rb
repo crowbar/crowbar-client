@@ -18,6 +18,8 @@ module Crowbar
   module Client
     module App
       class VirtualIP < Base
+        namespace "network virtualip"
+
         desc "allocate PROPOSAL SERVICE NETWORK RANGE [SUGGESTION]",
           "Allocate a virtual IP address"
 
