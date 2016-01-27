@@ -78,7 +78,7 @@ module Crowbar
 
         long_desc <<-LONGDESC
           `create NAME` will trigger the creation of a new backup on the
-          server, do download the backup after processing you can use the
+          server, to download the backup after processing you can use the
             download command.
         LONGDESC
 
@@ -137,7 +137,7 @@ module Crowbar
           "Delete a backup"
 
         long_desc <<-LONGDESC
-          `delete ID` will delete a backup from the server. Be carefule
+          `delete ID` will delete a backup from the server. Be careful
           with that command, you are not able to restore this file after
           deletion.
         LONGDESC

@@ -30,14 +30,14 @@ module Crowbar
 
           With --includes BARCLAMP[.PROPOSAL] option you can process
           only a specific part from the provided YAML file structure,
-          if you don't provide a proposal name we will take the `default`
-          proposal. This option allows multiple values, separated by a
-          `,` from each other.
+          the `default` proposal will be taken if you don't provide a
+          proposal name. This option allows multiple values, separated
+          by a `,` from each other.
 
           With --excludes BARCLAMP[.PROPOSAL] option you exclude
           specific parts from the provided YAML file structure to be
-          processed, if you don't provide a proposal name we will take
-          the `default` proposal. This option allows multiple values,
+          processed, the `default` proposal will be taken if you don't
+          provide a proposal name. This option allows multiple values,
           separated by a `,` from each other.
         LONGDESC
 
@@ -74,14 +74,14 @@ module Crowbar
           filename.
 
           With --includes BARCLAMP[.PROPOSAL] option you can export
-          only a specific part from the existing proposals, if you don't
-          provide a proposal name we will take the `default` proposal.
+          only a specific part from the existing proposals, the `default`
+          proposal will be taken if you don't provide a proposal name.
           This option allows multiple values, separated by a `,` from
           each other.
 
           With --excludes BARCLAMP[.PROPOSAL] option you exclude specific
-          parts from the existing proposals to be exported, if you don't
-          provide a proposal name we will take the `default` proposal.
+          parts from the existing proposals to be exported, the `default`
+          proposal will be taken if you don't provide a proposal name.
           This option allows multiple values, separated by a `,` from
           each other.
         LONGDESC
