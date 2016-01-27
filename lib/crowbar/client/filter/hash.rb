@@ -21,7 +21,7 @@ module Crowbar
         def process
           options[:values].select do |row|
             result = row.values.map do |value|
-              value.include? options[:filter]
+              value.to_s.include? options[:filter]
             end
 
             result.include? true
