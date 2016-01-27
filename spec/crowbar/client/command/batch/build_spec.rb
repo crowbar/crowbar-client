@@ -23,7 +23,11 @@ describe "Crowbar::Client::Command::Batch::Build" do
     ::Crowbar::Client::Command::Batch::Build.new(
       stdin,
       stdout,
-      stderr
+      stderr,
+      {},
+      file: fixture_path(
+        "batch.yml"
+      )
     )
   end
 

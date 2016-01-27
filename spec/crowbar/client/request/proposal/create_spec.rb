@@ -28,7 +28,8 @@ describe "Crowbar::Client::Request::Proposal::Create" do
       {
         barclamp: "ntp",
         proposal: "default",
-        data: "{}"
+        data: "{}",
+        payload: {}
       }
     end
 

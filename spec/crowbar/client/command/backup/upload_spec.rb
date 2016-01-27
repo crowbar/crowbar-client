@@ -24,6 +24,7 @@ describe "Crowbar::Client::Command::Backup::Upload" do
       stdin,
       stdout,
       stderr,
+      {},
       file: fixture_path(
         "upload.tgz"
       )
