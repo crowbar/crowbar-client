@@ -24,9 +24,7 @@ describe "Crowbar::Client::Command::Backup::Create" do
       stdin,
       stdout,
       stderr,
-      backup: {
-        name: "test-backup"
-      }
+      name: "test-backup"
     )
   end
 

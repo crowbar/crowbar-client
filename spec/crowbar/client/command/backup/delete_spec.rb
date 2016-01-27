@@ -24,8 +24,7 @@ describe "Crowbar::Client::Command::Backup::Delete" do
       stdin,
       stdout,
       stderr,
-      name: "test-backup",
-      created_at: "20150303-170203"
+      name: "test-backup"
     )
   end
 

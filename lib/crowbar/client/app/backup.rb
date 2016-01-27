@@ -85,30 +85,26 @@ module Crowbar
         def create(name)
           Command::Backup::Create.new(
             *command_params(
-              backup: name
+              name: name
             )
           ).execute
         rescue => e
           catch_errors(e)
         end
 
-        desc "download",
-          "Download a backup"
+        desc "delete",
+          "Delete a backup"
 
         long_desc <<-LONGDESC
-          `download ID [FILE]` will download a backup from the server. If
-          you specify a `file` the download gets written to that file,
-          otherwise it gets saved to the current working directory with an
-          automatically generated filename. You can directly provide a path
-          to a file or just pipe the content to stdout. To pipe the content
-          to stdout you should just write a `-` instead of a specific
-          filename.
+          `delete NAME` will delete a backup from the server. Be careful
+          with that command, you are not able to restore this file after
+          deletion.
         LONGDESC
 
-        def download(id, file = nil)
-          Command::Backup::Download.new(
+        def delete(name)
+          Command::Backup::Delete.new(
             *command_params(
-              id: id
+              name: name
             )
           ).execute
         rescue => e
@@ -133,19 +129,24 @@ module Crowbar
           catch_errors(e)
         end
 
-        desc "delete",
-          "Delete a backup"
+        desc "download",
+          "Download a backup"
 
         long_desc <<-LONGDESC
-          `delete ID` will delete a backup from the server. Be careful
-          with that command, you are not able to restore this file after
-          deletion.
+          `download NAME [FILE]` will download a backup from the server. If
+          you specify a `file` the download gets written to that file,
+          otherwise it gets saved to the current working directory with an
+          automatically generated filename. You can directly provide a path
+          to a file or just pipe the content to stdout. To pipe the content
+          to stdout you should just write a `-` instead of a specific
+          filename.
         LONGDESC
 
-        def delete(id)
-          Command::Backup::Delete.new(
+        def download(name, file = nil)
+          Command::Backup::Download.new(
             *command_params(
-              id: id
+              name: name,
+              file: file
             )
           ).execute
         rescue => e

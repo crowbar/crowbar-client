@@ -24,7 +24,7 @@ describe "Crowbar::Client::Command::Backup::Download" do
       stdin,
       stdout,
       stderr,
-      id: 1
+      name: "foo"
     )
   end
 

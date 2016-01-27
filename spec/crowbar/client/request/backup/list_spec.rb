@@ -25,13 +25,11 @@ describe "Crowbar::Client::Request::Backup::List" do
     end
 
     let!(:attrs) do
-      {
-      }
+      {}
     end
 
     let!(:params) do
-      {
-      }
+      {}
     end
 
     let!(:method) do

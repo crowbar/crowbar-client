@@ -34,8 +34,10 @@ module Crowbar
                 else
                   err "Failed to download backup"
                 end
+              when 404
+                err "Backup does not exist"
               else
-                err request.parsed_response["error"]
+                err request.body
               end
             end
           end
@@ -48,6 +50,7 @@ module Crowbar
 
             true
           rescue
+            path.unlink if path.file?
             false
           end
 
@@ -59,14 +62,9 @@ module Crowbar
               when File
                 args.file
               else
-                backup = Request::Backup::List.new.process do |p|
-                  p.parsed_response.detect do |row|
-                    row["id"] == args.id.to_i
-                  end
-                end
-
                 File.new(
-                  args.file || "#{backup["name"]}.tar.gz"
+                  args.file || "#{args.name}.tar.gz",
+                  File::CREAT | File::TRUNC | File::RDWR
                 )
               end
           end

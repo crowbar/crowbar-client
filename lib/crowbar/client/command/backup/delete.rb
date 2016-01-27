@@ -30,6 +30,8 @@ module Crowbar
               case request.code
               when 200
                 say "Successfully deleted the backup"
+              when 404
+                err "Backup does not exist"
               else
                 err request.parsed_response["error"]
               end

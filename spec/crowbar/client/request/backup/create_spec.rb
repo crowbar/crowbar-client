@@ -26,15 +26,13 @@ describe "Crowbar::Client::Request::Backup::Create" do
 
     let!(:attrs) do
       {
-        backup: "test-backup"
+        name: "test-backup"
       }
     end
 
     let!(:params) do
       {
-        backup: {
-          name: "test-backup"
-        }
+        name: "test-backup"
       }
     end
 
