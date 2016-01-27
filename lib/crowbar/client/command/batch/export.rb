@@ -67,7 +67,8 @@ module Crowbar
                 args.file
               else
                 File.new(
-                  args.file
+                  args.file,
+                  File::CREAT | File::TRUNC | File::RDWR
                 )
               end
           end

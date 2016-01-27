@@ -35,7 +35,8 @@ module Crowbar
                 args.file
               else
                 File.new(
-                  args.file
+                  args.file,
+                  File::RDONLY
                 )
               end
 
@@ -50,7 +51,7 @@ module Crowbar
               when 200
                 say "Successfully built batch"
               else
-                err request.parsed_response["error"]
+                err request.body
               end
             end
           end
