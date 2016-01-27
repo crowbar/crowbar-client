@@ -27,16 +27,17 @@ module Crowbar
               excludes: options.excludes
             )
 
-            case args.file
-            when "-"
-              args.file = stdin.to_io
-            when File
-              args.file = args.file
-            else
-              args.file = File.new(
+            args.file =
+              case args.file
+              when "-"
+                stdin.to_io
+              when File
                 args.file
-              )
-            end
+              else
+                File.new(
+                  args.file
+                )
+              end
 
             @request ||= Request::Batch::Build.new(
               args

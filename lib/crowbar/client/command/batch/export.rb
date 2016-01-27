@@ -59,16 +59,17 @@ module Crowbar
           end
 
           def path
-            case args.file
-            when "-"
-              @path ||= stdout.to_io
-            when File
-              @path ||= args.file
-            else
-              @path ||= File.new(
+            @path ||=
+              case args.file
+              when "-"
+                stdout.to_io
+              when File
                 args.file
-              )
-            end
+              else
+                File.new(
+                  args.file
+                )
+              end
           end
         end
       end
