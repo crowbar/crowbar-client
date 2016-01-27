@@ -16,16 +16,18 @@
 
 require_relative "../../../../spec_helper"
 
-describe "Crowbar::Client::Request::Backup::List" do
+describe "Crowbar::Client::Request::Backup::Restore" do
   it_behaves_like "a request class", true do
     subject do
-      ::Crowbar::Client::Request::Backup::List.new(
+      ::Crowbar::Client::Request::Backup::Restore.new(
         attrs
       )
     end
 
     let!(:attrs) do
-      {}
+      {
+        name: "foo"
+      }
     end
 
     let!(:params) do
@@ -33,11 +35,11 @@ describe "Crowbar::Client::Request::Backup::List" do
     end
 
     let!(:method) do
-      :get
+      :post
     end
 
     let!(:url) do
-      "utils/backups"
+      "utils/backups/foo/restore"
     end
 
     let!(:headers) do

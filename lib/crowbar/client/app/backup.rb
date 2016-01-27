@@ -73,6 +73,39 @@ module Crowbar
           catch_errors(e)
         end
 
+        desc "restore NAME",
+          "Restore from a backup"
+
+        long_desc <<-LONGDESC
+          `restore NAME` will trigger the restore process based on the
+          specified backup name. This command will override the proposals
+          of your server.
+
+          With --yes option you can force the restore without any further
+          question, this skips the otherwise required confirmation.
+        LONGDESC
+
+        method_option :yes,
+          type: :boolean,
+          default: false,
+          aliases: [],
+          desc: "Force the restore without any confirmation message"
+
+        def restore(name)
+          unless accepts_restore?
+            say "Canceled restore"
+            return
+          end
+
+          Command::Backup::Restore.new(
+            *command_params(
+              name: name
+            )
+          ).execute
+        rescue => e
+          catch_errors(e)
+        end
+
         desc "create",
           "Create a new backup"
 
@@ -85,30 +118,26 @@ module Crowbar
         def create(name)
           Command::Backup::Create.new(
             *command_params(
-              backup: name
+              name: name
             )
           ).execute
         rescue => e
           catch_errors(e)
         end
 
-        desc "download",
-          "Download a backup"
+        desc "delete",
+          "Delete a backup"
 
         long_desc <<-LONGDESC
-          `download ID [FILE]` will download a backup from the server. If
-          you specify a `file` the download gets written to that file,
-          otherwise it gets saved to the current working directory with an
-          automatically generated filename. You can directly provide a path
-          to a file or just pipe the content to stdout. To pipe the content
-          to stdout you should just write a `-` instead of a specific
-          filename.
+          `delete NAME` will delete a backup from the server. Be careful
+          with that command, you are not able to restore this file after
+          deletion.
         LONGDESC
 
-        def download(id, file = nil)
-          Command::Backup::Download.new(
+        def delete(name)
+          Command::Backup::Delete.new(
             *command_params(
-              id: id
+              name: name
             )
           ).execute
         rescue => e
@@ -133,23 +162,51 @@ module Crowbar
           catch_errors(e)
         end
 
-        desc "delete",
-          "Delete a backup"
+        desc "download",
+          "Download a backup"
 
         long_desc <<-LONGDESC
-          `delete ID` will delete a backup from the server. Be careful
-          with that command, you are not able to restore this file after
-          deletion.
+          `download NAME [FILE]` will download a backup from the server. If
+          you specify a `file` the download gets written to that file,
+          otherwise it gets saved to the current working directory with an
+          automatically generated filename. You can directly provide a path
+          to a file or just pipe the content to stdout. To pipe the content
+          to stdout you should just write a `-` instead of a specific
+          filename.
         LONGDESC
 
-        def delete(id)
-          Command::Backup::Delete.new(
+        def download(name, file = nil)
+          Command::Backup::Download.new(
             *command_params(
-              id: id
+              name: name,
+              file: file
             )
           ).execute
         rescue => e
           catch_errors(e)
+        end
+
+        no_commands do
+          def accepts_restore?
+            return true if options[:yes]
+
+            question = <<-QUESTION.strip_heredoc
+              Usage of this command is dangerous as it overwrites the
+              current state of the server and the proposals. Are you
+              sure you want to proceed?
+            QUESTION
+
+            answer = ask(
+              question,
+              :red,
+              limited_to: [
+                "yes",
+                "no"
+              ]
+            )
+
+            answer == "yes"
+          end
         end
       end
     end

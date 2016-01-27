@@ -23,9 +23,7 @@ module Crowbar
         class Create < Base
           def content
             super.easy_merge!(
-              backup: {
-                name: attrs.backup
-              }
+              name: attrs.name
             )
           end
 

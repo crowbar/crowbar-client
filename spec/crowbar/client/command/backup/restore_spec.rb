@@ -16,35 +16,25 @@
 
 require_relative "../../../../spec_helper"
 
-describe "Crowbar::Client::Request::Backup::List" do
-  it_behaves_like "a request class", true do
-    subject do
-      ::Crowbar::Client::Request::Backup::List.new(
-        attrs
-      )
-    end
+describe "Crowbar::Client::Command::Backup::Restore" do
+  include_context "command_context"
 
-    let!(:attrs) do
-      {}
-    end
-
-    let!(:params) do
-      {}
-    end
-
-    let!(:method) do
-      :get
-    end
-
-    let!(:url) do
-      "utils/backups"
-    end
-
-    let!(:headers) do
-      {
-        "Content-Type" => "application/json",
-        "Accept" => "application/json"
-      }
-    end
+  subject do
+    ::Crowbar::Client::Command::Backup::Restore.new(
+      stdin,
+      stdout,
+      stderr,
+      name: "test-backup"
+    )
   end
+
+  it "should always return a request class" do
+    expect(subject.request).to(
+      be_a(
+        ::Crowbar::Client::Request::Backup::Restore
+      )
+    )
+  end
+
+  pending
 end

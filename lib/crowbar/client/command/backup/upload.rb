@@ -27,7 +27,8 @@ module Crowbar
                 args.file
               else
                 File.new(
-                  args.file
+                  args.file,
+                  File::RDONLY
                 )
               end
 

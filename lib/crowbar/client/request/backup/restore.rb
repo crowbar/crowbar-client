@@ -14,37 +14,25 @@
 # limitations under the License.
 #
 
-require_relative "../../../../spec_helper"
+module Crowbar
+  module Client
+    module Request
+      module Backup
+        class Restore < Base
+          def method
+            :post
+          end
 
-describe "Crowbar::Client::Request::Backup::List" do
-  it_behaves_like "a request class", true do
-    subject do
-      ::Crowbar::Client::Request::Backup::List.new(
-        attrs
-      )
-    end
-
-    let!(:attrs) do
-      {}
-    end
-
-    let!(:params) do
-      {}
-    end
-
-    let!(:method) do
-      :get
-    end
-
-    let!(:url) do
-      "utils/backups"
-    end
-
-    let!(:headers) do
-      {
-        "Content-Type" => "application/json",
-        "Accept" => "application/json"
-      }
+          def url
+            [
+              "utils",
+              "backups",
+              attrs.name,
+              "restore"
+            ].join("/")
+          end
+        end
+      end
     end
   end
 end

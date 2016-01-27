@@ -27,7 +27,7 @@ module Crowbar
             [
               "utils",
               "backups",
-              attrs.id
+              attrs.name
             ].join("/")
           end
         end

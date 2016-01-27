@@ -26,7 +26,7 @@ describe "Crowbar::Client::Request::Backup::Download" do
 
     let!(:attrs) do
       {
-        id: 1
+        name: "foo"
       }
     end
 
@@ -40,7 +40,7 @@ describe "Crowbar::Client::Request::Backup::Download" do
     end
 
     let!(:url) do
-      "utils/backups/1/download"
+      "utils/backups/foo/download"
     end
 
     let!(:headers) do
