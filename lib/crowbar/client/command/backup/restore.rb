@@ -16,25 +16,26 @@
 
 module Crowbar
   module Client
-    module Request
+    module Command
       module Backup
-        autoload :Create,
-          File.expand_path("../backup/create", __FILE__)
+        class Restore < Base
+          def request
+            @request ||= Request::Backup::Restore.new(
+              args
+            )
+          end
 
-        autoload :Delete,
-          File.expand_path("../backup/delete", __FILE__)
-
-        autoload :Download,
-          File.expand_path("../backup/download", __FILE__)
-
-        autoload :List,
-          File.expand_path("../backup/list", __FILE__)
-
-        autoload :Restore,
-          File.expand_path("../backup/restore", __FILE__)
-
-        autoload :Upload,
-          File.expand_path("../backup/upload", __FILE__)
+          def execute
+            request.process do |request|
+              case request.code
+              when 200
+                say "Successfully triggered a restore"
+              else
+                err request.parsed_response["error"]
+              end
+            end
+          end
+        end
       end
     end
   end

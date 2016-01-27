@@ -14,28 +14,39 @@
 # limitations under the License.
 #
 
-module Crowbar
-  module Client
-    module Request
-      module Backup
-        autoload :Create,
-          File.expand_path("../backup/create", __FILE__)
+require_relative "../../../../spec_helper"
 
-        autoload :Delete,
-          File.expand_path("../backup/delete", __FILE__)
+describe "Crowbar::Client::Request::Backup::Restore" do
+  it_behaves_like "a request class", true do
+    subject do
+      ::Crowbar::Client::Request::Backup::Restore.new(
+        attrs
+      )
+    end
 
-        autoload :Download,
-          File.expand_path("../backup/download", __FILE__)
+    let!(:attrs) do
+      {
+        name: "foo"
+      }
+    end
 
-        autoload :List,
-          File.expand_path("../backup/list", __FILE__)
+    let!(:params) do
+      {}
+    end
 
-        autoload :Restore,
-          File.expand_path("../backup/restore", __FILE__)
+    let!(:method) do
+      :post
+    end
 
-        autoload :Upload,
-          File.expand_path("../backup/upload", __FILE__)
-      end
+    let!(:url) do
+      "utils/backups/foo/restore"
+    end
+
+    let!(:headers) do
+      {
+        "Content-Type" => "application/json",
+        "Accept" => "application/json"
+      }
     end
   end
 end

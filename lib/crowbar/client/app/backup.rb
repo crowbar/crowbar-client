@@ -73,6 +73,39 @@ module Crowbar
           catch_errors(e)
         end
 
+        desc "restore NAME",
+          "Restore from a backup"
+
+        long_desc <<-LONGDESC
+          `restore NAME` will trigger the restore process based on the
+          specified backup name. This command will override the proposals
+          of your server.
+
+          With --yes option you can force the restore without any further
+          question, this skips the otherwise required confirmation.
+        LONGDESC
+
+        method_option :yes,
+          type: :boolean,
+          default: false,
+          aliases: [],
+          desc: "Force the restore without any confirmation message"
+
+        def restore(name)
+          unless accepts_restore?
+            say "Canceled restore"
+            return
+          end
+
+          Command::Backup::Restore.new(
+            *command_params(
+              name: name
+            )
+          ).execute
+        rescue => e
+          catch_errors(e)
+        end
+
         desc "create",
           "Create a new backup"
 
@@ -151,6 +184,29 @@ module Crowbar
           ).execute
         rescue => e
           catch_errors(e)
+        end
+
+        no_commands do
+          def accepts_restore?
+            return true if options[:yes]
+
+            question = <<-QUESTION.strip_heredoc
+              Usage of this command is dangerous as it overwrites the
+              current state of the server and the proposals. Are you
+              sure you want to proceed?
+            QUESTION
+
+            answer = ask(
+              question,
+              :red,
+              limited_to: [
+                "yes",
+                "no"
+              ]
+            )
+
+            answer == "yes"
+          end
         end
       end
     end

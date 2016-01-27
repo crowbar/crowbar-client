@@ -22,7 +22,6 @@ module Crowbar
       module Backup
         class Create < Base
           def content
-            # TODO(must): Get rid of this namespace
             super.easy_merge!(
               name: attrs.name
             )

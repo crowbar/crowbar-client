@@ -18,23 +18,20 @@ module Crowbar
   module Client
     module Request
       module Backup
-        autoload :Create,
-          File.expand_path("../backup/create", __FILE__)
+        class Restore < Base
+          def method
+            :post
+          end
 
-        autoload :Delete,
-          File.expand_path("../backup/delete", __FILE__)
-
-        autoload :Download,
-          File.expand_path("../backup/download", __FILE__)
-
-        autoload :List,
-          File.expand_path("../backup/list", __FILE__)
-
-        autoload :Restore,
-          File.expand_path("../backup/restore", __FILE__)
-
-        autoload :Upload,
-          File.expand_path("../backup/upload", __FILE__)
+          def url
+            [
+              "utils",
+              "backups",
+              attrs.name,
+              "restore"
+            ].join("/")
+          end
+        end
       end
     end
   end
