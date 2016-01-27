@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.4.0](https://github.com/crowbar/crowbar-client/releases/tag/v2.4.0) - 2015-01-27
+
+* BUGFIX
+  * Fixed backup commands by name (@tboerger)
+  * Fixed help output for nested commands (@tboerger)
+* ENHANCEMENT
+  * Added subcommand to trigger a backup restore (@tboerger)
+  * Added subcommand for batch build and export (@tboerger)
+
 ## [2.3.0](https://github.com/crowbar/crowbar-client/releases/tag/v2.3.0) - 2015-01-15
 
 * BREAKING
