@@ -106,7 +106,7 @@ module Crowbar
           catch_errors(e)
         end
 
-        desc "create",
+        desc "create NAME",
           "Create a new backup"
 
         long_desc <<-LONGDESC
@@ -125,7 +125,7 @@ module Crowbar
           catch_errors(e)
         end
 
-        desc "delete",
+        desc "delete NAME",
           "Delete a backup"
 
         long_desc <<-LONGDESC
@@ -144,7 +144,7 @@ module Crowbar
           catch_errors(e)
         end
 
-        desc "upload",
+        desc "upload FILE",
           "Upload a backup"
 
         long_desc <<-LONGDESC
@@ -162,7 +162,7 @@ module Crowbar
           catch_errors(e)
         end
 
-        desc "download",
+        desc "download NAME [FILE]",
           "Download a backup"
 
         long_desc <<-LONGDESC
