@@ -45,8 +45,8 @@ describe "Crowbar::Client::Request::Batch::Export" do
 
     let!(:headers) do
       {
-        "Content-Type" => "application/octet-stream",
-        "Accept" => "application/octet-stream"
+        "Content-Type" => "application/json",
+        "Accept" => "application/json"
       }
     end
   end

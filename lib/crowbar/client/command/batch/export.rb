@@ -14,6 +14,7 @@
 # limitations under the License.
 #
 
+require "base64"
 require "easy_diff"
 
 module Crowbar
@@ -36,7 +37,7 @@ module Crowbar
             request.process do |request|
               case request.code
               when 200
-                if write(request.body)
+                if write(request.parsed_response)
                   say "Successfully exported batch"
                 else
                   err "Failed to export batch"
@@ -50,15 +51,21 @@ module Crowbar
           protected
 
           def write(body)
-            path.binmode
-            path.write body
+            path(body["name"]).tap do |path|
+              path.binmode
+              path.write(
+                Base64.decode64(
+                  body["file"]
+                )
+              )
 
-            true
+              true
+            end
           rescue
             false
           end
 
-          def path
+          def path(name = nil)
             @path ||=
               case args.file
               when "-"
@@ -67,7 +74,7 @@ module Crowbar
                 args.file
               else
                 File.new(
-                  args.file,
+                  args.file || name,
                   File::CREAT | File::TRUNC | File::RDWR
                 )
               end

@@ -47,7 +47,7 @@ describe "Crowbar::Client::Request::Batch::Build" do
     let!(:headers) do
       {
         "Accept" => "application/json",
-        "Content-Length" => "403",
+        "Content-Length" => "694",
         "Content-Type" => "multipart/form-data; boundary=-----------RubyMultipartPost"
       }
     end

@@ -63,11 +63,11 @@ module Crowbar
           catch_errors(e)
         end
 
-        desc "export FILE",
+        desc "export [FILE]",
           "Export proposals to file or stdout"
 
         long_desc <<-LONGDESC
-          `export FILE` will collect the informations of the proposals
+          `export [FILE]` will collect the information of the proposals
           in a YAML format. You can directly provide a path to a file or
           just pipe the content into stdout. To pipe the content to
           stdout you should just write a `-` instead of a specific
@@ -98,7 +98,7 @@ module Crowbar
           banner: "BARCLAMP[.PROPOSAL]",
           desc: "Exclude a specific barclamp or proposal for export"
 
-        def export(file)
+        def export(file = nil)
           Command::Batch::Export.new(
             *command_params(
               file: file
