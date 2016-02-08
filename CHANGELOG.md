@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.4.1](https://github.com/crowbar/crowbar-client/releases/tag/v2.4.1) - 2015-02-08
+
+* BUGFIX
+  * Fixed updated path to installer API (@jdsn)
+  * Print correct help output for backup commands (@tboerger)
+* ENHANCEMENT
+  * Integrated changes for fixed batch API (@tboerger)
+
 ## [2.4.0](https://github.com/crowbar/crowbar-client/releases/tag/v2.4.0) - 2015-01-27
 
 * BUGFIX
