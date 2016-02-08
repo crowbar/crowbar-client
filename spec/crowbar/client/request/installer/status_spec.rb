@@ -52,7 +52,7 @@ describe "Crowbar::Client::Request::Installer::Status" do
     end
 
     let!(:url) do
-      "installer/status"
+      "installer/installer/status"
     end
 
     let!(:headers) do

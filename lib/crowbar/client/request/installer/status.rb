@@ -26,6 +26,7 @@ module Crowbar
           def url
             [
               "installer",
+              "installer",
               "status"
             ].join("/")
           end
