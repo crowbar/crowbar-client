@@ -51,7 +51,7 @@ module Crowbar
               when 200
                 say "Successfully built batch"
               else
-                err request.body
+                err request.parsed_response["error"]
               end
             end
           end

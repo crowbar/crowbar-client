@@ -1,0 +1,14 @@
+proposals:
+- barclamp: provisioner
+  attributes:
+    shell_prompt: USER@ALIAS:CWD SUFFIX
+- barclamp: database
+  deployment:
+    elements:
+      database-server:
+        - "@@controller1@@"
+- barclamp: rabbitmq
+  deployment:
+    elements:
+      rabbitmq-server:
+        - "@@controller1@@"

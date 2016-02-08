@@ -28,13 +28,6 @@ module Crowbar
             )
           end
 
-          def headers
-            super.easy_merge!(
-              "Content-Type" => "application/octet-stream",
-              "Accept" => "application/octet-stream"
-            )
-          end
-
           def method
             :post
           end
