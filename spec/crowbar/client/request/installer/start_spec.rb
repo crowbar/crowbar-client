@@ -42,7 +42,7 @@ describe "Crowbar::Client::Request::Installer::Start" do
     end
 
     let!(:url) do
-      "installer/start"
+      "installer/installer/start"
     end
 
     let!(:headers) do

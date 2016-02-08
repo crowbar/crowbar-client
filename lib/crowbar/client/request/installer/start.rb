@@ -34,6 +34,7 @@ module Crowbar
           def url
             [
               "installer",
+              "installer",
               "start"
             ].join("/")
           end
