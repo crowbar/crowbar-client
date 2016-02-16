@@ -52,6 +52,15 @@ module Crowbar
     class InternalServerError < SimpleCatchableError
     end
 
+    class BadGatewayError < SimpleCatchableError
+    end
+
+    class ServiceUnavailableError < SimpleCatchableError
+    end
+
+    class GatewayTimeoutError < SimpleCatchableError
+    end
+
     class NotAuthorizedError < SimpleCatchableError
     end
 
