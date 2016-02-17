@@ -59,23 +59,51 @@ module Crowbar
             params
           )
 
-          case result.code
-          when 500
-            raise InternalServerError,
-              "An internal error occured"
-          when 401
-            raise NotAuthorizedError,
-              "User is not authorized"
-          when 403
-            raise NotAuthorizedError,
-              "User access is forbidden"
-          end
+          send(
+            errors[result.code]
+          ) if errors[result.code]
 
           if block_given?
             yield result
           else
             result
           end
+        end
+
+        def errors
+          {
+            401 => :not_authorized,
+            403 => :not_authorized,
+            500 => :internal_server,
+            502 => :bad_gateway,
+            503 => :service_unavailable,
+            504 => :gateway_timeout
+          }
+        end
+
+        def not_authorized
+          raise NotAuthorizedError,
+            "User is not authorized"
+        end
+
+        def internal_server
+          raise InternalServerError,
+            "An internal error occured"
+        end
+
+        def bad_gateway
+          raise BadGatewayError,
+            "Received a bad gateway error"
+        end
+
+        def service_unavailable
+          raise ServiceUnavailableError,
+            "Service is not available"
+        end
+
+        def gateway_timeout
+          raise GatewayTimeoutError,
+            "Received a gateway timeout"
         end
       end
     end
