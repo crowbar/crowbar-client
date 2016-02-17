@@ -56,7 +56,7 @@ module Crowbar
         class_option :anonymous,
           type: :boolean,
           default: Config.defaults[:anonymous],
-          aliases: ["-a"],
+          aliases: ["-A"],
           desc: "Skip API user authentication"
 
         class_option :debug,
