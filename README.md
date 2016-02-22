@@ -1,9 +1,9 @@
 # Crowbar: Client
 
-This is an experimental implementation to replace the current CLI scripts of
-the crowbar barclamps. This tool is intended to be installable standalone,
-that way everybody who got access to the Crowbar admin network should be able
-to manage Crowbar from remote.
+This tool is a complete reimplementation of the old CLI scripts of Crowbar.
+It is intended to be installable standalone on any machine with access to
+the Crowbar admin network. It is the **recommended command line interface** to manage
+Crowbar from remote or locally on the Crowbar server itself.
 
 The [Crowbar Framework](https://github.com/crowbar/crowbar) is currently
 maintained by [SUSE](http://www.suse.com/) as an [OpenStack](http://openstack.org)
@@ -20,12 +20,23 @@ was originally developed by the [Dell CloudEdge Solutions Team](http://dell.com/
 
 ## Install
 
-To install this simple rubygem you can check your package manager if it is
-available for you, alternativly you can just install the ruby gem if you have a
+To install this simple ruby gem you can check your package manager if it is
+available for you, alternatively you can just install the ruby gem if you have a
 running ruby stack on your machine with this command:
 
 ```
 gem install crowbar-client
+```
+
+## Configuration
+
+`crowbar-client` can be configured by placing a `.crowbarrc` file in your `$HOME` directory.
+For details about the options see the [default configuration file](config/crowbarrc).
+
+## Usage
+
+```
+crowbarctl help
 ```
 
 ## Contributing
