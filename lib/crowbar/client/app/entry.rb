@@ -18,10 +18,17 @@ module Crowbar
   module Client
     module App
       class Entry < Base
+        check_unknown_options!
+
         map [
           "--version",
           "-v"
         ] => :version
+
+        map [
+          "--help",
+          "-h"
+        ] => :help
 
         class_option :alias,
           type: :string,
@@ -64,6 +71,18 @@ module Crowbar
           default: Config.defaults[:debug],
           aliases: ["-d"],
           desc: "Output more debug information"
+
+        # TODO(should): Prevent a --no-help alternative flag
+        # class_option :help,
+        #   type: :boolean,
+        #   aliases: ["-h"],
+        #   desc: "Print this help information"
+
+        # TODO(should): Prevent a --no-version alternative flag
+        # class_option :version,
+        #   type: :boolean,
+        #   aliases: ["-v"],
+        #   desc: "Print the current version of the CLI"
 
         desc "version",
           "Display the current version of the client"
