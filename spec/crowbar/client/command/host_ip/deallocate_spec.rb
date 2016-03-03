@@ -19,21 +19,13 @@ require_relative "../../../../spec_helper"
 describe "Crowbar::Client::Command::HostIP::Deallocate" do
   include_context "command_context"
 
-  subject do
-    ::Crowbar::Client::Command::HostIP::Deallocate.new(
-      stdin,
-      stdout,
-      stderr
-    )
-  end
-
-  it "should always return a request class" do
-    expect(subject.request).to(
-      be_a(
-        ::Crowbar::Client::Request::HostIP::Deallocate
+  it_behaves_like "a command class", true do
+    subject do
+      ::Crowbar::Client::Command::HostIP::Deallocate.new(
+        stdin,
+        stdout,
+        stderr
       )
-    )
+    end
   end
-
-  pending
 end

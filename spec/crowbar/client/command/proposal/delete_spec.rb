@@ -19,21 +19,13 @@ require_relative "../../../../spec_helper"
 describe "Crowbar::Client::Command::Proposal::Delete" do
   include_context "command_context"
 
-  subject do
-    ::Crowbar::Client::Command::Proposal::Delete.new(
-      stdin,
-      stdout,
-      stderr
-    )
-  end
-
-  it "should always return a request class" do
-    expect(subject.request).to(
-      be_a(
-        ::Crowbar::Client::Request::Proposal::Delete
+  it_behaves_like "a command class", true do
+    subject do
+      ::Crowbar::Client::Command::Proposal::Delete.new(
+        stdin,
+        stdout,
+        stderr
       )
-    )
+    end
   end
-
-  pending
 end

@@ -19,23 +19,15 @@ require_relative "../../../../spec_helper"
 describe "Crowbar::Client::Command::Node::List" do
   include_context "command_context"
 
-  subject do
-    ::Crowbar::Client::Command::Node::List.new(
-      stdin,
-      stdout,
-      stderr,
-      lists: true,
-      aliases: true
-    )
-  end
-
-  it "should always return a request class" do
-    expect(subject.request).to(
-      be_a(
-        ::Crowbar::Client::Request::Node::List
+  it_behaves_like "a command class", true do
+    subject do
+      ::Crowbar::Client::Command::Node::List.new(
+        stdin,
+        stdout,
+        stderr,
+        lists: true,
+        aliases: true
       )
-    )
+    end
   end
-
-  pending
 end

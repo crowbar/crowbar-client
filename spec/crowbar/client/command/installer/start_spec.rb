@@ -19,22 +19,14 @@ require_relative "../../../../spec_helper"
 describe "Crowbar::Client::Command::Installer::Start" do
   include_context "command_context"
 
-  subject do
-    ::Crowbar::Client::Command::Installer::Start.new(
-      stdin,
-      stdout,
-      stderr,
-      force: false
-    )
-  end
-
-  it "should always return a request class" do
-    expect(subject.request).to(
-      be_a(
-        ::Crowbar::Client::Request::Installer::Start
+  it_behaves_like "a command class", true do
+    subject do
+      ::Crowbar::Client::Command::Installer::Start.new(
+        stdin,
+        stdout,
+        stderr,
+        force: false
       )
-    )
+    end
   end
-
-  pending
 end
