@@ -16,13 +16,17 @@
 
 shared_examples "a command class" do |with_body|
   let!(:superclass_description) do
-    self.class.superclass_metadata[:description].gsub(/Command/, "Request").constantize
+    self.class.superclass_metadata[:description]
+  end
+
+  let(:superclass) do
+    superclass_description.gsub(/Command/, "Request").constantize
   end
 
   it "should always return a request class" do
     expect(subject.request).to(
       be_a(
-        superclass_description
+        superclass
       )
     )
   end

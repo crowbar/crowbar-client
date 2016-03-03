@@ -1,5 +1,5 @@
 #
-# Copyright 2015, SUSE Linux GmbH
+# Copyright 2016, SUSE Linux GmbH
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,18 +14,13 @@
 # limitations under the License.
 #
 
-require_relative "../../../../spec_helper"
-
-describe "Crowbar::Client::Command::Node::Powercycle" do
-  include_context "command_context"
-
-  it_behaves_like "a command class", true do
-    subject do
-      ::Crowbar::Client::Command::Node::Powercycle.new(
-        stdin,
-        stdout,
-        stderr
-      )
+module Crowbar
+  module Client
+    module Request
+      module Node
+        class Powercycle < Action
+        end
+      end
     end
   end
 end

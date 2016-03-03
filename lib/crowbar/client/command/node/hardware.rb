@@ -22,7 +22,7 @@ module Crowbar
       module Node
         class Hardware < Base
           def request
-            @request ||= Request::Node::Action.new(
+            @request ||= Request::Node::Hardware.new(
               args.easy_merge(
                 action: :update
               )

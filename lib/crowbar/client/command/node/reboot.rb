@@ -22,7 +22,7 @@ module Crowbar
       module Node
         class Reboot < Base
           def request
-            @request ||= Request::Node::Action.new(
+            @request ||= Request::Node::Reboot.new(
               args.easy_merge(
                 action: :reboot
               )

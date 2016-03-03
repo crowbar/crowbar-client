@@ -22,7 +22,7 @@ module Crowbar
       module Node
         class Reinstall < Base
           def request
-            @request ||= Request::Node::Action.new(
+            @request ||= Request::Node::Reinstall.new(
               args.easy_merge(
                 action: :reinstall
               )

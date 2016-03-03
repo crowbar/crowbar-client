@@ -22,7 +22,7 @@ module Crowbar
       module Node
         class Poweroff < Base
           def request
-            @request ||= Request::Node::Action.new(
+            @request ||= Request::Node::Poweroff.new(
               args.easy_merge(
                 action: :poweroff
               )
