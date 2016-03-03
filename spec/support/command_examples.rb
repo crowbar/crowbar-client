@@ -30,4 +30,30 @@ shared_examples "a command class" do |with_body|
       )
     )
   end
+
+  it "should have options" do
+    expect(subject.options).to(
+      be_a(
+        Hashie::Mash
+      )
+    )
+  end
+
+  it "should have arguments" do
+    expect(subject.args).to(
+      be_a(
+        Hashie::Mash
+      )
+    )
+  end
+
+  it "should have file descriptors" do
+    [:stdin, :stdout, :stderr].each do |fd|
+      expect(subject.send(fd)).to(
+        be_a(
+          StringIO
+        )
+      )
+    end
+  end
 end
