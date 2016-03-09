@@ -22,10 +22,20 @@ module Crowbar
         # Implementation for the repository deactivate all request
         #
         class DeactivateAll < Base
+          #
+          # HTTP method that gets used by the request
+          #
+          # @return [Symbol] the method for the request
+          #
           def method
             :post
           end
 
+          #
+          # Path to the API endpoint for the request
+          #
+          # @return [String] path to the API endpoint
+          #
           def url
             [
               "utils",

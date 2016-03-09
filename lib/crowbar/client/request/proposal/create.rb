@@ -24,16 +24,31 @@ module Crowbar
         # Implementation for the proposal create request
         #
         class Create < Base
+          #
+          # Override the request content
+          #
+          # @return [Hash] the content for the request
+          #
           def content
             super.easy_merge!(
               attrs.payload
             )
           end
 
+          #
+          # HTTP method that gets used by the request
+          #
+          # @return [Symbol] the method for the request
+          #
           def method
             :put
           end
 
+          #
+          # Path to the API endpoint for the request
+          #
+          # @return [String] path to the API endpoint
+          #
           def url
             [
               "crowbar",
