@@ -20,13 +20,32 @@ module Crowbar
     # A representation of the current Crowbar CLI version
     #
     class Version
+      #
+      # Major version
+      #
       MAJOR = 2
+
+      #
+      # Minor version
+      #
       MINOR = 4
+
+      #
+      # Patch version
+      #
       PATCH = 1
 
+      #
+      # Optional suffix
+      #
       PRE = nil
 
       class << self
+        #
+        # Convert the Crowbar CLI version to a string
+        #
+        # @return [String] the version of Crowbar CLI
+        #
         def to_s
           [MAJOR, MINOR, PATCH, PRE].compact.join(".")
         end
