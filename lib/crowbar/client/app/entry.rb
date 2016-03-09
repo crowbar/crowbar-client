@@ -96,6 +96,9 @@ module Crowbar
           to debug some issue with the current implementation.
         LONGDESC
 
+        #
+        # Command to print the version of Crowbar CLI
+        #
         def version
           say "crowbar-client v#{Crowbar::Client::Version}"
         end

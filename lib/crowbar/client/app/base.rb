@@ -24,6 +24,14 @@ module Crowbar
       # A base class that provides helper for the wrappers
       #
       class Base < Thor
+        #
+        # Initialize the Thor command
+        #
+        # @param args [Array] the arguments
+        # @param local_options [Hash] the local options
+        # @param config [Hash] the configuration
+        # @return [Crowbar::Client::App::Base]
+        #
         def initialize(args = [], local_options = {}, config = {})
           super
 
@@ -43,10 +51,21 @@ module Crowbar
         no_commands do
           include Mixin::Format
 
+          #
+          # Print a message to STDOUT
+          #
+          # @param message [String] the message to print
+          #
           def say(message)
             $stdout.puts message
           end
 
+          #
+          # Print a message to STDERR
+          #
+          # @param message [String] the message to print
+          # @param exit_code [Integer] the exit code to use
+          #
           def err(message, exit_code = nil)
             case provide_format
             when :json
@@ -60,6 +79,12 @@ module Crowbar
             exit(exit_code) unless exit_code.nil?
           end
 
+          #
+          # Standard parameters for commands
+          #
+          # @param args [Hash] the arguments to inject
+          # @return [Array]
+          #
           def command_params(args = {})
             [
               $stdin,
@@ -70,6 +95,12 @@ module Crowbar
             ]
           end
 
+          #
+          # General errors to catch properly
+          #
+          # @param error [StandardError] the error to catch
+          # @raise [StandardError] only raised if uncatchable
+          #
           def catch_errors(error)
             case error
             when SimpleCatchableError
@@ -85,11 +116,27 @@ module Crowbar
         end
 
         class << self
+          #
+          # Properly print an error on invalid command
+          #
+          # @param command [String] the command that failed
+          # @param error [StandardError] the error class
+          # @param args [Array] the arguments that failed
+          # @param arity [Integer] the number of arguments
+          #
           def handle_argument_error(command, error, args, arity)
             $stderr.puts("Usage: #{banner(command)}")
             exit(2)
           end
 
+          #
+          # A banner that gets displayed on help and error
+          #
+          # @param command [String] the command for help output
+          # @param namespace [String] the namespace for help
+          # @param subcommand [Bool] the flag if it's a subcommand
+          # @return [String]
+          #
           def banner(command, namespace = nil, subcommand = true)
             addition = command.formatted_usage(
               self,

@@ -68,6 +68,13 @@ module Crowbar
           banner: "<filter>",
           desc: "Filter by criteria, display only data that contains filter"
 
+        #
+        # Installer status command
+        #
+        # It will print out information about the current status of the
+        # installer. You can display the list in different output formats
+        # and you can filter the list by any search criteria.
+        #
         def status
           Command::Installer::Status.new(
             *command_params
@@ -80,7 +87,7 @@ module Crowbar
           "Start the insallation of Crowbar"
 
         long_desc <<-LONGDESC
-          `start` will trigger the installation of the Administration Server.
+          `start` will trigger the installation of the server.
 
           With --force you can enforce a reinstallation if the installation
           has already been finished. Be careful with that option as you will
@@ -93,6 +100,11 @@ module Crowbar
           aliases: [],
           desc: "Force Administration Server installation"
 
+        #
+        # Installer start command
+        #
+        # It will trigger the installation of the server.
+        #
         def start
           Command::Installer::Start.new(
             *command_params

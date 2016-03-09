@@ -31,6 +31,15 @@ module Crowbar
           specified network interface on the specified node.
         LONGDESC
 
+        #
+        # Interface enable command
+        #
+        # Enable a network interface.
+        #
+        # @param proposal [String] the proposal name
+        # @param node [String] the node name or alias
+        # @param network [String] the network name
+        #
         def enable(proposal, node, network)
           Command::Interface::Enable.new(
             *command_params(
@@ -51,6 +60,15 @@ module Crowbar
           specified network interface on the specified node.
         LONGDESC
 
+        #
+        # Interface disable command
+        #
+        # Disable a network interface.
+        #
+        # @param proposal [String] the proposal name
+        # @param node [String] the node name or alias
+        # @param network [String] the network name
+        #
         def disable(proposal, node, network)
           Command::Interface::Disable.new(
             *command_params(

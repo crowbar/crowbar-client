@@ -75,8 +75,6 @@ module Crowbar
         # You can display the list in different output formats and you
         # can filter the list by any search criteria.
         #
-        # @return [String] a formatted response from the server
-        #
         def list
           Command::Backup::List.new(
             *command_params
@@ -110,7 +108,6 @@ module Crowbar
         # name. This command will override the proposals of your server.
         #
         # @param name [String] the name of the backup
-        # @return [String] a formatted response from the server
         #
         def restore(name)
           unless accepts_restore?
@@ -144,7 +141,6 @@ module Crowbar
         # command.
         #
         # @param name [String] the name of the backup
-        # @return [String] a formatted response from the server
         #
         def create(name)
           Command::Backup::Create.new(
@@ -172,7 +168,6 @@ module Crowbar
         # command, you are not able to restore this file after deletion.
         #
         # @param name [String] the name of the backup
-        # @return [String] a formatted response from the server
         #
         def delete(name)
           Command::Backup::Delete.new(
@@ -199,7 +194,6 @@ module Crowbar
         # later to trigger a restore.
         #
         # @param file [String] the path to the file
-        # @return [String] a formatted response from the server
         #
         def upload(file)
           Command::Backup::Upload.new(
@@ -236,7 +230,6 @@ module Crowbar
         #
         # @param name [String] the name of the backup
         # @param file [String] the path of the file
-        # @return [String] a formatted response from the server
         #
         def download(name, file = nil)
           Command::Backup::Download.new(
