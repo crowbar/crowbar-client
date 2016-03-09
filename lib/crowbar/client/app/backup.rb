@@ -109,7 +109,7 @@ module Crowbar
         # It will trigger the restore process based on the specified backup
         # name. This command will override the proposals of your server.
         #
-        # @param input [String] the name of the backup
+        # @param name [String] the name of the backup
         # @return [String] a formatted response from the server
         #
         def restore(name)
@@ -143,7 +143,7 @@ module Crowbar
         # download the backup after processing you can use the download
         # command.
         #
-        # @param input [String] the name of the backup
+        # @param name [String] the name of the backup
         # @return [String] a formatted response from the server
         #
         def create(name)
@@ -171,7 +171,7 @@ module Crowbar
         # It will delete a backup from the server. Be careful with that
         # command, you are not able to restore this file after deletion.
         #
-        # @param input [String] the name of the backup
+        # @param name [String] the name of the backup
         # @return [String] a formatted response from the server
         #
         def delete(name)
@@ -198,7 +198,7 @@ module Crowbar
         # It will upload a backup to the server. You can use this backup
         # later to trigger a restore.
         #
-        # @param input [String] the path to the file
+        # @param file [String] the path to the file
         # @return [String] a formatted response from the server
         #
         def upload(file)
@@ -234,8 +234,8 @@ module Crowbar
         # the content to stdout. To pipe the content to stdout you should
         # just write a `-` instead of a specific filename.
         #
-        # @param input [String] the name of the backup
-        # @param input [String] the path of the file
+        # @param name [String] the name of the backup
+        # @param file [String] the path of the file
         # @return [String] a formatted response from the server
         #
         def download(name, file = nil)
