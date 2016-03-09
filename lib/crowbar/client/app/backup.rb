@@ -68,6 +68,15 @@ module Crowbar
           banner: "<filter>",
           desc: "Filter by criteria, display only data that contains filter"
 
+        #
+        # Backup list command
+        #
+        # It will print out a list of existing backups on the server.
+        # You can display the list in different output formats and you
+        # can filter the list by any search criteria.
+        #
+        # @return [String] a formatted response from the server
+        #
         def list
           Command::Backup::List.new(
             *command_params
@@ -94,6 +103,15 @@ module Crowbar
           aliases: [],
           desc: "Force the restore without any confirmation message"
 
+        #
+        # Backup restore command
+        #
+        # It will trigger the restore process based on the specified backup
+        # name. This command will override the proposals of your server.
+        #
+        # @param input [String] the name of the backup
+        # @return [String] a formatted response from the server
+        #
         def restore(name)
           unless accepts_restore?
             say "Canceled restore"
@@ -115,9 +133,19 @@ module Crowbar
         long_desc <<-LONGDESC
           `create NAME` will trigger the creation of a new backup on the
           server, to download the backup after processing you can use the
-            download command.
+          download command.
         LONGDESC
 
+        #
+        # Backup create command
+        #
+        # It will trigger the creation of a new backup on the server, to
+        # download the backup after processing you can use the download
+        # command.
+        #
+        # @param input [String] the name of the backup
+        # @return [String] a formatted response from the server
+        #
         def create(name)
           Command::Backup::Create.new(
             *command_params(
@@ -137,6 +165,15 @@ module Crowbar
           deletion.
         LONGDESC
 
+        #
+        # Backup delete command
+        #
+        # It will delete a backup from the server. Be careful with that
+        # command, you are not able to restore this file after deletion.
+        #
+        # @param input [String] the name of the backup
+        # @return [String] a formatted response from the server
+        #
         def delete(name)
           Command::Backup::Delete.new(
             *command_params(
@@ -155,6 +192,15 @@ module Crowbar
           this backup later to trigger a restore.
         LONGDESC
 
+        #
+        # Backup upload command
+        #
+        # It will upload a backup to the server. You can use this backup
+        # later to trigger a restore.
+        #
+        # @param input [String] the path to the file
+        # @return [String] a formatted response from the server
+        #
         def upload(file)
           Command::Backup::Upload.new(
             *command_params(
@@ -178,6 +224,20 @@ module Crowbar
           filename.
         LONGDESC
 
+        #
+        # Backup download command
+        #
+        # It will download a backup from the server. If you specify a `file`
+        # the download gets written to that file, otherwise it gets saved
+        # to the current working directory with an automatically generated
+        # filename. You can directly provide a path to a file or just pipe
+        # the content to stdout. To pipe the content to stdout you should
+        # just write a `-` instead of a specific filename.
+        #
+        # @param input [String] the name of the backup
+        # @param input [String] the path of the file
+        # @return [String] a formatted response from the server
+        #
         def download(name, file = nil)
           Command::Backup::Download.new(
             *command_params(
@@ -190,6 +250,11 @@ module Crowbar
         end
 
         no_commands do
+          #
+          # Ask if the restore should be really down
+          #
+          # @return [Bool] allow or disallow a restore
+          #
           def accepts_restore?
             return true if options[:yes]
 
