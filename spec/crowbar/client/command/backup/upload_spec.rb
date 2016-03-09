@@ -19,25 +19,17 @@ require_relative "../../../../spec_helper"
 describe "Crowbar::Client::Command::Backup::Upload" do
   include_context "command_context"
 
-  subject do
-    ::Crowbar::Client::Command::Backup::Upload.new(
-      stdin,
-      stdout,
-      stderr,
-      {},
-      file: fixture_path(
-        "upload.tgz"
+  it_behaves_like "a command class", true do
+    subject do
+      ::Crowbar::Client::Command::Backup::Upload.new(
+        stdin,
+        stdout,
+        stderr,
+        {},
+        file: fixture_path(
+          "upload.tgz"
+        )
       )
-    )
+    end
   end
-
-  it "should always return a request class" do
-    expect(subject.request).to(
-      be_a(
-        ::Crowbar::Client::Request::Backup::Upload
-      )
-    )
-  end
-
-  pending
 end

@@ -21,23 +21,53 @@ module Crowbar
         autoload :Action,
           File.expand_path("../node/action", __FILE__)
 
+        autoload :Allocate,
+          File.expand_path("../node/allocate", __FILE__)
+
         autoload :Delete,
           File.expand_path("../node/delete", __FILE__)
 
         autoload :Group,
           File.expand_path("../node/group", __FILE__)
 
+        autoload :Hardware,
+          File.expand_path("../node/hardware", __FILE__)
+
+        autoload :Identify,
+          File.expand_path("../node/identify", __FILE__)
+
         autoload :List,
           File.expand_path("../node/list", __FILE__)
 
+        autoload :Powercycle,
+          File.expand_path("../node/powercycle", __FILE__)
+
+        autoload :Poweroff,
+          File.expand_path("../node/poweroff", __FILE__)
+
+        autoload :Poweron,
+          File.expand_path("../node/poweron", __FILE__)
+
+        autoload :Reboot,
+          File.expand_path("../node/reboot", __FILE__)
+
+        autoload :Reinstall,
+          File.expand_path("../node/reinstall", __FILE__)
+
         autoload :Rename,
           File.expand_path("../node/rename", __FILE__)
+
+        autoload :Reset,
+          File.expand_path("../node/reset", __FILE__)
 
         autoload :Role,
           File.expand_path("../node/role", __FILE__)
 
         autoload :Show,
           File.expand_path("../node/show", __FILE__)
+
+        autoload :Shutdown,
+          File.expand_path("../node/shutdown", __FILE__)
 
         autoload :Status,
           File.expand_path("../node/status", __FILE__)

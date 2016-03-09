@@ -22,7 +22,7 @@ module Crowbar
       module Node
         class Powercycle < Base
           def request
-            @request ||= Request::Node::Action.new(
+            @request ||= Request::Node::Powercycle.new(
               args.easy_merge(
                 action: :powercycle
               )

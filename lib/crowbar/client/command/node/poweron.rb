@@ -22,7 +22,7 @@ module Crowbar
       module Node
         class Poweron < Base
           def request
-            @request ||= Request::Node::Action.new(
+            @request ||= Request::Node::Poweron.new(
               args.easy_merge(
                 action: :poweron
               )

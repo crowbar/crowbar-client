@@ -19,25 +19,17 @@ require_relative "../../../../spec_helper"
 describe "Crowbar::Client::Command::Batch::Build" do
   include_context "command_context"
 
-  subject do
-    ::Crowbar::Client::Command::Batch::Build.new(
-      stdin,
-      stdout,
-      stderr,
-      {},
-      file: fixture_path(
-        "batch.yml"
+  it_behaves_like "a command class", true do
+    subject do
+      ::Crowbar::Client::Command::Batch::Build.new(
+        stdin,
+        stdout,
+        stderr,
+        {},
+        file: fixture_path(
+          "batch.yml"
+        )
       )
-    )
+    end
   end
-
-  it "should always return a request class" do
-    expect(subject.request).to(
-      be_a(
-        ::Crowbar::Client::Request::Batch::Build
-      )
-    )
-  end
-
-  pending
 end

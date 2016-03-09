@@ -22,7 +22,7 @@ module Crowbar
       module Node
         class Allocate < Base
           def request
-            @request ||= Request::Node::Action.new(
+            @request ||= Request::Node::Allocate.new(
               args.easy_merge(
                 action: :allocate
               )

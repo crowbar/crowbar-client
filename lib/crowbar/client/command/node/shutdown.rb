@@ -22,7 +22,7 @@ module Crowbar
       module Node
         class Shutdown < Base
           def request
-            @request ||= Request::Node::Action.new(
+            @request ||= Request::Node::Shutdown.new(
               args.easy_merge(
                 action: :shutdown
               )

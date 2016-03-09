@@ -22,7 +22,7 @@ module Crowbar
       module Node
         class Identify < Base
           def request
-            @request ||= Request::Node::Action.new(
+            @request ||= Request::Node::Identify.new(
               args.easy_merge(
                 action: :identify
               )

@@ -19,21 +19,13 @@ require_relative "../../../../spec_helper"
 describe "Crowbar::Client::Command::Node::Rename" do
   include_context "command_context"
 
-  subject do
-    ::Crowbar::Client::Command::Node::Rename.new(
-      stdin,
-      stdout,
-      stderr
-    )
-  end
-
-  it "should always return a request class" do
-    expect(subject.request).to(
-      be_a(
-        ::Crowbar::Client::Request::Node::Rename
+  it_behaves_like "a command class", true do
+    subject do
+      ::Crowbar::Client::Command::Node::Rename.new(
+        stdin,
+        stdout,
+        stderr
       )
-    )
+    end
   end
-
-  pending
 end
