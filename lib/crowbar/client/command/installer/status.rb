@@ -19,7 +19,7 @@ module Crowbar
     module Command
       module Installer
         #
-        # Implementation for the installer start command
+        # Implementation for the installer status command
         #
         class Status < Base
           include Mixin::Format

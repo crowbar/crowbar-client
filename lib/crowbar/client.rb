@@ -29,7 +29,7 @@ module Crowbar
   #
   module Client
     #
-    # Error class that always gets catched by the client
+    # Error class that always gets caught by the client
     #
     class SimpleCatchableError < StandardError
     end
@@ -101,7 +101,7 @@ module Crowbar
     end
 
     #
-    # Error class to catch not authorized responses
+    # Error class to catch unauthorized responses
     #
     class NotAuthorizedError < SimpleCatchableError
     end

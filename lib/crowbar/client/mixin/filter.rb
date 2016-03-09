@@ -20,7 +20,7 @@ module Crowbar
   module Client
     module Mixin
       #
-      # A mixing with filter related helpers
+      # A mixin with filter related helpers
       #
       module Filter
         extend ActiveSupport::Concern

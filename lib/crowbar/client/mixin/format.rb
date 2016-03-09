@@ -20,7 +20,7 @@ module Crowbar
   module Client
     module Mixin
       #
-      # A mixing with formatter related helpers
+      # A mixin with formatter related helpers
       #
       module Format
         extend ActiveSupport::Concern

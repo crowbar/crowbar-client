@@ -20,7 +20,7 @@ module Crowbar
   module Client
     module Mixin
       #
-      # A mixing with barclamp related helpers
+      # A mixin with barclamp related helpers
       #
       module Barclamp
         extend ActiveSupport::Concern

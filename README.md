@@ -16,6 +16,7 @@ was originally developed by the [Dell CloudEdge Solutions Team](http://dell.com/
 [![Code Climate](https://codeclimate.com/github/crowbar/crowbar-client.svg)](https://codeclimate.com/github/crowbar/crowbar-client)
 [![Test Coverage](https://codeclimate.com/github/crowbar/crowbar-client/badges/coverage.svg)](https://codeclimate.com/github/crowbar/crowbar-client)
 [![Dependency Status](https://gemnasium.com/crowbar/crowbar-client.svg)](https://gemnasium.com/crowbar/crowbar-client)
+[![Inline Docs](http://inch-ci.org/github/crowbar/crowbar-client.svg?branch=master)](http://inch-ci.org/github/crowbar/crowbar-client)
 [![Join the chat at https://gitter.im/crowbar/crowbar](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/crowbar/crowbar)
 
 ## Install

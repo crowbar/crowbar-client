@@ -17,7 +17,7 @@
 module Crowbar
   module Client
     #
-    # Module for some usefule and reuseable utilities
+    # Module for some utilities used within the client
     #
     module Util
       autoload :Editor,
