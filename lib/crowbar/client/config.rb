@@ -30,6 +30,11 @@ module Crowbar
       attr_writer :config
       attr_writer :values
 
+      #
+      # Define base configuration
+      #
+      # @param options [Hash] the base configuration
+      #
       def configure(options)
         self.options = Hashie::Mash.new(
           options
@@ -39,6 +44,11 @@ module Crowbar
         self.values = merge
       end
 
+      #
+      # Define default config
+      #
+      # @return [Hashie::Mash] the default config
+      #
       def defaults
         @defaults ||= Hashie::Mash.new(
           alias: default_alias,
@@ -51,36 +61,76 @@ module Crowbar
         )
       end
 
+      #
+      # Define parameter config
+      #
+      # @return [Hashie::Mash] the parameter config
+      #
       def options
         @options ||= defaults
       end
 
+      #
+      # Define file config
+      #
+      # @return [Hashie::Mash] the file config
+      #
       def config
         @config ||= Hashie::Mash.new
       end
 
+      #
+      # Define merged config
+      #
+      # @return [Hashie::Mash] the merged config
+      #
       def values
         @values ||= Hashie::Mash.new
       end
 
       protected
 
+      #
+      # Define a default alias value
+      #
+      # @return [String] the default alias value
+      #
       def default_alias
         ENV["CROWBAR_ALIAS"] || "default"
       end
 
+      #
+      # Define a default username value
+      #
+      # @return [String] the default username value
+      #
       def default_username
         ENV["CROWBAR_USERNAME"] || "crowbar"
       end
 
+      #
+      # Define a default password value
+      #
+      # @return [String] the default password value
+      #
       def default_password
         ENV["CROWBAR_PASSWORD"] || "crowbar"
       end
 
+      #
+      # Define a default server value
+      #
+      # @return [String] the default server value
+      #
       def default_server
         ENV["CROWBAR_SERVER"] || "http://127.0.0.1:80"
       end
 
+      #
+      # Define a default timeout value
+      #
+      # @return [Integer] the default timeout value
+      #
       def default_timeout
         if ENV["CROWBAR_TIMEOUT"].present?
           ENV["CROWBAR_TIMEOUT"].to_i
@@ -89,6 +139,11 @@ module Crowbar
         end
       end
 
+      #
+      # Define a default anonymous flag
+      #
+      # @return [Bool] the default anonymous flag
+      #
       def default_anonymous
         if ENV["CROWBAR_ANONYMOUS"].present?
           [
@@ -99,6 +154,11 @@ module Crowbar
         end
       end
 
+      #
+      # Define a default debug flag
+      #
+      # @return [String] the default alias flag
+      #
       def default_debug
         if ENV["CROWBAR_DEBUG"].present?
           [
@@ -109,6 +169,11 @@ module Crowbar
         end
       end
 
+      #
+      # Merge the different configs together
+      #
+      # @return [Hashie::Mash] the merged config
+      #
       def merge
         result = {}.tap do |overwrite|
           defaults.keys.each do |key|
@@ -130,6 +195,11 @@ module Crowbar
         )
       end
 
+      #
+      # Load and parse the config file
+      #
+      # @return [Hashie::Mash] the config content
+      #
       def parser
         ini = Hashie::Mash.new(
           IniFile.load(
@@ -146,12 +216,22 @@ module Crowbar
         Hashie::Mash.new
       end
 
+      #
+      # Find the first config file
+      #
+      # @return [String] the first config
+      #
       def finder
         paths.detect do |temp|
           File.exist? temp
         end
       end
 
+      #
+      # Define the available config file paths
+      #
+      # @return [Array] the available paths
+      #
       def paths
         [
           File.join(
@@ -166,26 +246,63 @@ module Crowbar
       end
 
       class << self
+        #
+        # Define base configuration
+        #
+        # @see #configure
+        # @param options [Hash] the base configuration
+        #
         def configure(options)
           instance.configure(options)
         end
 
+        #
+        # Define default config
+        #
+        # @see #defaults
+        # @return [Hashie::Mash] the default config
+        #
         def defaults
           instance.defaults
         end
 
+        #
+        # Define parameter config
+        #
+        # @see #options
+        # @return [Hashie::Mash] the parameter config
+        #
         def options
           instance.options
         end
 
+        #
+        # Define file config
+        #
+        # @see #config
+        # @return [Hashie::Mash] the file config
+        #
         def config
           instance.config
         end
 
+        #
+        # Define merged config
+        #
+        # @see #values
+        # @return [Hashie::Mash] the merged config
+        #
         def values
           instance.values
         end
 
+        #
+        # Magic to catch missing method calls
+        #
+        # @param method [Symbol] the method that is missing
+        # @param arguments [Array] the list of attributes
+        # @yield
+        #
         def method_missing(method, *arguments, &block)
           case
           when method.to_s.ends_with?("=")
@@ -203,6 +320,13 @@ module Crowbar
           end
         end
 
+        #
+        # Magic to catch missing respond_to calls
+        #
+        # @param method [Symbol] the method that is missing
+        # @param include_private [Bool] should include private methods
+        # @return [Bool] the class responds to it or not
+        #
         def respond_to?(method, include_private = false)
           case
           when method.to_s.ends_with?("=")
