@@ -17,6 +17,9 @@
 module Crowbar
   module Client
     module Filter
+      #
+      # Filter to reduce a hash subset by a given search clause
+      #
       class Subset < Base
         def process
           options[:filter].to_s.split(".").each do |segment|

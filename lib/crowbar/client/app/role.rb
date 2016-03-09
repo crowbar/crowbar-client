@@ -17,6 +17,9 @@
 module Crowbar
   module Client
     module App
+      #
+      # A Thor based CLI wrapper for role commands
+      #
       class Role < Base
         desc "list BARCLAMP",
           "List available roles for barclamp"

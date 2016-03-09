@@ -20,6 +20,9 @@ module Crowbar
   module Client
     module Request
       module Proposal
+        #
+        # Implementation for the proposal create request
+        #
         class Create < Base
           def content
             super.easy_merge!(

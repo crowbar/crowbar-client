@@ -16,6 +16,9 @@
 
 module Crowbar
   module Client
+    #
+    # Module for the available filter functionalities
+    #
     module Filter
       autoload :Array,
         File.expand_path("../filter/array", __FILE__)

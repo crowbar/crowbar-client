@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Request
       module Node
+        #
+        # Implementation for the node list request
+        #
         class List < Base
           def method
             :get

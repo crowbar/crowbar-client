@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Request
       module Node
+        #
+        # Implementation for the node status request
+        #
         class Status < Base
           def method
             :get

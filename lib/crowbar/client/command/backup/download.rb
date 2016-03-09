@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Command
       module Backup
+        #
+        # Implementation for the backup download command
+        #
         class Download < Base
           def request
             @request ||= Request::Backup::Download.new(

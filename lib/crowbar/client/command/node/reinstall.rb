@@ -20,6 +20,9 @@ module Crowbar
   module Client
     module Command
       module Node
+        #
+        # Implementation for the node reinstall command
+        #
         class Reinstall < Base
           def request
             @request ||= Request::Node::Reinstall.new(

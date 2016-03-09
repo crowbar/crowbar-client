@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Command
       module Repository
+        #
+        # Implementation for the repository deactivate all command
+        #
         class DeactivateAll < Base
           def request
             @request ||= Request::Repository::DeactivateAll.new(

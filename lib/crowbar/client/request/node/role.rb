@@ -20,6 +20,9 @@ module Crowbar
   module Client
     module Request
       module Node
+        #
+        # Implementation for the node role request
+        #
         class Role < Base
           def content
             super.easy_merge!(

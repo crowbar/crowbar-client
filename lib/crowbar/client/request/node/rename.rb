@@ -20,6 +20,9 @@ module Crowbar
   module Client
     module Request
       module Node
+        #
+        # Implementation for the node rename request
+        #
         class Rename < Base
           def content
             super.easy_merge!(

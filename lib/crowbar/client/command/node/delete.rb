@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Command
       module Node
+        #
+        # Implementation for the node delete command
+        #
         class Delete < Base
           def request
             @request ||= Request::Node::Delete.new(

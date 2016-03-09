@@ -17,6 +17,9 @@
 module Crowbar
   module Client
     module App
+      #
+      # A Thor based CLI wrapper for installer commands
+      #
       class Installer < Base
         desc "status",
           "Show current installer status"

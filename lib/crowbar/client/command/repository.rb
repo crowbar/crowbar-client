@@ -17,6 +17,9 @@
 module Crowbar
   module Client
     module Command
+      #
+      # Module for the repository command implementations
+      #
       module Repository
         autoload :Activate,
           File.expand_path("../repository/activate", __FILE__)

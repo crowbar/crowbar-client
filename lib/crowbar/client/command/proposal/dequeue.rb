@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Command
       module Proposal
+        #
+        # Implementation for the proposal dequeue command
+        #
         class Dequeue < Base
           include Mixin::Barclamp
 

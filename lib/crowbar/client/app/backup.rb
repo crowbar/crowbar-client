@@ -17,6 +17,9 @@
 module Crowbar
   module Client
     module App
+      #
+      # A Thor based CLI wrapper for backup commands
+      #
       class Backup < Base
         desc "list",
           "List existing backups"

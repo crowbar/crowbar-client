@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Command
       module HostIP
+        #
+        # Implementation for the host IP allocate command
+        #
         class Allocate < Base
           def request
             @request ||= Request::HostIP::Allocate.new(

@@ -16,6 +16,9 @@
 
 module Crowbar
   module Client
+    #
+    # Module for the available mixin functionalities
+    #
     module Mixin
       autoload :Barclamp,
         File.expand_path("../mixin/barclamp", __FILE__)

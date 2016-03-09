@@ -20,6 +20,9 @@ module Crowbar
   module Client
     module Request
       module Repository
+        #
+        # Implementation for the repository activate request
+        #
         class Activate < Base
           def content
             super.easy_merge!(

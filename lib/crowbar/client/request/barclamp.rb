@@ -17,6 +17,9 @@
 module Crowbar
   module Client
     module Request
+      #
+      # Module for the barclamp request implementations
+      #
       module Barclamp
         autoload :List,
           File.expand_path("../barclamp/list", __FILE__)

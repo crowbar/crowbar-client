@@ -20,6 +20,9 @@ require "singleton"
 
 module Crowbar
   module Client
+    #
+    # General configuration for the Crowbar CLI
+    #
     class Config
       include Singleton
 

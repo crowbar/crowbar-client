@@ -16,6 +16,9 @@
 
 module Crowbar
   module Client
+    #
+    # Module for the available formatter functionalities
+    #
     module Formatter
       autoload :Array,
         File.expand_path("../formatter/array", __FILE__)

@@ -17,6 +17,9 @@
 module Crowbar
   module Client
     module App
+      #
+      # A Thor based CLI wrapper for proposal commands
+      #
       class Proposal < Base
         desc "list BARCLAMP",
           "Show a list of available proposals"

@@ -20,6 +20,9 @@ require "json"
 module Crowbar
   module Client
     module Formatter
+      #
+      # Formatter to properly print out arrays in different formats
+      #
       class Array < Base
         def empty?
           options[:values].empty?

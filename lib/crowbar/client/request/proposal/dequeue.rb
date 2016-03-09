@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Request
       module Proposal
+        #
+        # Implementation for the proposal dequeue request
+        #
         class Dequeue < Base
           def method
             :delete

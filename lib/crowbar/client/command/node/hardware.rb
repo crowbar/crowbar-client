@@ -20,6 +20,9 @@ module Crowbar
   module Client
     module Command
       module Node
+        #
+        # Implementation for the node hardware command
+        #
         class Hardware < Base
           def request
             @request ||= Request::Node::Hardware.new(

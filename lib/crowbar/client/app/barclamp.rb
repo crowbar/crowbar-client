@@ -17,6 +17,9 @@
 module Crowbar
   module Client
     module App
+      #
+      # A Thor based CLI wrapper for barclamp commands
+      #
       class Barclamp < Base
         desc "list",
           "List available barclamps"

@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Request
       module Backup
+        #
+        # Implementation for the backup upload request
+        #
         class Upload < Base
           def params
             {

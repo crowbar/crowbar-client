@@ -19,6 +19,9 @@ require "httmultiparty"
 module Crowbar
   module Client
     module Request
+      #
+      # Client for executing the HTTP API requests
+      #
       class Party
         include HTTMultiParty
 

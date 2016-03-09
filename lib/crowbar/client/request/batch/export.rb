@@ -20,6 +20,9 @@ module Crowbar
   module Client
     module Request
       module Batch
+        #
+        # Implementation for the batch export request
+        #
         class Export < Base
           def content
             super.easy_merge!(

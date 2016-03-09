@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Request
       module Repository
+        #
+        # Implementation for the repository list request
+        #
         class List < Base
           def method
             :get

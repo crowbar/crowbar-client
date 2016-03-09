@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Request
       module Backup
+        #
+        # Implementation for the backup restore request
+        #
         class Restore < Base
           def method
             :post

@@ -17,6 +17,9 @@
 module Crowbar
   module Client
     module Request
+      #
+      # Module for the installer request implementations
+      #
       module Installer
         autoload :Status,
           File.expand_path("../installer/status", __FILE__)

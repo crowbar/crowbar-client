@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Request
       module Repository
+        #
+        # Implementation for the repository deactivate all request
+        #
         class DeactivateAll < Base
           def method
             :post

@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Command
       module Node
+        #
+        # Implementation for the node transition command
+        #
         class Transition < Base
           def request
             @request ||= Request::Node::Transition.new(

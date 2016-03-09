@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Request
       module Role
+        #
+        # Implementation for the role show request
+        #
         class Show < Base
           def method
             :get

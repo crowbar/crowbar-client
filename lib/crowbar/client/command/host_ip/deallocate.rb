@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Command
       module HostIP
+        #
+        # Implementation for the host IP deallocate command
+        #
         class Deallocate < Base
           def request
             @request ||= Request::HostIP::Deallocate.new(

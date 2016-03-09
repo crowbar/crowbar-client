@@ -17,6 +17,9 @@
 module Crowbar
   module Client
     module App
+      #
+      # A Thor based CLI wrapper for server commands
+      #
       class Server < Base
         desc "api BARCLAMP",
           "Show the API documentation"

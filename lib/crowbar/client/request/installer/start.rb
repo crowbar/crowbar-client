@@ -20,6 +20,9 @@ module Crowbar
   module Client
     module Request
       module Installer
+        #
+        # Implementation for the installer start request
+        #
         class Start < Base
           def content
             super.easy_merge!(

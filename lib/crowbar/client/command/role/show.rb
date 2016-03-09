@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Command
       module Role
+        #
+        # Implementation for the role show command
+        #
         class Show < Base
           include Mixin::Barclamp
 

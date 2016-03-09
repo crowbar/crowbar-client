@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Request
       module Server
+        #
+        # Implementation for the server API request
+        #
         class Api < Base
           def method
             :get

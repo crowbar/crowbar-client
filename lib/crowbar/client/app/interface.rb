@@ -17,6 +17,9 @@
 module Crowbar
   module Client
     module App
+      #
+      # A Thor based CLI wrapper for interface commands
+      #
       class Interface < Base
         namespace "network interface"
 

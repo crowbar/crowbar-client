@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Request
       module Proposal
+        #
+        # Implementation for the proposal show request
+        #
         class Show < Base
           def method
             :get

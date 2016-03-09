@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Command
       module Node
+        #
+        # Implementation for the node show command
+        #
         class Show < Base
           include Mixin::Format
           include Mixin::Filter

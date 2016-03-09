@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Request
       module Batch
+        #
+        # Implementation for the batch build request
+        #
         class Build < Base
           def params
             {

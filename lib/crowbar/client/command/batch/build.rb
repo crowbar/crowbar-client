@@ -20,6 +20,9 @@ module Crowbar
   module Client
     module Command
       module Batch
+        #
+        # Implementation for the batch build command
+        #
         class Build < Base
           def request
             args.easy_merge!(

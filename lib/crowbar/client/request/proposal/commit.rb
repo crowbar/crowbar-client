@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Request
       module Proposal
+        #
+        # Implementation for the proposal commit request
+        #
         class Commit < Base
           def method
             :post

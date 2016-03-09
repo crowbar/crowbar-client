@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Command
       module Interface
+        #
+        # Implementation for the interface disable command
+        #
         class Disable < Base
           def request
             @request ||= Request::Interface::Disable.new(

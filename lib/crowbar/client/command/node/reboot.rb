@@ -20,6 +20,9 @@ module Crowbar
   module Client
     module Command
       module Node
+        #
+        # Implementation for the node reboot command
+        #
         class Reboot < Base
           def request
             @request ||= Request::Node::Reboot.new(

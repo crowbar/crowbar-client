@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Request
       module Node
+        #
+        # Implementation for the node action request
+        #
         class Action < Base
           def method
             :post

@@ -20,6 +20,9 @@ module Crowbar
   module Client
     module Request
       module VirtualIP
+        #
+        # Implementation for the virtual IP allocate request
+        #
         class Allocate < Base
           def content
             super.easy_merge!(

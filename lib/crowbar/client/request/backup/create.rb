@@ -20,6 +20,9 @@ module Crowbar
   module Client
     module Request
       module Backup
+        #
+        # Implementation for the backup create request
+        #
         class Create < Base
           def content
             super.easy_merge!(

@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Command
       module Node
+        #
+        # Implementation for the node status command
+        #
         class Status < Base
           include Mixin::Format
           include Mixin::Filter

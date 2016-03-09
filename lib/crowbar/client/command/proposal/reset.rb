@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Command
       module Proposal
+        #
+        # Implementation for the proposal reset command
+        #
         class Reset < Base
           include Mixin::Barclamp
 

@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Request
       module Proposal
+        #
+        # Implementation for the proposal reset request
+        #
         class Reset < Base
           def method
             :post

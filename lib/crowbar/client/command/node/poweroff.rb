@@ -20,6 +20,9 @@ module Crowbar
   module Client
     module Command
       module Node
+        #
+        # Implementation for the node poweroff command
+        #
         class Poweroff < Base
           def request
             @request ||= Request::Node::Poweroff.new(

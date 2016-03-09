@@ -17,6 +17,9 @@
 module Crowbar
   module Client
     module Request
+      #
+      # Module for the repository request implementations
+      #
       module Repository
         autoload :Activate,
           File.expand_path("../repository/activate", __FILE__)

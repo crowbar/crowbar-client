@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Request
       module Installer
+        #
+        # Implementation for the installer status request
+        #
         class Status < Base
           def method
             :get

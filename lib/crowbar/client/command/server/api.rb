@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Command
       module Server
+        #
+        # Implementation for the server API command
+        #
         class Api < Base
           include Mixin::Barclamp
 

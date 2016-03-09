@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Request
       module Backup
+        #
+        # Implementation for the backup list request
+        #
         class List < Base
           def method
             :get

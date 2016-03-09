@@ -17,6 +17,9 @@
 module Crowbar
   module Client
     module Request
+      #
+      # Module for the role request implementations
+      #
       module Role
         autoload :List,
           File.expand_path("../role/list", __FILE__)

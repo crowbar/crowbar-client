@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Request
       module Role
+        #
+        # Implementation for the role list request
+        #
         class List < Base
           def method
             :get

@@ -17,6 +17,9 @@
 module Crowbar
   module Client
     module Request
+      #
+      # Module for the proposal request implementations
+      #
       module Proposal
         autoload :Commit,
           File.expand_path("../proposal/commit", __FILE__)

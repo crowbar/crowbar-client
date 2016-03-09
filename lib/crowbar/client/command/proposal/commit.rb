@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Command
       module Proposal
+        #
+        # Implementation for the proposal commit command
+        #
         class Commit < Base
           include Mixin::Barclamp
 

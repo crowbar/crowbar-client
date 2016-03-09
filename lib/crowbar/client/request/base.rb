@@ -19,6 +19,9 @@ require "hashie"
 module Crowbar
   module Client
     module Request
+      #
+      # Base that provides methods shared between request implementations
+      #
       class Base
         attr_accessor :request
         attr_accessor :attrs

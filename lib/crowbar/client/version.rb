@@ -16,6 +16,9 @@
 
 module Crowbar
   module Client
+    #
+    # A representation of the current Crowbar CLI version
+    #
     class Version
       MAJOR = 2
       MINOR = 4

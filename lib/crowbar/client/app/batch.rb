@@ -17,6 +17,9 @@
 module Crowbar
   module Client
     module App
+      #
+      # A Thor based CLI wrapper for batch commands
+      #
       class Batch < Base
         desc "build FILE",
           "Build proposals from file or stdin"

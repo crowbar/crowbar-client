@@ -16,6 +16,9 @@
 
 module Crowbar
   module Client
+    #
+    # Module for some usefule and reuseable utilities
+    #
     module Util
       autoload :Editor,
         File.expand_path("../util/editor", __FILE__)

@@ -17,6 +17,9 @@
 module Crowbar
   module Client
     module App
+      #
+      # A Thor based CLI entry point which resolves the sub-commands
+      #
       class Entry < Base
         check_unknown_options!
 

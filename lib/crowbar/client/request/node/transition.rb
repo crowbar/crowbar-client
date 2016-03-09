@@ -20,6 +20,9 @@ module Crowbar
   module Client
     module Request
       module Node
+        #
+        # Implementation for the node transition request
+        #
         class Transition < Base
           def content
             super.easy_merge!(

@@ -20,6 +20,9 @@ require "json"
 module Crowbar
   module Client
     module Formatter
+      #
+      # Formatter to properly print out keys and values in different formats
+      #
       class Nested < Base
         def empty?
           options[:values].blank?

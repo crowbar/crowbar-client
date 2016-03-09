@@ -17,6 +17,9 @@
 module Crowbar
   module Client
     module Command
+      #
+      # Module for the node command implementations
+      #
       module Node
         autoload :Allocate,
           File.expand_path("../node/allocate", __FILE__)

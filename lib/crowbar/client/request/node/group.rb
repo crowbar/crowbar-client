@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Request
       module Node
+        #
+        # Implementation for the node group request
+        #
         class Group < Base
           def method
             :post

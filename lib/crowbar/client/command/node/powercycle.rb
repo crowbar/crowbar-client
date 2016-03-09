@@ -20,6 +20,9 @@ module Crowbar
   module Client
     module Command
       module Node
+        #
+        # Implementation for the node powercycle command
+        #
         class Powercycle < Base
           def request
             @request ||= Request::Node::Powercycle.new(

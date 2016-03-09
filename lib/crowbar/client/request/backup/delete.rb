@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Request
       module Backup
+        #
+        # Implementation for the backup delete request
+        #
         class Delete < Base
           def method
             :delete

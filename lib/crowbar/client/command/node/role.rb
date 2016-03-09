@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Command
       module Node
+        #
+        # Implementation for the node role command
+        #
         class Role < Base
           def request
             @request ||= Request::Node::Role.new(

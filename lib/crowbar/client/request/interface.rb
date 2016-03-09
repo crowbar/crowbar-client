@@ -17,6 +17,9 @@
 module Crowbar
   module Client
     module Request
+      #
+      # Module for the interface request implementations
+      #
       module Interface
         autoload :Disable,
           File.expand_path("../interface/disable", __FILE__)

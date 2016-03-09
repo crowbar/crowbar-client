@@ -20,6 +20,9 @@ module Crowbar
   module Client
     module Request
       module Backup
+        #
+        # Implementation for the backup download request
+        #
         class Download < Base
           def headers
             super.easy_merge!(

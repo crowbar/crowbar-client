@@ -17,6 +17,9 @@
 module Crowbar
   module Client
     module App
+      #
+      # A Thor based CLI wrapper for host IP commands
+      #
       class HostIP < Base
         namespace "network hostip"
 

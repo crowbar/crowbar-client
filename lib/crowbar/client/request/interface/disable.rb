@@ -20,6 +20,9 @@ module Crowbar
   module Client
     module Request
       module Interface
+        #
+        # Implementation for the interface disable request
+        #
         class Disable < Base
           def content
             super.easy_merge!(

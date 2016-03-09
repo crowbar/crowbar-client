@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Command
       module Barclamp
+        #
+        # Implementation for the barclamp list command
+        #
         class List < Base
           include Mixin::Format
           include Mixin::Filter

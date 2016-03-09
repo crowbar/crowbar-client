@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Request
       module Barclamp
+        #
+        # Implementation for the barclamp list request
+        #
         class List < Base
           def method
             :get

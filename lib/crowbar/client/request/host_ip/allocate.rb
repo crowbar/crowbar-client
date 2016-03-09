@@ -20,6 +20,9 @@ module Crowbar
   module Client
     module Request
       module HostIP
+        #
+        # Implementation for the host IP allocate request
+        #
         class Allocate < Base
           def content
             super.easy_merge!(

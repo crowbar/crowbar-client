@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Command
       module Repository
+        #
+        # Implementation for the repository list command
+        #
         class List < Base
           include Mixin::Format
           include Mixin::Filter

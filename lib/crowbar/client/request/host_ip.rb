@@ -17,6 +17,9 @@
 module Crowbar
   module Client
     module Request
+      #
+      # Module for the host IP request implementations
+      #
       module HostIP
         autoload :Allocate,
           File.expand_path("../host_ip/allocate", __FILE__)

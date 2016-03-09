@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Command
       module Role
+        #
+        # Implementation for the role list command
+        #
         class List < Base
           include Mixin::Barclamp
 

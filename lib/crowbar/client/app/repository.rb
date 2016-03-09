@@ -17,6 +17,9 @@
 module Crowbar
   module Client
     module App
+      #
+      # A Thor based CLI wrapper for repository commands
+      #
       class Repository < Base
         desc "list",
           "List all available repositories"

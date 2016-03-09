@@ -20,6 +20,9 @@ module Crowbar
   module Client
     module Command
       module Installer
+        #
+        # Implementation for the installer start command
+        #
         class Start < Base
           def request
             @request ||= Request::Installer::Start.new(

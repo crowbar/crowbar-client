@@ -17,6 +17,9 @@
 module Crowbar
   module Client
     module Request
+      #
+      # Module for the node request implementations
+      #
       module Node
         autoload :Action,
           File.expand_path("../node/action", __FILE__)

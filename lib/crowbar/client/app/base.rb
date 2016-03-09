@@ -20,6 +20,9 @@ require "easy_diff"
 module Crowbar
   module Client
     module App
+      #
+      # A base class that provides helper for the wrappers
+      #
       class Base < Thor
         def initialize(args = [], local_options = {}, config = {})
           super

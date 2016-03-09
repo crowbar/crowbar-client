@@ -17,6 +17,9 @@
 module Crowbar
   module Client
     module App
+      #
+      # A Thor based CLI wrapper for virtual IP commands
+      #
       class VirtualIP < Base
         namespace "network virtualip"
 

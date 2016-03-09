@@ -17,6 +17,9 @@
 module Crowbar
   module Client
     module App
+      #
+      # A Thor based CLI wrapper for network commands
+      #
       class Network < Base
         desc "virtualip [COMMANDS]",
           "Actions for virtual IP addresses, call without params for help"
