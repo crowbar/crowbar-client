@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Command
       module VirtualIP
+        #
+        # Implementation for the virtual IP deallocate command
+        #
         class Deallocate < Base
           def request
             @request ||= Request::VirtualIP::Deallocate.new(

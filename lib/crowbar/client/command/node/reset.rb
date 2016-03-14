@@ -20,6 +20,9 @@ module Crowbar
   module Client
     module Command
       module Node
+        #
+        # Implementation for the node reset command
+        #
         class Reset < Base
           def request
             @request ||= Request::Node::Reset.new(

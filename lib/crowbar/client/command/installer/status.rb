@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Command
       module Installer
+        #
+        # Implementation for the installer status command
+        #
         class Status < Base
           include Mixin::Format
           include Mixin::Filter

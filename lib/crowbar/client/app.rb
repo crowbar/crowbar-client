@@ -16,6 +16,9 @@
 
 module Crowbar
   module Client
+    #
+    # Module for the Thor based CLI wrapper
+    #
     module App
       autoload :Backup,
         File.expand_path("../app/backup", __FILE__)

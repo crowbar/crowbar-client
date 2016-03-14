@@ -24,46 +24,91 @@ end
 require "active_support/all"
 
 module Crowbar
+  #
+  # Client for the Crowbar API
+  #
   module Client
+    #
+    # Error class that always gets caught by the client
+    #
     class SimpleCatchableError < StandardError
     end
 
+    #
+    # Error class to catch invalid options
+    #
     class BadOptionsError < SimpleCatchableError
     end
 
+    #
+    # Error class to catch unsupported formatters
+    #
     class BadFormatterError < SimpleCatchableError
     end
 
+    #
+    # Error class to catch unsupported filters
+    #
     class BadFilterError < SimpleCatchableError
     end
 
+    #
+    # Error class to catch invalid formats
+    #
     class InvalidFormatError < SimpleCatchableError
     end
 
+    #
+    # Error class to catch a closed editor exception
+    #
     class EditorAbortError < SimpleCatchableError
     end
 
+    #
+    # Error class to catch a editor startup exception
+    #
     class EditorStartupError < SimpleCatchableError
     end
 
+    #
+    # Error class to catch JSON parsing errors
+    #
     class InvalidJsonError < SimpleCatchableError
     end
 
+    #
+    # Error class to catch internal server errors
+    #
     class InternalServerError < SimpleCatchableError
     end
 
+    #
+    # Error class to catch bad gateway responses
+    #
     class BadGatewayError < SimpleCatchableError
     end
 
+    #
+    # Error class to catch service unavailable responses
+    #
     class ServiceUnavailableError < SimpleCatchableError
     end
 
+    #
+    # Error class to catch gateway timeout responses
+    #
     class GatewayTimeoutError < SimpleCatchableError
     end
 
+    #
+    # Error class to catch unauthorized responses
+    #
     class NotAuthorizedError < SimpleCatchableError
     end
 
+    #
+    # Error class to catch unavailable barclamps
+    #
     class UnavailableBarclampError < SimpleCatchableError
       def initialize(barclamp)
         super("Barclamp #{barclamp} is not available")

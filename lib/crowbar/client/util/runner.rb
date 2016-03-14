@@ -17,6 +17,9 @@
 module Crowbar
   module Client
     module Util
+      #
+      # A wrapper around the Crowbar CLI for proper initialization
+      #
       class Runner
         attr_accessor :argv
         attr_accessor :stdin

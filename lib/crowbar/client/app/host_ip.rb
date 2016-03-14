@@ -17,6 +17,9 @@
 module Crowbar
   module Client
     module App
+      #
+      # A Thor based CLI wrapper for host IP commands
+      #
       class HostIP < Base
         namespace "network hostip"
 
@@ -28,6 +31,18 @@ module Crowbar
           try to allocate a host IP address for the specified node.
         LONGDESC
 
+        #
+        # Host IP allocate command
+        #
+        # It will try to allocate a host IP address for the specified
+        # node.
+        #
+        # @param proposal [String] the proposal name
+        # @param node [String] the node name or alias
+        # @param network [String] the network name
+        # @param range [String] the network range
+        # @param suggestion [String] an optional suggestion
+        #
         def allocate(proposal, node, network, range, suggestion = nil)
           Command::HostIP::Allocate.new(
             *command_params(
@@ -50,6 +65,15 @@ module Crowbar
           a host IP address for the specified node.
         LONGDESC
 
+        #
+        # Host IP deallocate command
+        #
+        # It will try to deallocate a host IP address.
+        #
+        # @param proposal [String] the proposal name
+        # @param node [String] the node name or alias
+        # @param network [String] the network name
+        #
         def deallocate(proposal, node, network)
           Command::HostIP::Deallocate.new(
             *command_params(

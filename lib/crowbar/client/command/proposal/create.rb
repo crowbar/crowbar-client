@@ -21,6 +21,9 @@ module Crowbar
   module Client
     module Command
       module Proposal
+        #
+        # Implementation for the proposal create command
+        #
         class Create < Base
           include Mixin::Barclamp
 

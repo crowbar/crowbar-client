@@ -17,6 +17,9 @@
 module Crowbar
   module Client
     module Command
+      #
+      # Module for the batch command implementations
+      #
       module Batch
         autoload :Build,
           File.expand_path("../batch/build", __FILE__)

@@ -19,6 +19,9 @@ require "active_support/concern"
 module Crowbar
   module Client
     module Mixin
+      #
+      # A mixin with formatter related helpers
+      #
       module Format
         extend ActiveSupport::Concern
 

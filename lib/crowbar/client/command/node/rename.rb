@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Command
       module Node
+        #
+        # Implementation for the node rename command
+        #
         class Rename < Base
           def request
             @request ||= Request::Node::Rename.new(

@@ -17,6 +17,9 @@ module Crowbar
   module Client
     module Command
       module Backup
+        #
+        # Implementation for the backup upload command
+        #
         class Upload < Base
           def request
             args.file =

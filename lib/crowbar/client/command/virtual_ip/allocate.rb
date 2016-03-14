@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Command
       module VirtualIP
+        #
+        # Implementation for the virtual IP allocate command
+        #
         class Allocate < Base
           def request
             @request ||= Request::VirtualIP::Allocate.new(

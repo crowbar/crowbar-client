@@ -20,7 +20,15 @@ module Crowbar
   module Client
     module Request
       module Interface
+        #
+        # Implementation for the interface disable request
+        #
         class Disable < Base
+          #
+          # Override the request content
+          #
+          # @return [Hash] the content for the request
+          #
           def content
             super.easy_merge!(
               name: attrs.node,
@@ -28,10 +36,20 @@ module Crowbar
             )
           end
 
+          #
+          # HTTP method that gets used by the request
+          #
+          # @return [Symbol] the method for the request
+          #
           def method
             :post
           end
 
+          #
+          # Path to the API endpoint for the request
+          #
+          # @return [String] path to the API endpoint
+          #
           def url
             [
               "crowbar",

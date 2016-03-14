@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Command
       module Proposal
+        #
+        # Implementation for the proposal list command
+        #
         class List < Base
           include Mixin::Barclamp
 

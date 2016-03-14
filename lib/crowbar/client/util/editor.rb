@@ -20,6 +20,9 @@ require "json"
 module Crowbar
   module Client
     module Util
+      #
+      # Launch an editor and return the edited content
+      #
       class Editor
         attr_accessor :content
         attr_accessor :options

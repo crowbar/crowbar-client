@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Request
       module Node
+        #
+        # Implementation for the node reinstall request
+        #
         class Reinstall < Action
         end
       end

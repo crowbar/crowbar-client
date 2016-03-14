@@ -17,6 +17,9 @@
 module Crowbar
   module Client
     module Request
+      #
+      # Module for the server request implementations
+      #
       module Server
         autoload :Api,
           File.expand_path("../server/api", __FILE__)

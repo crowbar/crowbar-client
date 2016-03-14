@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Command
       module Interface
+        #
+        # Implementation for the interface enable command
+        #
         class Enable < Base
           def request
             @request ||= Request::Interface::Enable.new(

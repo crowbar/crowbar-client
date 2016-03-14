@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Command
       module Node
+        #
+        # Implementation for the node group command
+        #
         class Group < Base
           def request
             @request ||= Request::Node::Group.new(

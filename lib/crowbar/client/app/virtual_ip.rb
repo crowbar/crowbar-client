@@ -17,6 +17,9 @@
 module Crowbar
   module Client
     module App
+      #
+      # A Thor based CLI wrapper for virtual IP commands
+      #
       class VirtualIP < Base
         namespace "network virtualip"
 
@@ -28,6 +31,18 @@ module Crowbar
           try to allocate a virtual IP address for the specified service.
         LONGDESC
 
+        #
+        # Virtual IP allocate command
+        #
+        # It will try to allocate a virtual IP address for the specified
+        # service.
+        #
+        # @param proposal [String] the proposal name
+        # @param service [String] the service name
+        # @param network [String] the network name
+        # @param range [String] the network range
+        # @param suggestion [String] an optional suggestion
+        #
         def allocate(proposal, service, network, range, suggestion = nil)
           Command::VirtualIP::Allocate.new(
             *command_params(
@@ -50,6 +65,15 @@ module Crowbar
           a virtual IP address for the specified service.
         LONGDESC
 
+        #
+        # Virtual IP deallocate command
+        #
+        # It will try to deallocate a virtual IP address.
+        #
+        # @param proposal [String] the proposal name
+        # @param service [String] the service name
+        # @param network [String] the network name
+        #
         def deallocate(proposal, service, network)
           Command::VirtualIP::Deallocate.new(
             *command_params(

@@ -17,6 +17,9 @@
 module Crowbar
   module Client
     module App
+      #
+      # A Thor based CLI wrapper for batch commands
+      #
       class Batch < Base
         desc "build FILE",
           "Build proposals from file or stdin"
@@ -53,6 +56,17 @@ module Crowbar
           banner: "BARCLAMP[.PROPOSAL]",
           desc: "Exclude a specific barclamp or proposal for processing"
 
+        #
+        # Batch build command
+        #
+        # It will create/edit/commit proposals defined in an YAML format. You
+        # can directly provide a path to a file or just pipe the content
+        # from stdin. To pipe the content from stdin you should just write
+        # a `-` instead of a specific filename.
+        #
+        # @param file [String] the path to the file
+        # @return [String] a formatted response from the server
+        #
         def build(file)
           Command::Batch::Build.new(
             *command_params(
@@ -98,6 +112,17 @@ module Crowbar
           banner: "BARCLAMP[.PROPOSAL]",
           desc: "Exclude a specific barclamp or proposal for export"
 
+        #
+        # Batch export command
+        #
+        # It will collect the information of the proposals in a YAML format.
+        # You can directly provide a path to a file or just pipe the
+        # content into stdout. To pipe the content to stdout you should
+        # just write a `-` instead of a specific filename.
+        #
+        # @param file [String] the path of the file
+        # @return [String] a formatted response from the server
+        #
         def export(file = nil)
           Command::Batch::Export.new(
             *command_params(

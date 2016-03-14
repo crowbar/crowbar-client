@@ -17,6 +17,9 @@
 module Crowbar
   module Client
     module Command
+      #
+      # Module for the backup command implementations
+      #
       module Backup
         autoload :Create,
           File.expand_path("../backup/create", __FILE__)

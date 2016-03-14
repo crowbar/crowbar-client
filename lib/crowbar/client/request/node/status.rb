@@ -18,11 +18,24 @@ module Crowbar
   module Client
     module Request
       module Node
+        #
+        # Implementation for the node status request
+        #
         class Status < Base
+          #
+          # HTTP method that gets used by the request
+          #
+          # @return [Symbol] the method for the request
+          #
           def method
             :get
           end
 
+          #
+          # Path to the API endpoint for the request
+          #
+          # @return [String] path to the API endpoint
+          #
           def url
             [
               "nodes",

@@ -17,6 +17,9 @@
 module Crowbar
   module Client
     module App
+      #
+      # A Thor based CLI wrapper for barclamp commands
+      #
       class Barclamp < Base
         desc "list",
           "List available barclamps"
@@ -65,6 +68,13 @@ module Crowbar
           banner: "<filter>",
           desc: "Filter by criteria, display only data that contains filter"
 
+        #
+        # Barclamp list command
+        #
+        # It will print out a list of the available barclamps on the target
+        # cloud. You can display the list in different output formats and
+        # you can filter the list by any search criteria.
+        #
         def list
           Command::Barclamp::List.new(
             *command_params

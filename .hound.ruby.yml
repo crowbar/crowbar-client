@@ -25,9 +25,6 @@ Style/DotPosition:
 Style/CaseIndentation:
   IndentWhenRelativeTo: end
 
-Style/Documentation:
-  Enabled: false
-
 Lint/UnusedMethodArgument:
   Enabled: false
 

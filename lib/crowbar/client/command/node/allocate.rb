@@ -20,6 +20,9 @@ module Crowbar
   module Client
     module Command
       module Node
+        #
+        # Implementation for the node allocate command
+        #
         class Allocate < Base
           def request
             @request ||= Request::Node::Allocate.new(

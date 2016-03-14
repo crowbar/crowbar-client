@@ -21,6 +21,9 @@ module Crowbar
   module Client
     module Command
       module Batch
+        #
+        # Implementation for the batch export command
+        #
         class Export < Base
           def request
             args.easy_merge!(

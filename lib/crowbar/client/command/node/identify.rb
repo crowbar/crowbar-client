@@ -20,6 +20,9 @@ module Crowbar
   module Client
     module Command
       module Node
+        #
+        # Implementation for the node identify command
+        #
         class Identify < Base
           def request
             @request ||= Request::Node::Identify.new(

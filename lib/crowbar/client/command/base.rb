@@ -20,6 +20,9 @@ require "active_support/number_helper"
 module Crowbar
   module Client
     module Command
+      #
+      # Base that provides methods shared between command implementations
+      #
       class Base
         include ActiveSupport::NumberHelper
 

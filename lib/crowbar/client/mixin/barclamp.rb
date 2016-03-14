@@ -19,6 +19,9 @@ require "active_support/concern"
 module Crowbar
   module Client
     module Mixin
+      #
+      # A mixin with barclamp related helpers
+      #
       module Barclamp
         extend ActiveSupport::Concern
 

@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Request
       module Node
+        #
+        # Implementation for the node poweroff request
+        #
         class Poweroff < Action
         end
       end

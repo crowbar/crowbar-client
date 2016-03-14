@@ -17,6 +17,9 @@
 module Crowbar
   module Client
     module Formatter
+      #
+      # Base that provides methods shared between different formatters
+      #
       class Base
         attr_accessor :options
 

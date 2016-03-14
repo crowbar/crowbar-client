@@ -17,6 +17,9 @@
 module Crowbar
   module Client
     module Filter
+      #
+      # Filter to reduce an array by a given search clause
+      #
       class Array < Base
         def process
           options[:values].select do |row|

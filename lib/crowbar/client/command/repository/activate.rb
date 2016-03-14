@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Command
       module Repository
+        #
+        # Implementation for the repository activate command
+        #
         class Activate < Base
           def request
             @request ||= Request::Repository::Activate.new(

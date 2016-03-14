@@ -20,6 +20,9 @@ require "json"
 module Crowbar
   module Client
     module Formatter
+      #
+      # Formatter to properly print out hashes in different formats
+      #
       class Hash < Base
         def empty?
           options[:values].empty?

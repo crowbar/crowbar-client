@@ -20,6 +20,9 @@ module Crowbar
   module Client
     module Command
       module Node
+        #
+        # Implementation for the node shutdown command
+        #
         class Shutdown < Base
           def request
             @request ||= Request::Node::Shutdown.new(

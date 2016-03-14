@@ -17,6 +17,9 @@
 module Crowbar
   module Client
     module Filter
+      #
+      # Filter to reduce a hash by a given search clause
+      #
       class Hash < Base
         def process
           options[:values].select do |row|

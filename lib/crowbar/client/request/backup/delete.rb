@@ -18,11 +18,24 @@ module Crowbar
   module Client
     module Request
       module Backup
+        #
+        # Implementation for the backup delete request
+        #
         class Delete < Base
+          #
+          # HTTP method that gets used by the request
+          #
+          # @return [Symbol] the method for the request
+          #
           def method
             :delete
           end
 
+          #
+          # Path to the API endpoint for the request
+          #
+          # @return [String] path to the API endpoint
+          #
           def url
             [
               "utils",

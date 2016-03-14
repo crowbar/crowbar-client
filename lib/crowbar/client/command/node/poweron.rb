@@ -20,6 +20,9 @@ module Crowbar
   module Client
     module Command
       module Node
+        #
+        # Implementation for the node poweron command
+        #
         class Poweron < Base
           def request
             @request ||= Request::Node::Poweron.new(

@@ -18,6 +18,9 @@ module Crowbar
   module Client
     module Request
       module Node
+        #
+        # Implementation for the node shutdown request
+        #
         class Shutdown < Action
         end
       end

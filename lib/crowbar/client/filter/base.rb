@@ -17,6 +17,9 @@
 module Crowbar
   module Client
     module Filter
+      #
+      # Base that provides methods shared between different filters
+      #
       class Base
         attr_accessor :options
 

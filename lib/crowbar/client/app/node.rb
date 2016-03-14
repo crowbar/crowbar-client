@@ -17,6 +17,9 @@
 module Crowbar
   module Client
     module App
+      #
+      # A Thor based CLI wrapper for node commands
+      #
       class Node < Base
         desc "status",
           "Show current nodes status"
