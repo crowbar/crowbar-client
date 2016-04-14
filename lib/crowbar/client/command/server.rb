@@ -23,6 +23,8 @@ module Crowbar
       module Server
         autoload :Api,
           File.expand_path("../server/api", __FILE__)
+        autoload :Check,
+          File.expand_path("../server/check", __FILE__)
       end
     end
   end

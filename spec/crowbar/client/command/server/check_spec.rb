@@ -1,5 +1,5 @@
 #
-# Copyright 2015, SUSE Linux GmbH
+# Copyright 2016, SUSE Linux GmbH
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,18 +14,18 @@
 # limitations under the License.
 #
 
-module Crowbar
-  module Client
-    module Request
-      #
-      # Module for the server request implementations
-      #
-      module Server
-        autoload :Api,
-          File.expand_path("../server/api", __FILE__)
-        autoload :Check,
-          File.expand_path("../server/check", __FILE__)
-      end
+require_relative "../../../../spec_helper"
+
+describe "Crowbar::Client::Command::Server::Check" do
+  include_context "command_context"
+
+  it_behaves_like "a command class", true do
+    subject do
+      ::Crowbar::Client::Command::Server::Check.new(
+        stdin,
+        stdout,
+        stderr
+      )
     end
   end
 end

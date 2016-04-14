@@ -38,6 +38,59 @@ module Crowbar
         rescue => e
           catch_errors(e)
         end
+
+        desc "check",
+          "Perform sanity checks on the server"
+
+        long_desc <<-LONGDESC
+          `check` will perform sanity checks on the server.
+
+          With --format <format> option you can choose an output format
+          with the available options table, json or plain. You can also
+          use the shortcut options --table, --json or --plain.
+
+          With --filter <filter> option you can limit the result of
+          printed out elements. You can use any substring that is part
+          of the found elements.
+        LONGDESC
+
+        method_option :format,
+          type: :string,
+          default: "table",
+          banner: "<format>",
+          desc: "Format of the output, valid formats are table, json or plain"
+
+        method_option :table,
+          type: :boolean,
+          default: false,
+          aliases: [],
+          desc: "Format output as table, a shortcut for --format table option"
+
+        method_option :json,
+          type: :boolean,
+          default: false,
+          aliases: [],
+          desc: "Format output as table, a shortcut for --format json option"
+
+        method_option :plain,
+          type: :boolean,
+          default: false,
+          aliases: [],
+          desc: "Format output as table, a shortcut for --format plain option"
+
+        method_option :filter,
+          type: :string,
+          default: nil,
+          banner: "<filter>",
+          desc: "Filter by criteria, display only data that contains filter"
+
+        def check
+          Command::Server::Check.new(
+            *command_params
+          ).execute
+        rescue => e
+          catch_errors(e)
+        end
       end
     end
   end
