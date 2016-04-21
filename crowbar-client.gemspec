@@ -22,8 +22,16 @@ Gem::Specification.new do |s|
   s.version = Crowbar::Client::Version
   s.date = Time.now.utc.strftime("%F")
 
-  s.authors = ["Thomas Boerger"]
-  s.email = ["tboerger@suse.de"]
+  s.authors = [
+    "Thomas Boerger",
+    "Maximilian Meister",
+    "Rick Salevsky"
+  ]
+  s.email = [
+    "tboerger@suse.de",
+    "mmeister@suse.de",
+    "rsalevsky@suse.de"
+  ]
 
   s.summary = <<-EOF
     Crowbar commandline client
