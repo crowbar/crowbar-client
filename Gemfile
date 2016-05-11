@@ -5,13 +5,13 @@ group :development do
   gem "guard", require: false
   gem "guard-rubocop", require: false
   gem "guard-rspec", require: false
+
+  # Temporary fix for a ruby 2.2 requirement
+  # https://travis-ci.org/crowbar/crowbar-client/builds/127797633
+  gem "listen", "~> 3.0.7"
 end
 
 group :test do
-  # Temporary fix for rubocop rake 11 incompatibility
-  # https://github.com/bbatsov/rubocop/pull/2931
-  gem "rake", "< 11.0.0"
-
   gem "simplecov", require: false
   gem "coveralls", require: false
   gem "codeclimate-test-reporter", require: false
