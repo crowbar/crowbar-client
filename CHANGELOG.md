@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.4.2](https://github.com/crowbar/crowbar-client/releases/tag/v2.4.2) - 2015-05-04
+
+* BUGFIX
+  * Fixed duplicate option, renamed --anonymous shorthand from -a to -A (@tboerger)
+  * Raised timeout default value to prevent timeouts on requests (@MaximilianMeister)
+  * Pin development dependency listen to ruby 2.1 compatible version (@tboerger)
+* ENHANCEMENT
+  * Properly handle 502, 503 and 504 responses (@tboerger)
+  * Map -h and --help options properly to help subcommand (@tboerger)
+  * Extended the test suite (@MaximilianMeister)
+  * Enhanched the inline documentation (@tboerger)
+  * Added subcommand to check server sanity (@MaximilianMeister)
+
 ## [2.4.1](https://github.com/crowbar/crowbar-client/releases/tag/v2.4.1) - 2015-02-08
 
 * BUGFIX
