@@ -30,7 +30,7 @@ Gem::Specification.new do |s|
   s.email = [
     "tboerger@suse.de",
     "mmeister@suse.de",
-    "rsalevsky@suse.de"
+    "rsalevsky@suse.com"
   ]
 
   s.summary = <<-EOF
