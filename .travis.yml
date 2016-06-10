@@ -13,3 +13,10 @@ notifications:
       - "You can see the details at %{build_url}"
     on_success: change
     on_failure: always
+
+deploy:
+  provider: rubygems
+  api_key:
+    secure: "d0c/H/hLthQr56WnjGHWomBjT21WJoDTO2Gg3OQuuftqxNwe5zGK7pu3V9qwBGYIbtHmVzZfpns3tbkRw4Z50mFxPSywXsTc/VQYOnTPLUORgOGnQIcPDTpLOFl33NwQjKBAgISDF610eCngPWcLxBkzgVIFGBEVSIIIsCDTi4c741pj4ANEYA3YDaIgmu1+rp1new7/+hcjdEdsy1Kj6bomtuWsHGYY6eXTTGWfU+3edLXHez9p4tkgr5w65gHayvLMzY2fCVXAgQsgxTODwU/mP+slT0je1izSnHHq5SXb1OK87txMu5bTo8N6JrYhcEhLjAZ6iPXEHoGosJ9ApnIPO+1nQD+ORIjzwk+QY0ry1KNGEC+NRegbr+8jypSS44x1qRCFPUl5QealLWzbDwGA8EPNwPG6UIk7n4Y8QCyuaVclcHsHQRAI6CLU69aeeUPy/0tQFngjJK+HAIBFu616HvASyq8epTGKw2xxO9BzFGqknLlee0qAmjg2DlksBaMlRSDyOG31PeXYNutF9UFRl4xo1mkSFNmrEH1cAQwGyKJAOTZMXYASUE0jkNufVw2K+6tEnI8O4xS9P3p4TiMRkaEuN78k4/1vINfm957kSUvQuL2QY6BFbz48mJNFMHa8ERPGSo1ZOuZRsEC0KCEMcwEl/4NSI28NasmaJoc="
+  on:
+    tags: true
