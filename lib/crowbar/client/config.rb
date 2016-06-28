@@ -135,7 +135,7 @@ module Crowbar
         if ENV["CROWBAR_TIMEOUT"].present?
           ENV["CROWBAR_TIMEOUT"].to_i
         else
-          180
+          300
         end
       end
 
