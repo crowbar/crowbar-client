@@ -136,6 +136,8 @@ module Crowbar
               from_data
             when options[:file]
               from_file
+            when options[:default]
+              proposal_preload
             else
               from_editor
             end
