@@ -63,7 +63,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "webmock"
 
   s.add_runtime_dependency "thor", ">= 0.19.1"
-  s.add_runtime_dependency "activesupport", ">= 3.0.0"
+  s.add_runtime_dependency "activesupport", "< 5.0.0", ">= 3.0.0"
 
   s.add_runtime_dependency "httmultiparty", ">= 0.3.16"
   s.add_runtime_dependency "inifile", ">= 3.0.0"

@@ -158,6 +158,9 @@ module Crowbar
           With --file <file> option you can provide a path to a file
           which includes the content for the proposal in JSON format.
 
+          With --default option you can create a proposal from default
+          without editing it.
+
           With --merge option you can deep merge the provided data with
           the preloaded template.
         LONGDESC
@@ -173,6 +176,12 @@ module Crowbar
           default: nil,
           banner: "<file>",
           desc: "Reading proposal data from this json file"
+
+        method_option :default,
+          type: :boolean,
+          default: false,
+          aliases: [],
+          desc: "Creating proposal with default values"
 
         method_option :merge,
           type: :boolean,
