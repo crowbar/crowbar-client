@@ -43,6 +43,7 @@ module Crowbar
               :server,
               :timeout,
               :anonymous,
+              :apiversion,
               :debug
             )
           )

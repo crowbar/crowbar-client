@@ -57,6 +57,7 @@ module Crowbar
           server: default_server,
           timeout: default_timeout,
           anonymous: default_anonymous,
+          apiversion: default_apiversion,
           debug: default_debug
         )
       end
@@ -151,6 +152,21 @@ module Crowbar
           ].include? ENV["CROWBAR_ANONYMOUS"]
         else
           false
+        end
+      end
+
+      #
+      # Define a default api version
+      #
+      # @return [Float] the default crowbar api version
+      #
+      def default_apiversion
+        if ENV["CROWBAR_APIVERSION"].present?
+          [
+            1.0, 2.0
+          ].include? ENV["CROWBAR_APIVERSION"]
+        else
+          2.0
         end
       end
 
