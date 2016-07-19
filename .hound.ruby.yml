@@ -1,15 +1,14 @@
 inherit_from: .hound.suse.yml
 
 AllCops:
+  Rails:
+    Enabled: true
   DisplayStyleGuide: true
   DisplayCopNames: true
 
-Rails:
-  Enabled: true
-
 Style/RedundantReturn:
   Exclude:
-    - "chef/data_bags/crowbar/migrate/*"
+    - "chef/data_bags/crowbar/migrate/**/*"
 
 Style/FileName:
   Exclude:
@@ -19,13 +18,7 @@ Style/AlignHash:
   EnforcedHashRocketStyle: key
   EnforcedColonStyle: key
 
-Style/DotPosition:
-  EnforcedStyle: leading
-
-Style/CaseIndentation:
-  IndentWhenRelativeTo: end
-
-Style/EmptyCaseCondition:
+Style/Documentation:
   Enabled: false
 
 Lint/UnusedMethodArgument:
