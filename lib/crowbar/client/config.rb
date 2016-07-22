@@ -163,7 +163,7 @@ module Crowbar
         if ENV["CROWBAR_DEBUG"].present?
           [
             true, 1, "1", "t", "T", "true", "TRUE"
-          ].include? ENV["CROWBAR_ANONYMOUS"]
+          ].include? ENV["CROWBAR_DEBUG"]
         else
           false
         end
