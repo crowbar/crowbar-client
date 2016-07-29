@@ -83,8 +83,8 @@ module Crowbar
           "Show details of a specific role"
 
         long_desc <<-LONGDESC
-          `show BARCLAMP ROLE` will print out the details for a specified
-          role for the specified barclamp. You can display the details in
+          `show BARCLAMP ROLE` will print out the nodes available to
+          assign the role. You can display the details in
           different output formats and you can filter the details by any
           search criteria.
 

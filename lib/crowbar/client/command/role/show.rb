@@ -41,7 +41,7 @@ module Crowbar
               when 200
                 formatter = Formatter::Array.new(
                   format: provide_format,
-                  headings: ["Node"],
+                  headings: ["Nodes available to assign the role"],
                   values: Filter::Array.new(
                     filter: provide_filter,
                     values: content_from(request)
@@ -49,7 +49,7 @@ module Crowbar
                 )
 
                 if formatter.empty?
-                  err "No nodes"
+                  err "No nodes available to assign the role"
                 else
                   say formatter.result
                 end
