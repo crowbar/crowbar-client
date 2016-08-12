@@ -26,8 +26,7 @@ module Crowbar
         class Download < Base
           def headers
             super.easy_merge!(
-              "Content-Type" => "application/vnd.crowbar.v2.0+json",
-              "Accept" => "application/vnd.crowbar.v2.0+json"
+              Crowbar::Client::Util::ApiVersion.new(2.0).headers
             )
           end
 

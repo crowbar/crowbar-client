@@ -31,8 +31,7 @@ module Crowbar
           #
           def headers
             super.easy_merge!(
-              "Accept" => "application/vnd.crowbar.v2.0+json",
-              "Content-Type" => "application/vnd.crowbar.v2.0+json"
+              Crowbar::Client::Util::ApiVersion.new(2.0).headers
             )
           end
 

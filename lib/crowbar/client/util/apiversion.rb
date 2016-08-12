@@ -16,18 +16,21 @@
 
 module Crowbar
   module Client
-    #
-    # Module for some utilities used within the client
-    #
     module Util
-      autoload :Editor,
-        File.expand_path("../util/editor", __FILE__)
+      class ApiVersion
+        attr_accessor :version
 
-      autoload :Runner,
-        File.expand_path("../util/runner", __FILE__)
+        def initialize(version)
+          @version = version
+        end
 
-      autoload :ApiVersion,
-        File.expand_path("../util/apiversion", __FILE__)
+        def headers
+          {
+            "Accept" => "application/vnd.crowbar.v#{version}+json",
+            "Content-Type" => "application/vnd.crowbar.v#{version}+json"
+          }
+        end
+      end
     end
   end
 end
