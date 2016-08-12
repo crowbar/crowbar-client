@@ -28,12 +28,21 @@ describe "Crowbar::Client::Request::Backup::Upload" do
       {
         file: fixture_path(
           "upload.tgz"
-        ).open
+        ).open.path
       }
     end
 
     let!(:params) do
-      {}
+      {
+        backup: {
+          payload: {
+            multipart: true,
+            file: fixture_path(
+              "upload.tgz"
+            ).open.path
+          }
+        }
+      }
     end
 
     let!(:method) do
@@ -41,12 +50,12 @@ describe "Crowbar::Client::Request::Backup::Upload" do
     end
 
     let!(:url) do
-      "utils/backups/upload"
+      "api/crowbar/backups/upload"
     end
 
     let!(:headers) do
       {
-        "Accept" => "application/json",
+        "Accept" => "application/vnd.crowbar.v2.0+json",
         "Content-Length" => "468",
         "Content-Type" => "multipart/form-data; boundary=-----------RubyMultipartPost"
       }

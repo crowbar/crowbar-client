@@ -14,6 +14,8 @@
 # limitations under the License.
 #
 
+require "easy_diff"
+
 module Crowbar
   module Client
     module Request
@@ -22,13 +24,27 @@ module Crowbar
         # Implementation for the backup upload request
         #
         class Upload < Base
-          def params
-            {
-              headers: headers,
-              query: {
-                file: attrs.file
+          #
+          # Override the request headers
+          #
+          # @return [Hash] the headers for the request
+          #
+          def headers
+            super.easy_merge!(
+              "Accept" => "application/vnd.crowbar.v2.0+json",
+              "Content-Type" => "application/vnd.crowbar.v2.0+json"
+            )
+          end
+
+          def content
+            super.easy_merge!(
+              backup: {
+                payload: {
+                  multipart: true,
+                  file: attrs.file
+                }
               }
-            }
+            )
           end
 
           #
@@ -47,7 +63,8 @@ module Crowbar
           #
           def url
             [
-              "utils",
+              "api",
+              "crowbar",
               "backups",
               "upload"
             ].join("/")

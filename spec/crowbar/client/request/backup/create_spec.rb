@@ -32,7 +32,9 @@ describe "Crowbar::Client::Request::Backup::Create" do
 
     let!(:params) do
       {
-        name: "test-backup"
+        backup: {
+          name: "test-backup"
+        }
       }
     end
 
@@ -41,13 +43,13 @@ describe "Crowbar::Client::Request::Backup::Create" do
     end
 
     let!(:url) do
-      "utils/backups"
+      "api/crowbar/backups"
     end
 
     let!(:headers) do
       {
-        "Content-Type" => "application/json",
-        "Accept" => "application/json"
+        "Accept" => "application/vnd.crowbar.v2.0+json",
+        "Content-Type" => "application/vnd.crowbar.v2.0+json"
       }
     end
   end

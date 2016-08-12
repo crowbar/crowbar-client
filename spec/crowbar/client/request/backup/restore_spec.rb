@@ -39,13 +39,13 @@ describe "Crowbar::Client::Request::Backup::Restore" do
     end
 
     let!(:url) do
-      "utils/backups/foo/restore"
+      "api/crowbar/backups/foo/restore"
     end
 
     let!(:headers) do
       {
-        "Content-Type" => "application/json",
-        "Accept" => "application/json"
+        "Accept" => "application/vnd.crowbar.v2.0+json",
+        "Content-Type" => "application/vnd.crowbar.v2.0+json"
       }
     end
   end

@@ -14,6 +14,8 @@
 # limitations under the License.
 #
 
+require "easy_diff"
+
 module Crowbar
   module Client
     module Request
@@ -22,6 +24,18 @@ module Crowbar
         # Implementation for the backup delete request
         #
         class Delete < Base
+          #
+          # Override the request headers
+          #
+          # @return [Hash] the headers for the request
+          #
+          def headers
+            super.easy_merge!(
+              "Accept" => "application/vnd.crowbar.v2.0+json",
+              "Content-Type" => "application/vnd.crowbar.v2.0+json"
+            )
+          end
+
           #
           # HTTP method that gets used by the request
           #
@@ -38,7 +52,8 @@ module Crowbar
           #
           def url
             [
-              "utils",
+              "api",
+              "crowbar",
               "backups",
               attrs.name
             ].join("/")

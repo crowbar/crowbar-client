@@ -40,13 +40,13 @@ describe "Crowbar::Client::Request::Backup::Delete" do
     end
 
     let!(:url) do
-      "utils/backups/foo"
+      "api/crowbar/backups/foo"
     end
 
     let!(:headers) do
       {
-        "Content-Type" => "application/json",
-        "Accept" => "application/json"
+        "Accept" => "application/vnd.crowbar.v2.0+json",
+        "Content-Type" => "application/vnd.crowbar.v2.0+json"
       }
     end
   end
