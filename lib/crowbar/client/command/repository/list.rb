@@ -37,7 +37,7 @@ module Crowbar
               when 200
                 formatter = Formatter::Hash.new(
                   format: provide_format,
-                  headings: ["Platform", "Repo"],
+                  headings: ["Platform", "Architecture", "Repository"],
                   values: Filter::Hash.new(
                     filter: provide_filter,
                     values: content_from(request)
@@ -60,10 +60,13 @@ module Crowbar
           def content_from(request)
             [].tap do |row|
               request.parsed_response.each do |child|
-                row.push(
-                  platform: child["platform"],
-                  repo: child["id"]
-                )
+                child["repos"].each do |repo|
+                  row.push(
+                    platform: repo["platform"],
+                    arch: repo["arch"],
+                    repo: repo["id"]
+                  )
+                end
               end
             end
           end

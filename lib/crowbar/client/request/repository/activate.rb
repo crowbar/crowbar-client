@@ -32,6 +32,7 @@ module Crowbar
           def content
             super.easy_merge!(
               platform: attrs.platform,
+              arch: attrs.arch,
               repo: attrs.repo
             )
           end

@@ -27,6 +27,7 @@ describe "Crowbar::Client::Request::Repository::Activate" do
     let!(:attrs) do
       {
         platform: "suse-12.0",
+        arch: "x86_64",
         repo: "sles12-pool"
       }
     end
@@ -34,6 +35,7 @@ describe "Crowbar::Client::Request::Repository::Activate" do
     let!(:params) do
       {
         platform: "suse-12.0",
+        arch: "x86_64",
         repo: "sles12-pool"
       }
     end
