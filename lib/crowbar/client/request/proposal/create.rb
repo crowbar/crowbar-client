@@ -31,7 +31,7 @@ module Crowbar
           #
           def content
             super.easy_merge!(
-              attrs.payload
+              attrs.payload.to_hash
             )
           end
 

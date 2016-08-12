@@ -44,14 +44,14 @@ module Crowbar
       autoload :Node,
         File.expand_path("../request/node", __FILE__)
 
-      autoload :Party,
-        File.expand_path("../request/party", __FILE__)
-
       autoload :Proposal,
         File.expand_path("../request/proposal", __FILE__)
 
       autoload :Repository,
         File.expand_path("../request/repository", __FILE__)
+
+      autoload :Rest,
+        File.expand_path("../request/rest", __FILE__)
 
       autoload :Role,
         File.expand_path("../request/role", __FILE__)

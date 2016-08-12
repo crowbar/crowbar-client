@@ -29,8 +29,8 @@ module Crowbar
 
           def request
             @request ||= Request::Proposal::Create.new(
-              args.easy_merge(
-                payload: payload_content
+              args.easy_merge!(
+                payload: payload_content.to_hash
               )
             )
           end

@@ -31,7 +31,7 @@ module Crowbar
         end
 
         def request
-          @request ||= Party.new
+          @request ||= Rest.new(url: url)
         end
 
         def content
@@ -46,67 +46,49 @@ module Crowbar
         end
 
         def params
-          {
-            body: content.to_json,
-            headers: headers
-          }
+          case method
+          when :post
+            [
+              method,
+              content
+            ]
+          when :put
+            [
+              method,
+              content.to_json
+            ]
+          else
+            [
+              method
+            ]
+          end
         end
 
         def process
-          result = request.send(
-            method,
-            [
-              "/",
-              url
-            ].join(""),
-            params
-          )
-
-          send(
-            errors[result.code]
-          ) if errors[result.code]
+          result = begin
+            request.send(
+              *params,
+              accept: headers["Accept"],
+              content_type: headers["Content-Type"]
+            )
+          rescue => e
+            if e.class.superclass == RestClient::RequestFailed
+              Hashie::Mash.new(
+                parsed_response: {
+                  error: e.message
+                },
+                code: e.http_code
+              )
+            else
+              raise e
+            end
+          end
 
           if block_given?
             yield result
           else
             result
           end
-        end
-
-        def errors
-          {
-            401 => :not_authorized,
-            403 => :not_authorized,
-            500 => :internal_server,
-            502 => :bad_gateway,
-            503 => :service_unavailable,
-            504 => :gateway_timeout
-          }
-        end
-
-        def not_authorized
-          raise NotAuthorizedError,
-            "User is not authorized"
-        end
-
-        def internal_server
-          raise InternalServerError,
-            "An internal error occured"
-        end
-
-        def bad_gateway
-          raise BadGatewayError,
-            "Received a bad gateway error"
-        end
-
-        def service_unavailable
-          raise ServiceUnavailableError,
-            "Service is not available"
-        end
-
-        def gateway_timeout
-          raise GatewayTimeoutError,
-            "Received a gateway timeout"
         end
       end
     end

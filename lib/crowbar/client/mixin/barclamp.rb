@@ -32,7 +32,7 @@ module Crowbar
           end
 
           def available_barclamps
-            @available_barclamps ||= Request::Barclamp::List.new.process.keys
+            @available_barclamps ||= Request::Barclamp::List.new.process.parsed_response.keys
           end
         end
       end

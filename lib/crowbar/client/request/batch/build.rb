@@ -14,6 +14,8 @@
 # limitations under the License.
 #
 
+require "easy_diff"
+
 module Crowbar
   module Client
     module Request
@@ -22,15 +24,14 @@ module Crowbar
         # Implementation for the batch build request
         #
         class Build < Base
-          def params
-            {
-              headers: headers,
+          def content
+            super.easy_merge!(
               query: {
                 includes: attrs.includes,
                 excludes: attrs.excludes,
                 file: attrs.file
               }
-            }
+            )
           end
 
           #

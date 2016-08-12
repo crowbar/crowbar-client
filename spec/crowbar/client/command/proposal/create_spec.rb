@@ -46,9 +46,9 @@ describe "Crowbar::Client::Command::Proposal::Create" do
         headers: {}
       )
 
-    expect(subject.request).to(
-      be_a(
-        ::Crowbar::Client::Request::Proposal::Create
+    expect(subject.class).to(
+      eq(
+        ::Crowbar::Client::Command::Proposal::Create
       )
     )
   end

@@ -33,7 +33,13 @@ describe "Crowbar::Client::Request::Batch::Build" do
     end
 
     let!(:params) do
-      {}
+      {
+        query: {
+          includes: nil,
+          excludes: nil,
+          file: attrs[:file]
+        }
+      }
     end
 
     let!(:method) do

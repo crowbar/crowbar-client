@@ -43,15 +43,17 @@ shared_examples "a request class" do |with_body|
 
   it "submits payload to an API" do
     content = if with_body
-      {
-        body: params.to_json,
-        headers: headers
-      }
+      params
     else
-      {
-        headers: headers
-      }
+      ""
     end
+
+    allow(Crowbar::Client::Request::Rest).to receive(:new).and_return(
+      Crowbar::Client::Request::Rest.new(
+        url: url,
+        auth_type: nil
+      )
+    )
 
     stub_request(
       method,
@@ -65,14 +67,10 @@ shared_examples "a request class" do |with_body|
     subject.process
 
     expect(
-      a_request(
+      Crowbar::Client::Request::Rest.new(url: url).send(
         method,
-        "http://crowbar:80/#{url}"
-      ).with(
         content
-      )
-    ).to(
-      have_been_made.once
-    )
+      ).code
+    ).to eq(200)
   end
 end
