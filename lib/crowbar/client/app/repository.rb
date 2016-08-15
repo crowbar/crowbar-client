@@ -77,18 +77,19 @@ module Crowbar
           catch_errors(e)
         end
 
-        desc "activate PLATFORM REPO",
-          "Activate a repository for a platform"
+        desc "activate PLATFORM ARCH REPO",
+          "Activate a repository for a platform on a specific architecture"
 
         long_desc <<-LONGDESC
-          `activate PLATFORM REPO` will try to activate the
-          specified repository for the specified platform.
+          `activate PLATFORM ARCH REPO` will try to activate the
+          specified repository for the specified platform and architecture.
         LONGDESC
 
-        def activate(platform, repo)
+        def activate(platform, arch, repo)
           Command::Repository::Activate.new(
             *command_params(
               platform: platform,
+              arch: arch,
               repo: repo
             )
           ).execute
@@ -112,18 +113,19 @@ module Crowbar
           catch_errors(e)
         end
 
-        desc "deactivate PLATFORM REPO",
-          "Deactivate a repository for a platform"
+        desc "deactivate PLATFORM ARCH REPO",
+          "Deactivate a repository for a platform on a specific architecture"
 
         long_desc <<-LONGDESC
-          `deactivate PLATFORM REPO` will try to deactivate the
-          specified repository for the specified platform.
+          `deactivate PLATFORM ARCH REPO` will try to deactivate the
+          specified repository for the specified platform and architecture.
         LONGDESC
 
-        def deactivate(platform, repo)
+        def deactivate(platform, arch, repo)
           Command::Repository::Deactivate.new(
             *command_params(
               platform: platform,
+              arch: arch,
               repo: repo
             )
           ).execute
