@@ -26,8 +26,7 @@ module Crowbar
         class Download < Base
           def headers
             super.easy_merge!(
-              "Content-Type" => "application/octet-stream",
-              "Accept" => "application/octet-stream"
+              Crowbar::Client::Util::ApiVersion.new(2.0).headers
             )
           end
 
@@ -47,7 +46,8 @@ module Crowbar
           #
           def url
             [
-              "utils",
+              "api",
+              "crowbar",
               "backups",
               attrs.name,
               "download"

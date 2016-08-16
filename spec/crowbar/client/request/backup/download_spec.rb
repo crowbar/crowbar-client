@@ -40,7 +40,7 @@ describe "Crowbar::Client::Request::Backup::Download" do
     end
 
     let!(:url) do
-      "utils/backups/foo/download"
+      "api/crowbar/backups/foo/download"
     end
 
     let!(:headers) do

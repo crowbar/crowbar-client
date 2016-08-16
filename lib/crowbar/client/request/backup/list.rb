@@ -14,6 +14,8 @@
 # limitations under the License.
 #
 
+require "easy_diff"
+
 module Crowbar
   module Client
     module Request
@@ -22,6 +24,17 @@ module Crowbar
         # Implementation for the backup list request
         #
         class List < Base
+          #
+          # Override the request headers
+          #
+          # @return [Hash] the headers for the request
+          #
+          def headers
+            super.easy_merge!(
+              Crowbar::Client::Util::ApiVersion.new(2.0).headers
+            )
+          end
+
           #
           # HTTP method that gets used by the request
           #
@@ -38,7 +51,8 @@ module Crowbar
           #
           def url
             [
-              "utils",
+              "api",
+              "crowbar",
               "backups"
             ].join("/")
           end

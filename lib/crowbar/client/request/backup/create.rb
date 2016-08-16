@@ -25,13 +25,26 @@ module Crowbar
         #
         class Create < Base
           #
+          # Override the request headers
+          #
+          # @return [Hash] the headers for the request
+          #
+          def headers
+            super.easy_merge!(
+              Crowbar::Client::Util::ApiVersion.new(2.0).headers
+            )
+          end
+
+          #
           # Override the request content
           #
           # @return [Hash] the content for the request
           #
           def content
             super.easy_merge!(
-              name: attrs.name
+              backup: {
+                name: attrs.name
+              }
             )
           end
 
@@ -51,7 +64,8 @@ module Crowbar
           #
           def url
             [
-              "utils",
+              "api",
+              "crowbar",
               "backups"
             ].join("/")
           end

@@ -14,37 +14,23 @@
 # limitations under the License.
 #
 
-require_relative "../../../../spec_helper"
+module Crowbar
+  module Client
+    module Util
+      class ApiVersion
+        attr_accessor :version
 
-describe "Crowbar::Client::Request::Backup::List" do
-  it_behaves_like "a request class", true do
-    subject do
-      ::Crowbar::Client::Request::Backup::List.new(
-        attrs
-      )
-    end
+        def initialize(version)
+          @version = version
+        end
 
-    let!(:attrs) do
-      {}
-    end
-
-    let!(:params) do
-      {}
-    end
-
-    let!(:method) do
-      :get
-    end
-
-    let!(:url) do
-      "api/crowbar/backups"
-    end
-
-    let!(:headers) do
-      {
-        "Accept" => "application/vnd.crowbar.v2.0+json",
-        "Content-Type" => "application/vnd.crowbar.v2.0+json"
-      }
+        def headers
+          {
+            "Accept" => "application/vnd.crowbar.v#{version}+json",
+            "Content-Type" => "application/vnd.crowbar.v#{version}+json"
+          }
+        end
+      end
     end
   end
 end

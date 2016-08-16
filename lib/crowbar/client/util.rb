@@ -25,6 +25,9 @@ module Crowbar
 
       autoload :Runner,
         File.expand_path("../util/runner", __FILE__)
+
+      autoload :ApiVersion,
+        File.expand_path("../util/apiversion", __FILE__)
     end
   end
 end
