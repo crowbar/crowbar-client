@@ -23,17 +23,17 @@ module Crowbar
       #
       # Major version
       #
-      MAJOR = 2
+      MAJOR = 3
 
       #
       # Minor version
       #
-      MINOR = 4
+      MINOR = 0
 
       #
       # Patch version
       #
-      PATCH = 3
+      PATCH = 0
 
       #
       # Optional suffix

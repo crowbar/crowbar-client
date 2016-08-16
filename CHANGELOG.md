@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.0](https://github.com/crowbar/crowbar-client/releases/tag/v3.0.0) - 2016-08-16
+
+* BREAKING
+  * Adapt backups subcommand to the new api 2.0 (@MaximilianMeister)
+* BUGFIX
+  * Fix repository handling (bsc#993445) (@MaximilianMeister)
+* ENHANCEMENT
+  * Added lgtm config (@rsalevsky)
+  * Clarify command role show (@itxaka)
+  * Replace httparty/httmultiparty with rest-client (@MaximilianMeister)
+
 ## [2.4.3](https://github.com/crowbar/crowbar-client/releases/tag/v2.4.3) - 2016-07-06
 
 * BUGFIX
