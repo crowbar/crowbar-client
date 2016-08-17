@@ -31,7 +31,7 @@ module Crowbar
           #
           def headers
             super.easy_merge!(
-              Crowbar::Client::Util::ApiVersion.new(2.0).headers
+              Crowbar::Client::Util::ApiVersion.new(Config.apiversion).headers
             )
           end
 
@@ -50,13 +50,23 @@ module Crowbar
           # @return [String] path to the API endpoint
           #
           def url
-            [
-              "api",
-              "crowbar",
-              "backups",
-              attrs.name,
-              "restore"
-            ].join("/")
+            case Config.apiversion
+            when 1.0
+              [
+                "utils",
+                "backups",
+                attrs.name,
+                "restore"
+              ]
+            when 2.0
+              [
+                "api",
+                "crowbar",
+                "backups",
+                attrs.name,
+                "restore"
+              ]
+            end.join("/")
           end
         end
       end

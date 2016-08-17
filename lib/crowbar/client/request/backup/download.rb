@@ -26,7 +26,7 @@ module Crowbar
         class Download < Base
           def headers
             super.easy_merge!(
-              Crowbar::Client::Util::ApiVersion.new(2.0).headers
+              Crowbar::Client::Util::ApiVersion.new(Config.apiversion).headers
             )
           end
 
@@ -45,13 +45,23 @@ module Crowbar
           # @return [String] path to the API endpoint
           #
           def url
-            [
-              "api",
-              "crowbar",
-              "backups",
-              attrs.name,
-              "download"
-            ].join("/")
+            case Config.apiversion
+            when 1.0
+              [
+                "utils",
+                "backups",
+                attrs.name,
+                "download"
+              ]
+            when 2.0
+              [
+                "api",
+                "crowbar",
+                "backups",
+                attrs.name,
+                "download"
+              ]
+            end.join("/")
           end
         end
       end
