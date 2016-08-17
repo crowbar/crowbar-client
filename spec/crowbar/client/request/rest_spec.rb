@@ -1,5 +1,5 @@
 #
-# Copyright 2015, SUSE Linux GmbH
+# Copyright 2016, SUSE Linux GmbH
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,8 +16,8 @@
 
 require_relative "../../../spec_helper"
 
-describe "Crowbar::Client::Request::Party" do
-  subject { ::Crowbar::Client::Request::Party }
+describe "Crowbar::Client::Request::Rest" do
+  subject { ::Crowbar::Client::Request::Rest }
 
   pending
 
