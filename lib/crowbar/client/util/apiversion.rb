@@ -25,10 +25,17 @@ module Crowbar
         end
 
         def headers
-          {
-            "Accept" => "application/vnd.crowbar.v#{version}+json",
-            "Content-Type" => "application/vnd.crowbar.v#{version}+json"
-          }
+          if version == 1.0
+            {
+              "Accept" => "application/json",
+              "Content-Type" => "application/json"
+            }
+          else
+            {
+              "Accept" => "application/vnd.crowbar.v#{version}+json",
+              "Content-Type" => "application/vnd.crowbar.v#{version}+json"
+            }
+          end
         end
       end
     end
