@@ -69,6 +69,12 @@ module Crowbar
           aliases: ["-A"],
           desc: "Skip API user authentication"
 
+        class_option :apiversion,
+          type: :numeric,
+          default: Config.defaults[:apiversion],
+          aliases: ["-v"],
+          desc: "Select Crowbar API version"
+
         class_option :debug,
           type: :boolean,
           default: Config.defaults[:debug],
