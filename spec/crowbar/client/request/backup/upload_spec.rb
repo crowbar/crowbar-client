@@ -18,6 +18,10 @@ require_relative "../../../../spec_helper"
 
 describe "Crowbar::Client::Request::Backup::Upload" do
   it_behaves_like "a request class", false do
+    before(:each) do
+      ::Crowbar::Client::Config.apiversion = 2.0
+    end
+
     subject do
       ::Crowbar::Client::Request::Backup::Upload.new(
         attrs
