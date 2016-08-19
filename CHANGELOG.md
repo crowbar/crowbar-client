@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.1](https://github.com/crowbar/crowbar-client/releases/tag/v3.0.1) - 2016-08-19
+
+* BUGFIX
+  * Fix batch export subcommand (bsc#994125) (@rsalevsky)
+* ENHANCEMENT
+  * Enable configuring the api version (@MaximilianMeister)
+
 ## [3.0.0](https://github.com/crowbar/crowbar-client/releases/tag/v3.0.0) - 2016-08-16
 
 * BREAKING
