@@ -162,11 +162,9 @@ module Crowbar
       #
       def default_apiversion
         if ENV["CROWBAR_APIVERSION"].present?
-          [
-            1.0, 2.0
-          ].include? ENV["CROWBAR_APIVERSION"]
+          ENV["CROWBAR_APIVERSION"].to_f
         else
-          2.0
+          1.0
         end
       end
 
