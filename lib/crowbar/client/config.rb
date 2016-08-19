@@ -166,7 +166,7 @@ module Crowbar
             1.0, 2.0
           ].include? ENV["CROWBAR_APIVERSION"]
         else
-          2.0
+          1.0
         end
       end
 
