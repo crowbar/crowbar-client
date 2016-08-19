@@ -30,8 +30,10 @@ describe "Crowbar::Client::Request::Batch::Export" do
 
     let!(:params) do
       {
-        includes: nil,
-        excludes: nil
+        batch: {
+          includes: nil,
+          excludes: nil
+        }
       }
     end
 

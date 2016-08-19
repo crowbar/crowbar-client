@@ -31,8 +31,10 @@ module Crowbar
           #
           def content
             super.easy_merge!(
-              includes: attrs.includes,
-              excludes: attrs.excludes
+              batch: {
+                includes: attrs.includes,
+                excludes: attrs.excludes
+              }
             )
           end
 
