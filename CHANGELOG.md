@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://github.com/crowbar/crowbar-client/releases/tag/v3.1.0) - 2016-08-23
+
+* BUGFIX
+  * Set the default apiversion to 1.0 (@MaximilianMeister)
+* ENHANCEMENT
+  * Add upgrade subcommand (@MaximilianMeister)
+
 ## [3.0.1](https://github.com/crowbar/crowbar-client/releases/tag/v3.0.1) - 2016-08-19
 
 * BUGFIX
