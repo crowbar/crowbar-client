@@ -1,5 +1,5 @@
 #
-# Copyright 2015, SUSE Linux GmbH
+# Copyright 2016, SUSE Linux GmbH
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,11 +14,18 @@
 # limitations under the License.
 #
 
-require_relative "../../../spec_helper"
+require_relative "../../../../spec_helper"
 
-describe "Crowbar::Client::Request::Party" do
-  subject { ::Crowbar::Client::Request::Party }
+describe "Crowbar::Client::Command::Upgrade::Prepare" do
+  include_context "command_context"
 
-  pending
-
+  it_behaves_like "a command class", true do
+    subject do
+      ::Crowbar::Client::Command::Upgrade::Prepare.new(
+        stdin,
+        stdout,
+        stderr
+      )
+    end
+  end
 end

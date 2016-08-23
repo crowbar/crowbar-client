@@ -59,6 +59,9 @@ module Crowbar
       autoload :Server,
         File.expand_path("../request/server", __FILE__)
 
+      autoload :Upgrade,
+        File.expand_path("../request/upgrade", __FILE__)
+
       autoload :VirtualIP,
         File.expand_path("../request/virtual_ip", __FILE__)
     end

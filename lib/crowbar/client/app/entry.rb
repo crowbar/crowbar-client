@@ -148,6 +148,10 @@ module Crowbar
         desc "installer [COMMANDS]",
           "Installer specific commands, call without params for help"
         subcommand "installer", Crowbar::Client::App::Installer
+
+        desc "upgrade [COMMANDS]",
+          "Upgrade specific commands, call without params for help"
+        subcommand "upgrade", Crowbar::Client::App::Upgrade
       end
     end
   end
