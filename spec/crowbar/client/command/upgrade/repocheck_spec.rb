@@ -19,14 +19,14 @@ require_relative "../../../../spec_helper"
 describe "Crowbar::Client::Command::Upgrade::Backup" do
   include_context "command_context"
 
-  ["ha", "storage"].each do |addon|
+  ["crowbar", "ha", "storage"].each do |component|
     it_behaves_like "a command class", true do
       subject do
         ::Crowbar::Client::Command::Upgrade::Backup.new(
           stdin,
           stdout,
           stderr,
-          addon: addon
+          component: component
         )
       end
     end

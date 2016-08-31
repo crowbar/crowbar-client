@@ -50,7 +50,13 @@ module Crowbar
           # @return [String] path to the API endpoint
           #
           def url
-            case attrs.addon
+            case attrs.component
+            when "crowbar"
+              [
+                "api",
+                "crowbar",
+                "repocheck"
+              ].join("/")
             when "storage"
               [
                 "api",
