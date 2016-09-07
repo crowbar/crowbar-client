@@ -219,12 +219,21 @@ module Crowbar
           catch_errors(e)
         end
 
-        desc "repocheck ADDON",
-          "Check for existing repositories for an addon (ha|storage)"
+        desc "repocheck COMPONENT",
+          "Check for existing repositories for a component (crowbar|ha|storage)"
 
         long_desc <<-LONGDESC
-          `repocheck ADDON` will check for existing repositories
-          for a specifix addon product. ADDON can be 'storage' or 'ha'
+          `repocheck COMPONENT` will check for existing repositories
+          for a specific component. COMPONENT can be 'crowbar', 'storage' or 'ha'
+
+          crowbar: checks for the repositories required to upgrade the crowbar
+          server
+
+          storage: checks for the repositories required to upgrade the nodes that
+          have the SUSE Enterprise Storage Addon installed
+
+          ha: checks for the repositories required to upgrade the nodes that
+          have the SUSE Linux Enterprise High Availability Addon installed
 
           With --format <format> option you can choose an output format
           with the available options table, json or plain. You can also
@@ -265,10 +274,10 @@ module Crowbar
           banner: "<filter>",
           desc: "Filter by criteria, display only data that contains filter"
 
-        def repocheck(addon)
+        def repocheck(component)
           Command::Upgrade::Repocheck.new(
             *command_params(
-              addon: addon
+              component: component
             )
           ).execute
         rescue => e
