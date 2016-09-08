@@ -57,16 +57,10 @@ module Crowbar
                 "crowbar",
                 "repocheck"
               ].join("/")
-            when "storage"
+            when "nodes"
               [
                 "api",
-                "storages",
-                "repocheck"
-              ].join("/")
-            when "ha"
-              [
-                "api",
-                "clusters",
+                "upgrade",
                 "repocheck"
               ].join("/")
             end
