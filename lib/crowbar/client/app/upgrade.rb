@@ -281,6 +281,59 @@ module Crowbar
         rescue => e
           catch_errors(e)
         end
+
+        desc "database MODE",
+          "Initialize Crowbar database"
+
+        long_desc <<-LONGDESC
+          `database MODE` will set up the Crowbar database and perform the necessary migrations
+
+          MODE can be either 'new' or 'connect'
+
+          'new': Create a new PostgreSQL database and migrate the old data
+
+          'connect': Connect to a remote PostgreSQL database and migrate the old data
+        LONGDESC
+
+        method_option :username,
+          type: :string,
+          default: "crowbar",
+          banner: "<username>",
+          desc: "Username for the Crowbar database user"
+
+        method_option :password,
+          type: :string,
+          default: "crowbar",
+          banner: "<password>",
+          desc: "Password for the Crowbar database user"
+
+        method_option :database,
+          type: :string,
+          default: "crowbar_production",
+          banner: "<database>",
+          desc: "Name of the Crowbar database"
+
+        method_option :host,
+          type: :string,
+          default: "localhost",
+          banner: "<host>",
+          desc: "Host of the Crowbar database"
+
+        method_option :port,
+          type: :string,
+          default: "5432",
+          banner: "<port>",
+          desc: "Port of the Crowbar database"
+
+        def database(mode)
+          Command::Upgrade::Database.new(
+            *command_params(
+              mode: mode
+            )
+          ).execute
+        rescue => e
+          catch_errors(e)
+        end
       end
     end
   end
