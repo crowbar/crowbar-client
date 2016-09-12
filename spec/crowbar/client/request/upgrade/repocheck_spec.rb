@@ -18,7 +18,7 @@
 require_relative "../../../../spec_helper"
 
 describe "Crowbar::Client::Request::Upgrade::Repocheck" do
-  [["crowbar", "crowbar"], ["clusters", "ha"], ["storages", "storage"]].each do |component|
+  [["crowbar", "crowbar"], ["upgrade", "nodes"]].each do |component|
     it_behaves_like "a request class", true do
       subject do
         ::Crowbar::Client::Request::Upgrade::Repocheck.new(

@@ -220,20 +220,18 @@ module Crowbar
         end
 
         desc "repocheck COMPONENT",
-          "Check for existing repositories for a component (crowbar|ha|storage)"
+          "Check for existing repositories for a component (crowbar|nodes)"
 
         long_desc <<-LONGDESC
           `repocheck COMPONENT` will check for existing repositories
-          for a specific component. COMPONENT can be 'crowbar', 'storage' or 'ha'
+          for a specific component. COMPONENT can be 'crowbar' or 'nodes'
 
           crowbar: checks for the repositories required to upgrade the crowbar
           server
 
-          storage: checks for the repositories required to upgrade the nodes that
-          have the SUSE Enterprise Storage Addon installed
-
-          ha: checks for the repositories required to upgrade the nodes that
-          have the SUSE Linux Enterprise High Availability Addon installed
+          nodes: checks for the repositories required to upgrade the nodes, plus
+          an optional check if the SUSE Enterprise Storage or/and the SUSE Linux
+          Enterprise High Availability Addon is installed
 
           With --format <format> option you can choose an output format
           with the available options table, json or plain. You can also
