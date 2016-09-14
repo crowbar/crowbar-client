@@ -23,6 +23,9 @@ module Crowbar
       autoload :Barclamp,
         File.expand_path("../mixin/barclamp", __FILE__)
 
+      autoload :Database,
+        File.expand_path("../mixin/database", __FILE__)
+
       autoload :Format,
         File.expand_path("../mixin/format", __FILE__)
 

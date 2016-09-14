@@ -24,19 +24,27 @@ module Crowbar
         # Implementation for the upgrade Database command
         #
         class Database < Base
+          include Mixin::Database
+
+          def args_with_options
+            args.easy_merge!(
+              username: options.db_username,
+              password: options.db_password,
+              database: options.database,
+              host: options.host,
+              port: options.port
+            )
+          end
+
           def request
             @request ||= Request::Upgrade::Database.new(
-              args.easy_merge!(
-                username: options.username,
-                password: options.password,
-                database: options.database,
-                host: options.host,
-                port: options.port
-              )
+              args_with_options
             )
           end
 
           def execute
+            validate_params!(args_with_options)
+
             request.process do |request|
               response = JSON.parse(request.body)
 

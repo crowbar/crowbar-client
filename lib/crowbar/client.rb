@@ -115,6 +115,15 @@ module Crowbar
       end
     end
 
+    #
+    # Error class to catch invalid database parameters
+    #
+    class InvalidDatabaseParameterError < SimpleCatchableError
+      def initialize(field)
+        super("#{field.capitalize} is not valid. Please check <database subcommand> help")
+      end
+    end
+
     autoload :App,
       File.expand_path("../client/app", __FILE__)
 

@@ -293,37 +293,59 @@ module Crowbar
           'new': Create a new PostgreSQL database and migrate the old data
 
           'connect': Connect to a remote PostgreSQL database and migrate the old data
+
         LONGDESC
 
-        method_option :username,
+        method_option :db_username,
           type: :string,
           default: "crowbar",
-          banner: "<username>",
-          desc: "Username for the Crowbar database user"
+          banner: "<db_username>",
+          desc: "Username for the Crowbar database user
+                                   Min length: 4
+                                   Max length: 63
+                                   Only alphanumeric characters or underscores
+                                   Must begin with a letter [a-zA-Z] or underscore"
 
-        method_option :password,
+        method_option :db_password,
           type: :string,
           default: "crowbar",
-          banner: "<password>",
-          desc: "Password for the Crowbar database user"
+          banner: "<db_password>",
+          desc: "Password for the Crowbar database password
+                                   Min length: 4
+                                   Max length: 63
+                                   Alphanumeric and special characters
+                                   Must begin with any alphanumeric character or underscore"
 
         method_option :database,
           type: :string,
           default: "crowbar_production",
           banner: "<database>",
-          desc: "Name of the Crowbar database"
+          desc: "Name of the Crowbar database
+                                   Min length: 4
+                                   Max length: 63
+                                   Alphanumeric and special characters
+                                   Must begin with any alphanumeric character or underscore"
 
         method_option :host,
           type: :string,
           default: "localhost",
           banner: "<host>",
-          desc: "Host of the Crowbar database"
+          desc: "Host of the Crowbar database
+                                   Min length: 4
+                                   Max length: 63
+                                   Numbers and period characters (only IPv4)
+                                   Hostnames:
+                                     alphanumeric characters and hyphens
+                                     cannot start/end with digits or hyphen"
 
         method_option :port,
           type: :string,
           default: "5432",
           banner: "<port>",
-          desc: "Port of the Crowbar database"
+          desc: "Port of the Crowbar database
+                                   Min length: 1
+                                   Max length: 5
+                                   Only numbers"
 
         def database(mode)
           Command::Upgrade::Database.new(
