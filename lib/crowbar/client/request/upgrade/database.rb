@@ -21,9 +21,9 @@ module Crowbar
     module Request
       module Upgrade
         #
-        # Implementation for the upgrade backup request
+        # Implementation for the upgrade prepare request
         #
-        class Backup < Base
+        class Database < Base
           #
           # Override the request headers
           #
@@ -42,10 +42,12 @@ module Crowbar
           #
           def content
             super.easy_merge!(
-              backup: {
-                name: "crowbar_upgrade_#{Time.now.to_i}"
-              }
-            ) if attrs.component == "crowbar"
+              username: attrs.username,
+              password: attrs.password,
+              database: attrs.database,
+              host: attrs.host,
+              port: attrs.port
+            )
           end
 
           #
@@ -63,18 +65,16 @@ module Crowbar
           # @return [String] path to the API endpoint
           #
           def url
-            case attrs.component
-            when "crowbar"
+            case attrs.mode
+            when "connect"
               [
-                "api",
-                "crowbar",
-                "backups"
+                "upgrade",
+                "connect"
               ].join("/")
-            when "openstack"
+            when "new"
               [
-                "api",
-                "openstack",
-                "backup"
+                "upgrade",
+                "new"
               ].join("/")
             end
           end

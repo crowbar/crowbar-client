@@ -1,5 +1,5 @@
 #
-# Copyright 2015, SUSE Linux GmbH
+# Copyright 2016, SUSE Linux GmbH
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,23 +14,21 @@
 # limitations under the License.
 #
 
-module Crowbar
-  module Client
-    #
-    # Module for the available mixin functionalities
-    #
-    module Mixin
-      autoload :Barclamp,
-        File.expand_path("../mixin/barclamp", __FILE__)
+require_relative "../../../../spec_helper"
 
-      autoload :Database,
-        File.expand_path("../mixin/database", __FILE__)
+describe "Crowbar::Client::Command::Upgrade::Database" do
+  include_context "command_context"
 
-      autoload :Format,
-        File.expand_path("../mixin/format", __FILE__)
-
-      autoload :Filter,
-        File.expand_path("../mixin/filter", __FILE__)
+  ["connect", "new"].each do |mode|
+    it_behaves_like "a command class", true do
+      subject do
+        ::Crowbar::Client::Command::Upgrade::Database.new(
+          stdin,
+          stdout,
+          stderr,
+          mode: mode
+        )
+      end
     end
   end
 end
