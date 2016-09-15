@@ -164,7 +164,7 @@ module Crowbar
         if ENV["CROWBAR_APIVERSION"].present?
           ENV["CROWBAR_APIVERSION"].to_f
         else
-          1.0
+          Crowbar::Client::Util::ApiVersion.default
         end
       end
 
