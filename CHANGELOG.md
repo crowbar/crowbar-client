@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.1.1](https://github.com/crowbar/crowbar-client/releases/tag/v3.1.1) - 2016-09-16
+
+* BUGFIX
+  * Use the new API version by default on SP2 (@rsalevsky)
+* ENHANCEMENT
+  * Add upgrade database subcommand (@MaximilianMeister)
+  * Add upgrade admin server repocheck subcommand (@MaximilianMeister)
+  * Drop ha and ceph repocheck in favor of nodes repocheck (@MaximilianMeister)
+
 ## [3.1.0](https://github.com/crowbar/crowbar-client/releases/tag/v3.1.0) - 2016-08-23
 
 * BUGFIX
