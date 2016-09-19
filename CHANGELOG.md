@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.1.2](https://github.com/crowbar/crowbar-client/releases/tag/v3.1.2) - 2016-09-19
+
+* BUGFIX
+  * fix wrong usage of a case statement (@MaximilianMeister)
+
 ## [3.1.1](https://github.com/crowbar/crowbar-client/releases/tag/v3.1.1) - 2016-09-16
 
 * BUGFIX
