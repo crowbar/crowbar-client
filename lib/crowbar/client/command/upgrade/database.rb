@@ -48,8 +48,7 @@ module Crowbar
             request.process do |request|
               response = JSON.parse(request.body)
 
-              case request.code
-              when !200
+              unless request.code == 200
                 err request.parsed_response["error"]
               end
 
