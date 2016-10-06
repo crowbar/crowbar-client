@@ -52,7 +52,7 @@ describe "Crowbar::Client::Request::Upgrade::Database" do
       end
 
       let!(:url) do
-        "upgrade/#{mode}"
+        "api/upgrade/#{mode}"
       end
 
       let!(:headers) do

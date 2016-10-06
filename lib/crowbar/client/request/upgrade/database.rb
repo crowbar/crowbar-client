@@ -68,11 +68,13 @@ module Crowbar
             case attrs.mode
             when "connect"
               [
+                "api",
                 "upgrade",
                 "connect"
               ].join("/")
             when "new"
               [
+                "api",
                 "upgrade",
                 "new"
               ].join("/")
