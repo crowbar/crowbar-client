@@ -46,11 +46,11 @@ module Crowbar
             validate_params!(args_with_options)
 
             request.process do |request|
-              response = JSON.parse(request.body)
-
               unless request.code == 200
                 err request.parsed_response["error"]
               end
+
+              response = JSON.parse(request.body)
 
               steps_with_messages.each do |step, message|
                 next if response[step.to_s]["success"]
