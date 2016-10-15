@@ -303,7 +303,7 @@ module Crowbar
           desc: "Username for the Crowbar database user
                                    Min length: 4
                                    Max length: 63
-                                   Only alphanumeric characters or underscores
+                                   Only alphanumeric characters and/or underscores
                                    Must begin with a letter [a-zA-Z] or underscore"
 
         method_option :db_password,
