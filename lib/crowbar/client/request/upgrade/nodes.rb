@@ -21,9 +21,9 @@ module Crowbar
     module Request
       module Upgrade
         #
-        # Implementation for the upgrade node request
+        # Implementation for the upgrade nodes request
         #
-        class Node < Base
+        class Nodes < Base
           #
           # Override the request headers
           #
@@ -32,17 +32,6 @@ module Crowbar
           def headers
             super.easy_merge!(
               ::Crowbar::Client::Util::ApiVersion.new(2.0).headers
-            )
-          end
-
-          #
-          # Override the request content
-          #
-          # @return [Hash] the content for the request
-          #
-          def content
-            super.easy_merge!(
-              node: attrs.node
             )
           end
 
@@ -63,9 +52,8 @@ module Crowbar
           def url
             [
               "api",
-              "nodes",
-              attrs.node,
-              "upgrade"
+              "upgrade",
+              "nodes"
             ].join("/")
           end
         end

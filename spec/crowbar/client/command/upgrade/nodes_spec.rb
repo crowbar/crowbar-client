@@ -16,16 +16,15 @@
 
 require_relative "../../../../spec_helper"
 
-describe "Crowbar::Client::Command::Upgrade::Node" do
+describe "Crowbar::Client::Command::Upgrade::Nodes" do
   include_context "command_context"
 
   it_behaves_like "a command class", true do
     subject do
-      ::Crowbar::Client::Command::Upgrade::Node.new(
+      ::Crowbar::Client::Command::Upgrade::Nodes.new(
         stdin,
         stdout,
-        stderr,
-        id: 1
+        stderr
       )
     end
   end

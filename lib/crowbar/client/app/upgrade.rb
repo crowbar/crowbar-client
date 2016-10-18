@@ -173,7 +173,7 @@ module Crowbar
           "Upgrade Crowbar"
 
         long_desc <<-LONGDESC
-          `crowbar` will upgrade the operating system of the Crowbar server.
+          `crowbar` will upgrade the Crowbar server.
         LONGDESC
 
         def crowbar
@@ -184,18 +184,16 @@ module Crowbar
           catch_errors(e)
         end
 
-        desc "node NODE",
-          "Upgrade a single node"
+        desc "nodes",
+          "Trigger the upgrade on all nodes"
 
         long_desc <<-LONGDESC
-          `node NODE` will upgrade the operating system of a single node.
+          `nodes` will upgrade all nodes.
         LONGDESC
 
-        def node(node)
-          Command::Upgrade::Node.new(
-            *command_params(
-              node: node
-            )
+        def nodes
+          Command::Upgrade::Nodes.new(
+            *command_params
           ).execute
         rescue => e
           catch_errors(e)

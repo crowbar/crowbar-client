@@ -17,23 +17,21 @@
 
 require_relative "../../../../spec_helper"
 
-describe "Crowbar::Client::Request::Upgrade::Node" do
+describe "Crowbar::Client::Request::Upgrade::Nodes" do
   it_behaves_like "a request class", true do
     subject do
-      ::Crowbar::Client::Request::Upgrade::Node.new(
+      ::Crowbar::Client::Request::Upgrade::Nodes.new(
         attrs
       )
     end
 
     let!(:attrs) do
       {
-        node: 1
       }
     end
 
     let!(:params) do
       {
-        node: 1
       }
     end
 
@@ -42,7 +40,7 @@ describe "Crowbar::Client::Request::Upgrade::Node" do
     end
 
     let!(:url) do
-      "api/nodes/1/upgrade"
+      "api/upgrade/nodes"
     end
 
     let!(:headers) do
