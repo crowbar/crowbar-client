@@ -173,7 +173,7 @@ module Crowbar
           "Upgrade Crowbar"
 
         long_desc <<-LONGDESC
-          `crowbar` will upgrade the operating system of the Crowbar server.
+          `crowbar` will upgrade the Crowbar server.
         LONGDESC
 
         def crowbar
