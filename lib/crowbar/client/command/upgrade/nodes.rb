@@ -19,11 +19,11 @@ module Crowbar
     module Command
       module Upgrade
         #
-        # Implementation for the upgrade node command
+        # Implementation for the upgrade nodes command
         #
-        class Node < Base
+        class Nodes < Base
           def request
-            @request ||= Request::Upgrade::Node.new(
+            @request ||= Request::Upgrade::Nodes.new(
               args
             )
           end
@@ -32,7 +32,7 @@ module Crowbar
             request.process do |request|
               case request.code
               when 200
-                say "Successfully triggered node upgrade on #{args.id}"
+                say "Successfully triggered the upgrade of the nodes"
               else
                 err request.parsed_response["error"]
               end
