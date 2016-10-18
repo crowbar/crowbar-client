@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.1.3](https://github.com/crowbar/crowbar-client/releases/tag/v3.1.3) - 2016-10-18
+
+* BUGFIX
+  * Dont try to parse the body when it could be nil (@MaximilianMeister)
+* ENHANCEMENT
+  * Namespace the database setup in the upgrade case (@MaximilianMeister)
+  * Restrict the port validation to a max of 65535 (@MaximilianMeister)
+  * Adapt urls after moving the repocheck APIs (@MaximilianMeister)
+  * Adapt upgrade nodes command to the API (@MaximilianMeister)
+
 ## [3.1.2](https://github.com/crowbar/crowbar-client/releases/tag/v3.1.2) - 2016-09-19
 
 * BUGFIX
