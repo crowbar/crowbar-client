@@ -54,14 +54,14 @@ module Crowbar
             when "crowbar"
               [
                 "api",
-                "crowbar",
-                "repocheck"
+                "upgrade",
+                "adminrepocheck"
               ].join("/")
             when "nodes"
               [
                 "api",
                 "upgrade",
-                "repocheck"
+                "noderepocheck"
               ].join("/")
             end
           end
