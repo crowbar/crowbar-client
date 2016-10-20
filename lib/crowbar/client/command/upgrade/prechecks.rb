@@ -35,12 +35,12 @@ module Crowbar
             request.process do |request|
               case request.code
               when 200
-                formatter = Formatter::Nested.new(
+                formatter = Formatter::Hash.new(
                   format: provide_format,
-                  headings: ["Check", "Successful"],
-                  values: Filter::Subset.new(
+                  headings: ["Check ID", "Passed", "Required", "Errors", "Help"],
+                  values: Filter::Hash.new(
                     filter: provide_filter,
-                    values: request.parsed_response
+                    values: content_from(request)
                   ).result
                 )
 
@@ -51,6 +51,30 @@ module Crowbar
                 end
               else
                 err request.parsed_response["error"]
+              end
+            end
+          end
+
+          protected
+
+          def content_from(request)
+            [].tap do |row|
+              request.parsed_response.each do |check_id, values|
+                row.push(
+                  check_id: check_id,
+                  passed: values["passed"],
+                  required: values["required"],
+                  errors: if values["errors"].key?(check_id)
+                            values["errors"][check_id]["data"].inspect
+                          else
+                            nil
+                          end,
+                  help: if values["errors"].key?(check_id)
+                          values["errors"][check_id]["help"].inspect
+                        else
+                          nil
+                        end
+                )
               end
             end
           end
