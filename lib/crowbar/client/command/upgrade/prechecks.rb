@@ -59,7 +59,7 @@ module Crowbar
 
           def content_from(request)
             [].tap do |row|
-              request.parsed_response.each do |check_id, values|
+              request.parsed_response["checks"].each do |check_id, values|
                 row.push(
                   check_id: check_id,
                   passed: values["passed"],
