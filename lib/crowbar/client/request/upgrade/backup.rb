@@ -67,8 +67,8 @@ module Crowbar
             when "crowbar"
               [
                 "api",
-                "crowbar",
-                "backups"
+                "upgrade",
+                "adminbackup"
               ].join("/")
             when "openstack"
               [
