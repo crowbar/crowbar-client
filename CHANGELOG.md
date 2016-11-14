@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.4](https://github.com/crowbar/crowbar-client/releases/tag/v3.1.4) - 2016-11-14
+
+* ENHANCEMENT
+  * Add database subcommand for fresh cloud installations (@MaximilianMeister)
+  * Update database parameter validations (@MaximilianMeister)
+  * Adapting request url's to various API changes (@MaximilianMeister)
+
 ## [3.1.3](https://github.com/crowbar/crowbar-client/releases/tag/v3.1.3) - 2016-10-18
 
 * BUGFIX
