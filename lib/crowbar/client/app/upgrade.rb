@@ -321,7 +321,7 @@ module Crowbar
           desc: "Name of the Crowbar database
                                    Min length: 4
                                    Max length: 63
-                                   Alphanumeric and special characters
+                                   Alphanumeric characters and underscores
                                    Must begin with any alphanumeric character or underscore"
 
         method_option :host,
@@ -330,10 +330,10 @@ module Crowbar
           banner: "<host>",
           desc: "Host of the Crowbar database
                                    Min length: 4
-                                   Max length: 63
+                                   Max length: 253
                                    Numbers and period characters (only IPv4)
-                                   Hostnames:
-                                     alphanumeric characters and hyphens
+                                   Hostnames/FQDNs:
+                                     alphanumeric characters, dots and hyphens
                                      cannot start/end with digits or hyphen"
 
         method_option :port,

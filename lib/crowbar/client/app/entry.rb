@@ -152,6 +152,10 @@ module Crowbar
         desc "upgrade [COMMANDS]",
           "Upgrade specific commands, call without params for help"
         subcommand "upgrade", Crowbar::Client::App::Upgrade
+
+        desc "database [COMMANDS]",
+          "Database specific commands, call without params for help"
+        subcommand "database", Crowbar::Client::App::Database
       end
     end
   end
