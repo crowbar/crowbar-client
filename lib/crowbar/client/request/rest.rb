@@ -36,7 +36,8 @@ module Crowbar
             ].join(""),
             user: user,
             password: password,
-            auth_type: auth_type
+            auth_type: auth_type,
+            timeout: Config.timeout
           )
         end
       end
