@@ -60,6 +60,10 @@ module Crowbar
           def content_from(request)
             [].tap do |row|
               request.parsed_response["checks"].each do |check_id, values|
+                # make the check_id server agnostic
+                # the check_id could be named differently in the server response
+                check_id = values["errors"].keys.first if values["errors"].any?
+
                 row.push(
                   check_id: check_id,
                   passed: values["passed"],
