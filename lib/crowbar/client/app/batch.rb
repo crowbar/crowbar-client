@@ -21,62 +21,6 @@ module Crowbar
       # A Thor based CLI wrapper for batch commands
       #
       class Batch < Base
-        desc "build FILE",
-          "Build proposals from file or stdin"
-
-        long_desc <<-LONGDESC
-          `build FILE` will create/edit/commit proposals defined in
-          an YAML format. You can directly provide a path to a file or
-          just pipe the content from stdin. To pipe the content from
-          stdin you should just write a `-` instead of a specific
-          filename.
-
-          With --includes BARCLAMP[.PROPOSAL] option you can process
-          only a specific part from the provided YAML file structure,
-          the `default` proposal will be taken if you don't provide a
-          proposal name. This option allows multiple values, separated
-          by a `,` from each other.
-
-          With --excludes BARCLAMP[.PROPOSAL] option you exclude
-          specific parts from the provided YAML file structure to be
-          processed, the `default` proposal will be taken if you don't
-          provide a proposal name. This option allows multiple values,
-          separated by a `,` from each other.
-        LONGDESC
-
-        method_option :includes,
-          type: :array,
-          default: [],
-          banner: "BARCLAMP[.PROPOSAL]",
-          desc: "Include a specific barclamp or proposal for processing"
-
-        method_option :excludes,
-          type: :array,
-          default: [],
-          banner: "BARCLAMP[.PROPOSAL]",
-          desc: "Exclude a specific barclamp or proposal for processing"
-
-        #
-        # Batch build command
-        #
-        # It will create/edit/commit proposals defined in an YAML format. You
-        # can directly provide a path to a file or just pipe the content
-        # from stdin. To pipe the content from stdin you should just write
-        # a `-` instead of a specific filename.
-        #
-        # @param file [String] the path to the file
-        # @return [String] a formatted response from the server
-        #
-        def build(file)
-          Command::Batch::Build.new(
-            *command_params(
-              file: file
-            )
-          ).execute
-        rescue => e
-          catch_errors(e)
-        end
-
         desc "export [FILE]",
           "Export proposals to file or stdout"
 
