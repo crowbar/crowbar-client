@@ -354,6 +354,31 @@ module Crowbar
         rescue => e
           catch_errors(e)
         end
+
+        desc "cancel",
+          "Cancel Crowbar upgrade"
+
+        long_desc <<-LONGDESC
+          `cancel` will reset the nodes to ready state
+
+          This is only possible during the upgrade steps:
+
+          * prechecks
+          * prepare
+          * backup crowbar
+          * repocheck crowbar
+
+          Once the admin server upgrade has started, cancelling the upgrade is not possible anymore.
+
+        LONGDESC
+
+        def cancel
+          Command::Upgrade::Prepare.new(
+            *command_params
+          ).execute
+        rescue => e
+          catch_errors(e)
+        end
       end
     end
   end

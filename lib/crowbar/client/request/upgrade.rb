@@ -24,6 +24,9 @@ module Crowbar
         autoload :Backup,
           File.expand_path("../upgrade/backup", __FILE__)
 
+        autoload :Cancel,
+          File.expand_path("../upgrade/cancel", __FILE__)
+
         autoload :Crowbar,
           File.expand_path("../upgrade/crowbar", __FILE__)
 
