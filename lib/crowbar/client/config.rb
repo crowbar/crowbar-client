@@ -58,6 +58,7 @@ module Crowbar
           timeout: default_timeout,
           anonymous: default_anonymous,
           apiversion: default_apiversion,
+          experimental: default_experimental,
           debug: default_debug
         )
       end
@@ -165,6 +166,21 @@ module Crowbar
           ENV["CROWBAR_APIVERSION"].to_f
         else
           Crowbar::Client::Util::ApiVersion.default
+        end
+      end
+
+      #
+      # Define a experimental api version
+      #
+      # @return [String] the default experimental flag
+      #
+      def default_experimental
+        if ENV["CROWBAR_EXPERIMENTAL"].present?
+          [
+            true, 1, "1", "t", "T", "true", "TRUE"
+          ].include? ENV["CROWBAR_EXPERIMENTAL"]
+        else
+          false
         end
       end
 
