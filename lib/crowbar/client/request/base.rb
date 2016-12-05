@@ -75,7 +75,7 @@ module Crowbar
             if e.class.superclass == RestClient::RequestFailed
               Hashie::Mash.new(
                 parsed_response: {
-                  error: e.message
+                  error: e.response
                 },
                 code: e.http_code
               )
