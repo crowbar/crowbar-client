@@ -21,9 +21,6 @@ module Crowbar
       # Module for the batch request implementations
       #
       module Batch
-        autoload :Build,
-          File.expand_path("../batch/build", __FILE__)
-
         autoload :Export,
           File.expand_path("../batch/export", __FILE__)
       end
