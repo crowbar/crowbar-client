@@ -22,6 +22,8 @@ module Crowbar
         # Implementation for the upgrade nodes command
         #
         class Nodes < Base
+          include Mixin::UpgradeError
+
           def request
             @request ||= Request::Upgrade::Nodes.new(
               args
@@ -34,7 +36,9 @@ module Crowbar
               when 200
                 say "Successfully triggered the upgrade of the nodes"
               else
-                err request.parsed_response["error"]
+                err format_error(
+                  request.parsed_response["error"], "nodes_upgrade"
+                )
               end
             end
           end

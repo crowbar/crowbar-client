@@ -22,6 +22,8 @@ module Crowbar
         # Implementation for the upgrade backup command
         #
         class Backup < Base
+          include Mixin::UpgradeError
+
           def request
             @request ||= Request::Upgrade::Backup.new(
               args
@@ -34,7 +36,18 @@ module Crowbar
               when 200
                 say "Successfully created backup for #{args.component}"
               else
-                err request.parsed_response["error"]
+                case args.component
+                when "crowbar"
+                  err format_error(
+                    request.parsed_response["error"], "admin_backup"
+                  )
+                when "openstack"
+                  err format_error(
+                    request.parsed_response["error"], "nodes_db_dump"
+                  )
+                else
+                  request.parsed_response["error"]
+                end
               end
             end
           end

@@ -24,6 +24,7 @@ module Crowbar
         class Repocheck < Base
           include Mixin::Format
           include Mixin::Filter
+          include Mixin::UpgradeError
 
           def request
             @request ||= Request::Upgrade::Repocheck.new(
@@ -50,7 +51,18 @@ module Crowbar
                   say formatter.result
                 end
               else
-                err request.parsed_response["error"]
+                case args.component
+                when "crowbar"
+                  err format_error(
+                    request.parsed_response["error"], "admin_repo_checks"
+                  )
+                when "nodes"
+                  err format_error(
+                    request.parsed_response["error"], "nodes_repo_checks"
+                  )
+                else
+                  err request.parsed_response["error"]
+                end
               end
             end
           end

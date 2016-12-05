@@ -22,6 +22,8 @@ module Crowbar
         # Implementation for the upgrade services command
         #
         class Services < Base
+          include Mixin::UpgradeError
+
           def request
             @request ||= Request::Upgrade::Services.new(
               args
@@ -34,7 +36,9 @@ module Crowbar
               when 200
                 say "Stopping related services on all nodes"
               else
-                err request.parsed_response["error"]
+                err format_error(
+                  request.parsed_response["error"], "nodes_services"
+                )
               end
             end
           end

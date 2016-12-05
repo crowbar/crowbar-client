@@ -14,33 +14,22 @@
 # limitations under the License.
 #
 
+require "active_support/concern"
+
 module Crowbar
   module Client
-    module Command
-      module Upgrade
-        #
-        # Implementation for the upgrade crowbar command
-        #
-        class Crowbar < Base
-          include Mixin::UpgradeError
+    module Mixin
+      #
+      # A mixin with upgrade error related helpers
+      #
+      module UpgradeError
+        extend ActiveSupport::Concern
 
-          def request
-            @request ||= Request::Upgrade::Crowbar.new(
-              args
-            )
-          end
-
-          def execute
-            request.process do |request|
-              case request.code
-              when 200
-                say "Triggered Crowbar operating system upgrade"
-              else
-                err format_error(
-                  request.parsed_response["error"], "admin_upgrade"
-                )
-              end
-            end
+        included do
+          def format_error(response, step)
+            JSON.parse(response.body)["errors"][step]["data"]
+          rescue
+            "Unable to format error response for #{step}"
           end
         end
       end

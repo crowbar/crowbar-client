@@ -31,6 +31,9 @@ module Crowbar
 
       autoload :Filter,
         File.expand_path("../mixin/filter", __FILE__)
+
+      autoload :UpgradeError,
+        File.expand_path("../mixin/upgrade_error", __FILE__)
     end
   end
 end
