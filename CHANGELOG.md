@@ -1,11 +1,22 @@
 # Changelog
 
+## [3.1.5](https://github.com/crowbar/crowbar-client/releases/tag/v3.1.5) - 2016-12-06
+
+* BUGFIX
+  * Handover timeout to the rest-client (@MaximilianMeister)
+* ENHANCEMENT
+  * Improve upgrade precheck output (@MaximilianMeister)
+  * Improve upgrade error output (@MaximilianMeister)
+  * Add subcommand to cancel upgrade (@MaximilianMeister)
+  * Drop batch build command (@MaximilianMeister)
+  * Mark upgrade subcommand as experimental (@rsalevsky)
+
 ## [3.1.4](https://github.com/crowbar/crowbar-client/releases/tag/v3.1.4) - 2016-11-14
 
 * ENHANCEMENT
   * Add database subcommand for fresh cloud installations (@MaximilianMeister)
   * Update database parameter validations (@MaximilianMeister)
-  * Adapting request url's to various API changes (@MaximilianMeister)
+  * Adapting request urls to various API changes (@MaximilianMeister)
 
 ## [3.1.3](https://github.com/crowbar/crowbar-client/releases/tag/v3.1.3) - 2016-10-18
 
