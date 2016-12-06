@@ -149,9 +149,11 @@ module Crowbar
           "Installer specific commands, call without params for help"
         subcommand "installer", Crowbar::Client::App::Installer
 
-        desc "upgrade [COMMANDS]",
-          "Upgrade specific commands, call without params for help"
-        subcommand "upgrade", Crowbar::Client::App::Upgrade
+        if !(Crowbar::Client::Util::ApiVersion.default == 1.0) || Config.options.experimental
+          desc "upgrade [COMMANDS]",
+            "Upgrade specific commands, call without params for help"
+          subcommand "upgrade", Crowbar::Client::App::Upgrade
+        end
 
         desc "database [COMMANDS]",
           "Database specific commands, call without params for help"
