@@ -35,6 +35,8 @@ module Crowbar
                 say "Successfully updated alias for #{args.name}"
               when 404
                 err "Node does not exist"
+              when 406
+                err "Rename for #{args.name} failed. Node alias not unique?"
               else
                 err request.parsed_response["error"]
               end
