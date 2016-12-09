@@ -373,7 +373,7 @@ module Crowbar
         LONGDESC
 
         def cancel
-          Command::Upgrade::Prepare.new(
+          Command::Upgrade::Cancel.new(
             *command_params
           ).execute
         rescue => e
