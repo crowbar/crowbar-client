@@ -22,6 +22,7 @@ module Crowbar
         # Implementation for the proposal reset command
         #
         class Reset < Base
+          include Mixin::SimpleError
           include Mixin::Barclamp
 
           def request
@@ -40,7 +41,9 @@ module Crowbar
               when 404
                 say "Proposal does not exist"
               else
-                err request.parsed_response["error"]
+                err format_error(
+                  request.parsed_response["error"]
+                )
               end
             end
           end

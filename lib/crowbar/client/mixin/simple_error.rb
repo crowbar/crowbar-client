@@ -1,5 +1,5 @@
 #
-# Copyright 2015, SUSE Linux GmbH
+# Copyright 2016, SUSE Linux GmbH
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,29 +14,25 @@
 # limitations under the License.
 #
 
+require "active_support/concern"
+
 module Crowbar
   module Client
-    #
-    # Module for the available mixin functionalities
-    #
     module Mixin
-      autoload :Barclamp,
-        File.expand_path("../mixin/barclamp", __FILE__)
+      #
+      # A mixin with error related helpers
+      #
+      module SimpleError
+        extend ActiveSupport::Concern
 
-      autoload :Database,
-        File.expand_path("../mixin/database", __FILE__)
-
-      autoload :Format,
-        File.expand_path("../mixin/format", __FILE__)
-
-      autoload :Filter,
-        File.expand_path("../mixin/filter", __FILE__)
-
-      autoload :UpgradeError,
-        File.expand_path("../mixin/upgrade_error", __FILE__)
-
-      autoload :SimpleError,
-        File.expand_path("../mixin/simple_error", __FILE__)
+        included do
+          def format_error(response)
+            JSON.parse(response.body)["error"]
+          rescue
+            "Unable to format error response"
+          end
+        end
+      end
     end
   end
 end
