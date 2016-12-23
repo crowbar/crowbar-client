@@ -33,8 +33,10 @@ module Crowbar
               case request.code
               when 200
                 say "Canceled the upgrade process"
-              when 406
-                err "Not allowed to cancel the upgrade at this stage; Please refer to help output."
+              when 422
+                err "Failed to cancel the upgrade process"
+              when 423
+                err "Not possible to cancel the upgrade at this stage; Please refer to help output."
               else
                 err request.parsed_response["error"]
               end
