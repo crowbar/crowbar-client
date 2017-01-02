@@ -67,7 +67,6 @@ module Crowbar
             {
               database_setup: "Setup the Crowbar database",
               database_migration: "Migrate the Crowbar database",
-              schema_migration: "Migrate the schemas",
               crowbar_init: "Initialize Crowbar"
             }
           end
