@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.1.6](https://github.com/crowbar/crowbar-client/releases/tag/v3.1.6) - 2017-01-05
+
+* BUGFIX
+  * Catch error 406 when node alias is not unique (bsc#1011581) (@MaximilianMeister)
+  * Use cancel not prepare (@MaximilianMeister)
+* ENHANCEMENT
+  * Adapt http codes for upgrade cancel (@MaximilianMeister)
+  * Add SimpleError mixxin (@rsalevsky)
+  * Schema migration is included in the crowbar-init step now (@MaximilianMeister)
+  * Change endpoint of the openstack backup (@MaximilianMeister)
+
 ## [3.1.5](https://github.com/crowbar/crowbar-client/releases/tag/v3.1.5) - 2016-12-06
 
 * BUGFIX
