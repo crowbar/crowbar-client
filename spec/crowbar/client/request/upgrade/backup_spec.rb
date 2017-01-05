@@ -40,7 +40,7 @@ describe "Crowbar::Client::Request::Upgrade::Backup" do
     end
 
     let!(:url) do
-      "api/openstack/backup"
+      "api/upgrade/openstackbackup"
     end
 
     let!(:headers) do
