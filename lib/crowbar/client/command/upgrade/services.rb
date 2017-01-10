@@ -34,7 +34,9 @@ module Crowbar
             request.process do |request|
               case request.code
               when 200
-                say "Stopping related services on all nodes"
+                say "Stopping related services on all nodes." \
+                  "Query the upgrade status to follow the process with 'crowbarctl upgrade status'."
+                say "Next step: 'crowbarctl upgrade nodes'"
               else
                 err format_error(
                   request.parsed_response["error"], "nodes_services"

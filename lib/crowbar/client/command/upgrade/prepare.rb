@@ -34,7 +34,9 @@ module Crowbar
             request.process do |request|
               case request.code
               when 200
-                say "Setting nodes to upgrade state"
+                say "Setting nodes to upgrade state." \
+                  "Query the upgrade status to follow the process with 'crowbarctl upgrade status'."
+                say "Next step: 'crowbarctl upgrade backup crowbar'"
               else
                 err format_error(
                   request.parsed_response["error"], "upgrade_prepare"

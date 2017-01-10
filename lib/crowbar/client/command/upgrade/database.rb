@@ -58,6 +58,7 @@ module Crowbar
               end
 
               say "Successfully initialized Crowbar"
+              say "Next step: 'crowbarctl upgrade repocheck nodes'"
             end
           end
 

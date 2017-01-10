@@ -48,6 +48,10 @@ module Crowbar
                   err "No checks"
                 else
                   say formatter.result
+                  next unless provide_format == :table
+                  say "Make sure that there are no errors for the required checks" \
+                    " before executing the next step."
+                  say "Next step: 'crowbarctl upgrade prepare'"
                 end
               else
                 err request.parsed_response["error"]
