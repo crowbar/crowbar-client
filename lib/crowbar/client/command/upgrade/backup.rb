@@ -35,6 +35,10 @@ module Crowbar
               case request.code
               when 200
                 say "Successfully created backup for #{args.component}"
+                if args.component == "crowbar"
+                  say "Next step: 'crowbarctl upgrade repocheck crowbar'"
+                end
+                say "Next step: 'crowbarctl upgrade nodes'" if args.component == "openstack"
               else
                 case args.component
                 when "crowbar"

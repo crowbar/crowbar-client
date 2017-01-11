@@ -35,6 +35,8 @@ module Crowbar
               case request.code
               when 200
                 say "Triggered Crowbar operating system upgrade"
+                say "Wait until the admin server is fully upgraded and rebooted."
+                say "Next step: 'crowbarctl upgrade database [new|connect]'"
               else
                 err format_error(
                   request.parsed_response["error"], "admin_upgrade"
