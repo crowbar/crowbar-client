@@ -19,13 +19,13 @@ module Crowbar
     module Command
       module Upgrade
         #
-        # Implementation for the upgrade crowbar command
+        # Implementation for the upgrade admin command
         #
-        class Crowbar < Base
+        class Admin < Base
           include Mixin::UpgradeError
 
           def request
-            @request ||= Request::Upgrade::Crowbar.new(
+            @request ||= Request::Upgrade::Admin.new(
               args
             )
           end
@@ -39,7 +39,7 @@ module Crowbar
                 say "Next step: 'crowbarctl upgrade database [new|connect]'"
               else
                 err format_error(
-                  request.parsed_response["error"], "crowbar"
+                  request.parsed_response["error"], "admin"
                 )
               end
             end

@@ -21,9 +21,9 @@ module Crowbar
     module Request
       module Upgrade
         #
-        # Implementation for the upgrade crowbar request
+        # Implementation for the upgrade admin request
         #
-        class Crowbar < Base
+        class Admin < Base
           #
           # Override the request headers
           #

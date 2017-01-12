@@ -21,14 +21,14 @@ module Crowbar
       # Module for the upgrade command implementations
       #
       module Upgrade
+        autoload :Admin,
+          File.expand_path("../upgrade/admin", __FILE__)
+
         autoload :Backup,
           File.expand_path("../upgrade/backup", __FILE__)
 
         autoload :Cancel,
           File.expand_path("../upgrade/cancel", __FILE__)
-
-        autoload :Crowbar,
-          File.expand_path("../upgrade/crowbar", __FILE__)
 
         autoload :Database,
           File.expand_path("../upgrade/database", __FILE__)

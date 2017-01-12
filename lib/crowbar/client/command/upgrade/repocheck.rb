@@ -50,7 +50,7 @@ module Crowbar
                 else
                   say formatter.result
                   next unless provide_format == :table
-                  say "Next step: 'crowbarctl upgrade crowbar'" if args.component == "crowbar"
+                  say "Next step: 'crowbarctl upgrade admin'" if args.component == "admin"
                   say "Next step: 'crowbarctl upgrade services'" if args.component == "nodes"
                 end
               else

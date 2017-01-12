@@ -17,10 +17,10 @@
 
 require_relative "../../../../spec_helper"
 
-describe "Crowbar::Client::Request::Upgrade::Crowbar" do
+describe "Crowbar::Client::Request::Upgrade::Admin" do
   it_behaves_like "a request class", true do
     subject do
-      ::Crowbar::Client::Request::Upgrade::Crowbar.new(
+      ::Crowbar::Client::Request::Upgrade::Admin.new(
         attrs
       )
     end
