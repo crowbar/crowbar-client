@@ -57,11 +57,11 @@ module Crowbar
                 case args.component
                 when "crowbar"
                   err format_error(
-                    request.parsed_response["error"], "admin_repo_checks"
+                    request.parsed_response["error"], "repocheck_crowbar"
                   )
                 when "nodes"
                   err format_error(
-                    request.parsed_response["error"], "nodes_repo_checks"
+                    request.parsed_response["error"], "repocheck_nodes"
                   )
                 else
                   err request.parsed_response["error"]

@@ -39,7 +39,7 @@ module Crowbar
                 say "Next step: 'crowbarctl upgrade nodes'"
               else
                 err format_error(
-                  request.parsed_response["error"], "nodes_services"
+                  request.parsed_response["error"], "services"
                 )
               end
             end

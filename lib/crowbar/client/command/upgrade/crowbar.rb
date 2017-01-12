@@ -39,7 +39,7 @@ module Crowbar
                 say "Next step: 'crowbarctl upgrade database [new|connect]'"
               else
                 err format_error(
-                  request.parsed_response["error"], "admin_upgrade"
+                  request.parsed_response["error"], "crowbar"
                 )
               end
             end

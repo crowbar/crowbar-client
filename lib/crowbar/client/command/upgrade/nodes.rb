@@ -38,7 +38,7 @@ module Crowbar
                   "Query the upgrade status to follow the process with 'crowbarctl upgrade status'."
               else
                 err format_error(
-                  request.parsed_response["error"], "nodes_upgrade"
+                  request.parsed_response["error"], "nodes"
                 )
               end
             end
