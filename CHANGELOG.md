@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.1.7](https://github.com/crowbar/crowbar-client/releases/tag/v3.1.7) - 2017-01-13
+
+* ENHANCEMENT
+  * Guide user through the upgrade (@MaximilianMeister)
+  * Internal steps of the upgrade were renamed (@MaximilianMeister)
+
 ## [3.1.6](https://github.com/crowbar/crowbar-client/releases/tag/v3.1.6) - 2017-01-05
 
 * BUGFIX
