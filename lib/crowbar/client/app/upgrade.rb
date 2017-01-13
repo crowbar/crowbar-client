@@ -169,15 +169,15 @@ module Crowbar
           catch_errors(e)
         end
 
-        desc "crowbar",
-          "Upgrade Crowbar"
+        desc "admin",
+          "Upgrade Admin Server"
 
         long_desc <<-LONGDESC
-          `crowbar` will upgrade the Crowbar server.
+          `admin` will upgrade the Crowbar server.
         LONGDESC
 
-        def crowbar
-          Command::Upgrade::Crowbar.new(
+        def admin
+          Command::Upgrade::Admin.new(
             *command_params
           ).execute
         rescue => e

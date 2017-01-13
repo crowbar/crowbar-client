@@ -16,12 +16,12 @@
 
 require_relative "../../../../spec_helper"
 
-describe "Crowbar::Client::Command::Upgrade::Crowbar" do
+describe "Crowbar::Client::Command::Upgrade::Admin" do
   include_context "command_context"
 
   it_behaves_like "a command class", true do
     subject do
-      ::Crowbar::Client::Command::Upgrade::Crowbar.new(
+      ::Crowbar::Client::Command::Upgrade::Admin.new(
         stdin,
         stdout,
         stderr

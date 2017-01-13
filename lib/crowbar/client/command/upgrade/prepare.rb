@@ -39,7 +39,7 @@ module Crowbar
                 say "Next step: 'crowbarctl upgrade backup crowbar'"
               else
                 err format_error(
-                  request.parsed_response["error"], "upgrade_prepare"
+                  request.parsed_response["error"], "prepare"
                 )
               end
             end

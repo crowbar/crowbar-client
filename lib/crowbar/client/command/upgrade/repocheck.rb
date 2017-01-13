@@ -50,18 +50,18 @@ module Crowbar
                 else
                   say formatter.result
                   next unless provide_format == :table
-                  say "Next step: 'crowbarctl upgrade crowbar'" if args.component == "crowbar"
+                  say "Next step: 'crowbarctl upgrade admin'" if args.component == "admin"
                   say "Next step: 'crowbarctl upgrade services'" if args.component == "nodes"
                 end
               else
                 case args.component
                 when "crowbar"
                   err format_error(
-                    request.parsed_response["error"], "admin_repo_checks"
+                    request.parsed_response["error"], "repocheck_crowbar"
                   )
                 when "nodes"
                   err format_error(
-                    request.parsed_response["error"], "nodes_repo_checks"
+                    request.parsed_response["error"], "repocheck_nodes"
                   )
                 else
                   err request.parsed_response["error"]

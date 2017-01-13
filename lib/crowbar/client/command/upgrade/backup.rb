@@ -43,11 +43,11 @@ module Crowbar
                 case args.component
                 when "crowbar"
                   err format_error(
-                    request.parsed_response["error"], "admin_backup"
+                    request.parsed_response["error"], "backup_crowbar"
                   )
                 when "openstack"
                   err format_error(
-                    request.parsed_response["error"], "nodes_db_dump"
+                    request.parsed_response["error"], "backup_openstack"
                   )
                 else
                   request.parsed_response["error"]
