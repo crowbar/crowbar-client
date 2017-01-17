@@ -64,7 +64,8 @@ module Crowbar
                     request.parsed_response["error"], "repocheck_nodes"
                   )
                 else
-                  err request.parsed_response["error"]
+                  err "No such component '#{args.component}'. " \
+                    "Only 'admin' and 'nodes' are valid components."
                 end
               end
             end

@@ -50,7 +50,8 @@ module Crowbar
                     request.parsed_response["error"], "backup_openstack"
                   )
                 else
-                  request.parsed_response["error"]
+                  err "No such component '#{args.component}'. " \
+                    "Only 'crowbar' and 'openstack' are valid components."
                 end
               end
             end
