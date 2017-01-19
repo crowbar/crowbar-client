@@ -36,7 +36,7 @@ module Crowbar
               when 200
                 say "Stopping related services on all nodes." \
                   "Query the upgrade status to follow the process with 'crowbarctl upgrade status'."
-                say "Next step: 'crowbarctl upgrade nodes'"
+                say "Next step: 'crowbarctl upgrade backup openstack'"
               else
                 err format_error(
                   request.parsed_response["error"], "services"
