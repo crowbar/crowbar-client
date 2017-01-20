@@ -34,11 +34,14 @@ module Crowbar
             request.process do |request|
               case request.code
               when 200
-                say "Successfully created backup for #{args.component}"
                 if args.component == "crowbar"
+                  say "Successfully created backup for #{args.component}."
                   say "Next step: 'crowbarctl upgrade repocheck crowbar'"
+                else
+                  say "Creating a backup of OpenStack database. "
+                  say "Query the action progress with 'crowbarctl upgrade status'."
+                  say "Next step: 'crowbarctl upgrade nodes'"
                 end
-                say "Next step: 'crowbarctl upgrade nodes'" if args.component == "openstack"
               else
                 case args.component
                 when "crowbar"
