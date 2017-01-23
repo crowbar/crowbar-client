@@ -66,25 +66,31 @@ module Crowbar
               request.parsed_response["checks"].each do |check_id, values|
                 # make the check_id server agnostic
                 # the check_id could be named differently in the server response
-                check_id = values["errors"].keys.first if values["errors"].any?
+                check_ids = values["errors"].keys if values["errors"].any?
 
-                row.push(
-                  check_id: check_id,
-                  passed: values["passed"],
-                  required: values["required"],
-                  errors: if values["errors"].key?(check_id)
-                            values["errors"][check_id]["data"].inspect
-                          else
-                            nil
-                          end,
-                  help: if values["errors"].key?(check_id)
-                          values["errors"][check_id]["help"].inspect
-                        else
-                          nil
-                        end
-                )
+                if check_ids
+                  check_ids.each do |id|
+                    row.push(parsed_checks(id, values))
+                  end
+                else
+                  row.push(parsed_checks(check_id, values))
+                end
               end
             end
+          end
+
+          def parsed_checks(check_id, values)
+            {
+              check_id: check_id,
+              passed: values["passed"],
+              required: values["required"],
+              errors: if values["errors"].key?(check_id)
+                        values["errors"][check_id]["data"].inspect
+                      end,
+              help: if values["errors"].key?(check_id)
+                      values["errors"][check_id]["help"].inspect
+                    end
+            }
           end
         end
       end
