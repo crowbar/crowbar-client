@@ -25,6 +25,7 @@ module Crowbar
         #
         class Database < Base
           include Mixin::Database
+          include Mixin::UpgradeError
 
           def args_with_options
             args.easy_merge!(
@@ -47,7 +48,9 @@ module Crowbar
 
             request.process do |request|
               unless request.code == 200
-                err request.parsed_response["error"]
+                err format_error(
+                  request.parsed_response["error"], "database"
+                )
               end
 
               response = JSON.parse(request.body)
