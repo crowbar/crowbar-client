@@ -184,16 +184,23 @@ module Crowbar
           catch_errors(e)
         end
 
-        desc "nodes",
-          "Trigger the upgrade on all nodes"
+        desc "nodes COMPONENT",
+          "Trigger the node upgrade (all|controllers|NODENAME)"
 
         long_desc <<-LONGDESC
-          `nodes` will upgrade all nodes.
+          `nodes all` will upgrade all nodes.
+
+          `nodes controllers` will upgrade all controller nodes.
+
+          `nodes NODENAME` will upgrade the node with the NODENAME.
+          This only works for compute nodes.
         LONGDESC
 
-        def nodes
+        def nodes(component)
           Command::Upgrade::Nodes.new(
-            *command_params
+            *command_params(
+              component: component
+            )
           ).execute
         rescue => e
           catch_errors(e)
