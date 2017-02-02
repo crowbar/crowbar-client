@@ -21,11 +21,14 @@ module Crowbar
       # A Thor based CLI wrapper for upgrade commands
       #
       class Upgrade < Base
-        desc "status",
-          "Show the status of the upgrade"
+        desc "status [nodes]",
+          "Show the status of the upgrade or the nodes upgrade"
 
         long_desc <<-LONGDESC
           `status` will print out a status of the upgrade.
+
+          `status nodes` will print out a status of the nodes upgrade.
+
           You can display the status in different output formats
           and you can filter the list by any search criteria.
 
@@ -68,9 +71,11 @@ module Crowbar
           banner: "<filter>",
           desc: "Filter by criteria, display only data that contains filter"
 
-        def status
+        def status(nodes = false)
           Command::Upgrade::Status.new(
-            *command_params
+            *command_params(
+              nodes: nodes
+            )
           ).execute
         rescue => e
           catch_errors(e)
