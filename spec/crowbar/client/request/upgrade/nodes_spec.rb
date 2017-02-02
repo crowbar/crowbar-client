@@ -27,11 +27,13 @@ describe "Crowbar::Client::Request::Upgrade::Nodes" do
 
     let!(:attrs) do
       {
+        component: "all"
       }
     end
 
     let!(:params) do
       {
+        component: "all"
       }
     end
 

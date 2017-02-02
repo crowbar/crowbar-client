@@ -36,6 +36,17 @@ module Crowbar
           end
 
           #
+          # Override the request content
+          #
+          # @return [Hash] the content for the request
+          #
+          def content
+            super.easy_merge!(
+              component: attrs.component
+            )
+          end
+
+          #
           # HTTP method that gets used by the request
           #
           # @return [Symbol] the method for the request

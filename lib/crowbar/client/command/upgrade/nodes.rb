@@ -34,8 +34,16 @@ module Crowbar
             request.process do |request|
               case request.code
               when 200
-                say "Successfully triggered the upgrade of the nodes. " \
-                  "Query the upgrade status to follow the process with 'crowbarctl upgrade status'."
+                case args.component
+                when "all"
+                  say "Successfully triggered the upgrade of the nodes. "
+                when "controllers"
+                  say "Successfully triggered the upgrade of the controller nodes. "
+                else
+                  say "Successfully triggered the upgrade of node #{args.component}. "
+                end
+                say "Query the upgrade status to follow the process with " \
+                  "'crowbarctl upgrade status'."
               else
                 err format_error(
                   request.parsed_response["error"], "nodes"
