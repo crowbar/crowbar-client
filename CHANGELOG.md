@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.1.8](https://github.com/crowbar/crowbar-client/releases/tag/v3.1.8) - 2017-02-02
+
+* ENHANCEMENT
+  * Inform the user that OpenStack backup is ongoing (@jsuchome)
+  * Allow granular node upgrade (@MaximilianMeister)
+* BUGFIX
+  * Display an error when a false parameter gets passed (@MaximilianMeister)
+  * Change next step after 'services' to openstack DB backup (@jsuchome)
+  * Correctly format database error (@MaximilianMeister)
+
 ## [3.1.7](https://github.com/crowbar/crowbar-client/releases/tag/v3.1.7) - 2017-01-13
 
 * ENHANCEMENT
