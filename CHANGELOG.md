@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.9](https://github.com/crowbar/crowbar-client/releases/tag/v3.1.9) - 2017-02-03
+
+* ENHANCEMENT
+  * Enable querying the nodes upgrade status (@MaximilianMeister)
+* BUGFIX
+  * Don't show just one Error (@MaximilianMeister)
+
 ## [3.1.8](https://github.com/crowbar/crowbar-client/releases/tag/v3.1.8) - 2017-02-02
 
 * ENHANCEMENT
