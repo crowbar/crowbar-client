@@ -33,7 +33,7 @@ module Crowbar
       #
       # Patch version
       #
-      PATCH = 8
+      PATCH = 9
 
       #
       # Optional suffix
