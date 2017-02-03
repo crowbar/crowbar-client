@@ -50,10 +50,17 @@ module Crowbar
           # @return [String] path to the API endpoint
           #
           def url
-            [
-              "api",
-              "upgrade"
-            ].join("/")
+            if attrs.nodes
+              [
+                "api",
+                "upgrade?nodes=true"
+              ].join("/")
+            else
+              [
+                "api",
+                "upgrade"
+              ].join("/")
+            end
           end
         end
       end
