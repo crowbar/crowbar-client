@@ -71,10 +71,10 @@ module Crowbar
           banner: "<filter>",
           desc: "Filter by criteria, display only data that contains filter"
 
-        def status(nodes = false)
+        def status(component = nil)
           Command::Upgrade::Status.new(
             *command_params(
-              nodes: nodes
+              nodes: component == "nodes"
             )
           ).execute
         rescue => e
