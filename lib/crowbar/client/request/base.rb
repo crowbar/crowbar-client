@@ -50,7 +50,7 @@ module Crowbar
           when :post
             [
               method,
-              content
+              content.to_json
             ]
           when :put
             [
