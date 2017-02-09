@@ -33,7 +33,7 @@ module Crowbar
           else
             {
               "Accept" => "application/vnd.crowbar.v#{version}+json",
-              "Content-Type" => "application/vnd.crowbar.v#{version}+json"
+              "Content-Type" => "application/json"
             }
           end
         end
