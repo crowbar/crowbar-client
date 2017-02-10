@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.2.0](https://github.com/crowbar/crowbar-client/releases/tag/v3.2.0) - 2017-02-10
+
+* ENHANCEMENT
+  * Remove experimental marker from upgrade subcommand (@rsalevsky)
+* BUGFIX
+  * Fix json encoding for post request (@rhafer)
+  * Print nodes status only when nodes attribute is given (@jsuchome)
+  * Fix content-type sent from crowbarctl to v2 APIs (@skazi0)
+
 ## [3.1.9](https://github.com/crowbar/crowbar-client/releases/tag/v3.1.9) - 2017-02-03
 
 * ENHANCEMENT
