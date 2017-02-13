@@ -32,7 +32,7 @@ module Crowbar
           def content
             super.easy_merge!(
               attrs.payload
-            )
+            ).to_json
           end
 
           #
