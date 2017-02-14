@@ -34,7 +34,7 @@ describe "Crowbar::Client::Request::Proposal::Edit" do
     end
 
     let!(:params) do
-      {}
+      "{}"
     end
 
     let!(:method) do
