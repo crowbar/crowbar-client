@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.2.1](https://github.com/crowbar/crowbar-client/releases/tag/v3.2.1) - 2017-02-14
+
+* BUGFIX
+  * Revert "Fix json encoding for post request" (@rsalevsky)
+  * Fix json encoding for proposal edit (@rsalevsky)
+
 ## [3.2.0](https://github.com/crowbar/crowbar-client/releases/tag/v3.2.0) - 2017-02-10
 
 * ENHANCEMENT
