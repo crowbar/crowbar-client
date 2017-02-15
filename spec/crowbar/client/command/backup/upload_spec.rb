@@ -32,4 +32,33 @@ describe "Crowbar::Client::Command::Backup::Upload" do
       )
     end
   end
+  context "Using a nonexistant file" do
+    it "should show an error message" do
+      expect do
+        Crowbar::Client::Command::Backup::Upload.new(
+          stdin,
+          stdout,
+          stderr,
+          {},
+          file: "test"
+        ).request
+      end.to raise_error(Crowbar::Client::SimpleCatchableError, "File test does not exist.")
+    end
+  end
+
+  context "Using a existing file" do
+    it "should NOT show an error message" do
+      expect do
+        Crowbar::Client::Command::Backup::Upload.new(
+          stdin,
+          stdout,
+          stderr,
+          {},
+          file: fixture_path(
+            "upload.tgz"
+          )
+        ).request
+      end.not_to raise_error
+    end
+  end
 end
