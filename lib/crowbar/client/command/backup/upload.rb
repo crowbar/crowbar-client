@@ -29,6 +29,9 @@ module Crowbar
               when File
                 args.file
               else
+                unless File.exist?(args.file)
+                  err "File #{args.file} does not exist."
+                end
                 File.new(
                   args.file,
                   File::RDONLY
