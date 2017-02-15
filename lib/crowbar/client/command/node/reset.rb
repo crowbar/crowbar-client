@@ -27,7 +27,7 @@ module Crowbar
           def request
             @request ||= Request::Node::Reset.new(
               args.easy_merge(
-                action: :shutdown
+                action: :reset
               )
             )
           end
