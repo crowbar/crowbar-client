@@ -39,12 +39,9 @@ describe "Crowbar::Client::Request::Backup::Upload" do
     let!(:params) do
       {
         backup: {
-          payload: {
-            multipart: true,
-            file: fixture_path(
-              "upload.tgz"
-            ).open.path
-          }
+          file: fixture_path(
+            "upload.tgz"
+          ).open.path
         }
       }
     end
