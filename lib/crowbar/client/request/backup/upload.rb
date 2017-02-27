@@ -38,10 +38,7 @@ module Crowbar
           def content
             super.easy_merge!(
               backup: {
-                payload: {
-                  multipart: true,
-                  file: attrs.file
-                }
+                file: attrs.file
               }
             )
           end
