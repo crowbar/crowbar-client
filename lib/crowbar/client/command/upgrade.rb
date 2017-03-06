@@ -33,6 +33,9 @@ module Crowbar
         autoload :Database,
           File.expand_path("../upgrade/database", __FILE__)
 
+        autoload :Mode,
+          File.expand_path("../upgrade/mode", __FILE__)
+
         autoload :Nodes,
           File.expand_path("../upgrade/nodes", __FILE__)
 
