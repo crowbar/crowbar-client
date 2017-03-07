@@ -367,6 +367,27 @@ module Crowbar
           catch_errors(e)
         end
 
+        desc "mode UPGRADEMODE",
+          "Set/Get the upgrade mode (normal|non_disruptive)"
+
+        long_desc <<-LONGDESC
+          `mode` allows you to switch the upgrade mode between `non_disruptive` and `normal`.
+          Calling it without any arguments will return the currently selected upgrade mode.
+
+          Note: Changing the upgrade mode is only possible before starting the `services`
+                step.
+        LONGDESC
+
+        def mode(mode = nil)
+          Command::Upgrade::Mode.new(
+            *command_params(
+              mode: mode
+            )
+          ).execute
+        rescue => e
+          catch_errors(e)
+        end
+
         desc "cancel",
           "Cancel Crowbar upgrade"
 
