@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.2.2](https://github.com/crowbar/crowbar-client/releases/tag/v3.2.2) - 2017-03-08
+
+* ENHANCEMENT
+  * Add support for api/upgrade/mode API
+* BUGFIX
+  * Send a reset command on node reset (bsc#1025206)
+  * Check for file existance before uploading backup (bsc#1025309)
+  * Fix backup upload args (bsc#1026111)
+
 ## [3.2.1](https://github.com/crowbar/crowbar-client/releases/tag/v3.2.1) - 2017-02-14
 
 * BUGFIX
