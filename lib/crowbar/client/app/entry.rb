@@ -57,6 +57,12 @@ module Crowbar
           aliases: ["-s"],
           desc: "Specify server for connection"
 
+        class_option :verify_ssl,
+          type: :boolean,
+          default: Config.defaults[:verify_ssl],
+          aliases: ["-i"],
+          desc: "Verify server SSL certificate"
+
         class_option :timeout,
           type: :numeric,
           default: Config.defaults[:timeout],

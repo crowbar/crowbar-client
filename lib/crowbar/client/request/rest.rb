@@ -25,6 +25,7 @@ module Crowbar
           user = options.fetch(:user, Config.username)
           password = options.fetch(:password, Config.password)
           auth_type = options.fetch(:auth_type, :digest)
+          verify_ssl = options.fetch(:verify_ssl, Config.verify_ssl)
 
           Config.debug && RestClient.log = "stdout"
 
@@ -37,6 +38,7 @@ module Crowbar
             user: user,
             password: password,
             auth_type: auth_type,
+            verify_ssl: verify_ssl,
             timeout: Config.timeout
           )
         end
