@@ -55,6 +55,7 @@ module Crowbar
           username: default_username,
           password: default_password,
           server: default_server,
+          verify_ssl: default_verify_ssl,
           timeout: default_timeout,
           anonymous: default_anonymous,
           apiversion: default_apiversion,
@@ -126,6 +127,21 @@ module Crowbar
       #
       def default_server
         ENV["CROWBAR_SERVER"] || "http://127.0.0.1:80"
+      end
+
+      #
+      # Define a default verify_ssl flag
+      #
+      # @return [Bool] the default verify_ssl flag
+      #
+      def default_verify_ssl
+        if ENV["CROWBAR_VERIFY_SSL"].present?
+          [
+            false, 0, "0", "f", "F", "false", "FALSE"
+          ].include? ENV["CROWBAR_VERIFY_SSL"]
+        else
+          true
+        end
       end
 
       #

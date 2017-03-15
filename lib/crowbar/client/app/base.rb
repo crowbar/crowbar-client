@@ -41,6 +41,7 @@ module Crowbar
               :username,
               :password,
               :server,
+              :verify_ssl,
               :timeout,
               :anonymous,
               :apiversion,
