@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.3.0](https://github.com/crowbar/crowbar-client/releases/tag/v3.3.0) - 2017-03-30
+
+* ENHANCEMENT
+  * Allow skipping the SSL verification step
+
 ## [3.2.2](https://github.com/crowbar/crowbar-client/releases/tag/v3.2.2) - 2017-03-08
 
 * ENHANCEMENT
