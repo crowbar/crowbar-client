@@ -136,7 +136,7 @@ module Crowbar
       #
       def default_verify_ssl
         if ENV["CROWBAR_VERIFY_SSL"].present?
-          [
+          ![
             false, 0, "0", "f", "F", "false", "FALSE"
           ].include? ENV["CROWBAR_VERIFY_SSL"]
         else
