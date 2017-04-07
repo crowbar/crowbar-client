@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.1](https://github.com/crowbar/crowbar-client/releases/tag/v3.3.1) - 2017-04-07
+
+* BUGFIX
+  * Fix CROWBAR_VERIFY_SSL environment variable evaluation
+  * Fix upgrade hint after admin repochecks step (bsc#1029682)
+  * Use same timeout then the crowbar API
+
 ## [3.3.0](https://github.com/crowbar/crowbar-client/releases/tag/v3.3.0) - 2017-03-30
 
 * ENHANCEMENT
