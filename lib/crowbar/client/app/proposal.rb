@@ -141,7 +141,7 @@ module Crowbar
           catch_errors(e)
         end
 
-        desc "create BARCLAMP PROPOSAL",
+        desc "create BARCLAMP [PROPOSAL]",
           "Create a proposal for specific barclamp"
 
         long_desc <<-LONGDESC
@@ -163,6 +163,8 @@ module Crowbar
 
           With --merge option you can deep merge the provided data with
           the preloaded template.
+
+          Proposal name, if not provided, is 'default'
         LONGDESC
 
         method_option :data,
@@ -189,7 +191,7 @@ module Crowbar
           aliases: ["-m"],
           desc: "Merge input loaded from server with proposal data"
 
-        def create(barclamp, proposal)
+        def create(barclamp, proposal = "default")
           Command::Proposal::Create.new(
             *command_params(
               barclamp: barclamp,

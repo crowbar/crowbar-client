@@ -104,6 +104,11 @@ module Crowbar
               err "Failed to process file"
             end
 
+            if json["id"] != args.proposal
+              json["id"] = args.proposal
+              say "Using id(#{json["id"]}) as proposal name"
+            end
+
             if options[:merge]
               proposal_preload.easy_merge(
                 json
