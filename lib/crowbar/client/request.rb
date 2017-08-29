@@ -70,6 +70,9 @@ module Crowbar
 
       autoload :VirtualIP,
         File.expand_path("../request/virtual_ip", __FILE__)
+
+      autoload :Services,
+        File.expand_path("../request/services", __FILE__)
     end
   end
 end
