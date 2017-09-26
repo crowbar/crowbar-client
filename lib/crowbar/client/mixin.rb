@@ -37,6 +37,9 @@ module Crowbar
 
       autoload :SimpleError,
         File.expand_path("../mixin/simple_error", __FILE__)
+
+      autoload :Proposal,
+        File.expand_path("../mixin/proposal", __FILE__)
     end
   end
 end

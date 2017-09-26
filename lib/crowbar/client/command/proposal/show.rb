@@ -23,6 +23,7 @@ module Crowbar
         #
         class Show < Base
           include Mixin::Barclamp
+          include Mixin::Proposal
 
           include Mixin::Format
           include Mixin::Filter
@@ -45,7 +46,7 @@ module Crowbar
                   headings: ["Key", "Value"],
                   values: Filter::Subset.new(
                     filter: provide_filter,
-                    values: content_from(request)
+                    values: deployment_cleanup(content_from(request))
                   ).result
                 )
 

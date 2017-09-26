@@ -26,6 +26,7 @@ module Crowbar
         #
         class Edit < Base
           include Mixin::Barclamp
+          include Mixin::Proposal
 
           def request
             @request ||= Request::Proposal::Edit.new(
@@ -58,7 +59,7 @@ module Crowbar
 
             case result.code
             when 200
-              result.parsed_response
+              deployment_cleanup result.parsed_response
             when 404
               err "Failed to preload proposal"
             else
