@@ -32,6 +32,9 @@ module Crowbar
       autoload :Batch,
         File.expand_path("../request/batch", __FILE__)
 
+      autoload :Cluster,
+        File.expand_path("../request/cluster", __FILE__)
+
       autoload :Database,
         File.expand_path("../request/database", __FILE__)
 
