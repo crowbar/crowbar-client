@@ -28,12 +28,12 @@ module Crowbar
       #
       # Minor version
       #
-      MINOR = 3
+      MINOR = 4
 
       #
       # Patch version
       #
-      PATCH = 1
+      PATCH = 0
 
       #
       # Optional suffix

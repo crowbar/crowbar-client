@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.4.0](https://github.com/crowbar/crowbar-client/releases/tag/v3.4.0) - 2017-10-08
+
+* BUGFIX
+  * Fix proposal create from file (bsc#1037374)
+  * Fix create proposal from data (bsc#1037374)
+
+* ENHANCEMENT
+  * Add filtering of proposal deployment lists
+
 ## [3.3.1](https://github.com/crowbar/crowbar-client/releases/tag/v3.3.1) - 2017-04-07
 
 * BUGFIX
