@@ -162,6 +162,10 @@ module Crowbar
         desc "database [COMMANDS]",
           "Database specific commands, call without params for help"
         subcommand "database", Crowbar::Client::App::Database
+
+        desc "services [COMMANDS]",
+          "Services specific commands, call without params for help"
+        subcommand "services", Crowbar::Client::App::Services
       end
     end
   end
