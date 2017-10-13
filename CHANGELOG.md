@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.5.0](https://github.com/crowbar/crowbar-client/releases/tag/v3.5.0) - 2017-10-13
+
+* ENHANCEMENT
+  * Add new service command and subcommands
+
 ## [3.4.0](https://github.com/crowbar/crowbar-client/releases/tag/v3.4.0) - 2017-10-08
 
 * BUGFIX
