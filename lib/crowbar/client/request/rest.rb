@@ -35,8 +35,8 @@ module Crowbar
               "/",
               url
             ].join(""),
-            user: user,
-            password: password,
+            user: URI::DEFAULT_PARSER.escape(user, URI::PATTERN::RESERVED),
+            password: URI::DEFAULT_PARSER.escape(password, URI::PATTERN::RESERVED),
             auth_type: auth_type,
             verify_ssl: verify_ssl,
             timeout: Config.timeout
