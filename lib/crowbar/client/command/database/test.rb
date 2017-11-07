@@ -28,8 +28,8 @@ module Crowbar
 
           def args_with_options
             args.easy_merge!(
-              username: options.db_username,
-              password: options.db_password,
+              db_username: options.db_username,
+              db_password: options.db_password,
               database: options.database,
               host: options.host,
               port: options.port
