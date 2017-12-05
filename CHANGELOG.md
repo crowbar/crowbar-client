@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.5.1](https://github.com/crowbar/crowbar-client/releases/tag/v3.5.1) - 2017-12-05
+
+* BUGFIX
+  * Escape reserved characters in credentials
+  * Fix for custom user and password for database subcommand
+  * Fix IP allocation subcommand (bsc#1069792)
+
 ## [3.5.0](https://github.com/crowbar/crowbar-client/releases/tag/v3.5.0) - 2017-10-13
 
 * ENHANCEMENT
