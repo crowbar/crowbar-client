@@ -34,7 +34,7 @@ module Crowbar
               name: attrs.service,
               network: attrs.network,
               range: attrs.range,
-              suggestion: attrs.suggest
+              suggestion: attrs.suggestion
             )
           end
 
