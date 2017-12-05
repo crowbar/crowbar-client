@@ -29,7 +29,7 @@ describe "Crowbar::Client::Request::VirtualIP::Allocate" do
         service: "",
         network: "",
         range: "",
-        suggest: "",
+        suggestion: "",
         proposal: "default"
       }
     end

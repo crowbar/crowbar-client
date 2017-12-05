@@ -29,7 +29,7 @@ describe "Crowbar::Client::Request::HostIP::Allocate" do
         node: "",
         network: "",
         range: "",
-        suggest: "",
+        suggestion: "",
         proposal: "default"
       }
     end
