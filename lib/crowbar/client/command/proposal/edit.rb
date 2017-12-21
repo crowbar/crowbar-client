@@ -76,6 +76,9 @@ module Crowbar
               err "Failed to parse JSON"
             end
 
+            # check if the nodes in the configuration are in the list of nodes
+            check_nodes(json)
+
             if options[:merge]
               proposal_preload.easy_merge(
                 json
@@ -104,6 +107,9 @@ module Crowbar
               err "Failed to process file"
             end
 
+            # check if the nodes in the configuration are in the list of nodes
+            check_nodes(json)
+
             if options[:merge]
               proposal_preload.easy_merge(
                 json
@@ -116,8 +122,12 @@ module Crowbar
           def from_editor
             editor = Util::Editor.new content: proposal_preload
             editor.edit!
+            result = editor.result
 
-            editor.result
+            # check if the nodes in the configuration are in the list of nodes
+            check_nodes(result)
+
+            result
           rescue EditorAbortError => e
             err e.message
           rescue EditorStartupError => e
@@ -139,6 +149,36 @@ module Crowbar
             else
               from_editor
             end
+          end
+
+          def check_nodes(configuration)
+            invalid_nodes = []
+            nodes_and_clusters = valid_elements
+
+            configuration["deployment"].each do |service_name, service|
+              next if service["elements"].nil?
+
+              service["elements"].each do |role, nodes|
+                nodes.each do |node|
+                  unless nodes_and_clusters.include?(node)
+                    invalid_nodes << { "node" => node, "role" => role,
+                                       "service_name" => service_name }
+                  end
+                end
+              end
+            end
+
+            return if invalid_nodes.empty?
+
+            error_str = ""
+
+            invalid_nodes.each do |error|
+              error_str += "ERROR : #{error["node"]} is not available in the list of" \
+              " possible nodes and clusters. Added in role #{error["role"]}" \
+              " of service #{error["service_name"]}\r\n"
+            end
+
+            err error_str
           end
         end
       end
