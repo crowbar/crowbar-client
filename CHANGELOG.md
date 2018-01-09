@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.5.2](https://github.com/crowbar/crowbar-client/releases/tag/v3.5.2) - 2018-01-09
+
+* BUGFIX
+  * Display invalid nodes when editing proposal
+
 ## [3.5.1](https://github.com/crowbar/crowbar-client/releases/tag/v3.5.1) - 2017-12-05
 
 * BUGFIX
