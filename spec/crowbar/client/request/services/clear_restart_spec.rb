@@ -26,8 +26,8 @@ describe "Crowbar::Client::Request::Services::ClearServiceRestart" do
       )
     end
 
-    let!(:attrs) { { node: "test", service: "test" } }
-    let!(:params) { { node: "test", service: "test" } }
+    let!(:attrs) { { node: "test", cookbook: "test", service: "test" } }
+    let!(:params) { { node: "test", cookbook: "test", service: "test" } }
     let!(:method) { :post }
     let!(:url) { "api/restart_management/restarts" }
     let!(:headers) { { "Accept" => header, "Content-Type" => header } }

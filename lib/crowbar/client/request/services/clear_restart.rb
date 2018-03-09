@@ -43,6 +43,7 @@ module Crowbar
           def content
             super.easy_merge!(
               node: attrs.node,
+              cookbook: attrs.cookbook,
               service: attrs.service
             )
           end

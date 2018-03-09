@@ -35,17 +35,18 @@ module Crowbar
           catch_errors(e)
         end
 
-        desc "clear_restart NODE SERVICE",
+        desc "clear_restart NODE [COOKBOOK [SERVICE]]",
              "Clear the restart flag for a service on a node"
 
         long_desc <<-LONGDESC
-          `clear_restart NODE SERVICE` will clear the 'restart needed' flag
-          for the given SERVICE on the NODE.
+          `clear_restart NODE [COOKBOOK [SERVICE]]` will clear the 'restart needed' flag
+          for the given SERVICE, or all services in a COOKBOOK, or all services on the NODE.
         LONGDESC
-        def clear_restart(node, service)
+        def clear_restart(node, cookbook = nil, service = nil)
           Command::Services::ClearServiceRestart.new(
             *command_params(
               node: node,
+              cookbook: cookbook,
               service: service
             )
           ).execute
