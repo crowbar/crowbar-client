@@ -39,6 +39,10 @@ module Crowbar
                   say "Successfully triggered the upgrade of the nodes. "
                 when "controllers"
                   say "Successfully triggered the upgrade of the controller nodes. "
+                when "postpone"
+                  say "The upgrade of compute nodes was postponed."
+                when "resume"
+                  say "The upgrade process was resumed, compute nodes could be upgraded now."
                 else
                   say "Successfully triggered the upgrade of node #{args.component}. "
                 end

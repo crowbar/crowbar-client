@@ -189,8 +189,19 @@ module Crowbar
           catch_errors(e)
         end
 
+        if Config.defaults[:upgrade_versions] == "7-to-8"
+          postpone_resume_short = "|postpone|resume"
+          postpone_resume = <<-RESUME
+            `nodes postpone` will postpone the upgrade of compute nodes.
+            It is possible to use crowbar in this state.
+
+            `nodes resume` will resume the upgrade process.
+            It is possible to go back to upgrading the compute nodes.
+          RESUME
+        end
+
         desc "nodes COMPONENT",
-          "Trigger the node upgrade (all|controllers|NODENAME)"
+          "Trigger the node upgrade (all|controllers|NODENAME#{postpone_resume_short})"
 
         long_desc <<-LONGDESC
           `nodes all` will upgrade all nodes.
@@ -199,6 +210,8 @@ module Crowbar
 
           `nodes NODENAME` will upgrade the node with the NODENAME.
           This only works for compute nodes.
+
+          #{postpone_resume}
         LONGDESC
 
         def nodes(component)
