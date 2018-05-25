@@ -47,6 +47,8 @@ module Crowbar
 
                 if formatter.empty?
                   err "No result"
+                elsif args.name == "help"
+                  err "Node does not exist"
                 else
                   say formatter.result
                 end
