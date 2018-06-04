@@ -36,7 +36,11 @@ module Crowbar
               when 200
                 say "Triggered Crowbar operating system upgrade"
                 say "Wait until the admin server is fully upgraded and rebooted."
-                say "Next step: 'crowbarctl upgrade database [new|connect]'"
+                if Config.defaults[:upgrade_versions] == "6-to-7"
+                  say "Next step: 'crowbarctl upgrade database [new|connect]'"
+                else
+                  say "Next step: 'crowbarctl upgrade repocheck nodes'"
+                end
               else
                 err format_error(
                   request.parsed_response["error"], "admin"
