@@ -60,6 +60,7 @@ module Crowbar
           anonymous: default_anonymous,
           apiversion: default_apiversion,
           experimental: default_experimental,
+          upgrade_versions: default_upgrade_versions,
           debug: default_debug
         )
       end
@@ -92,6 +93,32 @@ module Crowbar
       end
 
       protected
+
+      #
+      # Define a default value for which upgrade is being executed
+      # User could provide values ("6-to-7" or "7-to-8") via ENV variable
+      # or it's gonna be set based on the system state.
+      #
+      # @return [String] the default value for upgrade versions
+      #
+      def default_upgrade_versions
+        return ENV["CROWBAR_UPGRADE_VERSIONS"] if ENV["CROWBAR_UPGRADE_VERSIONS"].present?
+        # if an upgrade is running, we could check the file indication
+        return "6-to-7" if File.exist?("/var/lib/crowbar/upgrade/6-to-7-upgrade-running")
+        return "7-to-8" if File.exist?("/var/lib/crowbar/upgrade/7-to-8-upgrade-running")
+
+        # if upgrade has not been started, check the system version
+        os_release_file = "/etc/os-release"
+
+        if File.exist?(os_release_file)
+          os_release = Hash[
+            File.open(os_release_file).read.scan(/(\S+)\s*=\s*"([^"]+)/)
+          ]
+          return "6-to-7" if os_release["VERSION_ID"] == "12.1"
+        end
+
+        "7-to-8"
+      end
 
       #
       # Define a default alias value
