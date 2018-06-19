@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.6.0](https://github.com/crowbar/crowbar-client/releases/tag/v3.6.0) - 2018-06-19
+
+* BUGFIX
+  * Fix node show help (bsc#1024498)
+* ENHANCEMENT
+  * Extend the clean restart flags
+  * Add an option to identify the version of product being upgraded
+  * Added support for postpone/resume upgrade actions
+
 ## [3.5.2](https://github.com/crowbar/crowbar-client/releases/tag/v3.5.2) - 2018-01-09
 
 * BUGFIX
