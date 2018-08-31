@@ -54,13 +54,13 @@ module Crowbar
           type: :boolean,
           default: false,
           aliases: [],
-          desc: "Format output as table, a shortcut for --format table option"
+          desc: "Format output as json, a shortcut for --format table option"
 
         method_option :plain,
           type: :boolean,
           default: false,
           aliases: [],
-          desc: "Format output as table, a shortcut for --format table option"
+          desc: "Format output as plain text, a shortcut for --format table option"
 
         method_option :filter,
           type: :string,

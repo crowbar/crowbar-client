@@ -59,13 +59,13 @@ module Crowbar
           type: :boolean,
           default: false,
           aliases: [],
-          desc: "Format output as table, a shortcut for --format table option"
+          desc: "Format output as json, a shortcut for --format json option"
 
         method_option :plain,
           type: :boolean,
           default: false,
           aliases: [],
-          desc: "Format output as table, a shortcut for --format table option"
+          desc: "Format output as plain text, a shortcut for --format plain option"
 
         method_option :filter,
           type: :string,
@@ -125,13 +125,13 @@ module Crowbar
           type: :boolean,
           default: false,
           aliases: [],
-          desc: "Format output as table, a shortcut for --format json option"
+          desc: "Format output as json, a shortcut for --format json option"
 
         method_option :plain,
           type: :boolean,
           default: false,
           aliases: [],
-          desc: "Format output as table, a shortcut for --format plain option"
+          desc: "Format output as plain text, a shortcut for --format plain option"
 
         method_option :filter,
           type: :string,
@@ -190,13 +190,13 @@ module Crowbar
           type: :boolean,
           default: false,
           aliases: [],
-          desc: "Format output as table, a shortcut for --format table option"
+          desc: "Format output as json, a shortcut for --format json option"
 
         method_option :plain,
           type: :boolean,
           default: false,
           aliases: [],
-          desc: "Format output as table, a shortcut for --format table option"
+          desc: "Format output as plain text, a shortcut for --format plain option"
 
         method_option :filter,
           type: :string,
