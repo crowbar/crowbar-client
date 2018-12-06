@@ -305,8 +305,7 @@ module Crowbar
           catch_errors(e)
         end
 
-        desc "database MODE",
-          "Initialize Crowbar database"
+        desc "database MODE", "Initialize Crowbar database"
 
         long_desc <<-LONGDESC
           `database MODE` will set up the Crowbar database and perform the necessary migrations
@@ -379,6 +378,8 @@ module Crowbar
         rescue => e
           catch_errors(e)
         end
+
+        remove_command :database unless Config.defaults[:upgrade_versions] == "6-to-7"
 
         desc "mode UPGRADEMODE",
           "Set/Get the upgrade mode (normal|non_disruptive)"
