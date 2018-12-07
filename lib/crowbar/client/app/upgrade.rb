@@ -201,14 +201,16 @@ module Crowbar
         end
 
         desc "nodes COMPONENT",
-          "Trigger the node upgrade (all|controllers|NODENAME#{postpone_resume_short})"
+          "Trigger the node upgrade (all|controllers|NODENAMES#{postpone_resume_short})"
 
         long_desc <<-LONGDESC
           `nodes all` will upgrade all nodes.
 
           `nodes controllers` will upgrade all controller nodes.
 
-          `nodes NODENAME` will upgrade the node with the NODENAME.
+          `nodes NODENAMES` will upgrade the nodes identified by NODENAMES.
+          Nodes' names or aliases can be separated by comma, semicolon or a space
+          (when separating by spaces, whole string has to be quoted).
           This only works for compute nodes.
 
           #{postpone_resume}
