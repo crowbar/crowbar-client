@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.6.1](https://github.com/crowbar/crowbar-client/releases/tag/v3.6.1) - 2018-12-07
+
+* BUGFIX
+  * Hide the database step when it is not used (bsc#1118004)
+* ENHANCEMENT
+  * Fix help strings
+  * Describe how to upgrade more nodes with one command
+
 ## [3.6.0](https://github.com/crowbar/crowbar-client/releases/tag/v3.6.0) - 2018-06-19
 
 * BUGFIX
