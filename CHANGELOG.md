@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.7.0](https://github.com/crowbar/crowbar-client/releases/tag/v3.7.0) - 2018-12-14
+
+* ENHANCEMENT
+  * Better upgrade repocheck output
+
 ## [3.6.1](https://github.com/crowbar/crowbar-client/releases/tag/v3.6.1) - 2018-12-07
 
 * BUGFIX
