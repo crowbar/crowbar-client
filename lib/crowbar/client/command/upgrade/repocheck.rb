@@ -36,20 +36,55 @@ module Crowbar
             request.process do |request|
               case request.code
               when 200
-                formatter = Formatter::Nested.new(
-                  format: provide_format,
-                  headings: ["Status", "Value"],
-                  values: Filter::Subset.new(
-                    filter: provide_filter,
-                    values: request.parsed_response
-                  ).result
-                )
+                hint = ""
+                if provide_format == :table
+                  response = request.parsed_response
+                  repos = {}
+                  response.each do |type, type_data|
+                    type_data["repos"].each do |repo|
+                      next if repo.nil?
+                      repos[repo] = { repo: repo, status: [], type: type } unless repos.key? repo
+                    end
+                    type_data["errors"].each do |error, error_data|
+                      error_data.each do |arch, bad_repos|
+                        bad_repos.each do |bad_repo|
+                          hint = "Some repopositories are not available. " \
+                            "Fix the problem and call the step again."
+                          repos[bad_repo][:status] << "#{error} (#{arch})"
+                        end
+                      end
+                    end
+                  end
+
+                  repos.values.each do |repo|
+                    repo[:status] = repo[:status].uniq.join(", ")
+                    repo[:status] = "available" if repo[:status].empty?
+                  end
+
+                  formatter = Formatter::Hash.new(
+                    format: provide_format,
+                    headings: ["Repository", "Status", "Type"],
+                    values: Filter::Hash.new(
+                      filter: provide_filter,
+                      values: repos.values
+                    ).result
+                  )
+                else
+                  formatter = Formatter::Nested.new(
+                    format: provide_format,
+                    values: Filter::Subset.new(
+                      filter: provide_filter,
+                      values: request.parsed_response
+                    ).result
+                  )
+                end
 
                 if formatter.empty?
                   err "No repochecks"
                 else
                   say formatter.result
                   next unless provide_format == :table
+                  say hint unless hint.empty?
                   say "Next step: 'crowbarctl upgrade admin'" if args.component == "crowbar"
                   say "Next step: 'crowbarctl upgrade services'" if args.component == "nodes"
                 end
