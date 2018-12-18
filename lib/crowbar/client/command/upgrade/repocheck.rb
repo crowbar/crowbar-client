@@ -100,7 +100,7 @@ module Crowbar
                   )
                 else
                   err "No such component '#{args.component}'. " \
-                    "Only 'admin' and 'nodes' are valid components."
+                    "Only 'crowbar' and 'nodes' are valid components."
                 end
               end
             end
