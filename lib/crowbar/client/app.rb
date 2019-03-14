@@ -62,6 +62,9 @@ module Crowbar
       autoload :Role,
         File.expand_path("../app/role", __FILE__)
 
+      autoload :Ses,
+        File.expand_path("../app/ses", __FILE__)
+
       autoload :Server,
         File.expand_path("../app/server", __FILE__)
 
