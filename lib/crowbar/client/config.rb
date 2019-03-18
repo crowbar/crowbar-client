@@ -108,14 +108,9 @@ module Crowbar
         return "7-to-8" if File.exist?("/var/lib/crowbar/upgrade/7-to-8-upgrade-running")
 
         # if upgrade has not been started, check the system version
-        os_release_file = "/etc/os-release"
+        os_release = Crowbar::Client::Util::OsRelease.fields
 
-        if File.exist?(os_release_file)
-          os_release = Hash[
-            File.open(os_release_file).read.scan(/(\S+)\s*=\s*"([^"]+)/)
-          ]
-          return "6-to-7" if os_release["VERSION_ID"] == "12.1"
-        end
+        return "6-to-7" if os_release["VERSION_ID"] == "12.1"
 
         "7-to-8"
       end
