@@ -109,9 +109,7 @@ module Crowbar
         return "7-to-8" if File.exist?("/var/lib/crowbar/upgrade/7-to-8-upgrade-running")
 
         # if upgrade has not been started, check the system version
-        os_release = Crowbar::Client::Util::OsRelease.fields
-
-        return "6-to-7" if os_release["VERSION_ID"] == "12.1"
+        return "6-to-7" if default_cloud_version == "6"
 
         "7-to-8"
       end
