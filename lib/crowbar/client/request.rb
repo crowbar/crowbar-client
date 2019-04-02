@@ -59,6 +59,9 @@ module Crowbar
       autoload :Rest,
         File.expand_path("../request/rest", __FILE__)
 
+      autoload :Restricted,
+        File.expand_path("../request/restricted", __FILE__)
+
       autoload :Role,
         File.expand_path("../request/role", __FILE__)
 
