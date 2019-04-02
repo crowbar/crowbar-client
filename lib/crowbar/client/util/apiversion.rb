@@ -40,15 +40,9 @@ module Crowbar
 
         class << self
           def default
-            os_release_file = "/etc/os-release"
+            os_release = OsRelease.fields
 
-            if File.exist?(os_release_file)
-              os_release = Hash[
-                File.open(os_release_file).read.scan(/(\S+)\s*=\s*"([^"]+)/)
-              ]
-
-              return 1.0 if os_release["VERSION_ID"] == "12.1" && os_release["ID"] == "sles"
-            end
+            return 1.0 if os_release["VERSION_ID"] == "12.1" && os_release["ID"] == "sles"
 
             2.0
           end

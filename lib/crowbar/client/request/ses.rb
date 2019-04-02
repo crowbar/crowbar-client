@@ -1,5 +1,5 @@
 #
-# Copyright 2015, SUSE Linux GmbH
+# Copyright 2019, SUSE
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,21 +16,14 @@
 
 module Crowbar
   module Client
-    #
-    # Module for some utilities used within the client
-    #
-    module Util
-      autoload :Editor,
-        File.expand_path("../util/editor", __FILE__)
-
-      autoload :Runner,
-        File.expand_path("../util/runner", __FILE__)
-
-      autoload :ApiVersion,
-        File.expand_path("../util/apiversion", __FILE__)
-
-      autoload :OsRelease,
-        File.expand_path("../util/osrelease", __FILE__)
+    module Request
+      #
+      # Module for the SES request implementations
+      #
+      module Ses
+        autoload :Upload,
+          File.expand_path("../ses/upload", __FILE__)
+      end
     end
   end
 end

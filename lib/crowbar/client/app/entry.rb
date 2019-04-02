@@ -166,6 +166,13 @@ module Crowbar
         desc "services [COMMANDS]",
           "Services specific commands, call without params for help"
         subcommand "services", Crowbar::Client::App::Services
+
+        desc "ses [COMMANDS]",
+          "SES (Ceph) specific commands, call without params for help"
+        subcommand "ses", Crowbar::Client::App::Ses
+
+        # hide SES command in older versions
+        remove_command :ses unless Config.defaults[:cloud_version].to_i >= 9
       end
     end
   end

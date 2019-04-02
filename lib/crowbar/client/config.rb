@@ -61,6 +61,7 @@ module Crowbar
           apiversion: default_apiversion,
           experimental: default_experimental,
           upgrade_versions: default_upgrade_versions,
+          cloud_version: default_cloud_version,
           debug: default_debug
         )
       end
@@ -108,16 +109,31 @@ module Crowbar
         return "7-to-8" if File.exist?("/var/lib/crowbar/upgrade/7-to-8-upgrade-running")
 
         # if upgrade has not been started, check the system version
-        os_release_file = "/etc/os-release"
-
-        if File.exist?(os_release_file)
-          os_release = Hash[
-            File.open(os_release_file).read.scan(/(\S+)\s*=\s*"([^"]+)/)
-          ]
-          return "6-to-7" if os_release["VERSION_ID"] == "12.1"
-        end
+        return "6-to-7" if default_cloud_version == "6"
 
         "7-to-8"
+      end
+
+      #
+      # Define a default cloud version value
+      # It is detected based on OS release for local machine or set by user via ENV variable.
+      #
+      # @return [String] the default cloud version value
+      #
+      def default_cloud_version
+        return ENV["CROWBAR_CLOUD_VERSION"] if ENV["CROWBAR_CLOUD_VERSION"].present?
+
+        os_release = Crowbar::Client::Util::OsRelease.fields
+        case os_release["VERSION_ID"]
+        when "12.1"
+          "6"
+        when "12.2"
+          "7"
+        when "12.3"
+          "8"
+        else
+          "9"
+        end
       end
 
       #
