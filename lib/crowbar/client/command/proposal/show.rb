@@ -40,13 +40,19 @@ module Crowbar
             request.process do |request|
               case request.code
               when 200
+                content = if options[:raw]
+                  content_from(request)
+                else
+                  deployment_cleanup(content_from(request))
+                end
+
                 formatter = Formatter::Nested.new(
                   format: provide_format,
                   path: provide_filter,
                   headings: ["Key", "Value"],
                   values: Filter::Subset.new(
                     filter: provide_filter,
-                    values: deployment_cleanup(content_from(request))
+                    values: content
                   ).result
                 )
 
