@@ -59,6 +59,9 @@ module Crowbar
       autoload :Repository,
         File.expand_path("../app/repository", __FILE__)
 
+      autoload :Restricted,
+        File.expand_path("../app/restricted", __FILE__)
+
       autoload :Role,
         File.expand_path("../app/role", __FILE__)
 

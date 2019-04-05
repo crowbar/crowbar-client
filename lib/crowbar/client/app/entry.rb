@@ -171,8 +171,14 @@ module Crowbar
           "SES (Ceph) specific commands, call without params for help"
         subcommand "ses", Crowbar::Client::App::Ses
 
+        desc "restricted [COMMANDS]",
+          "Commands specifc to restricted clients, call without params for help"
+        subcommand "restricted", Crowbar::Client::App::Restricted
+
         # hide SES command in older versions
         remove_command :ses unless Config.defaults[:cloud_version].to_i >= 9
+        # hide Restricted command in older versions
+        remove_command :restricted unless Config.defaults[:cloud_version].to_i >= 9
       end
     end
   end
