@@ -58,6 +58,15 @@ module Crowbar
         end
 
         def err(message)
+          if message.is_a?(RestClient::Response)
+            begin
+              json = JSON.parse(message.to_s)
+              message = json.fetch("error", message)
+            rescue JSON::ParserError
+              # too bad, this is not what we expected, we'll print the ugly string
+              nil
+            end
+          end
           raise SimpleCatchableError, message
         end
       end
