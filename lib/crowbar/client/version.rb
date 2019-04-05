@@ -28,7 +28,7 @@ module Crowbar
       #
       # Minor version
       #
-      MINOR = 8
+      MINOR = 9
 
       #
       # Patch version

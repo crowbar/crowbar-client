@@ -1,11 +1,16 @@
 # Changelog
 
-## [3.8.0](https://github.com/crowbar/crowbar-client/releases/tag/v3.8.0) - 2019-04-05
+## [3.9.0](https://github.com/crowbar/crowbar-client/releases/tag/v3.9.0) - 2019-04-05
 
 * ENHANCEMENT
   * Add support for the restricted APIs
   * Add --raw to "proposal show" & "proposal edit"
   * Correctly parse error messages that we don't handle natively
+
+## [3.8.0](https://github.com/crowbar/crowbar-client/releases/tag/v3.8.0) - 2019-04-02
+
+* ENHANCEMENT
+  * Add 'ses' subcommand to upload SES configuration file to crowbar (@skazi0)
 
 ## [3.7.0](https://github.com/crowbar/crowbar-client/releases/tag/v3.7.0) - 2018-12-14
 
