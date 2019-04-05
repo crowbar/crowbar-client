@@ -98,6 +98,10 @@ module Crowbar
           With --filter <filter> option you can limit the result of
           printed out elements. You can use any substring that is part
           of the found elements.
+
+          With --raw option you can ensure that the program will not
+          automatically alter the proposal (to remove non-existing
+          nodes, for instance).
         LONGDESC
 
         method_option :format,
@@ -129,6 +133,12 @@ module Crowbar
           default: nil,
           banner: "<filter>",
           desc: "Filter by criteria, display only data that contains filter"
+
+        method_option :raw,
+          type: :boolean,
+          default: false,
+          aliases: ["-r"],
+          desc: "Do not automatically edit the content of the proposal data"
 
         def show(barclamp, proposal)
           Command::Proposal::Show.new(
@@ -221,6 +231,10 @@ module Crowbar
 
           With --merge option you can deep merge the provided data with
           the preloaded proposal.
+
+          With --raw option you can ensure that the program will not
+          automatically alter the proposal (to remove non-existing
+          nodes, for instance).
         LONGDESC
 
         method_option :data,
@@ -240,6 +254,12 @@ module Crowbar
           default: false,
           aliases: ["-m"],
           desc: "Merge input loaded from server with proposal data"
+
+        method_option :raw,
+          type: :boolean,
+          default: false,
+          aliases: ["-r"],
+          desc: "Do not automatically edit the content of the proposal data"
 
         def edit(barclamp, proposal)
           Command::Proposal::Edit.new(

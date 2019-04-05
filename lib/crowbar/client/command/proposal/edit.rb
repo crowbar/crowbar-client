@@ -59,7 +59,11 @@ module Crowbar
 
             case result.code
             when 200
-              deployment_cleanup result.parsed_response
+              if options[:raw]
+                result.parsed_response
+              else
+                deployment_cleanup result.parsed_response
+              end
             when 404
               err "Failed to preload proposal"
             else
