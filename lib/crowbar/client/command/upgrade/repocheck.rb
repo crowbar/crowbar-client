@@ -50,6 +50,8 @@ module Crowbar
                         bad_repos.each do |bad_repo|
                           hint = "Some repopositories are not available. " \
                             "Fix the problem and call the step again."
+                          repos[bad_repo] = { repo: bad_repo, status: [], type: type } \
+                            unless repos.key? bad_repo
                           repos[bad_repo][:status] << "#{error} (#{arch})"
                         end
                       end
