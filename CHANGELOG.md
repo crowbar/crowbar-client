@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.9.1](https://github.com/crowbar/crowbar-client/releases/tag/v3.9.1) - 2020-07-01
+
+* BUGFIX
+  * Fix repocheck table output (SOC-10718)
+  * Enable restricted commands for Cloud8 (bsc#1117080)
+
 ## [3.9.0](https://github.com/crowbar/crowbar-client/releases/tag/v3.9.0) - 2019-04-05
 
 * ENHANCEMENT
