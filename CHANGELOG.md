@@ -1,6 +1,11 @@
 # Changelog
 
-## [3.9.1](https://github.com/crowbar/crowbar-client/releases/tag/v3.9.1) - 2020-07-01
+## [3.9.2](https://github.com/crowbar/crowbar-client/releases/tag/v3.9.2) - 2020-03-09
+
+* ENHANCEMENT
+  * Enable SES commands in Cloud8 (SOC-11122)
+
+## [3.9.1](https://github.com/crowbar/crowbar-client/releases/tag/v3.9.1) - 2019-07-01
 
 * BUGFIX
   * Fix repocheck table output (SOC-10718)
