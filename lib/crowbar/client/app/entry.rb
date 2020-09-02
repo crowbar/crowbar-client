@@ -178,7 +178,7 @@ module Crowbar
         # hide SES command in older versions
         remove_command :ses unless Config.defaults[:cloud_version].to_i >= 8
         # hide Restricted command in older versions
-        remove_command :restricted unless Config.defaults[:cloud_version].to_i >= 8
+        remove_command :restricted unless Config.defaults[:cloud_version].to_i >= 7
       end
     end
   end
