@@ -1,6 +1,6 @@
 # Changelog
 
-## [3.9.3](https://github.com/crowbar/crowbar-client/releases/tag/v3.9.2) - 2020-09-02
+## [3.9.3](https://github.com/crowbar/crowbar-client/releases/tag/v3.9.3) - 2020-09-02
 
 * ENHANCEMENT
   * Enable restricted commands for Cloud 7 (bsc#1117080)
